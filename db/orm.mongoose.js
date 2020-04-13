@@ -33,9 +33,8 @@ async function registerUser( userData ){
     return { 
             message: "User successfully saved", 
             id: saveUser._id,
-            email: saveUser.email };
-
-            
+            email: saveUser.email,
+            name: saveUser.name };           
  }
 
 // input: email, password

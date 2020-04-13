@@ -21,25 +21,25 @@ function RegisterPage(){
         e.preventDefault();
         
         if( userData.email === "" ) {
-            inputEmail.focus();
+            inputEmail.current.focus();
             setAlertMessage( { type: 'danger', message: 'Please provide your Email!' } );
             return;
         }
     
         if( !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userData.email)) ) {
-            inputEmail.focus();
+            inputEmail.current.focus();
             setAlertMessage( { type: 'danger', message: 'Please provide a valid Email!' } );
             return;
         }
 
         if( userData.password === "" ) {
-            inputPassword.focus();
+            inputPassword.current.focus();
             setAlertMessage( { type: 'danger', message: 'Please provide a password!' } );
             return;
         }
 
         if( userData.password.length < 8 ) {
-            inputPassword.focus();
+            inputPassword.current.focus();
             setAlertMessage( { type: 'danger', message: 'Please provide a longer password (8 characters min)!' } );
             return;
         }
@@ -53,16 +53,16 @@ function RegisterPage(){
                 body: JSON.stringify(userData)
           }).then( result=>result.json())
           console.log(apiResult)
-          
+       
                   
         if( apiResult.message ){
             setAlertMessage( { type: 'success', message: 'Thank you successfully registered!' } );
             localStorage.setItem("email", apiResult.email);
             
             setTimeout( function(){ setIsRegistered(true); }, 5000 );
-            console.log()
+            console.log(alertMessage)
         } else {
-            setAlertMessage( { type: 'danger', message: apiResult.error } );
+            setAlertMessage( { type: 'danger', message: 'Try again' } );
         }
         setUserData({ name: "", email: "", password: ""})
     }
@@ -71,15 +71,16 @@ function RegisterPage(){
         <div>
             {/* { isRegistered ? <Redirect to='/login' /> : '' } */}
 
-            <div className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
-                {alertMessage.message}
-            </div>
+            
             <section class="jumbotron text-center">
             <div class="container">
                 <h1>User Registration</h1>
                 <p class="lead text-muted">Register and browse movies!</p>
             </div>
             </section>
+            <div className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
+                {alertMessage.message}
+            </div>
         
             <div class="container">
                 <div class="card">
