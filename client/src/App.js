@@ -5,6 +5,9 @@ import HomePage from "./components/HomePage";
 import WatchList from "./components/WatchList/MovieWatchList";
 import Login from "./components/Login/Login";
 import Footer from "./components/Footer";
+import Registration from './components/Registration/Registration';
+import './App.css';
+
 
 
 function App() {
@@ -16,11 +19,9 @@ function App() {
         <Route exact path={["/","/homepage"]} component={HomePage} />
         <Route exact path={"/watchlist"} component={WatchList} />
         <Route exact path="/login" component={Login} />
+        <Registration />
 
       <Footer />
      </div>
     </Router>
-  );
-}
-
-export default App;
+  )}
