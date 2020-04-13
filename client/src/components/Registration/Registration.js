@@ -60,7 +60,7 @@ function RegisterPage(){
             localStorage.setItem("email", apiResult.email);
             
             setTimeout( function(){ setIsRegistered(true); }, 5000 );
-            console.log(alertMessage)
+            //apiresult -message, email, id, name
         } else {
             setAlertMessage( { type: 'danger', message: 'Try again' } );
         }
