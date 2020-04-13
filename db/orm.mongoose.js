@@ -4,9 +4,6 @@ const bcrypt = require ( 'bcrypt' );
 // mongoose.connect(`mongodb://${process.env.movieTracker}`,{useNewUrlParser: true});
 
 mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true});
-
-// mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true});
-
 const db = require( './models' );
 
 
@@ -14,7 +11,7 @@ const db = require( './models' );
 // output: { message, id, name }
 async function registerUser( userData ){
     if( !userData.password || !userData.name || !userData.email ){
-        // console.log( `[registerUser] invalid userData! `, userData );
+        console.log( `[registerUser] invalid userData! `, userData );
         return { message: "Invalid user data", id: "", name: "" };
     }
     
@@ -22,19 +19,22 @@ async function registerUser( userData ){
     const saltRounds = 10;
  
     const passwordHash = await bcrypt.hash(userData.password, saltRounds);
-    // console.log( `[registerUser] (hash=${passwordHash}) req.body:`, userData );
+    console.log( `[registerUser] (hash=${passwordHash}) req.body:`, userData );
+    
     const saveData = {
        name: userData.name,
        email: userData.email,
        password: passwordHash
     };
+
     const dbUser = new db.users( saveData );
     const saveUser = await dbUser.save();
     return { 
-            message: "User successfully saved", 
-            id: saveUser._id,
-            email: saveUser.email,
-            name: saveUser.name };           
+        message: "User successfully saved", 
+        id: saveUser._id,
+        email: saveUser.email,
+        name: saveUser.name 
+    };           
  }
 
 // input: email, password

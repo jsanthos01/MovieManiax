@@ -24,19 +24,19 @@ let users = new Schema ({
       { 
          id: mongoose.Types.ObjectId,
          title: {type: String},
-         image: {type: String}
+         image: {type: String},
+         ratings: {type: String}
       }
    ],
 
    watchlist: [
       {
-         id: mongoose.Types.ObjectId,
          title: {type: String},
+         popularity: {type: String},
          image: {type: String},
-         actors: {type:String},
          description: {type: String},
          ratings: {type: String},
-         genre: {type: String}
+         releaseDate: {type: String}
       }
    ],
    friendList: [
