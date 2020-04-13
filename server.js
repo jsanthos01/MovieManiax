@@ -16,11 +16,22 @@ app.use( express.json() );
 
 app.post('/api/user/registration', async function( req,res ){
     const userData = req.body;
-    console.log( `[POST: /api/user/registration] userData: `, userData );
+    // console.log( `[POST: /api/user/registration] userData: `, userData );
     
     const registerResult = await orm.registerUser( userData );
-    res.send( registerResult );
+    res.send(registerResult);
+    console.log(registerResult);
 })
+
+app.post('/api/user/login', async function( req,res ){
+    const userData = req.body;
+    // console.log( `[POST: /api/user/login] userData: `, userData );
+    const loginResult = await orm.loginUser( userData.email, userData.password );
+    loginResult.rememberMe = req.body.rememberMe;
+    res.send( loginResult );
+    
+});
+
 
 app.listen( PORT, function(){
     console.log( `[everest server] RUNNING, http://localhost:${PORT}` );

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 function LoginPage(){
     // DECLARATIVE FORM OF PROGRAMMING
-    const [ userData, setUserData ] = useState({ name: "", email: localStorage.email, password: "", rememberMe: true });
+    const [ userData, setUserData ] = useState({ name: "", email: "localStorage.email", password: "", rememberMe: true });
     const [ isLoggedIn, setIsLoggedIn ] = useState( false );
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
 
@@ -24,7 +24,7 @@ function LoginPage(){
         e.preventDefault();
         
         if( userData.email === "" ) {
-            inputEmail.focus();
+            inputEmail.current.focus();
             setAlertMessage( { type: 'danger', message: 'Please provide your Email!' } );
             return;
         }
@@ -44,8 +44,9 @@ function LoginPage(){
                 },
                 body: JSON.stringify(userData)
             }).then( result=>result.json())
+            console.log(apiResult)
                   
-        if( !apiResult.session ){
+        if( !apiResult.message ){
             setAlertMessage( { type: 'danger', message: apiResult.error } );
             // clear any session
             localStorage.session = '';
@@ -57,7 +58,7 @@ function LoginPage(){
         // remember the email (if checkbox toggled)
         localStorage.email =( apiResult.rememberMe ? apiResult.email : '' );
         // save the active session
-        localStorage.session = apiResult.session;
+        // localStorage.session = apiResult.session;
 
         setTimeout( function(){ setIsLoggedIn(true); }, 3000 );
     }

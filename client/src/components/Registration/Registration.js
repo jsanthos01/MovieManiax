@@ -52,11 +52,12 @@ function RegisterPage(){
                 },
                 body: JSON.stringify(userData)
           }).then( result=>result.json())
+          console.log(apiResult)
           
                   
         if( apiResult.message ){
             setAlertMessage( { type: 'success', message: 'Thank you successfully registered!' } );
-            localStorage.setItem("id", apiResult.id);
+            localStorage.setItem("email", apiResult.email);
             
             setTimeout( function(){ setIsRegistered(true); }, 5000 );
             console.log()
