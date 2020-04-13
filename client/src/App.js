@@ -1,13 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import Navbar from './components/Navbar';
-import './App.css';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import HomePage from "./components/HomePage";
+import WatchList from "./components/WatchList/MovieWatchList";
+import Login from "./components/Login/Login";
+import Footer from "./components/Footer";
+
 
 function App() {
   return (
-    <div>
-      <Navbar />
-    </div>
+    <Router>
+     <div className="App">
+      <NavBar/>
+
+        <Route exact path={["/","/homepage"]} component={HomePage} />
+        <Route exact path={"/watchlist"} component={WatchList} />
+        <Route exact path="/login" component={Login} />
+
+      <Footer />
+     </div>
+    </Router>
   );
 }
 
