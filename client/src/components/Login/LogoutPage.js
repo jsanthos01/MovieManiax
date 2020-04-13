@@ -15,6 +15,7 @@ function LogoutPage(){
     async function logoutRequest(){
         console.log( `[logoutRequest] attempting to logout...` );
         const apiResult = await API.post( '/api/user/logout', {} );
+        
                     
         console.log( `apiResult: `, apiResult );
 

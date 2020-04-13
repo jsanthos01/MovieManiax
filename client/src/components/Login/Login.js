@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 function Login(){
     // DECLARATIVE FORM OF PROGRAMMING
-    const [ userData, setUserData ] = useState({ name: "", email: "localStorage.email", password: "", rememberMe: true });
+    const [ userData, setUserData ] = useState({ name: "", email: " ", password: "", rememberMe: true });
     const [ isLoggedIn, setIsLoggedIn ] = useState( false );
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
 
@@ -49,7 +49,7 @@ function Login(){
         if( !apiResult.message ){
             setAlertMessage( { type: 'danger', message: apiResult.error } );
             // clear any session
-            localStorage.session = '';
+            // localStorage.session = '';
             return;
         };
 

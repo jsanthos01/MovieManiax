@@ -7,6 +7,7 @@ import Login from "./components/Login/Login";
 import Footer from "./components/Footer";
 import Registration from './components/Registration/Registration';
 import './App.css';
+import LogoutPage from './components/Login/LogoutPage';
 
 
 
@@ -19,7 +20,8 @@ function App() {
         <Route exact path={["/","/homepage"]} component={HomePage} />
         <Route exact path={"/watchlist"} component={WatchList} />
         <Route exact path="/login" component={Login} />
-        <Registration />
+        {/* <Registration /> */}
+        <LogoutPage />
 
       <Footer />
      </div>
