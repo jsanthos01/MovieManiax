@@ -14,19 +14,21 @@ function LogoutPage(){
     // call the api to logout (and clear session)
     async function logoutRequest(){
         console.log( `[logoutRequest] attempting to logout...` );
-        const apiResult = await API.post( '/api/user/logout', {} );
-                    
-        console.log( `apiResult: `, apiResult );
+        // const apiResult = await API.post( '/api/user/logout', {} );
 
-        if( apiResult.error ){
-            setAlertMessage( { type: 'danger', message: apiResult.error } );
-            return;
-        };
+        localStorage.id = "";
+                   
+        // console.log( `apiResult: `, apiResult );
 
-        setAlertMessage( { type: 'success', message: 'Logged out...' } );
+        // if( apiResult.error ){
+        //     setAlertMessage( { type: 'danger', message: apiResult.error } );
+        //     return;
+        // };
 
-        // save the active session
-        localStorage.session = '';
+        // setAlertMessage( { type: 'success', message: 'Logged out...' } );
+
+        // // save the active session
+        // localStorage.session = '';
 
         setTimeout( function(){ setIsLoggedOut(true); }, 3000 );
     }
@@ -36,12 +38,15 @@ function LogoutPage(){
         <div>
             { isLoggedOut ? <Redirect to='/login' /> : '' }
 
-            <div className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
+            {/* <div className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
                 {alertMessage.message}
-            </div>
+            </div> */}
             <section class="jumbotron text-center">
+            
             <div class="container">
+               
                 <p class="lead text-muted">Please wait, logging out...</p>
+                
             </div>
             </section>
         </div>

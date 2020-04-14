@@ -10,6 +10,12 @@ function SearchForm() {
     const myRef = useRef(null);
 
     const style = {
+        searchStyle: {
+            height: '85vh',
+            // backgroundImage: `url(${heroImg})`,
+            backgroundSize: 'cover',
+            backgroundPositionY: '-174px'
+        }, 
         myForm: {
             width: "70%",
             margin: "50px"

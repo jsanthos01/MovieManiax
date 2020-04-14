@@ -54,12 +54,30 @@ function MovieInformation() {
             </div>
             <div class="container">
                 
-                <div class='row'>
-                    <div class='col-md-4 text-center' >
-                    {movieDetails.poster_path && movieDetails.poster_path ? <img style={{width: '100%'}} src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`} alt="movie img" /> : <img src='https://cdn1.vectorstock.com/i/800x1000/21/85/white-blank-book-cover-isolated-template-empty-vector-25362185.jpg'  /> }
-                    
-                    {/* THIS IS WRONG... MUST BE CHANGED!!!!! */}
-                    <a href={`https://www.youtube.com/embed/${movieDetails.key}`}><button class="btn btn-danger mr-3 mt-3 playBtn"><i class="fas fa-play"></i> Watch Trailer</button></a>
+                {/* THIS YOUTUBE LINK IS DONE WRONG... MUST BE CHANGED!!!!! */}
+                <a href={`https://www.youtube.com/embed/${movieDetails.key}`}><button class="btn btn-outline-danger mr-3 mt-3">Watch Trailer</button></a>
+
+                </div>
+                <div class='col-md-8'>
+
+                    <h1>{movieDetails.title}</h1>
+                    <h4 style={{color:"white", fontStyle: "italic"}}>"{movieDetails.tagline}"</h4>
+                    <button class="btn btn-outline-danger mr-3 mt-3"><i class="fas fa-heart"></i> Favourites</button>
+                    <button class="btn btn-outline-primary mt-3"><i class="fas fa-plus"></i>  Watch List</button>
+                    <div>
+                        <ul class="list-group">
+                            <li class="list-group-item" > <i class="fas fa-star"></i> {movieDetails.vote_average}/10</li>
+                            <li class="list-group-item" >
+                                    Rate This Movie: 
+                                <div class="d-flex" style={{color:"#ffeb3b"}}>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                </div>
+                            </li>
+                            <li class="list-group-item" ><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
 
                     </div>
                     <div class='col-md-8'>
