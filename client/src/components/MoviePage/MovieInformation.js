@@ -5,10 +5,12 @@ function MovieInformation() {
     const {id} = useParams();
     const [movieDetails, setMovieDetails] = useState([]);
     const [movieTrailer, setMovieTrailer]= useState([]);
-    const listGroupItem = {
-        backgroundColor: "transparent",
-        borderRadius: "0",
-        color: "#fff"
+    const movieStyle = {
+        listGroupItem: {backgroundColor: "transparent", borderRadius: "0", color: "#fff"},
+        h4Style: {color:"white", fontStyle: "italic"},
+        castImage: {width: '30vh', height: '30vh', objectFit: 'cover',  borderRadius: '10px 10px 0 0 '},
+        castText: {color: "black", textAlign: "center"}
+
     }
 
     console.log("Inside the movieInfo Page!!!!");
@@ -45,20 +47,20 @@ function MovieInformation() {
                     <div class='col-md-8'>
 
                         <h1>{movieDetails.title}</h1>
-                        <h4 style={{color:"white", fontStyle: "italic"}}>"{movieDetails.tagline}"</h4>
+                        <h4 style={movieStyle.h4Style}>"{movieDetails.tagline}"</h4>
                         <button class="btn btn-outline-danger mr-3 mt-3"><i class="fas fa-heart"></i> Favourites</button>
                         <button class="btn btn-outline-primary mt-3"><i class="fas fa-plus"></i>  Watch List</button>
                         <div>
                             <ul class="list-group">
-                                <li class="list-group-item" style={listGroupItem}> <i class="fas fa-1x fa-star" style={{color: "yellow"}}></i><b> {movieDetails.vote_average}</b>/10</li>
-                                <li class="list-group-item" style={listGroupItem}><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
+                                <li class="list-group-item" style={movieStyle.listGroupItem}> <i class="fas fa-1x fa-star" style={{color: "yellow"}}></i><b> {movieDetails.vote_average}</b>/10</li>
+                                <li class="list-group-item" style={movieStyle.listGroupItem}><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
                             </ul>
                         </div>
-                        <div class="container" style={{color:"white"}}>
+                        <div class="container">
                             <h5>Overview</h5>
                             <p>{movieDetails.overview}</p>
                         </div>
-                        <div class="container" style={{color:"white"}}>
+                        <div class="container">
                             <h5>Genre</h5>
                             {movieDetails && movieDetails.genres ? <p>{movieDetails.genres.map( genre =><span class="badge badge-primary mr-2" style={{padding: "10px"}}>{genre.name}</span>)} </p> : '[no genre list]' }
                         </div>
@@ -73,8 +75,8 @@ function MovieInformation() {
                 {movieDetails && movieDetails.genres ? 
                 <div class="row">{movieDetails.credits.cast.slice(0,10).map( actor =>
                     <div class="mt-3 mr-3 mx-auto">
-                        <img style={{width: '30vh', height: '30vh', objectFit: 'cover',  borderRadius: '10px 10px 0 0 '}} src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} alt="movie img" />
-                        <p class="list-group-item" style={{color: "black", textAlign: "center"}}>{actor.name}</p>
+                        <img style={movieStyle.castImage} src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} alt="movie img" />
+                        <p class="list-group-item" style={movieStyle.castText}>{actor.name}</p>
                     </div> 
 
                 )} 
