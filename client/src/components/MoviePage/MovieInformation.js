@@ -5,11 +5,15 @@ function MovieInformation() {
     const {id} = useParams();
     const [movieDetails, setMovieDetails] = useState([]);
     const [movieTrailer, setMovieTrailer]= useState([]);
+    const [similarMovies, setSimilarMovies]= useState([]);
+
     const movieStyle = {
         listGroupItem: {backgroundColor: "transparent", borderRadius: "0", color: "#fff"},
         h4Style: {color:"white", fontStyle: "italic"},
         castImage: {width: '30vh', height: '30vh', objectFit: 'cover',  borderRadius: '10px 10px 0 0 '},
-        castText: {color: "black", textAlign: "center"}
+        castText: {color: "black", textAlign: "center"},
+        imgStyle :{height: "50vh",objectFit: "cover"},
+        cardBody: {height: "30vh",display: "flex",flexDirection: "column", justifyContent: "center"}
 
     }
 
@@ -26,6 +30,11 @@ function MovieInformation() {
         const apiMovieTrailer = await fetch(`http://api.themoviedb.org/3/movie/${id}/videos?api_key=5b4dbf95cc35d2e911560cca64385e60`).then( result=>result.json() );      
         console.log( 'apiMovieTrailer key: ', apiMovieTrailer);
         setMovieTrailer( apiMovieTrailer.results );
+
+        //Similar Movies List
+        const apiSimilarMovies = await fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=5b4dbf95cc35d2e911560cca64385e60&language=en-US&page=1`).then( result=>result.json() );      
+        console.log( 'apiSimilarMovies key: ', apiSimilarMovies);
+        setSimilarMovies( apiSimilarMovies.results );
     }
 
     useEffect(function(){
@@ -93,7 +102,24 @@ function MovieInformation() {
                     </div>)}
                 </div>
             </div>
-            
+            <div class="container mt-5">
+                <h1>Related Movies</h1>
+                <div class="row ">                    
+                {similarMovies.slice(0,10).map(movie => 
+                    <div class="col-md-4" style={{color: "black", textAlign: "center"}}>
+                        <div class="card mb-4 shadow-sm">
+                            <img  class="card-img-top" style={movieStyle.imgStyle} src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="movie img" />
+                            <div class="card-body" style={movieStyle.cardBody}>
+                            <h2 class="card-title">{movie.title}</h2>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <button class="btn btn-outline-primary mr-3 mt-3"> View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                </div>
+            </div>
         </div>
     )
 }
