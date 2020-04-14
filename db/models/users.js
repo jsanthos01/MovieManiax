@@ -22,7 +22,7 @@ let users = new Schema ({
 
    favouriteMovie: [
       { 
-         id: mongoose.Types.ObjectId,
+         movieId: {type: String},
          title: {type: String},
          image: {type: String},
          ratings: {type: String}
