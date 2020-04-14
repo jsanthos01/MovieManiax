@@ -72,8 +72,37 @@ async function loginUser( email, password ) {
     };
 }
 
-module.exports = {
 
+//WatchList Section
+async function postWatchlist(movieData){
+    console.log("Inside orm file")
+    console.log(movieData);
+ 
+    const movieInfo = {
+       "movieId": `${movieData.movieId}`,
+       "title": `${movieData.title}`,
+       "image":`${movieData.image}`,
+       "description": `${movieData.description}`,
+       "popularity": `${movieData.popularity}`,
+       "releaseDate": `${movieData.releaseDate}`,
+       "ratings": `${movieData.ratings}`
+    }
+ 
+    const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { watchlist:  movieInfo } });
+    console.log(userFetch)
+    return { message: "Movie successfully saved in Watchlist!!"};
+}
+
+
+async function getWatchlist(id){
+    const getSavedList =  db.users.find({_id:id});
+    return getSavedList;
+}
+
+
+module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    postWatchlist,
+    getWatchlist
 }

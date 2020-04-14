@@ -31,6 +31,7 @@ let users = new Schema ({
 
    watchlist: [
       {
+         movieId: {type: String},
          title: {type: String},
          popularity: {type: String},
          image: {type: String},

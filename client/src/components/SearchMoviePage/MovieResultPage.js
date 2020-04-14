@@ -26,9 +26,8 @@ function MovieResultPage(props) {
         if(type === "watchlist"){
             MovieData = {
                 userId: localStorage.id,
+                movieId: movieObj.id,
                 title: movieObj.title,
-                // genre: apiMovie.Genre,
-                // actors: apiMovie.Actors,
                 popularity: movieObj.popularity,
                 image: movieObj.poster_path,
                 description: movieObj.overview,
