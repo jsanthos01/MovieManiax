@@ -28,8 +28,8 @@ function MovieFavourites() {
             justifyContent: "center"
         }
     }
+    
     async function getSavedMovieList(){
-
         const getMovies = await fetch(`/api/favourites/${id}`).then(res => res.json());
         // console.log("Inside the Favourites Component")
         // console.log("inside the Favourites page:", getMovies)
@@ -59,6 +59,7 @@ function MovieFavourites() {
 
         }
     }
+
     //Sort by Name(Alphabetical)
     function nameOrder(a,b){
         const titleA = a.title.toUpperCase();

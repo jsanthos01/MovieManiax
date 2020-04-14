@@ -6,6 +6,8 @@ function FavouritesCard(props) {
         height: "50vh",
         objectFit: "cover"
     }
+
+    //Need to Add delete Option Routes
     return (
         <>
         {props.myMovies.map(movie => (

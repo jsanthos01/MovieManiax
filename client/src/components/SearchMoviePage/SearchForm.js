@@ -1,6 +1,7 @@
 import React, {useState, useRef}  from 'react'
 import MovieResultPage from './MovieResultPage'
 
+//Not sure if this is a package = Sara Check !
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop); 
 
 function SearchForm() {
@@ -45,6 +46,8 @@ function SearchForm() {
         const newMovieList = await fetch( `https://api.themoviedb.org/3/search/movie?api_key=${Api}&language=en-US&query=${searchInput}&page=1&include_adult=false` ).then( result=>result.json() );
         console.log( 'movieList: ', newMovieList.results); 
         setMovieList(newMovieList.results);
+
+        //Needs to be checked
         scrollToRef(myRef);
     }
 

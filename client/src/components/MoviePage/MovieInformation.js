@@ -24,6 +24,7 @@ function MovieInformation() {
     console.log("Inside the movieInfo Page!!!!");
     console.log(`Id of movie is: ${id}`);
     
+    //Making API calls
     async function loadMovieDetails(){ 
         //Movie Details and Cast Members
         const apiMovie = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=5b4dbf95cc35d2e911560cca64385e60&language=en-US&append_to_response=credits`).then( result=>result.json() );

@@ -5,6 +5,7 @@ function RelevantMovies(props) {
     console.log("Inside the RelevantMovies.js");
     const movie = props.movie;
     
+    //Add to favourites or watchlist in database
     async function getMovieId(type, movieObj){
         console.log("inside getMovieId Function: ", movieObj);
         let MovieData;
@@ -68,7 +69,6 @@ function RelevantMovies(props) {
 
 
     }
-
 
     return (
         <div class="col-md-4 text-center">
