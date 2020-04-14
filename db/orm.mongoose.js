@@ -99,10 +99,33 @@ async function getWatchlist(id){
     return getSavedList;
 }
 
-
+//Favourites Section
+async function postFavourites(movieData){
+    console.log("Inside orm post favourites file")
+    console.log(movieData);
+ 
+    const movieInfo = {
+       "movieId": `${movieData.movieId}`,
+       "title": `${movieData.title}`,
+       "image":`${movieData.image}`,
+       "ratings": `${movieData.ratings}`
+    }
+    //creating a new modal object
+    const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { favourites:  movieInfo } });
+    console.log(userFetch)
+    return { message: "Movie successfully saved in Favourites!!"};
+ }
+ 
+async function getFavourites(id){
+    const getSavedList =  db.users.find({_id:id});
+    return getSavedList;
+}
+ 
 module.exports = {
     registerUser,
     loginUser,
     postWatchlist,
-    getWatchlist
+    getWatchlist,
+    postFavourites,
+    getFavourites
 }
