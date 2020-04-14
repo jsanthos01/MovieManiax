@@ -27,3 +27,18 @@ h1 {
   border-radius: 2px;
   padding: 10px
 }
+
+.hero {
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-image:  linear-gradient(to right, rgba(3.14%, 14.51%, 40.39%, 0.5) 150px, rgba(7.06%, 20.39%, 50.59%, 0.7) 100%), url( https://i.pinimg.com/originals/9d/0f/50/9d0f5009708b1c92adb022c647b89913.jpg);
+}
+
+.searchBox {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+}

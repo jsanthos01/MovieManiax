@@ -9,15 +9,9 @@ function SearchForm() {
     const myRef = useRef(null);
 
     const style = {
-        searchStyle: {
-            height: '85vh',
-            backgroundImage: `url(${heroImg})`,
-            backgroundSize: 'cover',
-            backgroundPositionY: '-174px'
-        }, 
         myForm: {
-            width: '70%',
-            margin: '160px auto'
+            width: "70%",
+            margin: "50px"
         }, 
         myInput: {
             borderTopLeftRadius: '20px',
@@ -30,7 +24,8 @@ function SearchForm() {
             backgroundColor: '#ed145b',
             borderRadius: '20px',
             marginLeft: '20px',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            border: 'none'
         }
 
     }
@@ -55,19 +50,21 @@ function SearchForm() {
 
     return (
         <div id='something'>
-            <div class="jumbotron jumbotron-fluid hero" style={style.searchStyle}>
+            <div class="jumbotron jumbotron-fluid hero" >
                 <div class="searchBox container">
+                    <h1>Enter the Movie Of your Choice</h1>
+                    <h4>Discover millions of movies and TV shows. Explore now!</h4>
                     <div class="input-group mb-3 text-center" style={style.myForm}>
-                        <input onChange={handleInputChange} value={searchInput} type="text" class="form-control text-center" style={style.myInput} placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-                        <div style={style.myBtnRgt}>
-                            <button onClick={loadMovieList} type="submit" className="btn btn-outline-primary float-right">
+                        <input onChange={handleInputChange} value={searchInput} type="text" class="form-control text-center" style={style.myInput} placeholder="Search a movie, TV show ..." aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                        <div>
+                            <button onClick={loadMovieList} type="submit" style={style.myBtnRgt} className="float-right">
                             Search
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            { movieList.length > 0 ? <MovieResultPage  movieList={movieList} myRef={myRef} /> : 'The Movie You Searched is not available!' }
+            { movieList.length > 0 ? <MovieResultFinal  movieList={movieList} myRef={myRef} /> : 'The Movie You Searched is not available!' }
 
         </div>
     )
