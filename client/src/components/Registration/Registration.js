@@ -57,7 +57,12 @@ function RegisterPage(){
                   
         if( apiResult.message ){
             setAlertMessage( { type: 'success', message: 'Thank you successfully registered!' } );
+
             localStorage.setItem("email", apiResult.email);
+            localStorage.setItem('id', apiResult.id)
+            localStorage.setItem('name', apiResult.name)
+
+
             
             setTimeout( function(){ setIsRegistered(true); }, 5000 );
             //apiresult -message, email, id, name
@@ -69,7 +74,7 @@ function RegisterPage(){
 
     return (
         <div>
-            {/* { isRegistered ? <Redirect to='/login' /> : '' } */}
+            { isRegistered ? <Redirect to='/login' /> : '' }
 
             
             <section class="jumbotron text-center">

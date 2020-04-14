@@ -43,7 +43,7 @@ async function loginUser( email, password ) {
     const userData = await db.users.findOne({ email: email });
     console.log( `[loadUser] email='${email}' userData:`, userData );
     if( !userData ) {
-        return { error: "Invalid password" };
+        return { error: "Couldn't find that email. Register or try again!" };
     }
 
     const isValidPassword = await bcrypt.compare( password, userData.password );
@@ -70,6 +70,12 @@ async function loginUser( email, password ) {
         name: userData.name,
         email: userData.email,
     };
+}
+
+async function logoutUser( session ){
+    const userData = await db.users.findOneAndDelete({ session });
+    // console.log( `[logoutUser] session(${session})`, userData );
+    return true; //( userData._id ? true : false );
 }
 
 

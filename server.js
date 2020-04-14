@@ -17,7 +17,7 @@ app.post('/api/user/registration', async function( req,res ){
     const userData = req.body;
     console.log( `[Server.js POST: /api/user/registration] userData: `, userData );    
     const registerResult = await orm.registerUser( userData );
-    console.log("[POST RESULT] registration:", registerResult);
+    // console.log("[POST RESULT] registration:", registerResult);
     res.send(registerResult);
 })
 
@@ -29,7 +29,6 @@ app.post('/api/user/login', async function( req,res ){
     res.send( loginResult );
     
 });
-
 
 
 // JOANNA'S CODE WATCHLIST & FAVOURITES
