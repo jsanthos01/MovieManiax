@@ -42,3 +42,10 @@ h1 {
   flex-direction: column;
   color: white;
 }
+
+.extra {
+  text-align: center;
+  justify-content: center;
+
+}
+

@@ -64,7 +64,7 @@ function SearchForm() {
                     </div>
                 </div>
             </div>
-            { movieList.length > 0 ? <MovieResultFinal  movieList={movieList} myRef={myRef} /> : 'The Movie You Searched is not available!' }
+            { movieList.length > 0 ? <MovieResultPage  movieList={movieList} myRef={myRef} /> : 'The Movie You Searched is not available!' }
 
         </div>
     )
