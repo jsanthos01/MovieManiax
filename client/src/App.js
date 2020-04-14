@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-// import HomePage from "./components/HomePage";
+import HomePage from "./components/HomePage";
 import SearchMovie from './components/SearchMoviePage/SearchForm'
 import MovieInfo from './components/MoviePage/MovieInformation'
 import MovieWatchList from './components/WatchListPage/MovieWatchList';
