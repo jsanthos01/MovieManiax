@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
-
+import { Redirect } from 'react-router-dom';
+import RelevantMovies from './RelevantMovies'
 function MovieInformation() {
     const {id} = useParams();
     const [movieDetails, setMovieDetails] = useState([]);
     const [movieTrailer, setMovieTrailer]= useState([]);
     const [similarMovies, setSimilarMovies]= useState([]);
+    const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
+    const [ isNotLoggedIn, setIsNotLoggedIn ] = useState( false );
 
     const movieStyle = {
         listGroupItem: {backgroundColor: "transparent", borderRadius: "0", color: "#fff"},
@@ -13,8 +16,9 @@ function MovieInformation() {
         castImage: {width: '30vh', height: '30vh', objectFit: 'cover',  borderRadius: '10px 10px 0 0 '},
         castText: {color: "black", textAlign: "center"},
         imgStyle :{height: "50vh",objectFit: "cover"},
-        cardBody: {height: "30vh",display: "flex",flexDirection: "column", justifyContent: "center"}
-
+        cardBody: {height: "30vh",display: "flex",flexDirection: "column", justifyContent: "center"},
+        movieDesc: {color: "black",padding: "10px"},
+        messageStyle: {position: 'sticky',top: '0',left: '0'}
     }
 
     console.log("Inside the movieInfo Page!!!!");
@@ -43,6 +47,10 @@ function MovieInformation() {
 
     return (
         <div class='container-fluid' >
+            { isNotLoggedIn ? <Redirect to='/login' /> : '' }
+            <div style={messageStyle} className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
+                {alertMessage.message}
+            </div>
             <div class="container">
                 
                 <div class='row'>
@@ -106,17 +114,7 @@ function MovieInformation() {
                 <h1>Related Movies</h1>
                 <div class="row ">                    
                 {similarMovies.slice(0,10).map(movie => 
-                    <div class="col-md-4" style={{color: "black", textAlign: "center"}}>
-                        <div class="card mb-4 shadow-sm">
-                            <img  class="card-img-top" style={movieStyle.imgStyle} src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="movie img" />
-                            <div class="card-body" style={movieStyle.cardBody}>
-                            <h2 class="card-title">{movie.title}</h2>
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <button class="btn btn-outline-primary mr-3 mt-3"> View</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <RelevantMovies movie={movie} setIsNotLoggedIn={setIsNotLoggedIn} />
                 )}
                 </div>
             </div>
