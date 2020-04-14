@@ -51,8 +51,8 @@ function MovieResultPage(props) {
         }else if (type === "favourites"){
             MovieData = {
                 userId: localStorage.id,
+                movieId: movieObj.id,
                 title: movieObj.title,
-                // genre: apiMovie.Genre,
                 image: movieObj.poster_path,
                 ratings: movieObj.vote_average,
             }
