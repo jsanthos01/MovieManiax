@@ -43,8 +43,8 @@ function MovieInformation() {
                     <button class="btn btn-outline-primary mt-3"><i class="fas fa-plus"></i>  Watch List</button>
                     <div>
                         <ul class="list-group">
-                            <li class="list-group-item" style={listGroupItem}> <i class="fas fa-star"></i> {movieDetails.vote_average}/10</li>
-                            <li class="list-group-item" style={listGroupItem}>
+                            <li class="list-group-item" > <i class="fas fa-star"></i> {movieDetails.vote_average}/10</li>
+                            <li class="list-group-item" >
                                     Rate This Movie: 
                                 <div class="d-flex" style={{color:"#ffeb3b"}}>
                                 <i class="fas fa-star"></i>
@@ -54,7 +54,7 @@ function MovieInformation() {
                                 <i class="fas fa-star"></i>
                                 </div>
                             </li>
-                            <li class="list-group-item" style={listGroupItem}><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
+                            <li class="list-group-item" ><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
 
                         </ul>
                     </div>

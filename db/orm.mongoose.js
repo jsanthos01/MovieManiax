@@ -74,7 +74,7 @@ async function loginUser( email, password ) {
 
 async function logoutUser( session ){
     const userData = await db.users.findOneAndDelete({ session });
-    console.log( `[logoutUser] session(${session})`, userData );
+    // console.log( `[logoutUser] session(${session})`, userData );
     return true; //( userData._id ? true : false );
 }
 

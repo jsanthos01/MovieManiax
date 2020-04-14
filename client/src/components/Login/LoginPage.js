@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
 import { Redirect } from 'react-router-dom';
 
-function Login(){
+function LoginPage(){
     // DECLARATIVE FORM OF PROGRAMMING
-    const [ userData, setUserData ] = useState({ name: "", email: " ", password: "", rememberMe: true });
+    const [ userData, setUserData ] = useState({ name: "", email: localStorage.email, password: "", rememberMe: true });
     const [ isLoggedIn, setIsLoggedIn ] = useState( false );
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
 
@@ -22,6 +22,8 @@ function Login(){
 
     async function loginUser( e ){
         e.preventDefault();
+
+        setUserData({ name: "", email: localStorage.email, password: "", rememberMe: true })
         
         if( userData.email === "" ) {
             inputEmail.current.focus();
@@ -60,8 +62,8 @@ function Login(){
         // save the active session
         // localStorage.session = apiResult.session;
 
-        
         setTimeout( function(){ setIsLoggedIn(true); }, 3000 );
+        
     }
 
     return (
@@ -112,4 +114,4 @@ function Login(){
     )
 }
 
-export default Login;
+export default LoginPage;

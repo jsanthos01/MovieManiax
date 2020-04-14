@@ -11,7 +11,7 @@ function SearchForm() {
     const style = {
         searchStyle: {
             height: '85vh',
-            backgroundImage: `url(${heroImg})`,
+            // backgroundImage: `url(${heroImg})`,
             backgroundSize: 'cover',
             backgroundPositionY: '-174px'
         }, 
