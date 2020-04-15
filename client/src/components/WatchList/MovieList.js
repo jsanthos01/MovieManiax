@@ -17,16 +17,14 @@ function MovieList(props) {
     const imgStyle = {height: "40vh", objectFit: "cover", paddingBottom: "10px"}
     const rowStyle={marginBottom: "60px"}
 
-    async function removeMovie(movieId, userId){
-        console.log("inside the deleteBook function");
-        console.log(movieId, userId);
-
-        const removeMovie = await fetch(`/api/deleteWatchlistMovie/${userId}/${movieId}`, 
-        {
-            method: 'DELETE',
-        }).then(result => result.json());
-        console.log(removeMovie);
-
+    async function deleteMovieWlist(movieId){
+        console.log("[deleteMovieWlist] function");
+        const removeSpecificMovie = await fetch(`/api/removeListMovie/${id}/${movieId}`, 
+            {
+                method: 'DELETE'
+            }).then(result => result.json());
+            console.log(removeSpecificMovie.message);
+            props.getSavedMovieList();
     }
 
     return (
@@ -47,8 +45,8 @@ function MovieList(props) {
                             <div class="container d-flex mx-auto ">
                                 <Link to={"/movieDetails/" + movie.movieId }>
                                     <button type="button" class="btn btn-outline-primary mr-2">View</button>
-                                </Link>                                
-                                <button type="button" onClick={ () => removeMovie(movie._id, id) }class="btn btn-outline-danger mr-2">Delete</button>
+                                </Link>
+                                <button type="button" class="btn btn-sm btn-outline-danger" onClick={() => deleteMovieWlist(movie._id)} >Delete</button>
                             </div>
                         </div>
                 

@@ -1,13 +1,25 @@
 import React from 'react'
+import { useParams } from 'react-router-dom';
+import {Link, useLocation} from "react-router-dom";
 
 function FavouritesCard(props) {
     console.log(props.myMovies);
+    const { id } = useParams();
     const imgStyle = {
         height: "50vh",
         objectFit: "cover"
     }
 
-    //Need to Add delete Option Routes
+    async function deleteMovieFavourite(movieId){
+        console.log("[deleteMovieFavourite] function");
+        const removeSpecificMovie = await fetch(`/api/removeFavMovie/${id}/${movieId}`, 
+            {
+                method: 'DELETE'
+            }).then(result => result.json());
+            console.log(removeSpecificMovie.message);
+            props.getSavedMovieList();
+    }
+
     return (
         <>
         {props.myMovies.map(movie => (
@@ -19,8 +31,10 @@ function FavouritesCard(props) {
                         <p class="card-text"><b>Ratings</b>: {movie.ratings}/10</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-primary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                                <Link to={"/movieDetails/" + movie.movieId }>
+                                    <button type="button" class="btn btn-outline-primary mr-2">View</button>
+                                </Link> 
+                                <button type="button" class="btn btn-sm btn-outline-danger" onClick={() => deleteMovieFavourite(movie._id)} >Delete</button>
                             </div>
                             <small class="text-muted">9 mins</small>
                         </div>

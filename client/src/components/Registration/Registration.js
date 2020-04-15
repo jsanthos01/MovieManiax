@@ -66,11 +66,11 @@ function RegisterPage(){
     }
 
     return (
-        <div>
+        <div style={{color: "black"}}>
             { isRegistered ? <Redirect to='/login' /> : '' }
 
             
-            <section class="jumbotron text-center">
+            <section class=" text-center">
             <div class="container">
                 <h1>User Registration</h1>
                 <p class="lead text-muted">Register and browse movies!</p>

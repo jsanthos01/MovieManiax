@@ -30,13 +30,6 @@ function NavBar() {
                 Search
                 </Link>
               </li>  
-              { !id ?   
-              <li className="nav-item">
-                <Link to="/register" className={location.pathname === "/register" ? "nav-link active" : "nav-link"}>
-                Register
-                </Link>
-              </li> : ''}   
-
               { !id ? 
               <li className="nav-item">
                   <Link to="/login" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>

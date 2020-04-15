@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Homepage from './components/HomePage/HomePage'
 import SearchMovie from './components/SearchMoviePage/SearchForm'
 import MovieInfo from './components/MoviePage/MovieInformation'
 import MovieWatchList from './components/WatchList/MovieWatchList';
@@ -19,7 +20,7 @@ function App() {
       <Router>
         <Navbar />
         <div className="container-fluid main">
-          {/* <Route exact path={"/"} component={Homepage} /> */}
+          <Route exact path={"/"} component={Homepage} />
           <Route exact path="/searchMovie" component={SearchMovie} />
           <Route exact path="/movieDetails/:id" component={MovieInfo} />
           <Route exact path="/watchlist/:id" component={MovieWatchList} />

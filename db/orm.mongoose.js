@@ -81,9 +81,7 @@ async function logoutUser( session ){
 
 //WatchList Section
 async function postWatchlist(movieData){
-    console.log("Inside orm file")
-    console.log(movieData);
- 
+    console.log("Inside orm file");    
     const movieInfo = {
        "movieId": `${movieData.movieId}`,
        "title": `${movieData.title}`,
@@ -109,22 +107,42 @@ async function getWatchlist(id){
 async function postFavourites(movieData){
     console.log("Inside orm post favourites file")
     console.log(movieData);
- 
+   
     const movieInfo = {
-       "movieId": `${movieData.movieId}`,
-       "title": `${movieData.title}`,
-       "image":`${movieData.image}`,
-       "ratings": `${movieData.ratings}`
+        "movieId": `${movieData.movieId}`,
+        "title": `${movieData.title}`,
+        "image":`${movieData.image}`,
+        "ratings": `${movieData.ratings}`
     }
     //creating a new modal object
     const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { favourites:  movieInfo } });
     console.log(userFetch)
     return { message: "Movie successfully saved in Favourites!!"};
+    
+    
  }
  
 async function getFavourites(id){
     const getSavedList =  db.users.find({_id:id});
     return getSavedList;
+}
+ 
+async function deleteFavMovie(userId, movieObjId){
+    console.log("Inside orm delete favourites ");
+    console.log(userId)
+    console.log(movieObjId);
+    const deleteMovieDb = db.users.updateOne({_id: userId},{ "$pull": { "favourites": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
+        console.log(err)
+    });
+    return { message: "Movie successfully deleted from favourites page!!"};
+}
+async function deleteWatchListMovie(userId, movieObjId){
+    console.log("Inside orm delete watchlist ");
+    console.log(userId)
+    console.log(movieObjId);
+    const deletemovie = db.users.updateOne({_id: userId},{ "$pull": { "watchlist": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
+    });
+    return { message: "Movie successfully deleted from watchlist page!!"};
 }
  
 module.exports = {
@@ -133,5 +151,7 @@ module.exports = {
     postWatchlist,
     getWatchlist,
     postFavourites,
-    getFavourites
+    getFavourites,
+    deleteFavMovie,
+    deleteWatchListMovie
 }

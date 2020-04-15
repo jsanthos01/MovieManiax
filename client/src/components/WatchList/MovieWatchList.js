@@ -24,19 +24,6 @@ function MovieWatchList() {
     useEffect(function(){
         getSavedMovieList();
     },[])
-    
-    // async function removeMovie(id){
-    //     console.log("inside the removeMovie function");
-    //     console.log(id);
-
-    //     const removeSpecificMovie = await fetch(`/api/removeMovie/${id}`, 
-    //     {
-    //         method: 'DELETE'
-    //     }).then(result => result.json());
-    //     console.log(removeSpecificMovie);
-
-    //     getSavedMovieList();
-    // }
 
     return (
         <div class="container-fluid" style={{color:"black"}}>
@@ -51,7 +38,7 @@ function MovieWatchList() {
                             <h3 class="col-11"><i class="fas fa-cloud-download-alt"></i>  Pinned Movies </h3>
                         </div>
                         <hr/>
-                        { myMovies.length > 0 ? <MovieList myMovies={myMovies}/>: 'You have not added to your watchlist' }
+                        { myMovies.length > 0 ? <MovieList myMovies={myMovies}getSavedMovieList={getSavedMovieList} />: 'You have not added to your watchlist' }
 
                     </div>
                 </div>

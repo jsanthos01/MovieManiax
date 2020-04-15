@@ -71,13 +71,13 @@ function LoginPage(){
     }
 
     return (
-        <div>
-            { isLoggedIn ? <Redirect to='/productlist' /> : '' }
+        <div style={{color: "black"}}>
+            { isLoggedIn ? <Redirect to='/' /> : '' }
 
             <div className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
                 {alertMessage.message}
             </div>
-            <section class="jumbotron text-center">
+            <section class="text-center">
             <div class="container">
                 <h1>Login</h1>
                 <p class="lead text-muted">Register and go shopping!</p>

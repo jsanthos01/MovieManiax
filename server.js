@@ -59,6 +59,21 @@ app.get("/api/favourites/:id", async (req, res) => {
   const getMovieData = await await orm.getFavourites( id );
   res.json(getMovieData);
 })
+
+app.delete("/api/removeFavMovie/:userId/:movieId", async (req, res) => {
+  console.log("[delete route]", req.params.movieId);
+  const movieId = req.params.movieId;
+  const userId = req.params.userId;
+  const deleteMovie = orm.deleteFavMovie(userId,movieId);
+  res.send(deleteMovie);
+});
+app.delete("/api/removeListMovie/:userId/:movieId", async (req, res) => {
+  console.log("[delete route]", req.params.movieId);
+  const movieId = req.params.movieId;
+  const userId = req.params.userId;
+  const deleteMovieList = orm.deleteWatchListMovie(userId,movieId);
+  res.send(deleteMovieList);
+});
 // JOANNA'S CODE WATCHLIST & FAVOURITES ENDING LINE------
 
 app.listen( PORT, function(){

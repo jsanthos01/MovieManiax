@@ -100,7 +100,7 @@ function MovieFavourites() {
                             </div>
                         </div>
                         <div class="col-lg-4" style={style.alignStyle}>
-                            <button class="btn btn-primary">Refine</button>
+                            <button class="btn btn-primary">Filter By:</button>
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@ function MovieFavourites() {
             <div class="album py-50">
                 <div class="container">
                     <div class="row">
-                    { myMovies.length > 0 ? <FavouritesCard myMovies={myMovies} />: 'You have not added to your favourites' }
+                    { myMovies.length > 0 ? <FavouritesCard myMovies={myMovies} getSavedMovieList={getSavedMovieList} />: 'You have not added to your favourites' }
                     </div>
                 </div>
             </div>

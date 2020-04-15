@@ -42,7 +42,7 @@ function MovieResultPage(props) {
                 }
         
                 console.log("Movie Data", MovieData);
-                postMovieData = await fetch('/api/watchlistMovie',
+                postMovieData = await fetch(`/api/watchlistMovie/`,
                 {  
                     method: 'post',
                     headers: {
