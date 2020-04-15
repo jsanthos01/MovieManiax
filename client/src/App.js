@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SearchMovie from './components/SearchMoviePage/SearchForm'
 import MovieInfo from './components/MoviePage/MovieInformation'
-// import MovieWatchList from './components/WatchListPage/MovieWatchList';
+import MovieWatchList from './components/WatchList/MovieWatchList';
 import LoginPage from './components/Login/LoginPage';
 import LogoutPage from './components/Login/LogoutPage';
 import Registration from './components/Registration/Registration';
@@ -15,14 +15,14 @@ import './App.css';
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <Router>
         <Navbar />
-        <div className="container">
+        <div className="container-fluid main">
           {/* <Route exact path={["/","home"]} component={Homepage} /> */}
           <Route exact path="/searchMovie" component={SearchMovie} />
           <Route exact path="/movieDetails/:id" component={MovieInfo} />
-          {/* <Route exact path="/watchlist/:id" component={MovieWatchList} /> */}
+          <Route exact path="/watchlist/:id" component={MovieWatchList} />
           <Route exact path="/register" component={Registration} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/logout" component={LogoutPage} />
@@ -30,7 +30,7 @@ function App() {
           <Route exact path="/user/:id" component={Profile} /> 
           <Route exact path="/favourites/:id" component={Favourites} />
         </div>
-        <Footer/>
+        <Footer />
       </Router>
     </div>
   );

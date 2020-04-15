@@ -6,9 +6,6 @@ function NavBar() {
   const location = useLocation();
   const [isShown, setShown] = useState(false);
   let showClass = !isShown ? `collapse navbar-collapse`: `collapse navbar-collapse show`;
-  const style = {
-    logo: { width: '160 px', height: '80px' }
-  }
 
   const id = localStorage.id;
   console.log(id);
@@ -19,7 +16,8 @@ function NavBar() {
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <Link to="/" className="navbar-brand">
-        <img src= "https://i0.wp.com/atechguides.com/wp-content/uploads/2018/10/1-bigstock-Cinema-concept-Film-reel-pop-146972888.jpg" alt="google logo" style={style.logo} />
+        <img src="https://icons.iconarchive.com/icons/designbolts/free-multimedia/1024/Film-icon.png" style={{width: "40px"}}/>
+        MovieManiax
       </Link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onClick={()=>setShown(!isShown)}>
         <span class="navbar-toggler-icon"></span>
@@ -42,17 +40,19 @@ function NavBar() {
                 Register
                 </Link>
               </li>    
+              { !id ? 
               <li className="nav-item">
-                <Link to="/login" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>
-                Login
-                </Link>
-              </li>    
-              <li className="nav-item">
-                <Link to="/logout" className={location.pathname === "/logout" ? "nav-link active" : "nav-link"}>
-                Logout
-                </Link>
-              </li>  
-                               
+                  <Link to="/login" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>
+                  Login
+                  </Link>
+              </li> :
+                <li className="nav-item">
+                  <Link to="/logout" className={location.pathname === "/logout" ? "nav-link active" : "nav-link"}>
+                  Logout
+                  </Link>
+                </li> 
+              } 
+                          
               { !id ? '': 
                 <li className="nav-item">
                     <Link to={`/watchlist/${id}`} className={location.pathname === `/watchlist/${id}` ? "nav-link active" : "nav-link"}>

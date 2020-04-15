@@ -23,7 +23,6 @@ h1 {
 
 .playBtn {
   width: 70%;
-  /* border-radius: none; */
   border-radius: 2px;
   padding: 10px
 }
@@ -46,6 +45,5 @@ h1 {
 .extra {
   text-align: center;
   justify-content: center;
-
 }
 

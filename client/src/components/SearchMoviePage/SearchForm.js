@@ -2,7 +2,7 @@ import React, {useState, useRef}  from 'react'
 import MovieResultPage from './MovieResultPage'
 
 //Not sure if this is a package = Sara Check !
-const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop); 
+// const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop); 
 
 function SearchForm() {
     const [searchInput, setSearchInput] = useState("");
@@ -10,12 +10,6 @@ function SearchForm() {
     const myRef = useRef(null);
 
     const style = {
-        searchStyle: {
-            height: '85vh',
-            // backgroundImage: `url(${heroImg})`,
-            backgroundSize: 'cover',
-            backgroundPositionY: '-174px'
-        }, 
         myForm: {
             width: "70%",
             margin: "50px"
@@ -39,7 +33,6 @@ function SearchForm() {
 
     function handleInputChange(e){
         let newInput = e.target.value;
-        // console.log(newInput);
         setSearchInput(newInput);
     }
 
@@ -53,8 +46,8 @@ function SearchForm() {
         console.log( 'movieList: ', newMovieList.results); 
         setMovieList(newMovieList.results);
 
-        //Needs to be checked
-        scrollToRef(myRef);
+        //Needs to be checked by SARA MUNIR
+        // scrollToRef(myRef);
     }
 
     return (
@@ -73,7 +66,7 @@ function SearchForm() {
                     </div>
                 </div>
             </div>
-            { movieList.length > 0 ? <MovieResultPage  movieList={movieList} myRef={myRef} /> : 'The Movie You Searched is not available!' }
+            { movieList.length > 0 ? <MovieResultPage  movieList={movieList} myRef={myRef} /> : '' }
 
         </div>
     )
