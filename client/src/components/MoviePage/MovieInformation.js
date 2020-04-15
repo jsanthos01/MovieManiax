@@ -140,12 +140,6 @@ function MovieInformation() {
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-
-=======
-       
-      
->>>>>>> 52381fce0d82539fe54b4a528abeb85b1b376610
     )
 }
 
