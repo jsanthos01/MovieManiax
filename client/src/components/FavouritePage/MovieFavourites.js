@@ -30,8 +30,13 @@ function MovieFavourites() {
     }
     
     async function getSavedMovieList(){
+        
         const getMovies = await fetch(`/api/favourites/${id}`).then(res => res.json());
+        console.log("Inside the Favourites Component")
+        console.log("inside the Favourites page:", getMovies)
+        console.log("inside the Favourites page 2:", getMovies[0].favourites)
         const movies = getMovies;
+        console.log(movies)
         setMyMovies(movies[0].favourites);
     }
 

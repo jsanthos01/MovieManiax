@@ -56,7 +56,7 @@ app.post("/api/favourites", async (req, res) => {
 app.get("/api/favourites/:id", async (req, res) => {
   console.log(req.params.id)
   const id = req.params.id;
-  const getMovieData = await await orm.getWatchlist( id );
+  const getMovieData = await await orm.getFavourites( id );
   res.json(getMovieData);
 })
 // JOANNA'S CODE WATCHLIST & FAVOURITES ENDING LINE------

@@ -49,8 +49,8 @@ function LoginPage(){
             console.log(apiResult)
 
             localStorage.setItem("email", apiResult.email);
-            localStorage.setItem('id', apiResult.id)
-            localStorage.setItem('name', apiResult.name)
+            localStorage.setItem('id', apiResult.id);
+            localStorage.setItem('name', apiResult.name);
                   
         if( !apiResult.message ){
             setAlertMessage( { type: 'danger', message: apiResult.error } );
