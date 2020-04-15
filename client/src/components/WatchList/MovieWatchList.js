@@ -51,7 +51,8 @@ function MovieWatchList() {
                             <h3 class="col-11"><i class="fas fa-cloud-download-alt"></i>  Pinned Movies </h3>
                         </div>
                         <hr/>
-                        <MovieList myMovies={myMovies}/>
+                        { myMovies.length > 0 ? <MovieList myMovies={myMovies}/>: 'You have not added to your watchlist' }
+
                     </div>
                 </div>
             </div>
