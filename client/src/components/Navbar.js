@@ -24,22 +24,19 @@ function NavBar() {
       </button>
 
       <div className={showClass} id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link to="/home" className={location.pathname === "/home" ? "nav-link active" : "nav-link"}>
-                Home
-                </Link>
-              </li>          
+          <ul className="navbar-nav mr-auto">        
               <li className="nav-item">
                 <Link to="/searchMovie" className={location.pathname === "/searchMovie" ? "nav-link active" : "nav-link"}>
                 Search
                 </Link>
-              </li>    
+              </li>  
+              { !id ?   
               <li className="nav-item">
                 <Link to="/register" className={location.pathname === "/register" ? "nav-link active" : "nav-link"}>
                 Register
                 </Link>
-              </li>    
+              </li> : ''}   
+
               { !id ? 
               <li className="nav-item">
                   <Link to="/login" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>

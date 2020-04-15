@@ -19,7 +19,7 @@ function App() {
       <Router>
         <Navbar />
         <div className="container-fluid main">
-          {/* <Route exact path={["/","home"]} component={Homepage} /> */}
+          {/* <Route exact path={"/"} component={Homepage} /> */}
           <Route exact path="/searchMovie" component={SearchMovie} />
           <Route exact path="/movieDetails/:id" component={MovieInfo} />
           <Route exact path="/watchlist/:id" component={MovieWatchList} />

@@ -12,7 +12,7 @@ function RegisterPage(){
 
     function handleInputChange( e ){
         console.log(e.target)
-        const { id, value } = e.target; //
+        const { id, value } = e.target; 
 
         setUserData( { ...userData, [id]: value } );
     }
@@ -57,13 +57,6 @@ function RegisterPage(){
                   
         if( apiResult.message ){
             setAlertMessage( { type: 'success', message: 'Thank you successfully registered!' } );
-
-            localStorage.setItem("email", apiResult.email);
-            localStorage.setItem('id', apiResult.id)
-            localStorage.setItem('name', apiResult.name)
-
-
-            
             setTimeout( function(){ setIsRegistered(true); }, 5000 );
             //apiresult -message, email, id, name
         } else {
