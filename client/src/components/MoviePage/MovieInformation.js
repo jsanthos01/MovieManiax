@@ -49,7 +49,7 @@ function MovieInformation() {
     return (
         <div class='container-fluid' >
             { isNotLoggedIn ? <Redirect to='/login' /> : '' }
-            <div style={messageStyle} className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
+            <div style={movieStyle.messageStyle} className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
                 {alertMessage.message}
             </div>
 
@@ -58,52 +58,52 @@ function MovieInformation() {
                 {/* THIS YOUTUBE LINK IS DONE WRONG... MUST BE CHANGED!!!!! */}
                 <a href={`https://www.youtube.com/embed/${movieDetails.key}`}><button class="btn btn-outline-danger mr-3 mt-3">Watch Trailer</button></a>
 
+            </div>
+            <div class='col-md-8'>
+
+                <h1>{movieDetails.title}</h1>
+                <h4 style={{color:"white", fontStyle: "italic"}}>"{movieDetails.tagline}"</h4>
+                <button class="btn btn-outline-danger mr-3 mt-3"><i class="fas fa-heart"></i> Favourites</button>
+                <button class="btn btn-outline-primary mt-3"><i class="fas fa-plus"></i>  Watch List</button>
+                <div>
+                    <ul class="list-group">
+                        <li class="list-group-item" > <i class="fas fa-star"></i> {movieDetails.vote_average}/10</li>
+                        <li class="list-group-item" >
+                                Rate This Movie: 
+                            <div class="d-flex" style={{color:"#ffeb3b"}}>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            </div>
+                        </li>
+                        <li class="list-group-item" ><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
+                    </ul>    
                 </div>
                 <div class='col-md-8'>
                     <h1>{movieDetails.title}</h1>
-                    <h4 style={{color:"white", fontStyle: "italic"}}>"{movieDetails.tagline}"</h4>
+                    <h4 style={movieStyle.h4Style}>"{movieDetails.tagline}"</h4>
                     <button class="btn btn-outline-danger mr-3 mt-3"><i class="fas fa-heart"></i> Favourites</button>
                     <button class="btn btn-outline-primary mt-3"><i class="fas fa-plus"></i>  Watch List</button>
                     <div>
                         <ul class="list-group">
-                            <li class="list-group-item" > <i class="fas fa-star"></i> {movieDetails.vote_average}/10</li>
-                            <li class="list-group-item" >
-                                    Rate This Movie: 
-                                <div class="d-flex" style={{color:"#ffeb3b"}}>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                </div>
-                            </li>
-                            <li class="list-group-item" ><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
+                            <li class="list-group-item" style={movieStyle.listGroupItem}> <i class="fas fa-1x fa-star" style={{color: "yellow"}}></i><b> {movieDetails.vote_average}</b>/10</li>
+                            <li class="list-group-item" style={movieStyle.listGroupItem}><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
                         </ul>
                     </div>
-                    <div class='col-md-8'>
-
-                        <h1>{movieDetails.title}</h1>
-                        <h4 style={movieStyle.h4Style}>"{movieDetails.tagline}"</h4>
-                        <button class="btn btn-outline-danger mr-3 mt-3"><i class="fas fa-heart"></i> Favourites</button>
-                        <button class="btn btn-outline-primary mt-3"><i class="fas fa-plus"></i>  Watch List</button>
-                        <div>
-                            <ul class="list-group">
-                                <li class="list-group-item" style={movieStyle.listGroupItem}> <i class="fas fa-1x fa-star" style={{color: "yellow"}}></i><b> {movieDetails.vote_average}</b>/10</li>
-                                <li class="list-group-item" style={movieStyle.listGroupItem}><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
-                            </ul>
-                        </div>
-                        <div class="container">
-                            <h5>Overview</h5>
-                            <p>{movieDetails.overview}</p>
-                        </div>
-                        <div class="container">
-                            <h5>Genre</h5>
-                            {movieDetails && movieDetails.genres ? <p>{movieDetails.genres.map( genre =><span class="badge badge-primary mr-2" style={{padding: "10px"}}>{genre.name}</span>)} </p> : '[no genre list]' }
-                        </div>
+                    <div class="container">
+                        <h5>Overview</h5>
+                        <p>{movieDetails.overview}</p>
                     </div>
-            
+                    <div class="container">
+                        <h5>Genre</h5>
+                        {movieDetails && movieDetails.genres ? <p>{movieDetails.genres.map( genre =><span class="badge badge-primary mr-2" style={{padding: "10px"}}>{genre.name}</span>)} </p> : '[no genre list]' }
+                    </div>
                 </div>
+        
             </div>
+            
             <div class="container mt-5">
                 <h1>Full Cast & Crew</h1>
                 <div class="row">
@@ -140,7 +140,12 @@ function MovieInformation() {
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
 
+=======
+       
+      
+>>>>>>> 52381fce0d82539fe54b4a528abeb85b1b376610
     )
 }
 

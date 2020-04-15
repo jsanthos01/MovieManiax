@@ -1,9 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 
 function RelevantMovies(props) {
     console.log("Inside the RelevantMovies.js");
     const movie = props.movie;
+    const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
+
+    
     
     //Add to favourites or watchlist in database
     async function getMovieId(type, movieObj){
@@ -72,10 +75,10 @@ function RelevantMovies(props) {
 
     return (
         <div class="col-md-4 text-center">
-            <div class="card mb-4 box-shadow">
-                {movie.poster_path && movie.poster_path ? <img style={imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="something" /> : <img style={imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
+            <div class="card mb-4 box-shadow">o
+                {/* {movie.poster_path && movie.poster_path ? <img style={imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="something" /> : <img style={imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> } */}
                 
-                <div class="movieDesc" style={movieDesc}> 
+                <div class="movieDesc"> 
                     <h4>{movie.title}</h4>
                     <div class="extra">
                         <Link to={"/movieDetails/" + movie.id }>
