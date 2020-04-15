@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import HomePage from "./components/HomePage";
 import SearchMovie from './components/SearchMoviePage/SearchForm'
 import MovieInfo from './components/MoviePage/MovieInformation'
 // import MovieWatchList from './components/WatchListPage/MovieWatchList';
@@ -27,7 +26,8 @@ function App() {
           <Route exact path="/register" component={Registration} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/logout" component={LogoutPage} />
-          <Route exact path="/user" component={Profile} />
+          {/* delete before pushing */}
+          <Route exact path="/user/:id" component={Profile} /> 
           <Route exact path="/favourites/:id" component={Favourites} />
         </div>
         <Footer/>

@@ -13,6 +13,9 @@ function NavBar() {
   const id = localStorage.id;
   console.log(id);
 
+  const userName = localStorage.name;
+  console.log(userName);
+
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <Link to="/" className="navbar-brand">
@@ -48,7 +51,8 @@ function NavBar() {
                 <Link to="/logout" className={location.pathname === "/logout" ? "nav-link active" : "nav-link"}>
                 Logout
                 </Link>
-              </li>       
+              </li>  
+                               
               { !id ? '': 
                 <li className="nav-item">
                     <Link to={`/watchlist/${id}`} className={location.pathname === `/watchlist/${id}` ? "nav-link active" : "nav-link"}>
@@ -63,6 +67,13 @@ function NavBar() {
                     </Link>
                 </li> 
               } 
+              { !id ? '':
+                <li className="nav-item">
+                    <Link to={`/user/${id}`} className={location.pathname === `/userid/${id}` ? "nav-link active" : "nav-link"}>
+                    {`${userName}`}
+                    </Link>
+                </li>  
+              }
           </ul>
       </div>
     </nav>
