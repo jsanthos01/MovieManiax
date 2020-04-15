@@ -52,6 +52,7 @@ function MovieInformation() {
             <div style={messageStyle} className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
                 {alertMessage.message}
             </div>
+
             <div class="container">
                 
                 {/* THIS YOUTUBE LINK IS DONE WRONG... MUST BE CHANGED!!!!! */}
@@ -59,7 +60,6 @@ function MovieInformation() {
 
                 </div>
                 <div class='col-md-8'>
-
                     <h1>{movieDetails.title}</h1>
                     <h4 style={{color:"white", fontStyle: "italic"}}>"{movieDetails.tagline}"</h4>
                     <button class="btn btn-outline-danger mr-3 mt-3"><i class="fas fa-heart"></i> Favourites</button>
@@ -78,7 +78,7 @@ function MovieInformation() {
                                 </div>
                             </li>
                             <li class="list-group-item" ><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
-
+                        </ul>
                     </div>
                     <div class='col-md-8'>
 
@@ -108,36 +108,39 @@ function MovieInformation() {
                 <h1>Full Cast & Crew</h1>
                 <div class="row">
 
-                {movieDetails && movieDetails.genres ? 
-                <div class="row">{movieDetails.credits.cast.slice(0,10).map( actor =>
-                    <div class="mt-3 mr-3 mx-auto">
-                        <img style={movieStyle.castImage} src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} alt="movie img" />
-                        <p class="list-group-item" style={movieStyle.castText}>{actor.name}</p>
-                    </div> 
+                    {movieDetails && movieDetails.genres ? 
+                    <div class="row">
+                        {movieDetails.credits.cast.slice(0,10).map( actor =>
+                        <div class="mt-3 mr-3 mx-auto">
+                            <img style={movieStyle.castImage} src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} alt="movie img" />
+                            <p class="list-group-item" style={movieStyle.castText}>{actor.name}</p>
+                        </div> 
 
-                )} 
-                </div> : '[no cast members]' }
+                        )} 
+                    </div> : '[no cast members]' }
 
                 </div>
             </div>
             <div class="container mt-5">
                 <h1>Official Movie Trailers</h1>
                 <div class="row justify-content-center">                    
-                {movieTrailer.slice(0,3).map(movie => 
-                    <div class="mr-4 mt-4">
-                        <iframe width="340" height="215" src={`https://www.youtube.com/embed/${movie.key}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>)}
+                    {movieTrailer.slice(0,3).map(movie => 
+                        <div class="mr-4 mt-4">
+                            <iframe width="340" height="215" src={`https://www.youtube.com/embed/${movie.key}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    )}
                 </div>
             </div>
             <div class="container mt-5">
                 <h1>Related Movies</h1>
                 <div class="row ">                    
-                {similarMovies.slice(0,10).map(movie => 
-                    <RelevantMovies movie={movie} setIsNotLoggedIn={setIsNotLoggedIn} />
-                )}
+                    {similarMovies.slice(0,10).map(movie => 
+                        <RelevantMovies movie={movie} setIsNotLoggedIn={setIsNotLoggedIn} />
+                    )}
                 </div>
             </div>
         </div>
+
     )
 }
 
