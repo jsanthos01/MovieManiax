@@ -17,7 +17,7 @@ function App() {
         <Route exact path={"/watchlist"} component={WatchList} />
         <Route exact path="/login" component={Login} />
 
-      <Footer />
+      <Footer/>
      </div>
     </Router>
   );
