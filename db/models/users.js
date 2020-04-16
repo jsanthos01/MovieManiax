@@ -19,7 +19,10 @@ let users = new Schema ({
       trim: true
    },
    session: { type: String, default: '' },
-
+   profileImg: {
+      type: String,
+      default: 'https://getdrawings.com/free-icon-bw/anonymous-avatar-icon-19.png'  
+   },
    favouriteMovie: [
       { 
          movieId: {type: String},
