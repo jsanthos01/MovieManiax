@@ -11,12 +11,12 @@ function HomePage(){
            <div class="image5"></div>
            <div class="imageContainer">
            </div>
-           <div class="container">
+           <div class="HomeContainer">
                 <div class="heading">
                    <strong> Movie Maniax</strong>
                 </div>
             </div>
-            <div class="container2">   
+            <div class="HomeContainer2">   
                 <a class="searchBtn" ><strong>Find a movie</strong></a>
             </div> 
 
