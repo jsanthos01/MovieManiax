@@ -80,7 +80,7 @@ function LoginPage(){
             <section class="jumbotron text-center">
             <div class="container">
                 <h1>Login</h1>
-                <p class="lead text-muted">Register and go shopping!</p>
+                <p class="lead text-muted">Welcome back to Movie Maniax!</p>
             </div>
             </section>
         
