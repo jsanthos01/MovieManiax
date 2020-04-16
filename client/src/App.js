@@ -32,11 +32,12 @@ function App() {
           {/* delete before pushing */}
           <Route exact path="/user/:id" component={Profile} /> 
           <Route exact path="/favourites/:id" component={Favourites} />
+
           <Route exact path="/friendList" component={Friends} />
           
           <Route exact path="/genrePage" component={GenrePage} />
           <Route path="/genre/:id" component={GenreMoviePage} />
-
+          
         </div>
         <Footer />
       </Router>
