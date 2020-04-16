@@ -6,7 +6,7 @@ import AvatarUpload from './AvatarUpload';
     function Profile() {
         const userid = localStorage.id;
         const [ profileInfo, setProfileInfo] = useState( {} )
-        const [ shoeForm, setShowForm] = useState( 'true' )
+        const [ showForm, setShowForm] = useState( false )
         // console.log(userid);
         
 
@@ -36,6 +36,12 @@ import AvatarUpload from './AvatarUpload';
             loadAvatar();
         }, [] );
 
+        function uploadPic( e ){
+            e.preventDefault();
+    
+            setShowForm(false);
+        } 
+
     return (
         <div>
             <div class="row mt-4">
@@ -45,13 +51,17 @@ import AvatarUpload from './AvatarUpload';
                                     <div class="row">
                                         <div class="col-4">
                                             <img src={profileInfo.profileImg} alt="..." class="img-thumbnail"/><br/>
-                                            <button>edit</button>
+                                            <button onClick={function(){ setShowForm(true) }}>edit</button>
                                         </div>    
                                         
                                         <div class="col-6">
                                             <h1>{profileInfo.name}</h1>
                                             <div>{profileInfo.createdAt}</div>
-                                            <a href>edit profile</a>
+                                            { showForm ? <AvatarUpload uploadPic={uploadPic} /> : 
+                                                <div >
+                                                    <button onClick={function(){ setShowForm(true) }}>
+                                                       edit</button>
+                                                </div> }
                                         </div>
                                     </div>    
                             <div class="row">

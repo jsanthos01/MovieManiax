@@ -1,19 +1,20 @@
-// import React from 'react'
+import React from 'react'
 
-// function AvatarUpload() {
+function AvatarUpload(props) {
     
 
-//     function handleUpload(){
+    function handleUpload(){
 
-//     }
-//     return (
-//         <div>
-//             <form> 
-//                 <input type="file" name="myFile" />
-//                 <input type="submit" value="Upload a file" onClick={() => serShowForm(true)}/>
-//             </form>
-//         </div>
-//     )
-// }
+    }
+    return (
+        <div>
+            <form> 
+                <input type="file" name="myFile" />
+               <button onClick={props.UploadPic}>Upload </button> 
+                {/* <button class='btn btn-lg btn-primary' onClick={props.saveForm}>Save Review</button> */}
+            </form>
+        </div>
+    )
+}
 
-// export default AvatarUpload
+export default AvatarUpload
