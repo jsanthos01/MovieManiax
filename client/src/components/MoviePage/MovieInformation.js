@@ -57,8 +57,6 @@ function MovieInformation() {
                 MovieData = {
                     userId: localStorage.id,
                     title: movieObj.title,
-                    // genre: apiMovie.Genre,
-                    // actors: apiMovie.Actors,
                     popularity: movieObj.popularity,
                     image: movieObj.poster_path,
                     description: movieObj.overview,
@@ -134,8 +132,8 @@ function MovieInformation() {
                     <div class='col-md-8'>
                         <h1>{movieDetails.title}</h1>
                         <h4 style={{color:"white", fontStyle: "italic"}}>"{movieDetails.tagline}"</h4>
-                        <button class="btn btn-outline-danger mr-3 mt-3"><i class="fas fa-heart"></i> Favourites</button>
-                        <button class="btn btn-outline-primary mt-3"><i class="fas fa-plus"></i>  Watch List</button>
+                        <button class="btn btn-outline-danger mr-3 mt-3" onClick={() => getMovieId("favourites", movieDetails)}><i class="fas fa-heart"></i> Favourites</button>
+                        <button class="btn btn-outline-primary mt-3" onClick={() => getMovieId("watchlist", movieDetails)}><i class="fas fa-plus"></i>  Watch List</button>
                         <div>
                             <ul class="list-group">
                                 <li class="list-group-item" style={movieStyle.listGroupItem}> <i class="fas fa-1x fa-star" style={{color: "yellow"}}></i><b> {movieDetails.vote_average}</b>/10</li>

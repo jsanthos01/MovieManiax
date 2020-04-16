@@ -1,7 +1,6 @@
 import React, {useContext} from 'react'
 import { useParams } from 'react-router-dom';
 import {Link, useLocation} from "react-router-dom";
-
 function MovieList(props) {
     const { id } = useParams();
     console.log("Inside the saved movie List page");
