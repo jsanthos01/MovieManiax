@@ -15,7 +15,7 @@ app.use( express.json() );
 
 app.post('/api/user/registration', async function( req,res ){
     const userData = req.body;
-    console.log( `[Server.js POST: /api/user/registration] userData: `, userData );    
+    // console.log( `[Server.js POST: /api/user/registration] userData: `, userData );    
     const registerResult = await orm.registerUser( userData );
     // console.log("[POST RESULT] registration:", registerResult);
     res.send(registerResult);
@@ -34,29 +34,30 @@ app.post('/api/user/login', async function( req,res ){
 // JOANNA'S CODE WATCHLIST & FAVOURITES
 app.post("/api/watchlistMovie", async (req, res) => {
     const movieData = req.body;
-    console.log(movieData);
+    // console.log(movieData);
     const movieResult = await orm.postWatchlist( movieData );
     res.send(movieResult );
 })
 
 app.get("/api/watchlistMovie/:id", async (req, res) => {
-  console.log(req.params.id)
+  // console.log(req.params.id)
   const id = req.params.id;
   const getMovieData = await await orm.getWatchlist( id );
   res.json(getMovieData);
 })
 app.post("/api/favourites", async (req, res) => {
-  console.log("inside the favourites server.js")
+  // console.log("inside the favourites server.js")
     const movieData = req.body;
-    console.log(movieData);
+    // console.log(movieData);
     const movieResult = await orm.postFavourites( movieData );
     res.send(movieResult );
 })
 
 app.get("/api/favourites/:id", async (req, res) => {
-  console.log(req.params.id)
+  // console.log(req.params.id)
   const id = req.params.id;
   const getMovieData = await await orm.getFavourites( id );
+  // const getMovieData = await orm.getWatchlist( id );
   res.json(getMovieData);
 })
 
@@ -115,6 +116,14 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
 })
 
 //Sara's code ending here
+
+//get default avatar from db
+app.get("/api/avatar/:id", async function(req, res){
+  // console.log( 'avatar id is', req.params )
+  const id = req.params.id;
+  const showProfile = await orm.showProfileDb( id );
+  res.json(showProfile)
+})
 
 app.listen( PORT, function(){
     console.log( `[everest server] RUNNING, http://localhost:${PORT}` );

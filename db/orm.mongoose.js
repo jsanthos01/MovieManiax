@@ -11,15 +11,15 @@ const db = require( './models' );
 // output: { message, id, name }
 async function registerUser( userData ){
     if( !userData.password || !userData.name || !userData.email ){
-        console.log( `[registerUser] invalid userData! `, userData );
+        // console.log( `[registerUser] invalid userData! `, userData );
         return { message: "Invalid user data", id: "", name: "" };
     }
     
-    console.log( `[registerUser], userData: `, userData );
+    // console.log( `[registerUser], userData: `, userData );
     const saltRounds = 10;
  
     const passwordHash = await bcrypt.hash(userData.password, saltRounds);
-    console.log( `[registerUser] (hash=${passwordHash}) req.body:`, userData );
+    // console.log( `[registerUser] (hash=${passwordHash}) req.body:`, userData );
     
     const saveData = {
        name: userData.name,
@@ -41,7 +41,7 @@ async function registerUser( userData ){
 // output: <object> { userId, firstName, lastName, emailAddress, creationTime } || false
 async function loginUser( email, password ) {
     const userData = await db.users.findOne({ email: email });
-    console.log( `[loadUser] email='${email}' userData:`, userData );
+    // console.log( `[loadUser] email='${email}' userData:`, userData );
     if( !userData ) {
         return { error: "Couldn't find that email. Register or try again!" };
     }
@@ -82,6 +82,9 @@ async function logoutUser( session ){
 //WatchList Section
 async function postWatchlist(movieData){
     console.log("Inside orm file");    
+    // console.log("Inside orm file")
+    // console.log(movieData);
+ 
     const movieInfo = {
        "movieId": `${movieData.movieId}`,
        "title": `${movieData.title}`,
@@ -93,7 +96,7 @@ async function postWatchlist(movieData){
     }
  
     const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { watchlist:  movieInfo } });
-    console.log(userFetch)
+    // console.log(userFetch)
     return { message: "Movie successfully saved in Watchlist!!"};
 }
 
@@ -108,6 +111,9 @@ async function postFavourites(movieData){
     console.log("Inside orm post favourites file")
     console.log(movieData);
    
+    // console.log("Inside orm post favourites file")
+    // console.log(movieData);
+ 
     const movieInfo = {
         "movieId": `${movieData.movieId}`,
         "title": `${movieData.title}`,
@@ -116,7 +122,7 @@ async function postFavourites(movieData){
     }
     //creating a new modal object
     const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { favourites:  movieInfo } });
-    console.log(userFetch)
+    // console.log(userFetch)
     return { message: "Movie successfully saved in Favourites!!"};
     
     
@@ -186,6 +192,13 @@ async function deleteFriend( objIds ){
 }
 
 // sara's code ends here
+async function showProfileDb(id){
+    
+    const profileDb = db.users.findById({ _id:id })
+    // console.log( `[userInfo avatar] id ${id}`, avatarDb );
+    return profileDb;
+}
+
 module.exports = {
     registerUser,
     loginUser,
@@ -200,6 +213,7 @@ module.exports = {
     getUserslist,
     postFriend,
     getFriendlist,
-    deleteFriend
+    deleteFriend,
 
+    showProfileDb
 }
