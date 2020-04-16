@@ -8,8 +8,11 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 // const upload = require('multer')({ dest: 'public/uploads/' });
 // PORT is only set by Heroku, else we know it's local
+const path = require("path");
 
 app.use( express.static('client/build/') );
+app.use(express.static(path.join(__dirname, "client/src/components/Genre")));
+
 app.use( express.urlencoded({ extended: false }) );
 app.use( express.json() );
 
@@ -114,6 +117,12 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
   const friendsData = await await orm.deleteFriend( objIds );
   res.json(friendsData);
 })
+
+ /// genre list
+ app.get('/api/genre/list', async function( req,res ){
+  const genres = JSON.parse( fs.readFileSync( "client/src/components/Genre/genre.json" ) );
+  res.send( genres );
+});
 
 //Sara's code ending here
 

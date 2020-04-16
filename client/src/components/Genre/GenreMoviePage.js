@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
-import MovieList from '../SearchMoviePage/MovieResultFinal'
+import MovieList from '../SearchMoviePage/MovieResultPage'
 function GenreMoviePage() {
     const { id } = useParams();
     console.log("id: ", id);
