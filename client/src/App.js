@@ -12,6 +12,7 @@ import Profile from './components/UserProfile/Profile';
 import Favourites from './components/FavouritePage/MovieFavourites';
 import Footer from './components/Footer/Footer'
 import './App.css';
+import Friends from './components/FriendPage/Friend';
 
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
           {/* delete before pushing */}
           <Route exact path="/user/:id" component={Profile} /> 
           <Route exact path="/favourites/:id" component={Favourites} />
+          
+          <Route exact path="/friendList" component={Friends} />
+
         </div>
         <Footer />
       </Router>

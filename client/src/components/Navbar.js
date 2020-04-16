@@ -64,6 +64,13 @@ function NavBar() {
                     </Link>
                 </li>  
               }
+              { !id ? '': 
+                <li className="nav-item">
+                  <Link to="/friendList" className={location.pathname === "/friendList" ? "nav-link active" : "nav-link"}>
+                  Friends
+                  </Link>
+                </li>  
+              }
           </ul>
       </div>
     </nav>
