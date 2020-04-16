@@ -1,5 +1,5 @@
 import React from "react";
-// import "../style/HomePage.css"
+import "../style/HomePage.css"
 
 function HomePage(){
     return(
@@ -17,7 +17,7 @@ function HomePage(){
                 </div>
             </div>
             <div class="HomeContainer2">   
-                <a class="searchBtn" ><strong>Find a movie</strong></a>
+                <a class="searchBtn" href="/searchMovie" ><strong>Find a movie</strong></a>
             </div> 
 
         </div>

@@ -26,7 +26,6 @@ function App() {
           <Route exact path="/movieDetails/:id" component={MovieInfo} />
           <Route exact path="/watchlist/:id" component={MovieWatchList} />
           <Route exact path="/register" component={Registration} />
-          <Route exact path={"/watchlist"} component={WatchList} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/logout" component={LogoutPage} />
           {/* delete before pushing */}
