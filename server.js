@@ -75,6 +75,46 @@ app.delete("/api/removeListMovie/:userId/:movieId", async (req, res) => {
   res.send(deleteMovieList);
 });
 // JOANNA'S CODE WATCHLIST & FAVOURITES ENDING LINE------
+//Sara's code starting here
+//sara
+
+//to load registered users
+app.get("/api/UsersList", async (req, res) => {
+  console.log('in server file getting friends: ',req.params)
+  // const id = req.params;
+  const usersData = await await orm.getUserslist( );
+  res.json(usersData);
+})
+
+// to add or follow user
+app.post("/api/saveFriend", async (req, res) => {
+  const friendData = req.body;
+  console.log('in server file, the friend data info received is: ',friendData);
+  const friendResult = await orm.postFriend( friendData );
+  res.send(friendResult );
+})
+
+//to load users friends list
+
+app.get("/api/friendList/:id", async (req, res) => {
+  console.log('in server file getting friends: ',req.params)
+  const id = req.params.id;
+  const friendsData = await await orm.getFriendlist( id );
+  res.json(friendsData);
+})
+
+// to delete friends from llist
+app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
+  console.log('in server file deleting friends: ',req.params)
+  const objIds ={
+    userId : req.params.userId,
+    frndId : req.params.frndId
+  }
+  const friendsData = await await orm.deleteFriend( objIds );
+  res.json(friendsData);
+})
+
+//Sara's code ending here
 
 app.listen( PORT, function(){
     console.log( `[everest server] RUNNING, http://localhost:${PORT}` );

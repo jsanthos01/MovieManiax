@@ -43,7 +43,11 @@ let users = new Schema ({
       }
    ],
    friendList: [
-      //Sara will need to add
+      {
+         userId: {type: String},
+         name: {type: String},
+         // image: {type: String},
+      }
    ]
  }, {
     timestamps: true

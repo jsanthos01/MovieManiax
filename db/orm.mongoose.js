@@ -144,7 +144,48 @@ async function deleteWatchListMovie(userId, movieObjId){
     });
     return { message: "Movie successfully deleted from watchlist page!!"};
 }
- 
+
+
+// sara's code starts here
+
+//sara code: 
+
+
+async function getUserslist(){
+    const getUserList =  db.users.find({});
+    console.log('user list is: ', getUserList)
+    return getUserList;
+}
+async function postFriend(friendData){
+    console.log("Inside orm file")
+    console.log(friendData);
+    const myId= friendData.userId;
+
+    const friendInfo = {
+        'userId': `${friendData.userId}`,
+        'name': `${friendData.friendName}`,
+    }
+
+    const userFetch = await db.users.findOneAndUpdate({ _id: friendData.userId }, { $push: { friendList:  friendInfo } });
+    console.log(userFetch)
+    return { message: "friend successfully saved in Watchlist!!"};
+}
+
+async function getFriendlist(id){
+    const getFriendList =  db.users.find({_id:id});
+    return getFriendList;
+}
+
+async function deleteFriend( objIds ){
+    console.log( ' in orm objIds: ', objIds)
+    
+    const DeleteFriendList =  db.users.update({ _id:  objIds.userId }, { "$pull": { "friendList": { "_id": objIds.frndId } }}, { safe: true, multi:true }, function(err, obj) {
+       //do something smart
+    });
+    return DeleteFriendList;
+}
+
+// sara's code ends here
 module.exports = {
     registerUser,
     loginUser,
@@ -153,5 +194,12 @@ module.exports = {
     postFavourites,
     getFavourites,
     deleteFavMovie,
-    deleteWatchListMovie
+    deleteWatchListMovie,
+
+    //sara
+    getUserslist,
+    postFriend,
+    getFriendlist,
+    deleteFriend
+
 }
