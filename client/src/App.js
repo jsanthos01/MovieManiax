@@ -13,7 +13,8 @@ import Favourites from './components/FavouritePage/MovieFavourites';
 import Footer from './components/Footer/Footer'
 import './App.css';
 import Friends from './components/FriendPage/Friend';
-
+import GenrePage from './components/Genre/GenrePage';
+import GenreMoviePage from './components/Genre/GenreMoviePage';
 
 function App() {
   return (
@@ -32,6 +33,10 @@ function App() {
           <Route exact path="/user/:id" component={Profile} /> 
           <Route exact path="/favourites/:id" component={Favourites} />
           <Route exact path="/friendList" component={Friends} />
+          
+          <Route exact path="/genrePage" component={GenrePage} />
+          <Route path="/genre/:id" component={GenreMoviePage} />
+
         </div>
         <Footer />
       </Router>

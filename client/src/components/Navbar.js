@@ -29,7 +29,12 @@ function NavBar() {
                 <Link to="/searchMovie" className={location.pathname === "/searchMovie" ? "nav-link active" : "nav-link"}>
                 Search
                 </Link>
-              </li>  
+              </li>
+              <li className="nav-item">
+                  <Link to="/genrePage" className={location.pathname === "/genrePage" ? "nav-link active" : "nav-link"}>
+                  Genre
+                  </Link>
+              </li>   
               { !id ? 
               <li className="nav-item">
                   <Link to="/login" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>
