@@ -2,11 +2,12 @@ import React from 'react'
 import negative from './assets/negative2.png'
 import positive from './assets/positive.png'
 import picture from './assets/positive.png'
+
 function Reviews() {
     return ( 
-        <div class="container">
-            [Review Page!!!]
-            <table class="table">
+        <div className="result container mb-5">
+        [Review Page!!!]
+            <table class="table table-striped">
                 <thead class="thead-light">
                     <tr>
                     <th scope="col">#</th>
@@ -15,7 +16,7 @@ function Reviews() {
                     <th scope="col">Writer </th>
                     </tr>
                 </thead>
-                <tbody  style={{color: "white"}}>
+                <tbody style={{color: "white"}}>
                     <tr>
                         <th scope="row">1</th>
                         <td> <img src={picture} />6.8</td>
