@@ -1,8 +1,11 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import { useParams } from 'react-router-dom';
 import {Link, useLocation} from "react-router-dom";
+import Modal from './Modal';
+
 function MovieList(props) {
     const { id } = useParams();
+    const [modalDisplay, setModalDisplay] = useState(false)
     console.log("Inside the saved movie List page");
     console.log(props.myMovies);
     
@@ -34,7 +37,6 @@ function MovieList(props) {
                         <div className="col-lg-3" style={imageStyle}>
                             {movie.image ? <img style={imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt="something" /> : <img style={imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
                             <a href="Www.google.com" ><button type="button" class="btn btn-danger mr-2"><i class="fas fa-play"></i> Watch Trailer</button></a>
-
                         </div>
                         <div className="col-lg-9 d-flex justify-content-center flex-column">
                             <h2 style={{fontWeight:"900"}}><em>{movie.title}</em></h2>
@@ -45,8 +47,11 @@ function MovieList(props) {
                                 <Link to={"/movieDetails/" + movie.movieId }>
                                     <button type="button" class="btn btn-outline-primary mr-2">View</button>
                                 </Link>
-                                <button type="button" class="btn btn-sm btn-outline-danger" onClick={() => deleteMovieWlist(movie._id)} >Delete</button>
-                            </div>
+                                <button type="button" class="btn btn-sm btn-outline-danger mr-2" onClick={() => deleteMovieWlist(movie._id)} >Delete</button>
+                                <button type="button" class="btn btn-sm btn-outline-success" onClick={() => setModalDisplay(true)}>Add Review</button>
+                                <Modal modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} />
+                                
+                            </div> 
                         </div>
                 
                     </div>
