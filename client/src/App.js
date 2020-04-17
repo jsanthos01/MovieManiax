@@ -15,6 +15,7 @@ import './App.css';
 import Friends from './components/FriendPage/Friend';
 import GenrePage from './components/Genre/GenrePage';
 import GenreMoviePage from './components/Genre/GenreMoviePage';
+import FriendProfilePage from './components/FriendPage/FriendProfilePage';
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
           
           <Route exact path="/genrePage" component={GenrePage} />
           <Route path="/genre/:id" component={GenreMoviePage} />
-          
+          <Route path="/friendProfile/:id" component={FriendProfilePage} />          
         </div>
         <Footer />
       </Router>

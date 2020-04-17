@@ -45,8 +45,9 @@ let users = new Schema ({
    friendList: [
       {
          userId: {type: String},
+         friendId: {type: String},
          name: {type: String},
-         // image: {type: String},
+         image: {type: String},
       }
    ]
  }, {

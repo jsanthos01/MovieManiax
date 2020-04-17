@@ -27,7 +27,7 @@ async function registerUser( userData ){
        password: passwordHash
     };
 
-    const dbUser = new db.users( saveData );
+    const dbUser = await new db.users( saveData );
     const saveUser = await dbUser.save();
     return { 
         message: "User successfully saved", 
@@ -102,7 +102,7 @@ async function postWatchlist(movieData){
 
 
 async function getWatchlist(id){
-    const getSavedList =  db.users.find({_id:id});
+    const getSavedList =  await db.users.find({_id:id});
     return getSavedList;
 }
 
@@ -129,7 +129,7 @@ async function postFavourites(movieData){
  }
  
 async function getFavourites(id){
-    const getSavedList =  db.users.find({_id:id});
+    const getSavedList =  await db.users.find({_id:id});
     return getSavedList;
 }
  
@@ -137,7 +137,7 @@ async function deleteFavMovie(userId, movieObjId){
     console.log("Inside orm delete favourites ");
     console.log(userId)
     console.log(movieObjId);
-    const deleteMovieDb = db.users.updateOne({_id: userId},{ "$pull": { "favourites": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
+    const deleteMovieDb = await db.users.updateOne({_id: userId},{ "$pull": { "favourites": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
         console.log(err)
     });
     return { message: "Movie successfully deleted from favourites page!!"};
@@ -146,7 +146,7 @@ async function deleteWatchListMovie(userId, movieObjId){
     console.log("Inside orm delete watchlist ");
     console.log(userId)
     console.log(movieObjId);
-    const deletemovie = db.users.updateOne({_id: userId},{ "$pull": { "watchlist": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
+    const deletemovie = await db.users.updateOne({_id: userId},{ "$pull": { "watchlist": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
     });
     return { message: "Movie successfully deleted from watchlist page!!"};
 }
@@ -158,7 +158,7 @@ async function deleteWatchListMovie(userId, movieObjId){
 
 
 async function getUserslist(){
-    const getUserList =  db.users.find({});
+    const getUserList =  await db.users.find({});
     console.log('user list is: ', getUserList)
     return getUserList;
 }
@@ -169,8 +169,11 @@ async function postFriend(friendData){
 
     const friendInfo = {
         'userId': `${friendData.userId}`,
+        'friendId': `${friendData.friendId}`,
         'name': `${friendData.friendName}`,
+        'image': `${friendData.friendImg}`,
     }
+    // console.log("Inside orm file the friendInfo: ", friendInfo)
 
     const userFetch = await db.users.findOneAndUpdate({ _id: friendData.userId }, { $push: { friendList:  friendInfo } });
     console.log(userFetch)
@@ -178,14 +181,19 @@ async function postFriend(friendData){
 }
 
 async function getFriendlist(id){
-    const getFriendList =  db.users.find({_id:id});
+    const getFriendList =  await db.users.find({_id:id});
     return getFriendList;
+}
+async function getFriendInfo(id){
+    const getFriendInfo =  await db.users.find({_id:id});
+    console.log('in Orm etFriendInfo: ', getFriendInfo)
+    return getFriendInfo[0];
 }
 
 async function deleteFriend( objIds ){
     console.log( ' in orm objIds: ', objIds)
     
-    const DeleteFriendList =  db.users.update({ _id:  objIds.userId }, { "$pull": { "friendList": { "_id": objIds.frndId } }}, { safe: true, multi:true }, function(err, obj) {
+    const DeleteFriendList =  await db.users.update({ _id:  objIds.userId }, { "$pull": { "friendList": { "_id": objIds.frndId } }}, { safe: true, multi:true }, function(err, obj) {
        //do something smart
     });
     return DeleteFriendList;
@@ -194,7 +202,7 @@ async function deleteFriend( objIds ){
 // sara's code ends here
 async function showProfileDb(id){
     
-    const profileDb = db.users.findById({ _id:id })
+    const profileDb = await db.users.findById({ _id:id })
     // console.log( `[userInfo avatar] id ${id}`, avatarDb );
     return profileDb;
 }
@@ -214,6 +222,7 @@ module.exports = {
     postFriend,
     getFriendlist,
     deleteFriend,
+    getFriendInfo,
 
     showProfileDb
 }

@@ -45,7 +45,7 @@ app.post("/api/watchlistMovie", async (req, res) => {
 app.get("/api/watchlistMovie/:id", async (req, res) => {
   // console.log(req.params.id)
   const id = req.params.id;
-  const getMovieData = await await orm.getWatchlist( id );
+  const getMovieData = await  orm.getWatchlist( id );
   res.json(getMovieData);
 })
 app.post("/api/favourites", async (req, res) => {
@@ -59,7 +59,7 @@ app.post("/api/favourites", async (req, res) => {
 app.get("/api/favourites/:id", async (req, res) => {
   // console.log(req.params.id)
   const id = req.params.id;
-  const getMovieData = await await orm.getFavourites( id );
+  const getMovieData = await orm.getFavourites( id );
   // const getMovieData = await orm.getWatchlist( id );
   res.json(getMovieData);
 })
@@ -86,7 +86,7 @@ app.delete("/api/removeListMovie/:userId/:movieId", async (req, res) => {
 app.get("/api/UsersList", async (req, res) => {
   console.log('in server file getting friends: ',req.params)
   // const id = req.params;
-  const usersData = await await orm.getUserslist( );
+  const usersData = await orm.getUserslist( );
   res.json(usersData);
 })
 
@@ -103,8 +103,16 @@ app.post("/api/saveFriend", async (req, res) => {
 app.get("/api/friendList/:id", async (req, res) => {
   console.log('in server file getting friends: ',req.params)
   const id = req.params.id;
-  const friendsData = await await orm.getFriendlist( id );
+  const friendsData = await orm.getFriendlist( id );
   res.json(friendsData);
+})
+//to load friends profile
+
+app.get("/api/friend/:id", async (req, res) => {
+  console.log('in server file getting friend profile: ',req.params)
+  const id = req.params.id;
+  const friendsProfile = await orm.getFriendInfo( id );
+  res.json(friendsProfile);
 })
 
 // to delete friends from llist
@@ -114,7 +122,7 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
     userId : req.params.userId,
     frndId : req.params.frndId
   }
-  const friendsData = await await orm.deleteFriend( objIds );
+  const friendsData = await orm.deleteFriend( objIds );
   res.json(friendsData);
 })
 

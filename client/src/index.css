@@ -99,3 +99,17 @@ h1 {
   color: black;
   transform: rotateY(180deg);
 }
+.NavLinkActive {
+  color: black;
+  border-top: 1px solid green;
+  border-left: 1px solid green;
+  border-right: 1px solid green;
+  padding: 15px;
+  background: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.NavLinkActive:hover {
+text-decoration: none;
+color: black;
+}
