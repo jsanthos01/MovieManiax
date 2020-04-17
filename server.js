@@ -10,9 +10,8 @@ const app = express();
 // PORT is only set by Heroku, else we know it's local
 const path = require("path");
 
-app.use( express.static('client/build/') );
+app.use( express.static(path.join(__dirname, 'client/build'))) ;
 app.use(express.static(path.join(__dirname, "client/src/components/Genre")));
-
 app.use( express.urlencoded({ extended: false }) );
 app.use( express.json() );
 
