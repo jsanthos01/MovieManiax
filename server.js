@@ -134,6 +134,11 @@ app.get("/api/avatar/:id", async function(req, res){
   res.json(showProfile)
 })
 
+app.get('/*', function( req,res ){
+  console.log("redirect to index page!");
+  res.sendFile( path.join(__dirname, 'client/build', 'index.html') );
+});
+
 app.listen( PORT, function(){
     console.log( `[everest server] RUNNING, http://localhost:${PORT}` );
  });
