@@ -172,16 +172,16 @@ function MovieInformation() {
             <div class="container mt-5">
                 <h1>Official Movie Trailers</h1>
                 <div class="row ">                    
-                {movieTrailer && movieTrailer.length > 0 ? movieTrailer.slice(0,3).map(movie => 
+                {movieTrailer.slice(0,3).map(movie => 
                     <div class="mr-4 mt-4">
                         <iframe width="340" height="215" src={`https://www.youtube.com/embed/${movie.key}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>) : ''}
+                    </div>)}
                 </div>
             </div>
             <div class="container mt-5">
                 <h1>Related Movies</h1>
                 <div class="row ">                    
-                {similarMovies && similarMovies.length > 0 ? similarMovies.slice(0,10).map(movie => 
+                {similarMovies.slice(0,10).map(movie => 
                     <div class="col-md-4 text-center">
                         <div class="card mb-4 box-shadow">
                             {movie.poster_path && movie.poster_path ? <img style={movieStyle.imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="something" /> : <img style={movieStyle.imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
@@ -197,8 +197,8 @@ function MovieInformation() {
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                ) : ''}
+                    </div>
+                )}
                 </div>
             </div>
         </div>       
