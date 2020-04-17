@@ -135,7 +135,7 @@ function MovieInformation() {
                         <button class="btn btn-outline-danger mr-3 mt-3" onClick={() => getMovieId("favourites", movieDetails)}><i class="fas fa-heart"></i> Favourites</button>
                         <button class="btn btn-outline-primary mr-3 mt-3" onClick={() => getMovieId("watchlist", movieDetails)}><i class="fas fa-plus"></i>  Watch List</button>
                         <Link to={"/reviews/" + movieDetails.id }>
-                            <button type="button" className="btn btn-outline-warning mt-3"><i class="fas fa-comments"></i> Reviews</button>
+                            <button type="button" className="btn btn-outline-info mt-3"><i class="fas fa-comments"></i> Reviews</button>
                         </Link>
                         <div>
                             <ul class="list-group">
