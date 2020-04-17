@@ -5,7 +5,8 @@ import Modal from './Modal';
 
 function MovieList(props) {
     const { id } = useParams();
-    const [modalDisplay, setModalDisplay] = useState(false)
+    const [modalDisplay, setModalDisplay] = useState(false);
+    const [reviewInfo, setReviewInfo] = useState({});
     console.log("Inside the saved movie List page");
     console.log(props.myMovies);
     
@@ -33,7 +34,7 @@ function MovieList(props) {
         <div >
             <div className="container mb-3">
                 {props.myMovies.map(movie =>
-                    <div className="row" style={rowStyle}>
+                    <div key={movie.movieId} className="row" style={rowStyle}>
                         <div className="col-lg-3" style={imageStyle}>
                             {movie.image ? <img style={imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt="something" /> : <img style={imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
                             <a href="Www.google.com" ><button type="button" class="btn btn-danger mr-2"><i class="fas fa-play"></i> Watch Trailer</button></a>
@@ -49,7 +50,7 @@ function MovieList(props) {
                                 </Link>
                                 <button type="button" class="btn btn-sm btn-outline-danger mr-2" onClick={() => deleteMovieWlist(movie._id)} >Delete</button>
                                 <button type="button" class="btn btn-sm btn-outline-success" onClick={() => setModalDisplay(true)}>Add Review</button>
-                                <Modal modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} />
+                                {modalDisplay ? <Modal modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} movie={movie.movieId} setReviewInfo={setReviewInfo} /> : ''}
                                 
                             </div> 
                         </div>

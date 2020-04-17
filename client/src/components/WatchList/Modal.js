@@ -1,6 +1,8 @@
 import React from 'react'
 
 function Modal(props) {
+    const movieId = props.movie;
+    console.log(movieId)
     const modalWrapper = {
         position: 'fixed',
         top: 0,
@@ -18,7 +20,7 @@ function Modal(props) {
         zIndex: 100,
         backgroundColor: "rgba(0,0,0,0.4)"
     }
-    
+
     const modalBox = {
         position: 'relative',
         top: '50%',
@@ -49,9 +51,8 @@ function Modal(props) {
         height:'100%',
     }
     return (
-        <>
-        { props.modalDisplay ? <div className={'modal-wrapper'} style={modalWrapper}>
-        <div className={'modal-backdrop'} style={modalBackdrop} />
+        <div className={'modal-wrapper'} style={modalWrapper}>
+            <div className={'modal-backdrop'} style={modalBackdrop} />
             <div className={'modal-box'} style={modalBox}>
                 <div class='close' onClick={() => props.setModalDisplay(false)} style={close}>
                     +
@@ -84,8 +85,8 @@ function Modal(props) {
                     </div>
                 </div>
             </div>
-        </div>: ''}
-        </>
+        </div>
+
     )
 }
 
