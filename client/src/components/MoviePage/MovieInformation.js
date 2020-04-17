@@ -133,7 +133,10 @@ function MovieInformation() {
                         <h1>{movieDetails.title}</h1>
                         <h4 style={{color:"white", fontStyle: "italic"}}>"{movieDetails.tagline}"</h4>
                         <button class="btn btn-outline-danger mr-3 mt-3" onClick={() => getMovieId("favourites", movieDetails)}><i class="fas fa-heart"></i> Favourites</button>
-                        <button class="btn btn-outline-primary mt-3" onClick={() => getMovieId("watchlist", movieDetails)}><i class="fas fa-plus"></i>  Watch List</button>
+                        <button class="btn btn-outline-primary mr-3 mt-3" onClick={() => getMovieId("watchlist", movieDetails)}><i class="fas fa-plus"></i>  Watch List</button>
+                        <Link to={"/reviews/" + movieDetails.id }>
+                            <button type="button" className="btn btn-outline-warning mt-3"><i class="fas fa-comments"></i> Reviews</button>
+                        </Link>
                         <div>
                             <ul class="list-group">
                                 <li class="list-group-item" style={movieStyle.listGroupItem}> <i class="fas fa-1x fa-star" style={{color: "yellow"}}></i><b> {movieDetails.vote_average}</b>/10</li>
@@ -157,7 +160,9 @@ function MovieInformation() {
                     {movieDetails && movieDetails.genres ? 
                     <div class="row">{movieDetails.credits.cast.slice(0,10).map( actor =>
                         <div class="mt-3 mr-3 mx-auto">
-                            <img style={movieStyle.castImage} src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} alt="movie img" />
+                            {actor.profile_path ? <img style={movieStyle.castImage} src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} alt="movie img" />: <img style={movieStyle.castImage} src='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_640.png'  /> }
+
+                            
                             <p class="list-group-item" style={{color: "black", textAlign: "center"}}>{actor.name}</p>
                         </div> 
                     )} 
