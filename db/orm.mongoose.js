@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require ( 'bcrypt' );
 
-// mongoose.connect(`mongodb://${process.env.movieTracker}`,{useNewUrlParser: true});
-
-mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
+// mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true});
 const db = require( './models' );
 
 
