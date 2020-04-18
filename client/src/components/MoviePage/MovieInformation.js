@@ -192,12 +192,8 @@ function MovieInformation() {
                                     <Link to={"/movieDetails/" + movie.id }>
                                         <button type="button" class="btn btn-outline-primary mr-2">View More</button>
                                     </Link>
-                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Add to your Watchlist">
-                                        <button type="button" style={{pointerEvents: "none"}} onClick={() => getMovieId("watchlist", movie)} class="btn btn-primary mr-2"><i class="fas fa-bookmark"></i></button>
-                                    </span>
-                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Add to your Favourites">
-                                        <button type="button" style={{pointerEvents: "none"}} onClick={() => getMovieId("favourites", movie)} class="btn btn-danger mr-2"><i class="far fa-heart"></i></button>
-                                    </span>
+                                    <button type="button" onClick={() => getMovieId("watchlist", movie)} class="btn btn-primary mr-2"><i class="fas fa-bookmark"></i></button>
+                                    <button type="button" onClick={() => getMovieId("favourites", movie)} class="btn btn-danger mr-2"><i class="far fa-heart"></i></button>
                                 </div>
                             </div>
                         </div>

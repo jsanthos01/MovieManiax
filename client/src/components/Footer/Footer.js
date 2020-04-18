@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
     const footerStyle={
-        position: "relative",
+        position: "fixed",
         left: 0,
         bottom: 0,
         width: "100%",
