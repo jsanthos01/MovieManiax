@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {useRef} from 'react'
 
 function Modal(props) {
-    const movieId = props.movie;
-    console.log(movieId)
+    const propsInfo = props;
+    console.log(propsInfo)
     const modalWrapper = {
         position: 'fixed',
         top: 0,
@@ -50,6 +50,13 @@ function Modal(props) {
     const modalForm={
         height:'100%',
     }
+
+    const ratingNum = useRef();
+    function changeRating(){
+        const movieRating = ratingNum.current.value;
+        
+
+    }
     return (
         <div className={'modal-wrapper'} style={modalWrapper}>
             <div className={'modal-backdrop'} style={modalBackdrop} />
@@ -63,17 +70,23 @@ function Modal(props) {
                         <h3 >Add a Review and click on the Save Button!!</h3>
                         <form>
                             <div class="form-group">
-                                <label for="formName">Email</label>
+                                <label for="formName">Name</label>
                                 <input type="email" class="form-control" id="formName" placeholder="name@example.com" />
                             </div>
                             <div class="form-group">
                                 <label for="formRating">Rating...</label>
-                                <select class="form-control" id="formRating">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <select class="form-control" id="formRating" ref={ratingNum} onChange={changeRating}>
+                                    <option>1/10</option>
+                                    <option>2/10</option>
+                                    <option>3/10</option>
+                                    <option>4/10</option>
+                                    <option>5/10</option>
+                                    <option>5/10</option>
+                                    <option>6/10</option>
+                                    <option>7/10</option>
+                                    <option>8/10</option>
+                                    <option>9/10</option>
+                                    <option>10/10</option>
                                 </select>
                             </div>
                             <div class="form-group">

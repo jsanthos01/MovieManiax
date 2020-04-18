@@ -6,9 +6,7 @@ import Modal from './Modal';
 function MovieList(props) {
     const { id } = useParams();
     const [modalDisplay, setModalDisplay] = useState(false);
-    const [reviewInfo, setReviewInfo] = useState({});
-    console.log("Inside the saved movie List page");
-    console.log(props.myMovies);
+    const [reviewInfo, setReviewInfo] = useState({id: '',name: '', rating: '', comment: ''});
     
     const imageStyle={
         display: "flex",
@@ -21,7 +19,6 @@ function MovieList(props) {
     const rowStyle={marginBottom: "60px"}
 
     async function deleteMovieWlist(movieId){
-        console.log("[deleteMovieWlist] function");
         const removeSpecificMovie = await fetch(`/api/removeListMovie/${id}/${movieId}`, 
             {
                 method: 'DELETE'
@@ -49,8 +46,8 @@ function MovieList(props) {
                                     <button type="button" class="btn btn-outline-primary mr-2">View</button>
                                 </Link>
                                 <button type="button" class="btn btn-sm btn-outline-danger mr-2" onClick={() => deleteMovieWlist(movie._id)} >Delete</button>
-                                <button type="button" class="btn btn-sm btn-outline-success" onClick={() => setModalDisplay(true)}>Add Review</button>
-                                {modalDisplay ? <Modal modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} movie={movie.movieId} setReviewInfo={setReviewInfo} /> : ''}
+                                <button type="button" class="btn btn-sm btn-outline-success" id={movie.movieId} onClick={() => setModalDisplay(true)}>Add a Review</button>
+                                {modalDisplay ? <Modal modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} setReviewInfo={setReviewInfo} movie={movie.movieId}/> : ''}
                                 
                             </div> 
                         </div>

@@ -174,7 +174,7 @@ function MovieInformation() {
                 <div class="row ">                    
                 {movieTrailer.slice(0,3).map(movie => 
                     <div class="mr-4 mt-4">
-                        <iframe width="340" height="215" src={`https://www.youtube.com/embed/${movie.key}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="340" height="215" src={`https://www.youtube.com/embed/${movie.key}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     </div>)}
                 </div>
             </div>

@@ -45,9 +45,10 @@ app.post("/api/watchlistMovie", async (req, res) => {
 app.get("/api/watchlistMovie/:id", async (req, res) => {
   // console.log(req.params.id)
   const id = req.params.id;
-  const getMovieData = await await orm.getWatchlist( id );
+  const getMovieData = await orm.getWatchlist( id );
   res.json(getMovieData);
 })
+
 app.post("/api/favourites", async (req, res) => {
   // console.log("inside the favourites server.js")
     const movieData = req.body;
@@ -59,7 +60,7 @@ app.post("/api/favourites", async (req, res) => {
 app.get("/api/favourites/:id", async (req, res) => {
   // console.log(req.params.id)
   const id = req.params.id;
-  const getMovieData = await await orm.getFavourites( id );
+  const getMovieData = await orm.getFavourites( id );
   // const getMovieData = await orm.getWatchlist( id );
   res.json(getMovieData);
 })
@@ -68,25 +69,26 @@ app.delete("/api/removeFavMovie/:userId/:movieId", async (req, res) => {
   console.log("[delete route]", req.params.movieId);
   const movieId = req.params.movieId;
   const userId = req.params.userId;
-  const deleteMovie = orm.deleteFavMovie(userId,movieId);
+  const deleteMovie = await orm.deleteFavMovie(userId,movieId);
   res.send(deleteMovie);
 });
+
 app.delete("/api/removeListMovie/:userId/:movieId", async (req, res) => {
   console.log("[delete route]", req.params.movieId);
   const movieId = req.params.movieId;
   const userId = req.params.userId;
-  const deleteMovieList = orm.deleteWatchListMovie(userId,movieId);
+  const deleteMovieList = await orm.deleteWatchListMovie(userId,movieId);
   res.send(deleteMovieList);
 });
 // JOANNA'S CODE WATCHLIST & FAVOURITES ENDING LINE------
+
 //Sara's code starting here
-//sara
 
 //to load registered users
 app.get("/api/UsersList", async (req, res) => {
   console.log('in server file getting friends: ',req.params)
   // const id = req.params;
-  const usersData = await await orm.getUserslist( );
+  const usersData = await orm.getUserslist( );
   res.json(usersData);
 })
 
@@ -103,7 +105,7 @@ app.post("/api/saveFriend", async (req, res) => {
 app.get("/api/friendList/:id", async (req, res) => {
   console.log('in server file getting friends: ',req.params)
   const id = req.params.id;
-  const friendsData = await await orm.getFriendlist( id );
+  const friendsData = await orm.getFriendlist( id );
   res.json(friendsData);
 })
 
@@ -114,7 +116,7 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
     userId : req.params.userId,
     frndId : req.params.frndId
   }
-  const friendsData = await await orm.deleteFriend( objIds );
+  const friendsData = await orm.deleteFriend( objIds );
   res.json(friendsData);
 })
 
@@ -126,14 +128,12 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
 
 //Sara's code ending here
 
-//get default avatar from db
 app.get("/api/avatar/:id", async function(req, res){
-  // console.log( 'avatar id is', req.params )
   const id = req.params.id;
   const showProfile = await orm.showProfileDb( id );
   res.json(showProfile)
 })
 
 app.listen( PORT, function(){
-    console.log( `[everest server] RUNNING, http://localhost:${PORT}` );
+    console.log( `[MovieManiax server] RUNNING, http://localhost:${PORT}` );
  });
