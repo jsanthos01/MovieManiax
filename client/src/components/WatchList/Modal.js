@@ -1,8 +1,12 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
+// import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
+
 
 function Modal(props) {
-    const propsInfo = props;
-    console.log(propsInfo)
+    const [reviewData, setReviewData] = useState({id: '', name: '', movieId: '', rating: '', comment:''})
+    const { id } = useParams();
+    // console.log(props.movieId)
     const modalWrapper = {
         position: 'fixed',
         top: 0,
@@ -52,9 +56,23 @@ function Modal(props) {
     }
 
     const ratingNum = useRef();
-    function changeRating(){
-        const movieRating = ratingNum.current.value;
+    function handleInputChange(e){
+        const { id, value } = e.target;
+        setReviewData( { ...reviewData, [id]: value } );
         
+        
+    }
+
+    async function postReview(e){
+        e.preventDefault();
+        props.setModalDisplay(false)
+        let changedReview = {...reviewData};
+        changedReview["id"] = id;
+        changedReview["movieId"] = props.movieId;
+        setReviewData(changedReview)
+        console.log(reviewData)
+        // const apiResult = await fetch('/api/user/register', userData);
+
 
     }
     return (
@@ -70,30 +88,41 @@ function Modal(props) {
                         <h3 >Add a Review and click on the Save Button!!</h3>
                         <form>
                             <div class="form-group">
-                                <label for="formName">Name</label>
-                                <input type="email" class="form-control" id="formName" placeholder="name@example.com" />
+                                <label htmlFor="name">Name</label>
+                                <input 
+                                    value={reviewData.name} 
+                                    onChange={handleInputChange} 
+                                    class="form-control" 
+                                    id="name" 
+                                    type="text" 
+                                />
                             </div>
                             <div class="form-group">
-                                <label for="formRating">Rating...</label>
-                                <select class="form-control" id="formRating" ref={ratingNum} onChange={changeRating}>
-                                    <option>1/10</option>
-                                    <option>2/10</option>
-                                    <option>3/10</option>
-                                    <option>4/10</option>
-                                    <option>5/10</option>
-                                    <option>5/10</option>
-                                    <option>6/10</option>
-                                    <option>7/10</option>
-                                    <option>8/10</option>
-                                    <option>9/10</option>
-                                    <option>10/10</option>
+                                <label htmlFor="rating">Rating</label>
+                                <select class="form-control" id="rating" ref={ratingNum} value={reviewData.rating} onChange={handleInputChange}>
+                                    <option value="1/10">1/10</option>
+                                    <option value="2/10">2/10</option>
+                                    <option value="3/10">3/10</option>
+                                    <option value="4/10">4/10</option>
+                                    <option value="5/10">5/10</option>
+                                    <option value="6/10">6/10</option>
+                                    <option value="7/10">7/10</option>
+                                    <option value="8/10">8/10</option>
+                                    <option value="9/10">9/10</option>
+                                    <option value="10/10">10/10</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="formReview">Your Review</label>
-                                <textarea class="form-control" id="formReview" rows="3"></textarea>
+                                <label htmlFor="comment">Your Review</label>
+                                <textarea 
+                                    value={reviewData.comment}
+                                    class="form-control" 
+                                    id="comment" 
+                                    rows="3"
+                                    onChange={handleInputChange}
+                                />
                             </div>
-                            <button class='btn btn-lg btn-primary' >Save Review</button>
+                            <button class='btn btn-lg btn-primary' onClick={postReview}>Save Review</button>
                         </form>        
                     </div>
                 </div>
