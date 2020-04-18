@@ -192,14 +192,14 @@ async function showProfileDb(id){
 }
 
 async function postReview(details){
-    console.log("Inside orm [postReview]", details);
+    // console.log("Inside orm [postReview]", details);
     const myReview = {
         'movieId': `${details.movieId}`,
         'rating': `${details.rating}`,
         'comment': `${details.comment}`
     }
     const userFetch = await db.users.findOneAndUpdate({ _id: details.id }, { $push: { myReviews:  myReview } });
-
+    
     const reviewSchema ={
         movieId: details.movieId,
         // "movieName": details.movieName,
@@ -213,15 +213,28 @@ async function postReview(details){
     const dbReviews = new db.reviews( reviewSchema);
     const reviewInfo = await dbReviews.save();
 
-    return { message: "Review is successfully saved! "};
+    return { message: "Review successfully saved !!"};
 
 }
 
-async function getSpecificMovieReviews(){
-
+async function getSpecificMovieReviews(id){
+    
+    const getReviewData = await db.reviews.find({movieId: id});
+    // console.log(`[get Reviews orm.js]`, getReviewData)
+    return getReviewData;
 }
 
-
+async function deleteReviewInfo( userId, movieId ){
+    console.log(`[inside [deleteReview orm]`, userId, movieId)
+    const deleteReview = db.reviews.deleteOne( { "movieId" : movieId}, function (err) {
+        if (err) return handleError(err)
+    });
+   
+    const deleteUserReview = await db.users.update({ _id:  userId }, { "$pull": { "myReviews": { "movieId": movieId } }}, { safe: true, multi:true }, function(err, obj) {
+        //do something smart
+    });
+    return { message: "Your Review has been deleted !!"};
+}
 module.exports = {
     registerUser,
     loginUser,
@@ -237,5 +250,6 @@ module.exports = {
     deleteFriend,
     showProfileDb,
     postReview,
-    getSpecificMovieReviews
+    getSpecificMovieReviews,
+    deleteReviewInfo
 }

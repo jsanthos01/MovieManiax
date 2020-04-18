@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import Navbar from "./components/Navbar";
-import HomePage from './components/HomePage/HomePage'
+import HomePage from './components/HomePage/HomeDesign'
 import SearchMovie from './components/SearchMoviePage/SearchForm'
 import MovieInfo from './components/MoviePage/MovieInformation'
 import MovieWatchList from './components/WatchList/MovieWatchList';
@@ -34,7 +34,7 @@ function App() {
           <Route exact path="/user/:id" component={Profile} /> 
           <Route exact path="/favourites/:id" component={Favourites} />
           <Route exact path="/friendList" component={Friends} />
-          <Route exact path="/reviews/:id" component={Reviews} />
+          <Route exact path="/reviews/:id/:title" component={Reviews} />
           <Route exact path="/genrePage" component={GenrePage} />
           <Route path="/genre/:id" component={GenreMoviePage} />
           

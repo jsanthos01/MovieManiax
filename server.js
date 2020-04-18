@@ -98,7 +98,7 @@ app.post("/api/saveFriend", async (req, res) => {
 //to load users friends list
 
 app.get("/api/friendList/:id", async (req, res) => {
-  console.log('in server file getting friends: ',req.params)
+  // console.log('in server file getting friends: ',req.params)
   const id = req.params.id;
   const friendsData = await orm.getFriendlist( id );
   res.json(friendsData);
@@ -106,7 +106,7 @@ app.get("/api/friendList/:id", async (req, res) => {
 
 // to delete friends from llist
 app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
-  console.log('in server file deleting friends: ',req.params)
+  // console.log('in server file deleting friends: ',req.params)
   const objIds ={
     userId : req.params.userId,
     frndId : req.params.frndId
@@ -115,24 +115,39 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
   res.json(friendsData);
 })
 
- /// genre list
- app.get('/api/genre/list', async function( req,res ){
-  const genres = JSON.parse( fs.readFileSync( "client/src/components/Genre/genre.json" ) );
-  res.send( genres );
-});
-
-app.get("/api/avatar/:id", async function(req, res){
-  const id = req.params.id;
-  const showProfile = await orm.showProfileDb( id );
+/// genre list
+ app.get('/api/genre/list', async( req,res) => {
+   const genres = JSON.parse( fs.readFileSync( "client/src/components/Genre/genre.json" ) );
+   res.send( genres );
+  });
+  
+  app.get("/api/avatar/:id", async (req, res) => {
+    const id = req.params.id;
+    const showProfile = await orm.showProfileDb( id );
   res.json(showProfile)
 })
 
 //JOANNA REVIEWS SECTION
-app.post("/api/review", async function(req, res){
+app.post("/api/review", async (req, res) => {
   const postMovieReview = await orm.postReview(req.body);
   res.send(postMovieReview );
 })
 
+app.get("/api/specificReviews/:id", async (req, res) => {
+  const getReviews = await orm.getSpecificMovieReviews(req.params.id);
+  // console.log(`[getReviews server.js]`, getReviews)
+  res.send(getReviews);
+});
+
+app.delete("/api/removeReview/:userId/:movieId", async (req, res) => {
+  console.log("[delete review server.js]");
+  const movieId = req.params.movieId;
+  const userId = req.params.userId;
+  const deleteReview = await orm.deleteReviewInfo(userId,movieId);
+  res.send(deleteReview);
+});
+
+
 app.listen( PORT, function(){
-    console.log( `[MovieManiax server] RUNNING, http://localhost:${PORT}` );
- });
+  console.log( `[MovieManiax server] RUNNING, http://localhost:${PORT}` );
+});

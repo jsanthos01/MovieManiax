@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 function Modal(props) {
     const { id } = useParams();
     const [reviewData, setReviewData] = useState({id: id, name: '', movieId: props.movieId, rating: '', comment:''})
-    // console.log(props.movieId)
+    
     const modalWrapper = {
         position: 'fixed',
         top: 0,
@@ -48,14 +48,13 @@ function Modal(props) {
         fontSize: '23px',
         transform: 'rotate(45deg)',
         cursor: 'pointer',
-       color:'black'
+        color:'black'
     }
 
     const modalForm={
         height:'100%',
     }
 
-    const ratingNum = useRef();
     function handleInputChange(e){
         const { id, value } = e.target;
         setReviewData( { ...reviewData, [id]: value } );
@@ -99,7 +98,7 @@ function Modal(props) {
                             </div>
                             <div class="form-group">
                                 <label htmlFor="rating">Rating</label>
-                                <select class="form-control" id="rating" ref={ratingNum} value={reviewData.rating} onChange={handleInputChange}>
+                                <select class="form-control" id="rating" value={reviewData.rating} onChange={handleInputChange}>
                                     <option value="1/10">1/10</option>
                                     <option value="2/10">2/10</option>
                                     <option value="3/10">3/10</option>
