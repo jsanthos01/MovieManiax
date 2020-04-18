@@ -54,19 +54,12 @@ function LoginPage(){
                   
         if( !apiResult.message ){
             setAlertMessage( { type: 'danger', message: apiResult.error } );
-            // clear any session
-            // localStorage.session = '';
             return;
         };
 
         setAlertMessage( { type: 'success', message: 'Loading, please wait...' } );
-
-        // remember the email (if checkbox toggled)
         localStorage.email =( apiResult.rememberMe ? apiResult.email : '' );
-        // save the active session
-        // localStorage.session = apiResult.session;
-
-        setTimeout( function(){ setIsLoggedIn(true); }, 3000 );
+        setTimeout( function(){ setIsLoggedIn(true); }, 2000 );
         
     }
 

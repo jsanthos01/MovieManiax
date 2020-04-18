@@ -57,7 +57,7 @@ function RegisterPage(){
                   
         if( apiResult.message ){
             setAlertMessage( { type: 'success', message: 'Thank you successfully registered!' } );
-            setTimeout( function(){ setIsRegistered(true); }, 5000 );
+            setTimeout( function(){ setIsRegistered(true); }, 2000 );
             //apiresult -message, email, id, name
         } else {
             setAlertMessage( { type: 'danger', message: 'Try again' } );
