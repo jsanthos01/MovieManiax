@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 
 function Modal(props) {
+    console.log(props.movieId)
     const { id } = useParams();
     const [reviewData, setReviewData] = useState({id: id, name: '', movieId: props.movieId, rating: '', comment:''})
     
@@ -121,6 +122,9 @@ function Modal(props) {
                                     onChange={handleInputChange}
                                 />
                             </div>
+                            {/* <Link to={`/reviews/${movieDetails.id}/${movieDetails.title}`}>
+                                <button type="button" className="btn btn-outline-info mt-3"><i class="fas fa-comments"></i> Reviews</button>
+                            </Link> */}
                             <button class='btn btn-lg btn-primary' onClick={postReview}>Save Review</button>
                         </form>        
                     </div>

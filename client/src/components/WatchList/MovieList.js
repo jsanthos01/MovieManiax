@@ -7,6 +7,7 @@ function MovieList(props) {
     const { id } = useParams();
     const [modalDisplay, setModalDisplay] = useState(false);
     const [buttonId, setButtonId] = useState(0);
+    const [key, setKey] = useState("");
     const imageStyle={
         display: "flex",
         justifyContent: "center",
@@ -21,6 +22,7 @@ function MovieList(props) {
         console.log(e.target.id);
         setModalDisplay(true)
         setButtonId(e.target.id);
+        setKey(e.target.key)
 
     }
     async function deleteMovieWlist(movieId){
@@ -51,8 +53,8 @@ function MovieList(props) {
                                     <button type="button" class="btn btn-outline-primary mr-2">View</button>
                                 </Link>
                                 <button type="button" class="btn btn-sm btn-outline-danger mr-2" onClick={() => deleteMovieWlist(movie._id)} >Delete</button>
-                                <button type="button" class="btn btn-sm btn-outline-success" id={movie.movieId} onClick={buttonSetup}>Add a Review</button>
-                                {modalDisplay ? <Modal modalDisplay={modalDisplay} setModalDisplay={setModalDisplay}  movieId={buttonId} /> : ''}
+                                <button type="button" class="btn btn-sm btn-outline-success" key={movie.title} id={movie.movieId} onClick={buttonSetup}>Add a Review</button>
+                                {modalDisplay ? <Modal setModalDisplay={setModalDisplay}  movieId={buttonId} movieName={key} /> : ''}
                                 
                             </div> 
                         </div>
