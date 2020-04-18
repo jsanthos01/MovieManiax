@@ -33,8 +33,6 @@ app.post('/api/user/login', async function( req,res ){
     
 });
 
-
-// JOANNA'S CODE WATCHLIST & FAVOURITES
 app.post("/api/watchlistMovie", async (req, res) => {
     const movieData = req.body;
     // console.log(movieData);
@@ -80,9 +78,6 @@ app.delete("/api/removeListMovie/:userId/:movieId", async (req, res) => {
   const deleteMovieList = await orm.deleteWatchListMovie(userId,movieId);
   res.send(deleteMovieList);
 });
-// JOANNA'S CODE WATCHLIST & FAVOURITES ENDING LINE------
-
-//Sara's code starting here
 
 //to load registered users
 app.get("/api/UsersList", async (req, res) => {
@@ -126,12 +121,16 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
   res.send( genres );
 });
 
-//Sara's code ending here
-
 app.get("/api/avatar/:id", async function(req, res){
   const id = req.params.id;
   const showProfile = await orm.showProfileDb( id );
   res.json(showProfile)
+})
+
+//JOANNA REVIEWS SECTION
+app.post("/api/review", async function(req, res){
+  const postMovieReview = await orm.postReview(req.body);
+  res.send(postMovieReview );
 })
 
 app.listen( PORT, function(){

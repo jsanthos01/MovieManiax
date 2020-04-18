@@ -3,11 +3,10 @@ const Schema = mongoose.Schema;
 
 const reviews = new Schema({
     movieId: {type: String},
-    movieName: {type: String},
-    rating: Number,
+    rating: String,
     user: { 
-        name: String,
-        id: String
+        name:{type: String},
+        id: {type: String}
     },   
     comment: String,
     

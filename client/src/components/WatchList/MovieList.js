@@ -6,7 +6,6 @@ import Modal from './Modal';
 function MovieList(props) {
     const { id } = useParams();
     const [modalDisplay, setModalDisplay] = useState(false);
-    const [reviewInfo, setReviewInfo] = useState({id: '',name: '', rating: '', comment: ''});
     const [buttonId, setButtonId] = useState(0)
     const imageStyle={
         display: "flex",
@@ -53,7 +52,7 @@ function MovieList(props) {
                                 </Link>
                                 <button type="button" class="btn btn-sm btn-outline-danger mr-2" onClick={() => deleteMovieWlist(movie._id)} >Delete</button>
                                 <button type="button" class="btn btn-sm btn-outline-success" id={movie.movieId} onClick={buttonSetup}>Add a Review</button>
-                                {modalDisplay ? <Modal modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} setReviewInfo={setReviewInfo} movieId={buttonId}/> : ''}
+                                {modalDisplay ? <Modal modalDisplay={modalDisplay} setModalDisplay={setModalDisplay}  movieId={buttonId}/> : ''}
                                 
                             </div> 
                         </div>

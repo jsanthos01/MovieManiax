@@ -49,6 +49,13 @@ let users = new Schema ({
          // image: {type: String},
       }
    ],
+   myReviews: [
+      {
+         movieId: {type: String},
+         comment: {type: String},
+         rating: {type: String}
+      }
+   ]
 
  }, {
     timestamps: true

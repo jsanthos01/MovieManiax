@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 
 
 function Modal(props) {
-    const [reviewData, setReviewData] = useState({id: '', name: '', movieId: '', rating: '', comment:''})
     const { id } = useParams();
+    const [reviewData, setReviewData] = useState({id: id, name: '', movieId: props.movieId, rating: '', comment:''})
     // console.log(props.movieId)
     const modalWrapper = {
         position: 'fixed',
@@ -59,20 +59,20 @@ function Modal(props) {
     function handleInputChange(e){
         const { id, value } = e.target;
         setReviewData( { ...reviewData, [id]: value } );
-        
-        
     }
 
     async function postReview(e){
         e.preventDefault();
         props.setModalDisplay(false)
-        let changedReview = {...reviewData};
-        changedReview["id"] = id;
-        changedReview["movieId"] = props.movieId;
-        setReviewData(changedReview)
-        console.log(reviewData)
-        // const apiResult = await fetch('/api/user/register', userData);
-
+        const postReviewData = await fetch('/api/review',
+        {  
+            method: 'post',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(reviewData)
+        }).then( result=>result.json());
 
     }
     return (

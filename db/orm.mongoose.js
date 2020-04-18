@@ -3,7 +3,7 @@ const bcrypt = require ( 'bcrypt' );
 
 // mongoose.connect(`mongodb://${process.env.movieTracker}`,{useNewUrlParser: true});
 
-mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true});
+mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true, useFindAndModify: false});
 const db = require( './models' );
 
 
@@ -151,17 +151,12 @@ async function deleteWatchListMovie(userId, movieObjId){
     return { message: "Movie successfully deleted from watchlist page!!"};
 }
 
-
-// sara's code starts here
-
-//sara code: 
-
-
 async function getUserslist(){
     const getUserList = await db.users.find({});
     console.log('user list is: ', getUserList)
     return getUserList;
 }
+
 async function postFriend(friendData){
     console.log("Inside orm file")
     console.log(friendData);
@@ -184,20 +179,48 @@ async function getFriendlist(id){
 
 async function deleteFriend( objIds ){
     console.log( ' in orm objIds: ', objIds)
-    
     const DeleteFriendList = await db.users.update({ _id:  objIds.userId }, { "$pull": { "friendList": { "_id": objIds.frndId } }}, { safe: true, multi:true }, function(err, obj) {
        //do something smart
     });
     return DeleteFriendList;
 }
 
-// sara's code ends here
 async function showProfileDb(id){
-    
     const profileDb = await db.users.findById({ _id:id })
     // console.log( `[userInfo avatar] id ${id}`, avatarDb );
     return profileDb;
 }
+
+async function postReview(details){
+    console.log("Inside orm [postReview]", details);
+    const myReview = {
+        'movieId': `${details.movieId}`,
+        'rating': `${details.rating}`,
+        'comment': `${details.comment}`
+    }
+    const userFetch = await db.users.findOneAndUpdate({ _id: details.id }, { $push: { myReviews:  myReview } });
+
+    const reviewSchema ={
+        movieId: details.movieId,
+        // "movieName": details.movieName,
+        rating: details.rating,
+        user: { 
+            name:details.name,
+            id: details.id
+        },   
+        comment: details.comment,
+    }
+    const dbReviews = new db.reviews( reviewSchema);
+    const reviewInfo = await dbReviews.save();
+
+    return { message: "Review is successfully saved! "};
+
+}
+
+async function getSpecificMovieReviews(){
+
+}
+
 
 module.exports = {
     registerUser,
@@ -212,5 +235,7 @@ module.exports = {
     postFriend,
     getFriendlist,
     deleteFriend,
-    showProfileDb
+    showProfileDb,
+    postReview,
+    getSpecificMovieReviews
 }
