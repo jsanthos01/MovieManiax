@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import Navbar from "./components/Navbar";
-import HomePage from './components/HomePage/HomeDesign'
+import HomePage from './components/HomePage/HomePage'
 import SearchMovie from './components/SearchMoviePage/SearchForm'
 import MovieInfo from './components/MoviePage/MovieInformation'
 import MovieWatchList from './components/WatchList/MovieWatchList';
