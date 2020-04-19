@@ -29,9 +29,8 @@ h1 {
 
 .hero {
   background-size: cover; 
-  height: 45vh;
   background-repeat: no-repeat;
-  background-image:  linear-gradient(to right, rgba(3.14%, 14.51%, 40.39%, 0.5) 150px, rgba(7.06%, 20.39%, 50.59%, 0.7) 100%), url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.123rf.com%2Fphoto_140290822_stock-vector-realistic-3d-gold-cinema-film-strip-isolated-on-blue-background-festive-design-cinema-film-frame-wit.html&psig=AOvVaw0wPEwIdAcakuekqhkIrQP-&ust=1587349553813000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKDL24648-gCFQAAAAAdAAAAABAQ);
+  background-image:  linear-gradient(to right, rgba(3.14%, 14.51%, 40.39%, 0.5) 150px, rgba(7.06%, 20.39%, 50.59%, 0.7) 100%), url( https://i.pinimg.com/originals/9d/0f/50/9d0f5009708b1c92adb022c647b89913.jpg);
 }
 
 .searchBox {
