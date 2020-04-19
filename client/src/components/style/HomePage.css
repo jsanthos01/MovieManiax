@@ -8,7 +8,7 @@
     background-image: url('../assets/movieBackground.jpg');
     background-size: cover;
   }
-  .container{
+  .styleCont{
     margin-top: 10%;
   }
 
@@ -17,7 +17,7 @@
     font-size: 6vw;
   }
 
-  .para{
+  .words{
     color: aliceblue;
     text-align: center;
     font-size: 2vw;
@@ -25,9 +25,22 @@
   .btnContainer{
     text-align: center;
   }
-  .btn{
+
+  .searchButton{
     border-radius: 20px;
     background-color: rgba(235,20,90);
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+    margin-top: 20px;
+    border-radius: 80px;
+
+  }
+
+  .searchButton:hover{
+    text-decoration: none;
+    color: white
+
   }
   
     
