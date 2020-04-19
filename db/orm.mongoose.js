@@ -122,7 +122,9 @@ async function postFriend(friendData){
     const myId= friendData.userId;
     const friendInfo = {
         'userId': `${friendData.userId}`,
+        'friendId': `${friendData.friendId}`,
         'name': `${friendData.friendName}`,
+        'image': `${friendData.friendImg}`,
     }
 
     const userFetch = await db.users.findOneAndUpdate({ _id: friendData.userId }, { $push: { friendList:  friendInfo } });
@@ -132,6 +134,11 @@ async function postFriend(friendData){
 async function getFriendlist(id){
     const getFriendList = await db.users.find({_id:id});
     return getFriendList;
+}
+async function getFriendInfo(id){
+    const getFriendInfo =  await db.users.find({_id:id});
+    console.log('in Orm etFriendInfo: ', getFriendInfo)
+    return getFriendInfo[0];
 }
 
 async function deleteFriend( objIds ){
@@ -217,6 +224,7 @@ module.exports = {
     postFriend,
     getFriendlist,
     deleteFriend,
+    getFriendInfo,
     showProfileDb,
     postReview,
     getSpecificMovieReviews,

@@ -14,7 +14,7 @@ function NavBar() {
   console.log(userName);
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
       <Link to="/" className="navbar-brand">
         <img src="https://icons.iconarchive.com/icons/designbolts/free-multimedia/1024/Film-icon.png" style={{width: "40px"}}/>
         MovieManiax
@@ -30,10 +30,27 @@ function NavBar() {
                 Search
                 </Link>
               </li>
-              <li className="nav-item">
-                  <Link to="/genrePage" className={location.pathname === "/genrePage" ? "nav-link active" : "nav-link"}>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                More
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <Link to="/genrePage" style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === "/genrePage" ? "nav-link active" : "nav-link"}>
                   Genre
                   </Link>
+                  <div class="dropdown-divider"></div>
+                  <Link to="/upcoming" style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === "/upcoming" ? "nav-link active" : "nav-link"}>
+                  Up Coming
+                  </Link>
+                  <div class="dropdown-divider"></div>
+                  <Link to="/popular" style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === "/popular" ? "nav-link active" : "nav-link"}>
+                  Popular Movies
+                  </Link>
+                  <div class="dropdown-divider"></div>
+                  <Link to="/TopRated" style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === "/TopRated" ? "nav-link active" : "nav-link"}>
+                  Top Rated
+                  </Link>
+                </div>
               </li>   
               { !id ? 
               <li className="nav-item">

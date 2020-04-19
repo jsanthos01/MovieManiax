@@ -1,4 +1,5 @@
 import React,{useState , useEffect} from 'react'
+import { Link } from "react-router-dom";
 
 function Friend() {
     const [ searchInput, setSearchInput ] = useState("");
@@ -29,19 +30,25 @@ function Friend() {
         }
     }
     function showUserProfile( newInput ){
-        // setSearchInput( newInput.user.name.first );
-        // clear the list
         setUserProfile( newInput );
         setShowList( [] );
-        // console.log('userProfile',userProfile)
     }
     async function addToFriendList( user ){
         console.log('addfrend btn clicked. userId: ', user);
+
+        console.log('checking if exist: ', myFriendList.findIndex(friend=> friend.friendId === user._id));
+        
+        if ( myFriendList.findIndex(friend=> friend.friendId === user._id) > -1 ){
+            console.log('friend already exist in your list!')
+            setAlertMessage( { type: 'success', message: 'friend already exist in your list!' } )
+            return;
+        }
+
         const friendInfo = {
             userId: localStorage.id,
             friendId: user._id,
             friendName: user.name,
-            // friendImg: user.img
+            friendImg: user.profileImg
         }
         console.log('posting friendInfo: ', friendInfo);
         const addedFriend= await fetch('/api/saveFriend',
@@ -103,7 +110,7 @@ function Friend() {
         // const userListResult = await fetch('https://randomuser.me/api/0.8/?results=45').then(result=>result.json());  
         const friendListResult = await fetch(`/api/friendList/${userId}`).then(result=>result.json());  
         setMyFriendList( friendListResult[0].friendList );
-        console.log( 'friendListResult: ', friendListResult[0].friendList )
+        console.log( '104 friendListResult: ', friendListResult[0].friendList )
     }
     async function viewProfile(user){
         console.log('to check if view btn works: ', user)
@@ -130,34 +137,46 @@ function Friend() {
             </form>
             <div class="container"> 
                 { userProfile.name  ? 
-                <div>
-                    <div class="row card-body"> 
-                        <div class="col-md card" style={{border: '1px dashed red'}}>
-                            <h3>{ userProfile.name} </h3>
-                            <ul class="col list-group mb-3">
-                                <li class="list-group-item">  
-                                    { userProfile.email}
-                                </li>
-                            </ul>
+                    <div class="card"> 
+                        <div class="row card-body" >
+                            <div  class="col-md-10">
+                                <h3>{ userProfile.name} </h3>
+                                <ul class="col list-group mb-3">
+                                    <li class="list-group-item">  
+                                        { userProfile.email}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div  class="col-md-2">
+                                <div class="btn btn-success" onClick={()=>addToFriendList(userProfile)}> Follow </div>
+                            </div>
                         </div>
-                        <div class="btn btn-success" onClick={()=>addToFriendList(userProfile)}> Add as Friend </div>
                     </div> 
-                </div>: '' }
+                : '' }
             </div>
             {/* friendList._id */}
             <div class="container">
-                
                 <div class="mb-3">
                     <h4 style={{color: "white"}}>Your Following List</h4>
-                    <ul class="col-lg list-group ">
                         { myFriendList.length>0 ? myFriendList.map( user =>
-                        <li class="list-group-item d-flex justify-content-between" >{user.name}
-                        <div class="d-flex justify-content-between">
-                            <div class="btn btn-success mr-2" onClick={()=>viewProfile(user)}>View Profile</div>
-                            <div class="btn btn-success" onClick={()=>deleteFromFriendList(user._id)}> <i class="fas fa-user-times"></i></div>
-                        </div>
-                        </li> ) : <h4 style={{color: "white"}}>Add people you would like to follow</h4>}
-                    </ul>
+                        <div class="card" style={{border : '1px solid red'}}>
+                            <div class="d-flex card-body">
+                                <div class="col-md-1">
+                                    <img src={user.image} alt="img profile" style={{width : '100%'}}/>
+                                </div>
+                                <div class="col-md-11">
+                                    <h3>{user.name}</h3>
+                                    <div class="d-flex justify-content-between">
+                                        <Link to={'/friendProfile/'+user.friendId}>
+                                            <div class="btn btn-success mr-2">View Profile</div>
+                                        </Link>
+                                        <div class="btn btn-success" onClick={()=>deleteFromFriendList(user._id)}> <i class="fas fa-user-times"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> ) : 
+                        <h4 style={{color: "white"}}>Add people you would like to follow</h4>}
+
                 </div>
             </div>
         </div>

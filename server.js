@@ -91,6 +91,14 @@ app.get("/api/friendList/:id", async (req, res) => {
   const friendsData = await orm.getFriendlist( id );
   res.json(friendsData);
 })
+//to load friends profile
+
+app.get("/api/friend/:id", async (req, res) => {
+  // console.log('in server file getting friend profile: ',req.params)
+  const id = req.params.id;
+  const friendsProfile = await orm.getFriendInfo( id );
+  res.json(friendsProfile);
+})
 
 // to delete friends from llist
 app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
