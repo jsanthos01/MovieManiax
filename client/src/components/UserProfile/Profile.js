@@ -3,52 +3,46 @@ import AvatarUpload from './AvatarUpload';
 import { Link } from "react-router-dom";
 import Bio from './Bio';
 
+function Profile() {
+    const userid = localStorage.id;
+    const [ profileInfo, setProfileInfo] = useState( {} )
+    const [ watchList, setwatchList] = useState( [] )
+    const [ favoriteList, setFavoriteList] = useState ( [] )
+    const [ friendList, setFriendList] = useState ( [] )
+    const [ showForm, setShowForm] = useState( false )
+    const [ newDate, setNewDate] = useState( '' )
+    const [ bioForm, setBioForm] = useState( false )
+    // console.log(userid);
+    
 
+    async function loadAvatar(){  
 
-    function Profile() {
-        const userid = localStorage.id;
-        const [ profileInfo, setProfileInfo] = useState( {} )
-        const [ watchList, setwatchList] = useState( [] )
-        const [ favoriteList, setFavoriteList] = useState ( [] )
-        const [ friendList, setFriendList] = useState ( [] )
-        const [ showForm, setShowForm] = useState( false )
-        const [ newDate, setNewDate] = useState( '' )
-        const [ bioForm, setBioForm] = useState( false )
-        // console.log(userid);
+        const profileData = await fetch(`/api/avatar/${userid}`).then( result => result.json() )  
+        // console.log(i); 
+        // console.log(profileData.friendList)          
+        setProfileInfo (profileData)
+        setwatchList( profileData.watchlist);
+        setFavoriteList( profileData.favourites )
+        setFriendList( profileData.friendList)
+        let date = new Date(profileData.createdAt)
+        let newDate = date.toString().substring(4, 15)
+        setNewDate( newDate )
         
-
-        async function loadAvatar(){  
-
-            const profileData = await fetch(`/api/avatar/${userid}`).then( result => result.json() )  
-            // console.log(i); 
-            console.log(profileData.friendList)          
-            setProfileInfo (profileData)
-            setwatchList( profileData.watchlist);
-            setFavoriteList( profileData.favourites )
-            setFriendList( profileData.friendList)
-            let date = new Date(profileData.createdAt)
-            let newDate = date.toString().substring(4, 15)
-            setNewDate( newDate )
-            
-        }
+    }
                               
-        useEffect( function(){
-            loadAvatar();
-        }, [bioForm, showForm] );
+    useEffect( function(){
+        loadAvatar();
+    }, [bioForm, showForm] );
 
-        function uploadPic( e ){
-            e.preventDefault();
-    
-            setShowForm(false);
-        } 
+    function uploadPic( e ){
+        e.preventDefault();
+        setShowForm(false);
+    } 
 
-        function handleBioSubmit( e ){
-            e.preventDefault();
-    
-            setBioForm(false);
-        }
-
-    
+    function handleBioSubmit( e ){
+        e.preventDefault();
+        setBioForm(false);
+    }
 
     return (
         <div>
@@ -56,34 +50,33 @@ import Bio from './Bio';
                 <div class="col-lg-8">  
                     <div class="row ml-4">
                         <div class="col">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <img src={profileInfo.profileImg} style={{minHeight:'70px', height:'120px'}} alt="..." class="img-thumbnail"/><br/>
-                                            { showForm ? <AvatarUpload uploadPic={uploadPic} /> : 
-                                                <div >
-                                                    <button onClick={function(){ setShowForm(true) }}>
-                                                       edit</button>
-                                                </div> }
-                                        </div>    
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src={profileInfo.profileImg} style={{minHeight:'70px', height:'120px'}} alt="..." class="img-thumbnail"/><br/>
+                                    { showForm ? <AvatarUpload uploadPic={uploadPic} /> : 
+                                        <div >
+                                            <button onClick={function(){ setShowForm(true) }}>
+                                                edit</button>
+                                        </div> }
+                                </div>    
+                                
+                                <div class="col-6">
+                                    <h1>{profileInfo.name}</h1>
+                                    <small class="text-muted format-date">Movie Maniax member since {newDate}</small>
+                                </div>
+                            </div>  
+                            <div class="row mt-4">
+                                
+                                <div class="col-12">
+                                    <form class="mt-2">
+                                        { bioForm ? <Bio handleBioSubmit={handleBioSubmit} /> : 
+                                        <button style={{backgroundColor: 'transparent', borderStyle: 'none', color: 'white'}}  onClick={() => { setBioForm(true) }}><p class="text-left">{profileInfo.bio}<span class="pl-2"><i class="fas fa-pencil-alt"></i></span></p></button>}
                                         
-                                        <div class="col-6">
-                                            <h1>{profileInfo.name}</h1>
-                                            <small class="text-muted format-date">Movie Maniax member since {newDate}</small>
-                                            
-                                        </div>
-                                    </div>  
-                        <div class="row mt-4">
-                            
-                            <div class="col-12">
-                                <form class="mt-2">
-                                    { bioForm ? <Bio handleBioSubmit={handleBioSubmit} /> : 
-                                    <button style={{backgroundColor: 'transparent', borderStyle: 'none', color: 'white'}}  onClick={() => { setBioForm(true) }}><p class="text-left">{profileInfo.bio}<span class="pl-2"><i class="fas fa-pencil-alt"></i></span></p></button>}
+                                    </form>
                                     
-                                </form>
-                                  
+                                </div>
                             </div>
-                        </div>
-                                    <div class="col-12 mt-4" style={{border: '1px solid grey'}}></div>
+                            <div class="col-12 mt-4" style={{border: '1px solid grey'}}></div>
 
                             <div class="row mt-4">
                                  <div class="col"> 
@@ -103,10 +96,8 @@ import Bio from './Bio';
                                         </div>
                                         { watchList.length !== 0 ? <div class="col-12"><Link to={`/watchlist/${userid}`} class="ml-2" style={{color:'white'}}>More</Link></div> : <div class="col-12">Add movies to your watch list</div>}
                                     </div>
-                                 </div>
-                                                
-                                 <div class="col-12 mt-4" style={{ border: '1px solid grey'}}></div>                
-                            
+                                 </div>              
+                                <div class="col-12 mt-4" style={{ border: '1px solid grey'}}></div>                
                             </div>
                             <div class="row mt-4">
                                  <div class="col"> 
@@ -126,7 +117,6 @@ import Bio from './Bio';
                                         { favoriteList.length !==0 ? <div class="col-12"><Link to={`/favourites/${userid}`} class="ml-2" style={{color:'white',}}>More</Link></div> : <div  class="col-12">List out your favorite movies! </div>}
                                     </div>
                                  </div>
-
                                 <div class="col-12 mt-4" style={{border: '1px solid grey' }}></div>
                             </div>
                             <div class="row mt-4">
@@ -140,15 +130,9 @@ import Bio from './Bio';
                                         </div>
                                     </div>
                                  </div>
-
-                            
                             </div>
-                            
-                            
                         </div>
                     </div>
-                    
-                    
                 </div>
                 
                 <div class="col-lg-4">
