@@ -24,7 +24,6 @@ function MovieResultPage(props) {
     }
     
     async function getMovieId(type, movieObj){
-        console.log("inside getMovieId Function: ", movieObj);
         let MovieData;
         let postMovieData;
 
@@ -93,17 +92,16 @@ function MovieResultPage(props) {
     }
 
     return (
-        <div ref={props.myRef}>
+        <div >
             <div style={style.messageStyle} className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
                 {alertMessage.message}
             </div>
             <div className="container ">
                 <div class="row">
                     {resultArray.map(movie => 
-                        <div class="col-md-4 text-center">
-                            <div class="card mb-4 box-shadow">
+                        <div class="col-md-3 text-center">
+                            <div class="card mb-3 box-shadow">
                                 {movie.poster_path && movie.poster_path ? <img style={style.imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="something" /> : <img style={style.imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
-                                
                                 <div class="movieDesc" style={style.movieDesc}> 
                                     <h4>{movie.title}</h4>
                                         <div class="extra">

@@ -11,7 +11,7 @@ const reviews = new Schema({
     comment: String,
     
 }, {
-    timestamps: true /* creates corresponding timestamp fields: createdAt, updatedAt */
+    timestamps: true 
 });
  
 module.exports = mongoose.model('reviews', reviews);

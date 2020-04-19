@@ -1,11 +1,9 @@
-import React, {useRef, useState} from 'react'
-// import PropTypes from 'prop-types';
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 
 function Modal(props) {
-    console.log(props.movieId)
-    const { id } = useParams();
+    const id = localStorage.id
     const [reviewData, setReviewData] = useState({id: id, name: '', movieId: props.movieId, rating: '', comment:''})
     
     const modalWrapper = {
@@ -64,6 +62,7 @@ function Modal(props) {
     async function postReview(e){
         e.preventDefault();
         props.setModalDisplay(false)
+        console.log(reviewData)
         const postReviewData = await fetch('/api/review',
         {  
             method: 'post',
@@ -75,6 +74,7 @@ function Modal(props) {
         }).then( result=>result.json());
 
     }
+    
     return (
         <div className={'modal-wrapper'} style={modalWrapper}>
             <div className={'modal-backdrop'} style={modalBackdrop} />

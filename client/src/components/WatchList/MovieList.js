@@ -1,13 +1,10 @@
 import React, {useContext, useState} from 'react'
 import { useParams } from 'react-router-dom';
 import {Link, useLocation} from "react-router-dom";
-import Modal from './Modal';
 
 function MovieList(props) {
     const { id } = useParams();
     const [modalDisplay, setModalDisplay] = useState(false);
-    const [buttonId, setButtonId] = useState(0);
-    const [key, setKey] = useState("");
     const imageStyle={
         display: "flex",
         justifyContent: "center",
@@ -17,21 +14,14 @@ function MovieList(props) {
     }
     const imgStyle = {height: "40vh", objectFit: "cover", paddingBottom: "10px"}
     const rowStyle={marginBottom: "60px"}
-    
-    function buttonSetup(e){
-        console.log(e.target.id);
-        setModalDisplay(true)
-        setButtonId(e.target.id);
-        setKey(e.target.key)
-
-    }
     async function deleteMovieWlist(movieId){
         const removeSpecificMovie = await fetch(`/api/removeListMovie/${id}/${movieId}`, 
             {
                 method: 'DELETE'
-            }).then(result => result.json());
-            console.log(removeSpecificMovie.message);
-            props.getSavedMovieList();
+            }
+        ).then(result => result.json());
+        console.log(removeSpecificMovie.message);
+        props.getSavedMovieList();
     }
 
     return (
@@ -52,10 +42,7 @@ function MovieList(props) {
                                 <Link to={"/movieDetails/" + movie.movieId }>
                                     <button type="button" class="btn btn-outline-primary mr-2">View</button>
                                 </Link>
-                                <button type="button" class="btn btn-sm btn-outline-danger mr-2" onClick={() => deleteMovieWlist(movie._id)} >Delete</button>
-                                <button type="button" class="btn btn-sm btn-outline-success" key={movie.title} id={movie.movieId} onClick={buttonSetup}>Add a Review</button>
-                                {modalDisplay ? <Modal setModalDisplay={setModalDisplay}  movieId={buttonId} movieName={key} /> : ''}
-                                
+                                <button type="button" class="btn btn-sm btn-outline-danger mr-2" onClick={() => deleteMovieWlist(movie._id)} >Delete</button>                                
                             </div> 
                         </div>
                 

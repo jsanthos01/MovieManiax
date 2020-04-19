@@ -1,9 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
-import {Link, useLocation} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function FavouritesCard(props) {
-    console.log(props.myMovies);
     const { id } = useParams();
     const imgStyle = {
         height: "50vh",
@@ -11,12 +10,10 @@ function FavouritesCard(props) {
     }
 
     async function deleteMovieFavourite(movieId){
-        console.log("[deleteMovieFavourite] function");
         const removeSpecificMovie = await fetch(`/api/removeFavMovie/${id}/${movieId}`, 
             {
                 method: 'DELETE'
             }).then(result => result.json());
-            console.log(removeSpecificMovie.message);
             props.getSavedMovieList();
     }
 

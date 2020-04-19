@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import { Redirect } from 'react-router-dom';
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function MovieInformation() {
     const { id } = useParams();
@@ -21,25 +21,19 @@ function MovieInformation() {
         movieDesc: {color: "black",padding: "10px"},
         messageStyle: {position: 'sticky',top: '0',left: '0'}
     }
-
-    console.log("Inside the movieInfo Page!!!!");
-    console.log(`Id of movie is: ${id}`);
     
     //Making API calls
     async function loadMovieDetails(){ 
         //Movie Details and Cast Members
         const apiMovie = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=5b4dbf95cc35d2e911560cca64385e60&language=en-US&append_to_response=credits`).then( result=>result.json() );
-        console.log("apiMovie", apiMovie);
         setMovieDetails( apiMovie );
 
         //Movie Trailer Videos
         const apiMovieTrailer = await fetch(`http://api.themoviedb.org/3/movie/${id}/videos?api_key=5b4dbf95cc35d2e911560cca64385e60`).then( result=>result.json() );      
-        console.log( 'apiMovieTrailer key: ', apiMovieTrailer);
         setMovieTrailer( apiMovieTrailer.results );
 
         //Similar Movies List
         const apiSimilarMovies = await fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=5b4dbf95cc35d2e911560cca64385e60&language=en-US&page=1`).then( result=>result.json() );      
-        console.log( 'apiSimilarMovies key: ', apiSimilarMovies);
         setSimilarMovies( apiSimilarMovies.results );
     }
 
@@ -48,7 +42,6 @@ function MovieInformation() {
     },[])
 
     async function getMovieId(type, movieObj){
-        console.log("inside getMovieId Function: ", movieObj);
         let MovieData;
         let postMovieData;
 
@@ -64,7 +57,6 @@ function MovieInformation() {
                     releaseDate: movieObj.release_date
                 }
         
-                console.log("Movie Data", MovieData);
                 postMovieData = await fetch('/api/watchlistMovie',
                 {  
                     method: 'post',
@@ -74,9 +66,7 @@ function MovieInformation() {
                     },
                     body: JSON.stringify(MovieData)
                 }).then( result=>result.json());
-        
-                console.log(postMovieData);
-    
+
             }else if (type === "favourites"){
                 MovieData = {
                     userId: localStorage.id,
@@ -86,9 +76,7 @@ function MovieInformation() {
                     ratings: movieObj.vote_average,
                 }
             
-                console.log("Movie Data", MovieData);
-                postMovieData = await fetch('/api/favourites',
-                {  
+                postMovieData = await fetch('/api/favourites',{  
                     method: 'post',
                     headers: {
                         'Accept': 'application/json, text/plain, */*',
@@ -96,21 +84,20 @@ function MovieInformation() {
                     },
                     body: JSON.stringify(MovieData)
                 }).then( result=>result.json());
-        
-                console.log(postMovieData);
             }   
     
             if( postMovieData.message ){
                 setAlertMessage( { type: 'success', message: postMovieData.message } );
-                setTimeout( function(){ setAlertMessage( {} ); }, 3000 );
+                setTimeout( function(){ setAlertMessage( {} ); }, 2000 );
             } else {
                 setAlertMessage( { type: 'danger', message: postMovieData.message } );
                 setTimeout( function(){ setAlertMessage( {} ); }, 2500 );
             }
+
         }else {
             setIsNotLoggedIn(true)
             setAlertMessage( { type: 'danger', message: "Please signin to add to your favourites or watchlist!" } );
-            setTimeout( function(){ setAlertMessage( {} ); }, 3000 ); 
+            setTimeout( function(){ setAlertMessage( {} ); }, 2000 ); 
         }
     }
 
@@ -125,9 +112,6 @@ function MovieInformation() {
                 <div class="row">
                     <div class='col-md-4 text-center' >
                         {movieDetails.poster_path && movieDetails.poster_path ? <img style={{width: '100%'}} src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`} alt="movie img" /> : <img src='https://cdn1.vectorstock.com/i/800x1000/21/85/white-blank-book-cover-isolated-template-empty-vector-25362185.jpg'  /> }
-                        
-                        {/* THIS IS WRONG... MUST BE CHANGED!!!!! */}
-                        <a href={`https://www.youtube.com/embed/${movieDetails.key}`}><button class="btn btn-danger mr-3 mt-3 playBtn"><i class="fas fa-play"></i> Watch Trailer</button></a>
                     </div>
                     <div class='col-md-8'>
                         <h1>{movieDetails.title}</h1>
@@ -135,7 +119,7 @@ function MovieInformation() {
                         <button class="btn btn-outline-danger mr-3 mt-3" onClick={() => getMovieId("favourites", movieDetails)}><i class="fas fa-heart"></i> Favourites</button>
                         <button class="btn btn-outline-primary mr-3 mt-3" onClick={() => getMovieId("watchlist", movieDetails)}><i class="fas fa-plus"></i>  Watch List</button>
                         <Link to={`/reviews/${movieDetails.id}/${movieDetails.title}`}>
-                            <button type="button" className="btn btn-outline-info mt-3"><i class="fas fa-comments"></i> Reviews</button>
+                            <button type="button" className="btn btn-outline-info mt-3"><i class="fas fa-comments"></i> View Reviews</button>
                         </Link>
                         <div>
                             <ul class="list-group">

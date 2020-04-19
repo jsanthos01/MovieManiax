@@ -22,23 +22,21 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-        <div className="container-fluid main">
-        <Route exact path={["/","/homepage"]} component={HomePage} />
-          <Route exact path="/searchMovie" component={SearchMovie} />
-          <Route exact path="/movieDetails/:id" component={MovieInfo} />
-          <Route exact path="/watchlist/:id" component={MovieWatchList} />
-          <Route exact path="/register" component={Registration} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/logout" component={LogoutPage} />
-          {/* delete before pushing */}
-          <Route exact path="/user/:id" component={Profile} /> 
-          <Route exact path="/favourites/:id" component={Favourites} />
-          <Route exact path="/friendList" component={Friends} />
-          <Route exact path="/reviews/:id/:title" component={Reviews} />
-          <Route exact path="/genrePage" component={GenrePage} />
-          <Route path="/genre/:id" component={GenreMoviePage} />
-          
-        </div>
+          <div className="container-fluid main">
+            <Route exact path={["/","/homepage"]} component={HomePage} />
+            <Route exact path="/searchMovie" component={SearchMovie} />
+            <Route exact path="/movieDetails/:id" component={MovieInfo} />
+            <Route exact path="/watchlist/:id" component={MovieWatchList} />
+            <Route exact path="/register" component={Registration} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/logout" component={LogoutPage} />
+            <Route exact path="/user/:id" component={Profile} /> 
+            <Route exact path="/favourites/:id" component={Favourites} />
+            <Route exact path="/friendList" component={Friends} />
+            <Route exact path="/reviews/:id/:title" component={Reviews} />
+            <Route exact path="/genrePage" component={GenrePage} />
+            <Route path="/genre/:id" component={GenreMoviePage} /> 
+          </div>
         <Footer />
       </Router>
     </div>

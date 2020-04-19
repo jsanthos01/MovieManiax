@@ -30,13 +30,8 @@ function MovieFavourites() {
     }
     
     async function getSavedMovieList(){
-        
         const getMovies = await fetch(`/api/favourites/${id}`).then(res => res.json());
-        console.log("Inside the Favourites Component")
-        console.log("inside the Favourites page:", getMovies)
-        console.log("inside the Favourites page 2:", getMovies[0].favourites)
         const movies = getMovies;
-        console.log(movies)
         setMyMovies(movies[0].favourites);
     }
 
@@ -47,15 +42,12 @@ function MovieFavourites() {
     function sortOptions(option){
         setMyMovies([]);
         if(option === "alphabetical"){
-            console.log(option);
             myMovies.sort(nameOrder);
             setMyMovies([...myMovies]);
         }else if(option ==="rating"){
-            console.log(option);
             myMovies.sort(ratingsOrder);
             setMyMovies([...myMovies]);
         }else if(option === "date"){
-            console.log(option);
 
         }
     }

@@ -6,21 +6,12 @@ const bcrypt = require ( 'bcrypt' );
 mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true, useFindAndModify: false});
 const db = require( './models' );
 
-
-// input: <object> { name, email, password }
-// output: { message, id, name }
 async function registerUser( userData ){
     if( !userData.password || !userData.name || !userData.email ){
-        // console.log( `[registerUser] invalid userData! `, userData );
         return { message: "Invalid user data", id: "", name: "" };
     }
-    
-    // console.log( `[registerUser], userData: `, userData );
     const saltRounds = 10;
- 
-    const passwordHash = await bcrypt.hash(userData.password, saltRounds);
-    // console.log( `[registerUser] (hash=${passwordHash}) req.body:`, userData );
-    
+    const passwordHash = await bcrypt.hash(userData.password, saltRounds);    
     const saveData = {
        name: userData.name,
        email: userData.email,
@@ -35,19 +26,16 @@ async function registerUser( userData ){
         email: saveUser.email,
         name: saveUser.name 
     };           
- }
+}
 
-// input: email, password
-// output: <object> { userId, firstName, lastName, emailAddress, creationTime } || false
+
 async function loginUser( email, password ) {
     const userData = await db.users.findOne({ email: email });
-    // console.log( `[loadUser] email='${email}' userData:`, userData );
     if( !userData ) {
         return { error: "Couldn't find that email. Register or try again!" };
     }
 
     const isValidPassword = await bcrypt.compare( password, userData.password );
-    // console.log( ` [loginUser] checking password (password: ${password} ) hash(${userData.password})`, isValidPassword );
     if( !isValidPassword ) {
         return { error: "Invalid password" };
     }
@@ -72,19 +60,9 @@ async function loginUser( email, password ) {
     };
 }
 
-async function logoutUser( session ){
-    const userData = await db.users.findOneAndDelete({ session });
-    // console.log( `[logoutUser] session(${session})`, userData );
-    return true; //( userData._id ? true : false );
-}
-
-
 //WatchList Section
 async function postWatchlist(movieData){
-    console.log("Inside orm file");    
-    // console.log("Inside orm file")
-    // console.log(movieData);
- 
+    console.log("Inside orm file");     
     const movieInfo = {
        "movieId": `${movieData.movieId}`,
        "title": `${movieData.title}`,
@@ -96,7 +74,6 @@ async function postWatchlist(movieData){
     }
  
     const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { watchlist:  movieInfo } });
-    // console.log(userFetch)
     return { message: "Movie successfully saved in Watchlist!!"};
 }
 
@@ -108,25 +85,15 @@ async function getWatchlist(id){
 
 //Favourites Section
 async function postFavourites(movieData){
-    console.log("Inside orm post favourites file")
-    console.log(movieData);
-   
-    // console.log("Inside orm post favourites file")
-    // console.log(movieData);
- 
     const movieInfo = {
         "movieId": `${movieData.movieId}`,
         "title": `${movieData.title}`,
         "image":`${movieData.image}`,
         "ratings": `${movieData.ratings}`
     }
-    //creating a new modal object
     const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { favourites:  movieInfo } });
-    // console.log(userFetch)
-    return { message: "Movie successfully saved in Favourites!!"};
-    
-    
- }
+    return { message: "Movie successfully saved in Favourites!!"}; 
+}
  
 async function getFavourites(id){
     const getSavedList = await db.users.find({_id:id});
@@ -134,41 +101,31 @@ async function getFavourites(id){
 }
  
 async function deleteFavMovie(userId, movieObjId){
-    console.log("Inside orm delete favourites ");
-    console.log(userId)
-    console.log(movieObjId);
     const deleteMovieDb = await db.users.updateOne({_id: userId},{ "$pull": { "favourites": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
         console.log(err)
     });
     return { message: "Movie successfully deleted from favourites page!!"};
 }
 async function deleteWatchListMovie(userId, movieObjId){
-    console.log("Inside orm delete watchlist ");
-    console.log(userId)
-    console.log(movieObjId);
     const deletemovie = await db.users.updateOne({_id: userId},{ "$pull": { "watchlist": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
+        console.log(err)
     });
     return { message: "Movie successfully deleted from watchlist page!!"};
 }
 
 async function getUserslist(){
     const getUserList = await db.users.find({});
-    console.log('user list is: ', getUserList)
     return getUserList;
 }
 
 async function postFriend(friendData){
-    console.log("Inside orm file")
-    console.log(friendData);
     const myId= friendData.userId;
-
     const friendInfo = {
         'userId': `${friendData.userId}`,
         'name': `${friendData.friendName}`,
     }
 
     const userFetch = await db.users.findOneAndUpdate({ _id: friendData.userId }, { $push: { friendList:  friendInfo } });
-    console.log(userFetch)
     return { message: "friend successfully saved in Watchlist!!"};
 }
 
@@ -178,21 +135,18 @@ async function getFriendlist(id){
 }
 
 async function deleteFriend( objIds ){
-    console.log( ' in orm objIds: ', objIds)
     const DeleteFriendList = await db.users.update({ _id:  objIds.userId }, { "$pull": { "friendList": { "_id": objIds.frndId } }}, { safe: true, multi:true }, function(err, obj) {
-       //do something smart
+        console.log(err)
     });
     return DeleteFriendList;
 }
 
 async function showProfileDb(id){
     const profileDb = await db.users.findById({ _id:id })
-    // console.log( `[userInfo avatar] id ${id}`, avatarDb );
     return profileDb;
 }
 
 async function postReview(details){
-    // console.log("Inside orm [postReview]", details);
     const myReview = {
         'movieId': `${details.movieId}`,
         'rating': `${details.rating}`,
@@ -200,9 +154,8 @@ async function postReview(details){
     }
     const userFetch = await db.users.findOneAndUpdate({ _id: details.id }, { $push: { myReviews:  myReview } });
     
-    const reviewSchema ={
+    const reviewSchema = {
         movieId: details.movieId,
-        // "movieName": details.movieName,
         rating: details.rating,
         user: { 
             name:details.name,
@@ -212,29 +165,27 @@ async function postReview(details){
     }
     const dbReviews = new db.reviews( reviewSchema);
     const reviewInfo = await dbReviews.save();
-
     return { message: "Review successfully saved !!"};
 
 }
 
-async function getSpecificMovieReviews(id){
-    
+async function getSpecificMovieReviews(id){   
     const getReviewData = await db.reviews.find({movieId: id});
-    // console.log(`[get Reviews orm.js]`, getReviewData)
     return getReviewData;
 }
 
 async function deleteReviewInfo( userId, movieId ){
-    console.log(`[inside [deleteReview orm]`, userId, movieId)
+    console.log(userId, movieId)
     const deleteReview = db.reviews.deleteOne( { "movieId" : movieId}, function (err) {
         if (err) return handleError(err)
     });
    
     const deleteUserReview = await db.users.update({ _id:  userId }, { "$pull": { "myReviews": { "movieId": movieId } }}, { safe: true, multi:true }, function(err, obj) {
-        //do something smart
+        console.log(err)
     });
     return { message: "Your Review has been deleted !!"};
 }
+
 module.exports = {
     registerUser,
     loginUser,
