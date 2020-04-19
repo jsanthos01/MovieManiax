@@ -171,7 +171,6 @@ async function postReview(details){
 
 async function getSpecificMovieReviews(id){   
     const getReviewData = await db.reviews.find({movieId: id});
-    console.log(getReviewData)
     return getReviewData;
 }
 
