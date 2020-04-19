@@ -56,8 +56,9 @@ let users = new Schema ({
    myReviews: [
       {
          movieId: {type: String},
-         comment: {type: String},
-         rating: {type: String}
+         description: {type: String},
+         rating: {type: String},
+         likes: Number
       }
    ]
 

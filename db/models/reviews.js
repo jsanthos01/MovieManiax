@@ -6,9 +6,19 @@ const reviews = new Schema({
     rating: String,
     user: { 
         name:{type: String},
-        id: {type: String}
+        id: {type: String},
+        profilePic: {type: String},
     },   
-    comment: String,
+    description: String,
+    comments: [
+       {
+            userId: {type: String},
+            name: {type: String},
+            profilePic: {type: String},
+            description: {type: String}
+        }
+    ],
+    likes: Number
     
 }, {
     timestamps: true 
