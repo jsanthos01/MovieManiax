@@ -22,6 +22,10 @@ let users = new Schema ({
       type: String,
       default: 'https://getdrawings.com/free-icon-bw/anonymous-avatar-icon-19.png'  
    },
+   bio: {
+      type: String,
+      default: 'Tell the world something about yourself'  
+   },
    favourites: [
       { 
          movieId: {type: String},

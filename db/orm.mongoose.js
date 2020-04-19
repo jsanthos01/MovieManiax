@@ -185,6 +185,29 @@ async function deleteReviewInfo( userId, movieId ){
     return { message: "Your Review has been deleted !!"};
 }
 
+
+//-----------------multer--------------------------------
+async function updateAvatar( userId, imageUrl ){
+    // console.log(`[updateThumbnail] thumbId(${imageId}) myEdit: `, myData);
+    const imageData = {
+        profileImg: imageUrl
+     };
+    const dbResult = await db.users.findOneAndUpdate({_id: userId}, imageData);
+
+    return { message: `Thank you, updated` }
+}
+//--------------------------bio----------------------------
+
+async function bioResultDb( bioId, bioData ){
+    console.log(`[updateBio] BioId(${bioId}) myEdit: `, bioData);
+    
+    const dbBioResult = await db.users.findOneAndUpdate({_id: bioId}, bioData);
+
+    return dbBioResult;
+}    
+
+//------------------------------------------------------------ 
+
 module.exports = {
     registerUser,
     loginUser,
@@ -201,5 +224,7 @@ module.exports = {
     showProfileDb,
     postReview,
     getSpecificMovieReviews,
-    deleteReviewInfo
+    deleteReviewInfo,
+    bioResultDb,
+    updateAvatar
 }

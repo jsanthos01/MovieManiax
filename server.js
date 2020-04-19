@@ -3,7 +3,7 @@ const express = require( 'express' );
 const fs = require('fs');
 const path = require("path");
 const orm = require( './db/orm.mongoose' );
-
+const multer  = require('multer');
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -108,12 +108,14 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
    res.send( genres );
   });
   
+  //-----------------------------get profile details------
   app.get("/api/avatar/:id", async (req, res) => {
     const id = req.params.id;
     const showProfile = await orm.showProfileDb( id );
   res.json(showProfile)
 })
 
+//----------------------------------------------------------
 //JOANNA REVIEWS SECTION
 app.post("/api/review", async (req, res) => {
   const postMovieReview = await orm.postReview(req.body);
@@ -131,6 +133,43 @@ app.delete("/api/removeReview/:userId/:movieId", async (req, res) => {
   const deleteReview = await orm.deleteReviewInfo(userId, movieId);
   res.send(deleteReview);
 });
+
+//----------------------------multer--------------------------------
+//-----------multer image upload----------------
+const upload = require('multer')({ dest: 'client/public/uploads/' });
+
+  app.put( '/api/upload/:userid', upload.single('myFile'), async function( req, res ){
+    console.log(req.body)
+  // let imageData = imageUrl;
+  let userId = req.params.userid
+  //do I need this?
+  const filePath = req.file.path;
+
+  const originalName = req.file.originalname;
+
+  const fileExt = originalName.toLowerCase().substr((originalName.lastIndexOf('.'))).replace('jpeg','jpg');
+    fs.renameSync( `${__dirname}/${filePath}`, `${__dirname}/${filePath}${fileExt}` );
+
+  const imageUrl = req.file.path.replace(/\\/g, '/').replace('client/public/','/')+fileExt;
+  
+  const imgUploadDb = await orm.updateAvatar( userId, imageUrl );
+  res.send( imgUploadDb );
+
+});
+//------------------------------------------------------
+
+//----------------------------------bio--------------------
+
+app.put('/api/user/:id', async function( req, res ){
+  const bioData = req.body;
+  const id = req.params.id;
+  console.log( `[POST: /api/user/bioId userData: `, bioData );
+  const bioResult = await orm.bioResultDb( id, bioData );
+  res.send( bioResult );
+  
+});
+
+//-----------------------------------------------------------------
 
 
 app.listen( PORT, function(){
