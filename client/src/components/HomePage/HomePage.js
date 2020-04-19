@@ -3,23 +3,14 @@ import "../style/HomePage.css"
 
 function HomePage(){
     return(
-        <div class="HomeMain">  
-           <div class="image1"></div>
-           <div class="image2"></div>
-           <div class="image3"></div>
-           <div class="image4"></div>
-           <div class="image5"></div>
-           <div class="imageContainer">
-           </div>
-           <div class="HomeContainer">
-                <div class="heading">
-                   <strong> Movie Maniax</strong>
-                </div>
+        <div class="jumbotron jumbotron-fluid homeDiv ">
+        <div class="container">
+            <h1 class="display-7 title">MovieManiax</h1>
+            <p class="para">MOVIES.FUN.POPCORN</p>
+            <div class="btnContainer">
+             <a class="btn" href="/searchMovie" role="button">Find Your Movies</a>
             </div>
-            <div class="HomeContainer2">   
-                <a class="searchBtn" href="/searchMovie" ><strong>Find a movie</strong></a>
-            </div> 
-
+        </div>
         </div>
     )
 }
