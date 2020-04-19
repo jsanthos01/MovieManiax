@@ -2,6 +2,32 @@
     margin: 0;
     padding: 0;
   }
+  .homeDiv{
+    background-image: url('https://cdn.discordapp.com/attachments/690620387415031821/701263130457669663/movieBackground.jpg');
+    background-size: cover;
+    height: 100vh;
+  }
+  .container{
+    margin-top: 10%;
+  }
+
+  .title{
+    text-align: center;
+    font-size: 6vw;
+  }
+
+  .para{
+    color: aliceblue;
+    text-align: center;
+    font-size: 2vw;
+  }
+  .btnContainer{
+    text-align: center;
+  }
+  .btn{
+    border-radius: 20px;
+    background-color: rgba(235,20,90);
+  }
   
     
   
