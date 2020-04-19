@@ -3,7 +3,7 @@ import "../style/HomePage.css"
 
 function HomePage(){
     return(
-        <div class="homeDiv">
+        <div class="homeDiv ">
             <div class="container styleCont">
                 <h1 class="display-7 title">MovieManiax</h1>
                 <p class="words">MOVIES.FUN.POPCORN</p>
