@@ -5,15 +5,20 @@ function TabBar(props) {
     const location = useLocation();
 
     return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <Link to={`/friendProfile/${props.id}/WatchList`} className={location.pathname === `/friendProfile/${props.id}/WatchList` ? "NavLinkActive" : "nav-link"}>
+        <nav class="tabBar">
+            <ul class="d-flex">
+                <li class="">
+                    <Link to={`/friendProfile/${props.id}/About`} className={location.pathname === `/friendProfile/${props.id}/About` ? "NavLinkActive" : "navLink"}>
+                    About Me
+                    </Link>
+                </li>
+                <li class="">
+                    <Link to={`/friendProfile/${props.id}/WatchList`} className={location.pathname === `/friendProfile/${props.id}/WatchList` ? "NavLinkActive" : "navLink"}>
                     Watch List
                     </Link>
                 </li>
                 <li class="nav-item active">
-                    <Link to={`/friendProfile/${props.id}/FavoritesList`} className={location.pathname === `/friendProfile/${props.id}/FavoritesList`? "NavLinkActive" : "nav-link"}>
+                    <Link to={`/friendProfile/${props.id}/FavoritesList`} className={location.pathname === `/friendProfile/${props.id}/FavoritesList`? "NavLinkActive" : "navLink"}>
                     Favorites List
                     </Link>
                 </li>

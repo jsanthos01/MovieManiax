@@ -6,7 +6,11 @@ body {
     sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #060d1d;
+
+  background-image: linear-gradient(   #0a1635 20%, #0c1226);
+
+  /* background: #0c1226; */
+  /* background: #0e1b3e; */
   /* color: white;   */
 
 }
@@ -46,9 +50,6 @@ h1 {
   text-align: center;
   justify-content: center;
 }
-
-
-
 
 
 
@@ -99,17 +100,127 @@ h1 {
   color: black;
   transform: rotateY(180deg);
 }
-.NavLinkActive {
-  color: black;
-  border-top: 1px solid green;
-  border-left: 1px solid green;
-  border-right: 1px solid green;
+
+
+
+
+
+/* tab */
+.tabBar{
+  margin-bottom: 30px;
+
+}
+.navLink {
+  color: rgb(134, 134, 134);
   padding: 15px;
-  background: white;
+
+}
+.navLink:hover {
+background: #f56372;
+text-decoration: none;
+color: white;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+
+}
+
+.NavLinkActive {
+  color: #f56372;
+  border-top: 1px solid #2ec3d6;
+  /* border-bottom: 1px solid #2ec3d6; */
+  border-left: 1px solid #2ec3d6;
+  /* border-right: 1px solid #2ec3d6; */
+  padding: 15px;
+  /* background: white; */
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 .NavLinkActive:hover {
 text-decoration: none;
-color: black;
+color: #f56372;
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+
+
+
+/* movie card */
+.movieCard {
+  background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
+  /* background: #0f1b38; */
+  border-radius: 20px;
+  /* border: 1px solid #fdc664; */
+  padding: 25px;
+  margin: 10px;
+  filter: drop-shadow( 0px 0px 8px #0000009d);
+}
+
+.movieCard-title{
+  color: #2ec3d6;
+
+}
+.movieCrdImg{
+  filter: drop-shadow( 0px 0px 8px #1743509d);
+
+  /* border-bottom:   3px solid #fdc664; */
+}
+.movieCrdTitle{
+  /* padding: 20px; */
+  font-size: 1.5rem;
+  /* width: 100%; */
+}
+.crdImg {
+  border-radius: 10px;
+  height: 60vh;
+  object-fit: cover;
+
+  /* border: 3px solid #e2a439; */
+
+}
+.hrCdImg{
+  border-radius: 10px;
+  /* height: 40vh; */
+  width: 100%;
+  object-fit: cover;
+  /* border: 1px solid palevioletred; */
+  
+}
+.mvHrzCrdImg{
+  /* width: 40%; */
+    /* height: 40vh;
+  width: 40vh; */
+
+
+}
+.mvHrzCrdDesc {
+  /* width: 60%; */
+  /* border: 1px solid #2ec3d6; */
+  /* padding: 20px; */
+  /* margin-top: 20px; */
+
+}
+.movieCrdDesc{
+  padding: 20px;
+  /* margin-top: 20px; */
+}
+
+.navbar{
+  color: white;
+}
+
+.tabHeight{
+  min-height: 60vh;
+}
+
+ul li {
+  list-style: none;
+}
+
+.ratngCard {
+  text-align: center;
+  width: 70px;
+  border-radius: 5px;
+  background: #e75c6a;
+  color: white;
+  padding: 10px;
 }

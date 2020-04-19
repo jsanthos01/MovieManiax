@@ -7,10 +7,9 @@ function Footer() {
             bottom: 0,
             width: "100%",
             paddingTop: "20px",
-            backgroundColor: "grey",
+            // backgroundColor: "grey",
             color: "white",
             textAlign:"center"
-         
     }
     return (
         <div class="footer" style={footerStyle}>
