@@ -9,13 +9,11 @@
     background-size: cover;
     height: 100vh;
   }
-  .styleCont{
-    margin-top: 10%;
-  }
 
   .title{
     text-align: center;
     font-size: 6vw;
+    padding-top: 20%;
   }
 
   .words{
@@ -26,11 +24,9 @@
   .btnContainer{
     text-align: center;
   }
-
   .searchButton{
-    border-radius: 20px;
     background-color: rgba(235,20,90);
-    padding: 20px;
+    padding: 15px;
     color: white;
     text-decoration: none;
     margin-top: 20px;
