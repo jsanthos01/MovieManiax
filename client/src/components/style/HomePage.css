@@ -1,11 +1,12 @@
 * {
     margin: 0;
     padding: 0;
+    /* height: 100%; */
+    /* margin: 0; */
   }
   .homeDiv{
-    background-image: url('https://cdn.discordapp.com/attachments/690620387415031821/701263130457669663/movieBackground.jpg');
+    background-image: url('../assets/movieBackground.jpg');
     background-size: cover;
-    height: 100vh;
   }
   .container{
     margin-top: 10%;

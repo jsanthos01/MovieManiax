@@ -3,7 +3,7 @@ import "../style/HomePage.css"
 
 function HomePage(){
     return(
-        <div class="jumbotron jumbotron-fluid homeDiv ">
+        <div class="homeDiv ">
         <div class="container">
             <h1 class="display-7 title">MovieManiax</h1>
             <p class="para">MOVIES.FUN.POPCORN</p>
