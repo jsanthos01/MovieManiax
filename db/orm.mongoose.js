@@ -178,7 +178,6 @@ async function deleteReviewInfo( userId, movieId ){
     const deleteReview = db.reviews.deleteOne( { "_id" : movieId}, function (err) {
         if (err) return handleError(err)
     });
-   
     const deleteUserReview = await db.users.update({ _id:  userId }, { "$pull": { "myReviews": { "_id": movieId } }}, { safe: true, multi:true }, function(err, obj) {
         console.log(err)
     });
@@ -193,16 +192,13 @@ async function updateAvatar( userId, imageUrl ){
         profileImg: imageUrl
      };
     const dbResult = await db.users.findOneAndUpdate({_id: userId}, imageData);
-
     return { message: `Thank you, updated` }
 }
 //--------------------------bio----------------------------
 
 async function bioResultDb( bioId, bioData ){
-    console.log(`[updateBio] BioId(${bioId}) myEdit: `, bioData);
-    
+    // console.log(`[updateBio] BioId(${bioId}) myEdit: `, bioData);
     const dbBioResult = await db.users.findOneAndUpdate({_id: bioId}, bioData);
-
     return dbBioResult;
 }    
 

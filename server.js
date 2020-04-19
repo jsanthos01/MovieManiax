@@ -134,24 +134,17 @@ app.delete("/api/removeReview/:userId/:movieId", async (req, res) => {
   res.send(deleteReview);
 });
 
-//----------------------------multer--------------------------------
 //-----------multer image upload----------------
 const upload = require('multer')({ dest: 'client/public/uploads/' });
 
-  app.put( '/api/upload/:userid', upload.single('myFile'), async function( req, res ){
-    console.log(req.body)
-  // let imageData = imageUrl;
+app.put( '/api/upload/:userid', upload.single('myFile'), async function( req, res ){
   let userId = req.params.userid
-  //do I need this?
   const filePath = req.file.path;
-
   const originalName = req.file.originalname;
-
+ 
   const fileExt = originalName.toLowerCase().substr((originalName.lastIndexOf('.'))).replace('jpeg','jpg');
     fs.renameSync( `${__dirname}/${filePath}`, `${__dirname}/${filePath}${fileExt}` );
-
   const imageUrl = req.file.path.replace(/\\/g, '/').replace('client/public/','/')+fileExt;
-  
   const imgUploadDb = await orm.updateAvatar( userId, imageUrl );
   res.send( imgUploadDb );
 
@@ -163,10 +156,9 @@ const upload = require('multer')({ dest: 'client/public/uploads/' });
 app.put('/api/user/:id', async function( req, res ){
   const bioData = req.body;
   const id = req.params.id;
-  console.log( `[POST: /api/user/bioId userData: `, bioData );
+  // console.log( `[POST: /api/user/bioId userData: `, bioData );
   const bioResult = await orm.bioResultDb( id, bioData );
   res.send( bioResult );
-  
 });
 
 //-----------------------------------------------------------------

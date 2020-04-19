@@ -7,17 +7,13 @@ function Bio(props) {
     function updateBio(e){
         e.preventDefault();
         let newBio = e.target.value;
-        console.log(newBio);
+        // console.log(newBio);
         const key = 'bio'
         setMyBio( { ...myBio, [key]: newBio } );
     }
-    console.log(myBio)
-
-
+    // console.log(myBio)
     async function handleSubmit(e){
-        e.preventDefault();
-        console.log(myBio)
-       
+        e.preventDefault();       
         const apiBio = await fetch(`/api/user/${bioId}`, 
             {   method: 'put',
                 headers:{
@@ -26,21 +22,16 @@ function Bio(props) {
                 
                 body: JSON.stringify(myBio)
           }).then( result=>result.json())
-            
-          console.log(apiBio)
-
         props.handleBioSubmit(e);    
     };
 
     return (
         <div>
-            
             <form>
                 <textarea rows="10" name="myBio" value={myBio.bio} cols="60" onChange={updateBio}></textarea>
                 <br/><br/>
                 <input onClick={handleSubmit} type="submit"></input>
             </form>
-
         </div>
     )
 }
