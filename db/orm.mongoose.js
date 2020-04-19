@@ -171,16 +171,16 @@ async function postReview(details){
 
 async function getSpecificMovieReviews(id){   
     const getReviewData = await db.reviews.find({movieId: id});
+    console.log(getReviewData)
     return getReviewData;
 }
 
 async function deleteReviewInfo( userId, movieId ){
-    console.log(userId, movieId)
-    const deleteReview = db.reviews.deleteOne( { "movieId" : movieId}, function (err) {
+    const deleteReview = db.reviews.deleteOne( { "_id" : movieId}, function (err) {
         if (err) return handleError(err)
     });
    
-    const deleteUserReview = await db.users.update({ _id:  userId }, { "$pull": { "myReviews": { "movieId": movieId } }}, { safe: true, multi:true }, function(err, obj) {
+    const deleteUserReview = await db.users.update({ _id:  userId }, { "$pull": { "myReviews": { "_id": movieId } }}, { safe: true, multi:true }, function(err, obj) {
         console.log(err)
     });
     return { message: "Your Review has been deleted !!"};

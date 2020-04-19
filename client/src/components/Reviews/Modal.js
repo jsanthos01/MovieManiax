@@ -62,7 +62,6 @@ function Modal(props) {
     async function postReview(e){
         e.preventDefault();
         props.setModalDisplay(false)
-        console.log(reviewData)
         const postReviewData = await fetch('/api/review',
         {  
             method: 'post',

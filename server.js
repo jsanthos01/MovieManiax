@@ -122,15 +122,13 @@ app.post("/api/review", async (req, res) => {
 
 app.get("/api/specificReviews/:id", async (req, res) => {
   const getReviews = await orm.getSpecificMovieReviews(req.params.id);
-  // console.log(`[getReviews server.js]`, getReviews)
   res.send(getReviews);
 });
 
 app.delete("/api/removeReview/:userId/:movieId", async (req, res) => {
-  console.log("[delete review server.js]");
   const movieId = req.params.movieId;
   const userId = req.params.userId;
-  const deleteReview = await orm.deleteReviewInfo(userId,movieId);
+  const deleteReview = await orm.deleteReviewInfo(userId, movieId);
   res.send(deleteReview);
 });
 

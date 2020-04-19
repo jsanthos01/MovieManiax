@@ -12,6 +12,7 @@ function MovieWatchList() {
     async function getSavedMovieList(){
         const getMovies = await fetch(`/api/watchlistMovie/${id}`).then(res => res.json());
         const movies = getMovies;
+        setMyMovies(movies[0].watchlist);
     }
 
     useEffect(function(){

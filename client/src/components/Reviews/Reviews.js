@@ -11,13 +11,11 @@ function Reviews() {
 
     async function getSpecificReviews(){
         const getMovies = await fetch(`/api/specificReviews/${id}`).then(res => res.json());
-        console.log(getMovies);
         setReviews(getMovies);
     }
 
-    async function deleteReview(){
-        console.log("Inside delete review function")
-        const removeSpecificReview = await fetch(`/api/removeReview/${userId}/${id}`, 
+    async function deleteReview(reviewId){
+        const removeSpecificReview = await fetch(`/api/removeReview/${userId}/${reviewId}`, 
             {
                 method: 'DELETE'
             }).then(result => result.json());
@@ -25,17 +23,16 @@ function Reviews() {
             getSpecificReviews();
     }
 
-
     useEffect(function(){
         getSpecificReviews();
     }, [modalDisplay])
+
     return ( 
         <div className="result container mb-5" style={{backgroundColor:"white"}}>
             <div>
                 <h1 style={{color: "black", padding: "20px"}}>{title}</h1>
                 <button type="button" class="btn btn-sm btn-outline-primary m-3"  onClick={() => setModalDisplay(true)}>Add a Review</button>
                 {modalDisplay ? <Modal setModalDisplay={setModalDisplay}  movieId={id} movieName={title} /> : ''}
-
             </div>
 
             <div class="container">
@@ -57,7 +54,7 @@ function Reviews() {
                                     <p>{review.createdAt}</p>
                                 </td>
                                 <td>{review.user.name}
-                                    { userId === review.user.id ? <button type="button" class="btn btn-danger ml-3" onClick={deleteReview} >Delete</button> : ''}
+                                    { userId === review.user.id ? <button type="button" class="btn btn-danger ml-3" onClick={()=> deleteReview(review._id)} >Delete</button> : ''}
                                 </td>
                             </tr>  
                             </>
