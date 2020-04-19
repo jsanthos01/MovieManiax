@@ -1,165 +1,34 @@
 * {
     margin: 0;
     padding: 0;
+    /* height: 100%; */
+    /* margin: 0; */
   }
-  .HomeMain {
-    height: 100vh;
-    width: 100vw;
-    background-color: black;
-    position: relative;
+  .homeDiv{
+    background-image: url('../assets/movieBackground.jpg');
+    background-size: cover;
+  }
+  .container{
+    margin-top: 10%;
+  }
 
+  .title{
+    text-align: center;
+    font-size: 6vw;
   }
-  .imageContainer{
-    height: 100vh;
-    background-color: black;
-    position: relative;
-    opacity: 0.5;
-    z-index: 4;
+
+  .para{
+    color: aliceblue;
+    text-align: center;
+    font-size: 2vw;
   }
-  .image1 {
-    position: absolute;
-    background-image: url(https://miro.medium.com/max/3360/1*gZafIaddOPebOpRhuLfnsw.jpeg);
-    background-size: 900px 900px;
-    height: 100vh;
-    width: 25vw;
-    background-position: -7vw 50%;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-    animation: dd2 10s 50;
-    animation-delay: 3s;
+  .btnContainer{
+    text-align: center;
   }
-  .image2 {
-    position: absolute;
-    background-image: url(https://images-na.ssl-images-amazon.com/images/I/91EtQD0P0dL._SY445_.jpg);
-    background-size: 1000px 1000px;
-    height: 100vh;
-    width: 25vw;
-    background-position: -7vw 50%;
-    left: 15vw;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-    animation: dd2 10s 50;
-    animation-delay: 3s;
-  }
-  .image3 {
-    position: absolute;
-    background-image: url(https://images-na.ssl-images-amazon.com/images/I/81GfZasnt9L._AC_SL1371_.jpg);
-    background-size: 1400px 1100px;
-    overflow: hidden;
-    height: 100vh;
-    width: 35vw;
-    left: 30vw;
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
-    background-position: -15vw 50%;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-    animation: dd3 10s 50;
-    animation-delay: 3s;
-  }
-  .image4 {
-    position: absolute;
-    overflow: hidden;
-    background-image: url(https://images-na.ssl-images-amazon.com/images/I/51EG732BV3L._AC_SY445_.jpg);
-    background-size: 1000px 920px;
-    height: 100vh;
-    width: 25vw;
-    left: 60vw;
-    background-position: -50vw 50%;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-    animation: dd4 10s 50;
-    animation-delay: 4s;
-  }
-  .image5 {
-    position: absolute;
-    overflow: hidden;
-    background-image: url(https://m.media-amazon.com/images/M/MV5BZGViZjVkOGItM2E3NS00ZDJlLTg4ZTctOTQ4MDNmZTVmNzUxXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg);
-    background-size: 950px 920px;
-    height: 100vh;
-    width: 20vw;
-    left: 80vw;
-    background-position: -50vw 50%;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-    animation: dd4 10s 50;
-    animation-delay: 4s;
+  .btn{
+    border-radius: 20px;
+    background-color: rgba(235,20,90);
   }
   
-  @keyframes dd1 {
-    0% {
-    }
-    50% {
-      width: 95vw;
-    }
-  }
-  @keyframes dd12 {
-    0% {
-    }
-    50% {
-      background-position: Calc(0vw - 40px) 50%;
-    }
-  }
-  @keyframes dd2 {
-    0% {
-    }
-    50% {
-      background-position: Calc(-10vw - 40px) 50%;
-    }
-  }
-  @keyframes dd3 {
-    0% {
-    }
-    50% {
-      background-position: Calc(-35vw - 40px) 50%;
-    }
-  }
-  @keyframes dd4 {
-    0% {
-    }
-    50% {
-      background-position: Calc(-70vw - 40px) 50%;
-    }
-  }
-  .HomeContainer{
-    display: block;
-    text-transform: uppercase;
-    max-width: 1000px;
-    background: white;
-    font-size: 120px;
-    text-align: center;
-    position: absolute;
-    z-index: 4;
-    top: 40%;
-    left: 50%;
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-    mix-blend-mode: screen;
-    will-change: opacity;
-  }
-  .HomeContainer2{
-      display: block;
-      text-transform: uppercase;
-      width: 300px;
-      padding: 15px;
-      margin-top: 50px;
-      color: black;
-      background-color: yellow;
-      font-size: 30px;
-      text-align: center;
-      position: absolute;
-      z-index: 4;
-      top: 50%;
-      left: 50%;
-      -ms-transform: translateX(-50%) translateY(-50%);
-      -webkit-transform: translate(-50%,-50%);
-      transform: translate(-50%,-50%);
-
-  }
-
+    
   
