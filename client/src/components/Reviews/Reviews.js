@@ -7,11 +7,18 @@ function Reviews() {
     const {id, title} = useParams();
     const userId = localStorage.id
     const [reviews, setReviews] = useState([]);
+    const [reviewUserId, setReviewUserId] = useState([]);
+    const [profileImg, setProfileImg] = useState([])
     const [modalDisplay, setModalDisplay] = useState(false);
 
     async function getSpecificReviews(){
         const getMovies = await fetch(`/api/specificReviews/${id}`).then(res => res.json());
         setReviews(getMovies);
+        getMovies.map(review =>reviewUserId.push(review.user.id));
+
+        const getUserInfo = await fetch(`/api/UsersList`).then(res => res.json());
+        console.log(getUserInfo);
+        setProfileImg(getUserInfo);   
     }
 
     async function deleteReview(reviewId, comment){
@@ -34,6 +41,7 @@ function Reviews() {
         getSpecificReviews();
     }, [modalDisplay])
 
+    console.log(reviews)
     return ( 
         <div className="result container mb-5">
             <div>
@@ -47,9 +55,8 @@ function Reviews() {
                             <div class="card styleCard">
                                 <div class="grouped">
                                     <div class="avatar">
-                                        <a href="/u/Ruuz?language=en-US">
-                                            <img class="avatar lazyload" src="https://images-platform.99static.com/jQu2xohritutSVmnVq7np7rbkxg=/0x0:1920x1920/500x500/top/smart/99designs-contests-attachments/106/106359/attachment_106359975" data-srcset="https://image.tmdb.org/t/p/w64_and_h64_face/xUObnJSvHrFPsIpoDmb1jiQZLq7.jpg 1x, https://image.tmdb.org/t/p/w128_and_h128_face/xUObnJSvHrFPsIpoDmb1jiQZLq7.jpg 2x" alt="Gimly" />
-                                        </a>
+                                        {profileImg.map(user => user._id === review.user.id ? <img class="avatar lazyload" src={user.profileImg} alt="Gimly" />: '')}
+                                        
                                     </div>
                                     <div class="info">
                                         <div class="rating_wrapper">
