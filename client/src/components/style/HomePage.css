@@ -45,7 +45,8 @@
 
   .searchButton:hover{
     text-decoration: none;
-    color: white
+    color: white;
+    /* background-color: rgb(158, 158, 158); */
 
   }
   

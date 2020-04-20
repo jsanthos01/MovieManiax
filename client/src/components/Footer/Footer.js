@@ -6,7 +6,7 @@ function Footer() {
         left: 0,
         bottom: 0,
         width: "100%",
-        color: "white",
+        color: "rgb(158, 158, 158)",
         textAlign:"center"
     }
     return (
