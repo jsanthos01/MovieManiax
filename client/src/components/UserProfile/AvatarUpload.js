@@ -13,17 +13,20 @@ function AvatarUpload(props) {
     
     async function handleUpload(e){
         e.preventDefault();
-        let myForm = document.getElementById('myForm');
-        let formData = new FormData(myForm);
-        const uploadPic = await fetch(`/api/upload/${userid}`, 
-            {
-                method: 'PUT',
-                body: formData
-            }
-        ).then( result=>result.json())
-            console.log(uploadPic)
-
         props.uploadPic(e);
+        
+        if(myPic){
+            let myForm = document.getElementById('myForm');
+            let formData = new FormData(myForm);
+            const uploadPic = await fetch(`/api/upload/${userid}`, 
+                {
+                    method: 'PUT',
+                    body: formData
+                }
+            ).then( result=>result.json())
+                console.log(uploadPic)
+        }
+        
     }
     return (
         <div>            

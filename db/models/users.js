@@ -51,13 +51,13 @@ let users = new Schema ({
          userId: {type: String},
          friendId: {type: String},
          name: {type: String},
-         // image: {type: String},
+         image: {type: String},
       }
    ],
    myReviews: [
       {
-         // reviewSchemaId: {type: String},
          movieId: {type: String},
+         movieImage: {type: String},
          comment: {type: String},
          rating: {type: String},
          movieName: {type: String}

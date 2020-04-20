@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 function Modal(props) {
+    console.log(props)
     const id = localStorage.id
-    const [reviewData, setReviewData] = useState({id: id, name: '', movieId: props.movieId, movieName: props.movieName, rating: '', comment:''})
+    const [reviewData, setReviewData] = useState({id: id, name: '', moviePoster: props.movieImage, movieId: props.movieId, movieName: props.movieName, rating: '', comment:''})
     
     const modalWrapper = {
         position: 'fixed',
@@ -61,7 +62,9 @@ function Modal(props) {
 
     async function postReview(e){
         e.preventDefault();
-        props.setModalDisplay(false)
+        props.setModalDisplay(false);
+        
+
         const postReviewData = await fetch('/api/review',
         {  
             method: 'post',

@@ -13,7 +13,7 @@ function Reviews() {
                         {/* <div class="mvHrzCrdImg">
                         </div> */}
                         <div class="mvHrzCrdDesc col-md-2">
-                            <img src={`https://via.placeholder.com/150`} class="hrCdImg " alt="movie poster" />
+                            <img src={`https://image.tmdb.org/t/p/w500/${review.movieImage}`} class="hrCdImg " alt="movie poster" />
                         </div>
                         <div class="mvHrzCrdDesc col-md-10">
                             <h3>Movie Name</h3>

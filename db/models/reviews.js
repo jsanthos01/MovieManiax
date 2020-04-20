@@ -7,7 +7,6 @@ const reviews = new Schema({
     user: { 
         name:{type: String},
         id: {type: String},
-        profilePic: {type: String},
     },   
     comment: String,
     // comments: [

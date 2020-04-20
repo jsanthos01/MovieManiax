@@ -126,6 +126,7 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
 //----------------------------------------------------------
 //JOANNA REVIEWS SECTION
 app.post("/api/review", async (req, res) => {
+  console.log("REVIEW IMAGE SECTION", req.body);
   const postMovieReview = await orm.postReview(req.body);
   res.send(postMovieReview );
 })
@@ -177,7 +178,6 @@ app.get("/api/userImage/:id" , async function (req, res) {
   res.send(getProfilePic)
 })
 //-----------------------------------------------------------------
-
 
 app.listen( PORT, function(){
   console.log( `[MovieManiax server] RUNNING, http://localhost:${PORT}` );

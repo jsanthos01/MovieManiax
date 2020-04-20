@@ -72,8 +72,10 @@ async function postWatchlist(movieData){
        "ratings": `${movieData.ratings}`
     }
  
-    const checkWatchlist = await db.users.findOne({ _id: movieData.userId, "watchlist.movieId": movieInfo.movieId});
-    if( checkWatchlist) {
+    const checkWatchlist = await db.users.findOne({ _id: movieData.userId});
+    let watchListArr = checkWatchlist.watchlist;
+    const exists = watchListArr.find(movie => movie.movieId === movieInfo.movieId)
+    if( exists) {
         return { message: "Movie Exists in the your watchlist page!!!" };
     }else{
         const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { watchlist:  movieInfo } });
@@ -94,8 +96,11 @@ async function postFavourites(movieData){
         "image":`${movieData.image}`,
         "ratings": `${movieData.ratings}`
     }
-    const checkFavourites = await db.users.findOne({ _id: movieData.userId, "favourites.movieId": movieInfo.movieId});
-    if( checkFavourites ) {
+    const checkFavourites = await db.users.findOne({ _id: movieData.userId});
+    let favArr = checkFavourites.favourites;
+    
+    const exists = favArr.find(movie => movie.movieId === movieInfo.movieId)
+    if( exists ) {
         return { message: "Movie Exists in the your Favourites page!!!" };
     }else {
         const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { favourites:  movieInfo } });
@@ -166,6 +171,7 @@ async function postReview(details){
     const myReview = {
         // 'reviewSchemaId': `${details.id}`,
         'movieId': `${details.movieId}`,
+        'movieImage':`${details.moviePoster}`,
         'movieName': `${details.movieName}`,
         'rating': `${details.rating}`,
         'comment': `${details.comment}`
@@ -223,12 +229,13 @@ async function bioResultDb( bioId, bioData ){
     return dbBioResult;
 }    
 
-async function profilePic(id){
-    const findUser = await db.users.findOne({_id: id});
-    const profileImage = findUser.profileImg;
-    console.log(profileImage);
-    return profileImage
-}
+// async function getProfileImage(){
+//     const userFetched = await db.users.find({});
+//     let profileUrl = [];
+
+//     userFetched.forEach(user => profileUrl.push(user.profileImg));
+//     return profileUrl;
+// }
 //------------------------------------------------------------ 
 
 module.exports = {
@@ -250,6 +257,5 @@ module.exports = {
     getSpecificMovieReviews,
     deleteReviewInfo,
     bioResultDb,
-    updateAvatar,
-    profilePic
+    updateAvatar    
 }

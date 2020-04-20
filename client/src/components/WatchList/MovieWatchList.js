@@ -28,7 +28,7 @@ function MovieWatchList() {
                 <h1 style={style.header}>Your WatchList</h1>
             </div>
 
-            <div className="result container mb-5">
+            <div className="container mb-5">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
