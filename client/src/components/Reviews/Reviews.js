@@ -7,11 +7,14 @@ function Reviews() {
     const {id, title} = useParams();
     const userId = localStorage.id
     const [reviews, setReviews] = useState([]);
+    const [profileImg, setProfileImg] = useState("")
     const [modalDisplay, setModalDisplay] = useState(false);
 
     async function getSpecificReviews(){
         const getMovies = await fetch(`/api/specificReviews/${id}`).then(res => res.json());
+        const getProfileImage = await fetch(`/api/userImage/${id}`).then(res => res.json());
         setReviews(getMovies);
+        setProfileImg(getProfileImage)
     }
 
     async function deleteReview(reviewId, comment){

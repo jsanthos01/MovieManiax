@@ -223,6 +223,12 @@ async function bioResultDb( bioId, bioData ){
     return dbBioResult;
 }    
 
+async function profilePic(id){
+    const findUser = await db.users.findOne({_id: id});
+    const profileImage = findUser.profileImg;
+    console.log(profileImage);
+    return profileImage
+}
 //------------------------------------------------------------ 
 
 module.exports = {
@@ -244,5 +250,6 @@ module.exports = {
     getSpecificMovieReviews,
     deleteReviewInfo,
     bioResultDb,
-    updateAvatar
+    updateAvatar,
+    profilePic
 }

@@ -171,6 +171,11 @@ app.put('/api/user/:id', async function( req, res ){
   res.send( bioResult );
 });
 
+app.get("/api/userImage/:id" , async function (req, res) {
+  const id = req.params.id;
+  const getProfilePic = await orm.profilePic( id );
+  res.send(getProfilePic)
+})
 //-----------------------------------------------------------------
 
 
