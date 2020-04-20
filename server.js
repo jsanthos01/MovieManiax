@@ -60,7 +60,7 @@ app.get("/api/favourites/:id", async (req, res) => {
 app.delete("/api/removeFavMovie/:userId/:movieId", async (req, res) => {
   const movieId = req.params.movieId;
   const userId = req.params.userId;
-  const deleteMovie = await orm.deleteFavMovie(userId,movieId);
+  const deleteMovie = await orm.deleteFavMovie(userId, movieId);
   res.send(deleteMovie);
 });
 
@@ -135,10 +135,12 @@ app.get("/api/specificReviews/:id", async (req, res) => {
   res.send(getReviews);
 });
 
-app.delete("/api/removeReview/:userId/:movieId", async (req, res) => {
+app.put("/api/removeReview/:userId/:movieId", async (req, res) => {
   const movieId = req.params.movieId;
   const userId = req.params.userId;
-  const deleteReview = await orm.deleteReviewInfo(userId, movieId);
+  const comment = req.body;
+  console.log("Server.js", comment)
+  const deleteReview = await orm.deleteReviewInfo(userId, movieId, comment);
   res.send(deleteReview);
 });
 

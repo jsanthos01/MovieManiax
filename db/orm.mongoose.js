@@ -62,7 +62,6 @@ async function loginUser( email, password ) {
 
 //WatchList Section
 async function postWatchlist(movieData){
-    console.log("Inside orm file");     
     const movieInfo = {
        "movieId": `${movieData.movieId}`,
        "title": `${movieData.title}`,
@@ -73,8 +72,13 @@ async function postWatchlist(movieData){
        "ratings": `${movieData.ratings}`
     }
  
-    const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { watchlist:  movieInfo } });
-    return { message: "Movie successfully saved in Watchlist!!"};
+    const checkWatchlist = await db.users.findOne({ _id: movieData.userId, "watchlist.movieId": movieInfo.movieId});
+    if( checkWatchlist) {
+        return { message: "Movie Exists in the your watchlist page!!!" };
+    }else{
+        const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { watchlist:  movieInfo } });
+        return { message: "Movie successfully saved in Watchlist!!"};
+    }
 }
 
 
@@ -91,8 +95,13 @@ async function postFavourites(movieData){
         "image":`${movieData.image}`,
         "ratings": `${movieData.ratings}`
     }
-    const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { favourites:  movieInfo } });
-    return { message: "Movie successfully saved in Favourites!!"}; 
+    const checkFavourites = await db.users.findOne({ _id: movieData.userId, "favourites.movieId": movieInfo.movieId});
+    if( checkFavourites ) {
+        return { message: "Movie Exists in the your Favourites page!!!" };
+    }else {
+        const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { favourites:  movieInfo } });
+        return { message: "Movie successfully saved in Favourites!!"}; 
+    }
 }
  
 async function getFavourites(id){
@@ -154,7 +163,9 @@ async function showProfileDb(id){
 }
 
 async function postReview(details){
+    console.log(details);
     const myReview = {
+        // 'reviewSchemaId': `${details.id}`,
         'movieId': `${details.movieId}`,
         'movieName': `${details.movieName}`,
         'rating': `${details.rating}`,
@@ -182,11 +193,12 @@ async function getSpecificMovieReviews(id){
     return getReviewData;
 }
 
-async function deleteReviewInfo( userId, movieId ){
+async function deleteReviewInfo( userId, movieId, comment ){
+    console.log(`Orm.js`, comment)
     const deleteReview = db.reviews.deleteOne( { "_id" : movieId}, function (err) {
         if (err) return handleError(err)
     });
-    const deleteUserReview = await db.users.update({ _id:  userId }, { "$pull": { "myReviews": { "_id": movieId } }}, { safe: true, multi:true }, function(err, obj) {
+    const deleteUserReview = await db.users.update({ _id:  userId }, { "$pull": { "myReviews": { "comment": comment.comment } }}, { safe: true, multi:true }, function(err, obj) {
         console.log(err)
     });
     return { message: "Your Review has been deleted !!"};

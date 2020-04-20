@@ -10,7 +10,6 @@ function MovieInformation() {
     const [ similarMovies, setSimilarMovies ]= useState([]);
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
     const [ isNotLoggedIn, setIsNotLoggedIn ] = useState( false );
-
     const movieStyle = {
         listGroupItem: {backgroundColor: "transparent", borderRadius: "0", color: "#fff"},
         h4Style: {color:"white", fontStyle: "italic"},
@@ -47,8 +46,10 @@ function MovieInformation() {
 
         if(localStorage.id){
             if(type === "watchlist"){
+                                
                 MovieData = {
                     userId: localStorage.id,
+                    movieId: movieObj.id,
                     title: movieObj.title,
                     popularity: movieObj.popularity,
                     image: movieObj.poster_path,
@@ -56,7 +57,7 @@ function MovieInformation() {
                     ratings: movieObj.vote_average,
                     releaseDate: movieObj.release_date
                 }
-        
+    
                 postMovieData = await fetch('/api/watchlistMovie',
                 {  
                     method: 'post',

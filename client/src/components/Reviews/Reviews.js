@@ -14,13 +14,20 @@ function Reviews() {
         setReviews(getMovies);
     }
 
-    async function deleteReview(reviewId){
+    async function deleteReview(reviewId, comment){
+        console.log(reviewId)
+        const putComment = {comment: comment}
         const removeSpecificReview = await fetch(`/api/removeReview/${userId}/${reviewId}`, 
             {
-                method: 'DELETE'
-            }).then(result => result.json());
-            console.log(removeSpecificReview.message);
-            getSpecificReviews();
+                method: 'PUT',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(putComment)
+            }
+        ).then(result => result.json());
+        console.log(removeSpecificReview.message);
+        getSpecificReviews();
     }
 
     useEffect(function(){
@@ -59,7 +66,7 @@ function Reviews() {
                                     <li class="nav-item ">
                                         <i class="comments far fa-comment"></i><span id="number${fetchPosts[i].post_id}">5</span>
                                         <i class="thumbsUp far fa-thumbs-up"></i><span id="comment${fetchPosts[i].post_id}" >9</span>
-                                        { userId === review.user.id ? <i class=" trash fas fa-trash" onClick={()=> deleteReview(review._id)} ></i> : ''}
+                                        { userId === review.user.id ? <i class=" trash fas fa-trash" onClick={()=> deleteReview(review._id, review.comment)} ></i> : ''}
                                     </li>
                                 </ul>
                             </div>
