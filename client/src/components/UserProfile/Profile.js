@@ -126,7 +126,7 @@ function Profile() {
                                  <div class="col"> 
                                     <div class="row">
                                         <div class="col-12">
-                                            <h3 style={{display: 'inline', marginRight:'5px'}}>Your Reviews </h3><span><i style={{padding: '5px', backgroundColor: 'green', borderRadius: '3px' }} class="fas fa-users"></i></span>
+                                            <h3 style={{display: 'inline', marginRight:'5px'}}>Your Reviews </h3><span><i style={{padding: '5px', backgroundColor: 'green', borderRadius: '3px' }} class="fas fa-comments"></i></span>
                                         </div>
                                         <div class="col mt-4 mb-4">
                                             {myReviews.slice(0, 10).map(item => 
