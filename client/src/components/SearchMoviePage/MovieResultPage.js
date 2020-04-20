@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 function MovieResultPage(props) {
     console.log("Inside the MovieResult", props.movieList);
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
-    const [ isNotLoggedIn, setIsNotLoggedIn ] = useState( false );
     const resultArray = props.movieList;
 
     const style = {
@@ -84,7 +83,6 @@ function MovieResultPage(props) {
                 setTimeout( function(){ setAlertMessage( {} ); }, 2500 );
             }
         }else {
-            setIsNotLoggedIn(true)
             setAlertMessage( { type: 'danger', message: "Please signin to add to your favourites or watchlist!" } );
             setTimeout( function(){ setAlertMessage( {} ); }, 3000 ); 
         }
@@ -104,15 +102,15 @@ function MovieResultPage(props) {
                                 {movie.poster_path && movie.poster_path ? <img style={style.imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="something" /> : <img style={style.imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
                                 <div class="movieDesc" style={style.movieDesc}> 
                                     <h4>{movie.title}</h4>
-                                        <div class="extra">
-                                            <Link to={"/movieDetails/" + movie.id }>
-                                                <button type="button" class="btn btn-outline-primary mr-2">View More</button>
-                                            </Link>
-                                            <button type="button" onClick={() => getMovieId("watchlist", movie)} class="btn btn-primary mr-2"><i class="fas fa-bookmark"></i></button>
-                                            <button type="button" onClick={() => getMovieId("favourites", movie)} class="btn btn-danger mr-2"><i class="far fa-heart"></i></button>
-                                        </div>
+                                    <div class="extra">
+                                        <Link to={"/movieDetails/" + movie.id }>
+                                            <button type="button" class="btn btn-outline-primary mr-2">View More</button>
+                                        </Link>
+                                        <button type="button" onClick={() => getMovieId("watchlist", movie)} class="btn btn-primary mr-2"><i class="fas fa-bookmark"></i></button>
+                                        <button type="button" onClick={() => getMovieId("favourites", movie)} class="btn btn-danger mr-2"><i class="far fa-heart"></i></button>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     )}
 
