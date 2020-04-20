@@ -133,6 +133,7 @@ border-bottom-right-radius: 5px;
 
 /* movie card */
 .movieCard {
+  width: 60vh;
   background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
   /* background: #0f1b38; */
   border-radius: 20px;
@@ -140,6 +141,20 @@ border-bottom-right-radius: 5px;
   padding: 25px;
   margin: 10px;
   filter: drop-shadow( 0px 0px 8px #0000009d);
+  position: relative;
+
+}
+.movieHrzCard {
+  width: 100%;
+  background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
+  /* background: #0f1b38; */
+  border-radius: 20px;
+  /* border: 1px solid #fdc664; */
+  padding: 25px;
+  margin: 10px;
+  filter: drop-shadow( 0px 0px 8px #0000009d);
+  position: relative;
+
 }
 
 .movieCard-title{
@@ -188,6 +203,8 @@ border-bottom-right-radius: 5px;
 }
 .movieCrdDesc{
   padding: 20px;
+  min-height: 30vh;
+  text-align: center;
   /* margin-top: 20px; */
 }
 
@@ -204,10 +221,45 @@ ul li {
 }
 
 .ratngCard {
+  position: absolute;
   text-align: center;
-  width: 70px;
-  border-radius: 5px;
-  background: #e75c6a;
+  font-size: 1.2rem;
+  font-style: italic;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background:  rgb(237, 20, 91);;
   color: white;
   padding: 10px;
+  top: -15px;
+  right: -15px;
+}
+
+.myBtn {
+  border: 1px solid #26b3b8;
+  color: #26b3b8;
+}
+.myBtn:hover {
+  background: #26b3b8;
+  color: white;
+}
+
+
+@media only screen and (max-width: 1200px) {
+  .movieCard {
+    width: 53vh;
+    
+  }
+}
+@media only screen and (max-width: 990px) {
+  .movieCard {
+    width: 60vh;
+    
+  }
+}
+@media only screen and (max-width: 770px) {
+  .movieCard {
+    width: 80vh;
+    
+  }
 }

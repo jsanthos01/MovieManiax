@@ -8,13 +8,17 @@ function MovieResultPage(props) {
 
     const style = {
         messageStyle: {
+            background: '#26b3b8',
+            color: 'white',
             position: 'sticky',
             top: '0',
-            left: '0'
+            left: '0',
+            zIndex: '10'
         },
         imgStyle: {
             objectFit: "cover",
-            height: "50vh"
+            height: "50vh",
+            width: "100%"
         },
         movieDesc: {
             color: "black",
@@ -88,7 +92,7 @@ function MovieResultPage(props) {
         }
 
     }
-
+ 
     return (
         <div >
             <div style={style.messageStyle} className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
@@ -97,19 +101,23 @@ function MovieResultPage(props) {
             <div className="container ">
                 <div class="row">
                     {resultArray.map(movie => 
-                        <div class="col-md-3 text-center">
-                            <div class="card mb-3 box-shadow">
-                                {movie.poster_path && movie.poster_path ? <img style={style.imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="something" /> : <img style={style.imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
-                                <div class="movieDesc" style={style.movieDesc}> 
-                                    <h4>{movie.title}</h4>
-                                    <div class="extra">
-                                        <Link to={"/movieDetails/" + movie.id }>
-                                            <button type="button" class="btn btn-outline-primary mr-2">View More</button>
-                                        </Link>
-                                        <button type="button" onClick={() => getMovieId("watchlist", movie)} class="btn btn-primary mr-2"><i class="fas fa-bookmark"></i></button>
-                                        <button type="button" onClick={() => getMovieId("favourites", movie)} class="btn btn-danger mr-2"><i class="far fa-heart"></i></button>
-                                    </div>
-                                </div>
+                        <div class="movieCard mx-auto" >
+                            <p class="movieCard-title">MOVIE INFO</p>  
+                            <div class="movieCrdImg">
+                                {movie.poster_path && movie.poster_path ? <img style={style.imgStyle} class="crdImg" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="movie poster" /> : <img style={style.imgStyle} class="crdImg" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png' style={style.imgStyle} /> }
+
+                                {/* <img src={`https://image.tmdb.org/t/p/w500/${movie.image}`} class="crdImg" alt="movie poster" style={{width: "100%"}}/> */}
+                            </div>
+                            <div class="movieCrdDesc">
+                                <p class="movieCrdTitle">{movie.title}</p>  
+                                <p class="ratngCard">{movie.vote_average}</p>
+                            </div>
+                            <div class="extra">
+                                <Link to={"/movieDetails/" + movie.id }>
+                                    <button type="button" class="btn myBtn mr-2">View More</button>
+                                </Link>
+                                <button type="button" onClick={() => getMovieId("watchlist", movie)} class="btn  myBtn mr-2"><i class="fas fa-bookmark"></i></button>
+                                <button type="button" onClick={() => getMovieId("favourites", movie)} class="btn myBtn mr-2"><i class="far fa-heart"></i></button>
                             </div>
                         </div>
                     )}

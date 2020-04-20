@@ -11,7 +11,7 @@ function WatchList() {
         <div class='tabHeight' style={{color : 'white'}}>
             <div class=' '>
             {myMovies.map(movie=>
-                    <div class="movieCard mx-auto row " >
+                    <div class="movieHrzCard mx-auto row " >
                         
                         {/* <div class="mvHrzCrdImg">
                         </div> */}
