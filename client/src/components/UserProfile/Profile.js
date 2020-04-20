@@ -54,7 +54,7 @@ function Profile() {
                     <div class="row ml-4">
                         <div class="col">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-2">
                                     <img src={profileInfo.profileImg} style={{minHeight:'70px', height:'120px'}} alt="..." class="img-thumbnail"/><br/>
                                     { showForm ? <AvatarUpload uploadPic={uploadPic} /> : 
                                         <div >
@@ -63,7 +63,7 @@ function Profile() {
                                         </div> }
                                 </div>    
                                 
-                                <div class="col-6">
+                                <div class="col-8">
                                     <h1 >{profileInfo.name}</h1>
                                     <small class="text-muted ml-4">Movie Maniax member since {newDate}</small>
                                 </div>
