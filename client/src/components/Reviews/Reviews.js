@@ -10,7 +10,7 @@ function Reviews() {
     const [reviewUserId, setReviewUserId] = useState([]);
     const [profileImg, setProfileImg] = useState([])
     const [modalDisplay, setModalDisplay] = useState(false);
-
+    const [movieImage, setMovieImage] = useState("");
     async function getSpecificReviews(){
         const getMovies = await fetch(`/api/specificReviews/${id}`).then(res => res.json());
         setReviews(getMovies);
@@ -37,6 +37,14 @@ function Reviews() {
         getSpecificReviews();
     }
 
+    async function getMovieImage(){
+        const apiMovie = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=5b4dbf95cc35d2e911560cca64385e60&language=en-US`).then( result=>result.json() );
+        console.log(apiMovie)
+        setMovieImage(apiMovie.poster_path)
+        // console.log(movieImage)
+        setModalDisplay(true)
+    }
+
     useEffect(function(){
         getSpecificReviews();
     }, [modalDisplay])
@@ -46,7 +54,7 @@ function Reviews() {
         <div className="result container mb-5">
             <div>
                 <h1>{title}</h1>
-                <button type="button" class="btn btn-sm btn-outline-primary m-3"  onClick={() => setModalDisplay(true)}>Add a Review</button>
+                <button type="button" class="btn btn-sm btn-outline-primary m-3"  onClick={getMovieImage}>Add a Review</button>
             </div>
             <div class="container">
                 {reviews.map(review => 
@@ -80,7 +88,7 @@ function Reviews() {
                 )}
                   
             </div>
-            {modalDisplay ? <Modal setModalDisplay={setModalDisplay}  movieId={id} movieName={title} /> : ''}
+            {modalDisplay ? <Modal setModalDisplay={setModalDisplay}  movieId={id} movieName={title} movieImage={movieImage} /> : ''}
         </div>
     )
 }

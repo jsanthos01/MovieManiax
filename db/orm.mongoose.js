@@ -171,6 +171,7 @@ async function postReview(details){
     const myReview = {
         // 'reviewSchemaId': `${details.id}`,
         'movieId': `${details.movieId}`,
+        'movieImage':`${details.moviePoster}`,
         'movieName': `${details.movieName}`,
         'rating': `${details.rating}`,
         'comment': `${details.comment}`

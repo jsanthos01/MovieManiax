@@ -126,6 +126,7 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
 //----------------------------------------------------------
 //JOANNA REVIEWS SECTION
 app.post("/api/review", async (req, res) => {
+  console.log("REVIEW IMAGE SECTION", req.body);
   const postMovieReview = await orm.postReview(req.body);
   res.send(postMovieReview );
 })
