@@ -12,6 +12,7 @@ function Profile() {
     const [ showForm, setShowForm] = useState( false )
     const [ newDate, setNewDate] = useState( '' )
     const [ bioForm, setBioForm] = useState( false )
+    const [ myReviews, setMyReviews] = useState( [] )
     // console.log(userid);
     
 
@@ -22,12 +23,16 @@ function Profile() {
         setwatchList( profileData.watchlist);
         setFavoriteList( profileData.favourites )
         setFriendList( profileData.friendList)
+        setMyReviews( profileData.myReviews)
         let date = new Date(profileData.createdAt)
         let newDate = date.toString().substring(4, 15)
         setNewDate( newDate )
         
     }
-                              
+    function loadFriendProfile(){  
+            window.location.reload(true);
+        }
+    
     useEffect( function(){
         loadAvatar();
     }, [bioForm, showForm] );
@@ -49,7 +54,7 @@ function Profile() {
                     <div class="row ml-4">
                         <div class="col">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-2">
                                     <img src={profileInfo.profileImg} style={{minHeight:'70px', height:'120px'}} alt="..." class="img-thumbnail"/><br/>
                                     { showForm ? <AvatarUpload uploadPic={uploadPic} /> : 
                                         <div >
@@ -58,9 +63,9 @@ function Profile() {
                                         </div> }
                                 </div>    
                                 
-                                <div class="col-6">
-                                    <h1>{profileInfo.name}</h1>
-                                    <small class="text-muted format-date">Movie Maniax member since {newDate}</small>
+                                <div class="col-8">
+                                    <h1 >{profileInfo.name}</h1>
+                                    <small class="text-muted ml-4">Movie Maniax member since {newDate}</small>
                                 </div>
                             </div>  
                             <div class="row mt-4">
@@ -121,10 +126,23 @@ function Profile() {
                                  <div class="col"> 
                                     <div class="row">
                                         <div class="col-12">
-                                            <h3 style={{display: 'inline', marginRight:'5px'}}>Your Friendlist </h3><span><i style={{padding: '5px', backgroundColor: 'green', borderRadius: '3px' }} class="fas fa-users"></i></span>
+                                            <h3 style={{display: 'inline', marginRight:'5px'}}>Your Reviews </h3><span><i style={{padding: '5px', backgroundColor: 'green', borderRadius: '3px' }} class="fas fa-comments"></i></span>
                                         </div>
                                         <div class="col mt-4 mb-4">
-                                            <div>Add friends</div>
+                                            {myReviews.slice(0, 10).map(item => 
+                                            <div class="row">
+                                                    
+                                                    <div class="col-8">
+                                                        <div class="row">
+                                                            <h4 class="col-12 mt-2">Movie Title</h4>
+                                                            <div class="col-12">
+                                                                <p>
+                                                                {item.comment}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>)}
                                         </div>
                                     </div>
                                  </div>
@@ -136,22 +154,31 @@ function Profile() {
                 <div class="col-lg-4">
                     <div class="row justify-content-center">
                         <div class="col-8">
-                            <h4>Quick Links</h4>
-                            <ul>
-                                <li>watchlist</li>
-                                <li>favorites</li>
-                                <li>logout</li>
-                            </ul>
+                            <h4 class="text-center">Quick Links</h4>
+                            <div class="row">
+                                <div class="col">
+                                        <div class="text-center"> <Link to={`/favourites/${userid}`}>Watchlist</Link></div>
+                                        <div class="text-center"><Link to={`/favourites/${userid}`}>Favorites</Link></div>
+                                </div>
+                            </div>
+                            
                         </div>
                         <div class="col-8 mt-4">
-                            <h4>Your Followers</h4>
-                            { friendList.slice(0, 10).map(friend => 
-                                <div>
-                                    <div class="mt-4">{<img class="" style={{minHeight:'50px', height:'70px', objectFit: 'cover', borderRadius: '30px', margin: '0, auto'}} src={friend.image} alt={friend.name} /> }</div>
-                                    <div class="text-left ml-4"><Link to={`/friendProfile/${friend.friendId}`}>{friend.name}</Link></div>                                    
-                                </div> )
-                            }
-                            
+                            <h4 class="text-center">Followers</h4>
+                            <div class="row justify-content-center">
+                                <div class="col">   
+                                    { friendList.slice(0, 10).map(friend => 
+                                        <div>
+                                            <div class="mt-4">
+                                                <div style={{display: 'block', width:'60px', margin: "0 auto"}}>
+                                                    {<img class="" style={{ minHeight:'50px', height:'70px', borderRadius: '30px'}} src={friend.image} alt={friend.name} /> }
+                                                </div>    
+                                        </div>
+                                            <div class="text-center"><Link to={`/friendProfile/${friend.friendId}`}>{friend.name}</Link></div>                                    
+                                        </div> )
+                                    }
+                                </div>
+                            </div>    
                         </div>
                     </div>
                 </div>
