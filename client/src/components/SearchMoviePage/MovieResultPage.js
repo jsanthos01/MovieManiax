@@ -92,9 +92,8 @@ function MovieResultPage(props) {
         }
 
     }
-
     return (
-        <div >
+        <div>
             <div style={style.messageStyle} className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
                 {alertMessage.message}
             </div>
@@ -119,7 +118,6 @@ function MovieResultPage(props) {
                             </div>
                         </div>
                     )}
-
                 </div>
             </div>
         </div>
