@@ -98,6 +98,7 @@ async function postFavourites(movieData){
     }
     const checkFavourites = await db.users.findOne({ _id: movieData.userId});
     let favArr = checkFavourites.favourites;
+    
     const exists = favArr.find(movie => movie.movieId === movieInfo.movieId)
     if( exists ) {
         return { message: "Movie Exists in the your Favourites page!!!" };
