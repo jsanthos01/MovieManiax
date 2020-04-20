@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from "react-router-dom";
-import picture from './assets/positive.png'
 import Modal from './Modal'
 import './Reviews.css'
 
@@ -61,7 +60,6 @@ function Reviews() {
                                         <i class="comments far fa-comment"></i><span id="number${fetchPosts[i].post_id}">5</span>
                                         <i class="thumbsUp far fa-thumbs-up"></i><span id="comment${fetchPosts[i].post_id}" >9</span>
                                         { userId === review.user.id ? <i class=" trash fas fa-trash" onClick={()=> deleteReview(review._id)} ></i> : ''}
-
                                     </li>
                                 </ul>
                             </div>

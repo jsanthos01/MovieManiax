@@ -71,7 +71,6 @@ function MovieInformation() {
                 MovieData = {
                     userId: localStorage.id,
                     title: movieObj.title,
-                    // genre: apiMovie.Genre,
                     image: movieObj.poster_path,
                     ratings: movieObj.vote_average,
                 }
@@ -145,8 +144,6 @@ function MovieInformation() {
                     <div class="row">{movieDetails.credits.cast.slice(0,10).map( actor =>
                         <div class="mt-3 mr-3 mx-auto">
                             {actor.profile_path ? <img style={movieStyle.castImage} src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} alt="movie img" />: <img style={movieStyle.castImage} src='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_640.png'  /> }
-
-                            
                             <p class="list-group-item" style={{color: "black", textAlign: "center"}}>{actor.name}</p>
                         </div> 
                     )} 

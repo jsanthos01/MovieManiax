@@ -9,16 +9,16 @@ const reviews = new Schema({
         id: {type: String},
         profilePic: {type: String},
     },   
-    description: String,
-    comments: [
-       {
-            userId: {type: String},
-            name: {type: String},
-            profilePic: {type: String},
-            description: {type: String}
-        }
-    ],
-    likes: Number
+    comment: String,
+    // comments: [
+    //    {
+    //         userId: {type: String},
+    //         name: {type: String},
+    //         profilePic: {type: String},
+    //         description: {type: String}
+    //     }
+    // ],
+    // likes: Number
     
 }, {
     timestamps: true 

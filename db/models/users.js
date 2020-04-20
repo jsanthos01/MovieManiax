@@ -58,7 +58,7 @@ let users = new Schema ({
          movieId: {type: String},
          description: {type: String},
          rating: {type: String},
-         likes: Number
+         movieName: {type: String}
       }
    ]
 

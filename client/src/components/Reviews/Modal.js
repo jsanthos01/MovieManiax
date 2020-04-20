@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 
-
 function Modal(props) {
     const id = localStorage.id
-    const [reviewData, setReviewData] = useState({id: id, name: '', movieId: props.movieId, rating: '', comment:''})
+    const [reviewData, setReviewData] = useState({id: id, name: '', movieId: props.movieId, movieName: props.movieName, rating: '', comment:''})
     
     const modalWrapper = {
         position: 'fixed',

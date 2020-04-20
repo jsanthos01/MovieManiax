@@ -149,6 +149,7 @@ async function showProfileDb(id){
 async function postReview(details){
     const myReview = {
         'movieId': `${details.movieId}`,
+        'movieName': `${details.movieName}`,
         'rating': `${details.rating}`,
         'comment': `${details.comment}`
     }
