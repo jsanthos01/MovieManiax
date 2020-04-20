@@ -12,11 +12,16 @@ import Registration from './components/Registration/Registration';
 import Profile from './components/UserProfile/Profile';
 import Favourites from './components/FavouritePage/MovieFavourites';
 import Footer from './components/Footer/Footer'
+
 import Friends from './components/FriendPage/Friend';
+import FriendProfilePage from './components/FriendPage/FriendProfilePage';
+
 import Reviews from './components/Reviews/Reviews' 
 import GenrePage from './components/Genre/GenrePage';
 import GenreMoviePage from './components/Genre/GenreMoviePage';
-
+import UpcomingPage from './components/ShowMore/Upcoming/Upcoming';
+import PopularPage from './components/ShowMore/Popular/Popular';
+import TopRatedPage from './components/ShowMore/TopRated/TopRated';
 function App() {
   return (
     <div className="App">
@@ -32,10 +37,19 @@ function App() {
             <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/user/:id" component={Profile} /> 
             <Route exact path="/favourites/:id" component={Favourites} />
+
+            {/* friends  page */}
+
             <Route exact path="/friendList" component={Friends} />
+            <Route path="/friendProfile/:id" component={FriendProfilePage} />          
+
             <Route exact path="/reviews/:id/:title" component={Reviews} />
+            {/* show more  page */}
+            <Route path="/genre/:id" component={GenreMoviePage} />
             <Route exact path="/genrePage" component={GenrePage} />
-            <Route path="/genre/:id" component={GenreMoviePage} /> 
+            <Route exact path="/upcoming" component={UpcomingPage} />
+            <Route exact path="/popular" component={PopularPage} />
+            <Route exact path="/TopRated" component={TopRatedPage} /> 
           </div>
         <Footer />
       </Router>
