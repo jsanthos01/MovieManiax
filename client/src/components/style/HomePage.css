@@ -4,12 +4,20 @@
     /* height: 100%; */
     /* margin: 0; */
   }
+  .hero2{
+    height: 66vh;
+  }
   .homeDiv{
+    position: absolute;
     background-image: url('../assets/movieBackground.jpg');
     background-size: cover;
     height: 100vh;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -10;
   }
-
   .title{
     text-align: center;
     font-size: 6vw;
@@ -31,14 +39,8 @@
     text-decoration: none;
     margin-top: 20px;
     border-radius: 80px;
-
   }
-
   .searchButton:hover{
     text-decoration: none;
     color: white
-
   }
-  
-    
-  

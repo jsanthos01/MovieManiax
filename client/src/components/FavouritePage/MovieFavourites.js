@@ -81,12 +81,11 @@ function MovieFavourites() {
     //Sort By ID
     function ratingsOrder(a,b){
         return Number(a.ratings) - Number(b.ratings);
-    }
+    } 
 
     return (
         <div>
             <div className="header">
-                
                 <div class="container-fluid">
                     <h1 style={style.header}>Your Favourites</h1>
                     <div class="row" style={style.rowStyle}>

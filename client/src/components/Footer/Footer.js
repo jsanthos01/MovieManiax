@@ -13,7 +13,6 @@ function Footer() {
         <div class="footer" style={footerStyle}>
             <p>(c) 2020 MovieManiax</p>
             <p>Created by:  Akanksha Joanna Norma Sara</p>
-
         </div>
     )
 }

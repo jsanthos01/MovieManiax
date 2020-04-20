@@ -228,7 +228,7 @@ ul li {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background:  rgb(237, 20, 91);;
+  background:  rgb(237, 20, 91);
   color: white;
   padding: 10px;
   top: -15px;
@@ -243,8 +243,23 @@ ul li {
   background: #26b3b8;
   color: white;
 }
-
-
+.myBtnPink {
+  border: 1px solid rgb(237, 20, 91);
+  color: rgb(237, 20, 91);
+}
+.myBtnPink:hover {
+  background: rgb(237, 20, 91);
+  color: white;
+}
+/* .header {
+  border: 1px solid salmon;
+} */
+/* .watchlistHeight {
+  height: 100%;
+} */
+/* .nav-item a: hover {
+  color: rgb(237, 20, 91);
+} */
 @media only screen and (max-width: 1200px) {
   .movieCard {
     width: 53vh;

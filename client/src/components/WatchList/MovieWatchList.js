@@ -23,11 +23,10 @@ function MovieWatchList() {
     },[])
 
     return (
-        <div class="container-fluid" style={{color:"black"}}>
+        <div class="watchlistHeight">
             <div class="header">
                 <h1 style={style.header}>Your WatchList</h1>
             </div>
-
             <div className="result container mb-5">
                 <div class="card">
                     <div class="card-body">

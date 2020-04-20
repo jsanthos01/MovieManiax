@@ -92,7 +92,7 @@ function MovieResultPage(props) {
         }
 
     }
- 
+
     return (
         <div >
             <div style={style.messageStyle} className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
@@ -105,8 +105,6 @@ function MovieResultPage(props) {
                             <p class="movieCard-title">MOVIE INFO</p>  
                             <div class="movieCrdImg">
                                 {movie.poster_path && movie.poster_path ? <img style={style.imgStyle} class="crdImg" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="movie poster" /> : <img style={style.imgStyle} class="crdImg" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png' style={style.imgStyle} /> }
-
-                                {/* <img src={`https://image.tmdb.org/t/p/w500/${movie.image}`} class="crdImg" alt="movie poster" style={{width: "100%"}}/> */}
                             </div>
                             <div class="movieCrdDesc">
                                 <p class="movieCrdTitle">{movie.title}</p>  
