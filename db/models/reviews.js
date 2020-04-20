@@ -10,16 +10,10 @@ const reviews = new Schema({
         profilePic: {type: String},
     },   
     comment: String,
-    // comments: [
-    //    {
-    //         userId: {type: String},
-    //         name: {type: String},
-    //         profilePic: {type: String},
-    //         description: {type: String}
-    //     }
-    // ],
-    // likes: Number
-    
+    comments: {
+        type: Schema.Types.ObjectId,
+        ref: 'comments'
+    }
 }, {
     timestamps: true 
 });

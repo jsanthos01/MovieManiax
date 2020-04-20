@@ -8,7 +8,9 @@ function Reviews() {
     const userId = localStorage.id
     const [reviews, setReviews] = useState([]);
     const [modalDisplay, setModalDisplay] = useState(false);
-
+    const [formOpen, setFormOpen] = useState({});
+    const [comment, setComment] = useState({name: "", userId: "", reviewId: "", content: ""});
+    
     async function getSpecificReviews(){
         const getMovies = await fetch(`/api/specificReviews/${id}`).then(res => res.json());
         setReviews(getMovies);
@@ -30,10 +32,25 @@ function Reviews() {
         getSpecificReviews();
     }
 
+    function handleInputChange(e){
+        let commentInfo = {...comment}
+        commentInfo["userId"] = userId;
+
+        if(e.target.id === "name"){
+            commentInfo["name"] = e.target.value
+        }else if(e.target.id === "content") {
+            commentInfo["content"] = e.target.value
+
+        }
+        console.log("")
+        setComment(commentInfo);
+    }
+
     useEffect(function(){
         getSpecificReviews();
     }, [modalDisplay])
 
+    console.log(comment)
     return ( 
         <div className="result container mb-5">
             <div>
@@ -41,7 +58,7 @@ function Reviews() {
                 <button type="button" class="btn btn-sm btn-outline-primary m-3"  onClick={() => setModalDisplay(true)}>Add a Review</button>
             </div>
             <div class="container">
-                {reviews.map(review => 
+                {reviews.map((review, idx) => 
                     <div class="content">
                         <div class="inner_content">
                             <div class="card styleCard">
@@ -64,9 +81,37 @@ function Reviews() {
                                 </div>
                                 <ul class="nav justify-content-start">
                                     <li class="nav-item ">
-                                        <i class="comments far fa-comment"></i><span id="number${fetchPosts[i].post_id}">5</span>
+                                        <i class="comments far fa-comment" onClick={()=>setFormOpen({id: idx, state: true})}></i><span id="number${fetchPosts[i].post_id}">5</span>
                                         <i class="thumbsUp far fa-thumbs-up"></i><span id="comment${fetchPosts[i].post_id}" >9</span>
                                         { userId === review.user.id ? <i class=" trash fas fa-trash" onClick={()=> deleteReview(review._id, review.comment)} ></i> : ''}
+                                        <div class="container">
+                                        {formOpen.id == idx && formOpen.state ? 
+                                            <form>
+                                                
+                                                <div class="form-group">
+                                                    <label htmlFor="name">Name</label>
+                                                    <input 
+                                                        value={reviewData.name} 
+                                                        onChange={handleInputChange} 
+                                                        class="form-control" 
+                                                        id="name" 
+                                                        type="text" 
+                                                    />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label htmlFor="content">Your Comment</label>
+                                                    <textarea 
+                                                        value={reviewData.comment}
+                                                        class="form-control" 
+                                                        id="content" 
+                                                        rows="3"
+                                                        onChange={handleInputChange}
+                                                    />
+                                                </div>
+                                                <button type="submit" class="btn btn-outline-primary">Save Comment</button>
+                                            </form> : ''  
+                                        }
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
