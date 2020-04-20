@@ -39,9 +39,7 @@ function MovieList(props) {
                             <p><b>Rating:</b> <b>{movie.ratings}</b>/10 </p>
                             <p><b>Release Date:</b> {movie.releaseDate}</p>
                             <div class="container d-flex mx-auto ">
-                                <a href={"/movieDetails/" + movie.id}>
-                                    <button type="button" class="btn btn-outline-primary mr-2">View</button>
-                                </a>
+                                <a class="btn btn-success mr-2" href={"/movieDetails/" + movie.movieId}> View Detail</a>
                                 <button type="button" class="btn btn-sm btn-outline-danger mr-2" onClick={() => deleteMovieWlist(movie._id)} >Delete</button>                                
                             </div> 
                         </div>
