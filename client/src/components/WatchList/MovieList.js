@@ -30,7 +30,7 @@ function MovieList(props) {
                 {props.myMovies.map(movie =>
                     <div className="row" style={rowStyle}>
                         <div className="col-lg-3" style={imageStyle}>
-                            {movie.image ? <img style={imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt="something" /> : <img style={imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
+                            {movie.image != "null" && movie.image ? <img style={imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt="something" /> : <img style={imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
                             <a href="Www.google.com" ><button type="button" class="btn btn-danger mr-2"><i class="fas fa-play"></i> Watch Trailer</button></a>
                         </div>
                         <div className="col-lg-9 d-flex justify-content-center flex-column">

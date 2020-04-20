@@ -81,7 +81,6 @@ async function postWatchlist(movieData){
     }
 }
 
-
 async function getWatchlist(id){
     const getSavedList = await db.users.find({_id:id});
     return getSavedList;

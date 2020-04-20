@@ -32,7 +32,9 @@ function MovieFavourites() {
     async function getSavedMovieList(){
         const getMovies = await fetch(`/api/favourites/${id}`).then(res => res.json());
         const movies = getMovies;
-        setMyMovies(movies[0].favourites);
+        const sortedMovies = movies[0].favourites.reverse()
+        // console.log(sortedMovies)
+        setMyMovies(sortedMovies);
     }
 
     useEffect(function(){
@@ -47,8 +49,9 @@ function MovieFavourites() {
         }else if(option ==="rating"){
             myMovies.sort(ratingsOrder);
             setMyMovies([...myMovies]);
-        }else if(option === "date"){
-
+        }else if(option === "reverse alphabetical"){
+            myMovies.sort(reverseNameOrder);
+            setMyMovies([...myMovies]);
         }
     }
 
@@ -59,6 +62,17 @@ function MovieFavourites() {
         if(titleA > titleB){
             return 1;
         }else if(titleA < titleB){
+            return -1
+        }
+        return 0
+    }
+    //Sort by Name(Reverse Alphabetical)
+    function reverseNameOrder(a,b){
+        const titleA = a.title.toUpperCase();
+        const titleB = b.title.toUpperCase();
+        if(titleA < titleB){
+            return 1;
+        }else if(titleA > titleB){
             return -1
         }
         return 0
@@ -87,7 +101,7 @@ function MovieFavourites() {
                                 <div class={menuClass} aria-labelledby="dropdownMenu2">
                                     <button onClick={() => sortOptions("alphabetical")}class="dropdown-item" type="button">Alphabetical</button>
                                     <button onClick={() => sortOptions("rating")}class="dropdown-item" type="button">IMDb Rating</button>
-                                    <button onClick={() => sortOptions("date")}class="dropdown-item" type="button">Date Added</button>
+                                    <button onClick={() => sortOptions("reverse alphabetical")}class="dropdown-item" type="button">Reverse Alphabetical</button>
                                 </div>
                             </div>
                         </div>
