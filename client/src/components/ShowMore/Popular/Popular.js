@@ -10,7 +10,6 @@ function Popular() {
         console.log('apiPopular: ',apiPopular.results)
         setMovieList(apiPopular.results);
 
-        // https://api.themoviedb.org/3/movie/popular?api_key=5b4dbf95cc35d2e911560cca64385e60&language=en-US&page=1
     }
 
     useEffect( function(){
@@ -19,8 +18,7 @@ function Popular() {
 
     return (
         <div>
-            <h3 class="text-center mb-4" style={{color: 'white'}}>Popular Movies</h3>
-
+            <h3 class="text-center mb-4 moreHeads" >Popular Movies</h3>
             <MovieList movieList={movieList}></MovieList>
         </div>
     )

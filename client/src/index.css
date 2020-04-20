@@ -133,7 +133,7 @@ border-bottom-right-radius: 5px;
   background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
   border-radius: 20px;
   padding: 25px;
-  margin: 10px;
+  margin: 15px 10px;
   filter: drop-shadow( 0px 0px 8px #0000009d);
   position: relative;
 
@@ -199,6 +199,7 @@ border-bottom-right-radius: 5px;
   padding: 20px;
   min-height: 30vh;
   text-align: center;
+  align-items: center;
   /* margin-top: 20px; */
 }
 
@@ -244,6 +245,12 @@ ul li {
 .myBtnPink:hover {
   background: rgb(237, 20, 91);
   color: white;
+}
+
+.moreHeads{
+  color: white;
+  display: block;
+  text-align: center;
 }
 
 @media only screen and (max-width: 1200px) {

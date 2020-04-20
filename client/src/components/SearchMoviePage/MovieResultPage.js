@@ -8,9 +8,15 @@ function MovieResultPage(props) {
 
     const style = {
         messageStyle: {
+            width: '80%',
+            border: 'none',
+            background: '#26b3b8',
+            color: 'white',
             position: 'sticky',
             top: '0',
-            left: '0'
+            left: '0',
+            zIndex: '10',
+            margin: '0 auto'
         },
         imgStyle: {
             objectFit: "cover",
