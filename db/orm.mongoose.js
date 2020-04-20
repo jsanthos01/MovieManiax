@@ -199,6 +199,8 @@ async function updateAvatar( userId, imageUrl ){
         profileImg: imageUrl
      };
     const dbResult = await db.users.findOneAndUpdate({_id: userId}, imageData);
+    const userFetch = await db.users.findOneAndUpdate({ _id: userId }, { $push: { friendList: {image: imageData} } });
+
     return { message: `Thank you, updated` }
 }
 //--------------------------bio----------------------------

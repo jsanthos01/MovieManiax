@@ -46,7 +46,7 @@ function Profile() {
 
     return (
         <div>
-            <div class="row mt-4">
+            <div class="row mt-4" style={{color: "white"}}>
                 <div class="col-lg-8">  
                     <div class="row ml-4">
                         <div class="col">
@@ -147,6 +147,13 @@ function Profile() {
                         </div>
                         <div class="col-8 mt-4">
                             <h4>Your Followers</h4>
+                            { friendList.slice(0, 10).map(friend => 
+                                <div>
+                                    <div class="mt-4">{<img class="" style={{minHeight:'50px', height:'70px', objectFit: 'cover', borderRadius: '30px', margin: '0, auto'}} src={friend.image} alt={friend.name} /> }</div>
+                                    <div class="text-left ml-4"><Link to={`/friendProfile/${friend.friendId}`}>{friend.name}</Link></div>                                    
+                                </div> )
+                            }
+                            
                         </div>
                     </div>
                 </div>
