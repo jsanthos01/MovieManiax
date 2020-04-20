@@ -171,9 +171,9 @@ function MovieInformation() {
                             <div class="movieDesc" style={movieStyle.movieDesc}> 
                                 <h4>{movie.title}</h4>
                                 <div class="extra">
-                                    <Link to={"/movieDetails/" + movie.id }>
-                                        <button type="button" class="btn btn-outline-primary mr-2">View More</button>
-                                    </Link>
+                                    
+                                    <a href={"/movieDetails/" + movie.id}><button type="button" class="btn btn-outline-primary mr-2">View More</button></a>
+                                    
                                     <button type="button" onClick={() => getMovieId("watchlist", movie)} class="btn btn-primary mr-2"><i class="fas fa-bookmark"></i></button>
                                     <button type="button" onClick={() => getMovieId("favourites", movie)} class="btn btn-danger mr-2"><i class="far fa-heart"></i></button>
                                 </div>

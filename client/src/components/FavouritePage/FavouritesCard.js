@@ -28,9 +28,7 @@ function FavouritesCard(props) {
                         <p class="card-text"><b>Ratings</b>: {movie.ratings}/10</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <Link to={"/movieDetails/" + movie.movieId }>
-                                    <button type="button" class="btn btn-outline-primary mr-2">View</button>
-                                </Link> 
+                            <a class="btn btn-success mr-2" href={"/movieDetails/" + movie.movieId}> View Detail</a>
                                 <button type="button" class="btn btn-sm btn-outline-danger" onClick={() => deleteMovieFavourite(movie._id)} >Delete</button>
                             </div>
                         </div>

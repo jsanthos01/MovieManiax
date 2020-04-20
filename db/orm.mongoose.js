@@ -72,8 +72,10 @@ async function postWatchlist(movieData){
        "ratings": `${movieData.ratings}`
     }
  
-    const checkWatchlist = await db.users.findOne({ _id: movieData.userId, "watchlist.movieId": movieInfo.movieId});
-    if( checkWatchlist) {
+    const checkWatchlist = await db.users.findOne({ _id: movieData.userId});
+    let watchListArr = checkWatchlist.watchlist;
+    const exists = watchListArr.find(movie => movie.movieId === movieInfo.movieId)
+    if( exists) {
         return { message: "Movie Exists in the your watchlist page!!!" };
     }else{
         const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { watchlist:  movieInfo } });
@@ -94,8 +96,11 @@ async function postFavourites(movieData){
         "image":`${movieData.image}`,
         "ratings": `${movieData.ratings}`
     }
-    const checkFavourites = await db.users.findOne({ _id: movieData.userId, "favourites.movieId": movieInfo.movieId});
-    if( checkFavourites ) {
+    const checkFavourites = await db.users.findOne({ _id: movieData.userId});
+    let favArr = checkFavourites.favourites;
+    
+    const exists = favArr.find(movie => movie.movieId === movieInfo.movieId)
+    if( exists ) {
         return { message: "Movie Exists in the your Favourites page!!!" };
     }else {
         const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { favourites:  movieInfo } });

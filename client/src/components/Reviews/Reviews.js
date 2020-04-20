@@ -57,18 +57,16 @@ function Reviews() {
                                             <div class="rounded rating"><i class="fas fa-star pr-2" style={{color: "yellow"}}></i>{review.rating}</div>
                                         </div>
                                         <h5>Written on {review.createdAt}</h5>
+                                        <ul class="nav justify-content-end">
+                                            <li class="nav-item ">
+                                                { userId === review.user.id ? <i class=" trash fas fa-trash" onClick={()=> deleteReview(review._id, review.comment)} ></i> : ''}
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="teaser">
                                     <p>{review.comment}</p>
                                 </div>
-                                <ul class="nav justify-content-start">
-                                    <li class="nav-item ">
-                                        <i class="comments far fa-comment"></i><span id="number${fetchPosts[i].post_id}">5</span>
-                                        <i class="thumbsUp far fa-thumbs-up"></i><span id="comment${fetchPosts[i].post_id}" >9</span>
-                                        { userId === review.user.id ? <i class=" trash fas fa-trash" onClick={()=> deleteReview(review._id, review.comment)} ></i> : ''}
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
