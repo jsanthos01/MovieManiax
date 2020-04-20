@@ -18,8 +18,6 @@ function Profile() {
     async function loadAvatar(){  
 
         const profileData = await fetch(`/api/avatar/${userid}`).then( result => result.json() )  
-        // console.log(i); 
-        // console.log(profileData.friendList)          
         setProfileInfo (profileData)
         setwatchList( profileData.watchlist);
         setFavoriteList( profileData.favourites )
@@ -89,7 +87,7 @@ function Profile() {
     
                                             { watchList.slice(0, 10).map(movie => 
                                                     <div class="card d-inline-flex m-2" style={{width: '10rem'}}>
-                                                    {movie.image && movie.image !== null? <img class="" style={{minHeight:'70px', height:'160px', objectFit: 'cover'}} src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt={movie.title} /> : <img class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
+                                                    {movie.image && movie.image !== "null" ? <img class="" style={{minHeight:'70px', height:'160px', objectFit: 'cover'}} src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt={movie.title} /> : <img class="card-img-top" src='https://via.placeholder.com/150/000000/FFFFFF/'  /> }
                                                     <div class="text-center"><a href="#" >{movie.title}</a></div>
                                             </div>)}
                             
@@ -109,12 +107,12 @@ function Profile() {
 
                                             { favoriteList.slice(0, 10).map(movie => 
                                                 <div class="card d-inline-flex m-2" style={{width: '10rem'}}>
-                                                {movie.image || movie.image !== null? <img class="" style={{minHeight:'70px', height:'160px', objectFit: 'cover'}} src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt={movie.title} /> : <img class="card-img-top" src='https://via.placeholder.com/150/000000/FFFFFF/'  /> }
+                                                {movie.image && movie.image !== "null"? <img class="" style={{minHeight:'70px', height:'160px', objectFit: 'cover'}} src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt={movie.title} /> : <img class="card-img-top" src='https://via.placeholder.com/150/000000/FFFFFF/'  /> }
                                                 <div class="text-center"><a href="#" >{movie.title}</a> </div>                                    
                                             </div> )}
                                             
                                         </div>
-                                        { favoriteList.length !==0 ? <div class="col-12"><Link to={`/favourites/${userid}`} class="ml-2" style={{color:'white',}}>More</Link></div> : <div  class="col-12">List out your favorite movies! </div>}
+                                        { favoriteList.length !== 0 ? <div class="col-12"><Link to={`/favourites/${userid}`} class="ml-2" style={{color:'white',}}>More</Link></div> : <div  class="col-12">List out your favorite movies! </div>}
                                     </div>
                                  </div>
                                 <div class="col-12 mt-4" style={{border: '1px solid grey' }}></div>
