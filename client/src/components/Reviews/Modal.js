@@ -11,6 +11,7 @@ function Modal(props) {
         left: 0,
         bottom: 0,
         right: 0,
+        color: "black"
 
     }
     const modalBackdrop = {

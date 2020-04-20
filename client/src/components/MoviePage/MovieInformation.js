@@ -111,7 +111,7 @@ function MovieInformation() {
             <div class="container">
                 <div class="row">
                     <div class='col-md-4 text-center' >
-                        {movieDetails.poster_path && movieDetails.poster_path ? <img style={{width: '100%'}} src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`} alt="movie img" /> : <img src='https://cdn1.vectorstock.com/i/800x1000/21/85/white-blank-book-cover-isolated-template-empty-vector-25362185.jpg'  /> }
+                        {movieDetails.poster_path && movieDetails.poster_path !=="null" ? <img style={{width: '100%'}} src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`} alt="movie img" /> : <img style={{width: '100%'}} src='https://critics.io/img/movies/poster-placeholder.png' /> }
                     </div>
                     <div class='col-md-8'>
                         <h1>{movieDetails.title}</h1>
@@ -154,16 +154,16 @@ function MovieInformation() {
             <div class="container mt-5">
                 <h1>Official Movie Trailers</h1>
                 <div class="row ">                    
-                {movieTrailer.slice(0,3).map(movie => 
+                {movieTrailer !== undefined ? movieTrailer.slice(0,3).map(movie => 
                     <div class="mr-4 mt-4">
                         <iframe width="340" height="215" src={`https://www.youtube.com/embed/${movie.key}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                    </div>)}
+                    </div> ): "Sorry Trailers cannot be Uploaded"}
                 </div>
             </div>
             <div class="container mt-5">
                 <h1>Related Movies</h1>
                 <div class="row ">                    
-                {similarMovies.slice(0,10).map(movie => 
+                {similarMovies !== undefined ? similarMovies.slice(0,10).map(movie => 
                     <div class="col-md-4 text-center">
                         <div class="card mb-4 box-shadow">
                             {movie.poster_path && movie.poster_path ? <img style={movieStyle.imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="something" /> : <img style={movieStyle.imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
@@ -180,7 +180,7 @@ function MovieInformation() {
                             </div>
                         </div>
                     </div>
-                )}
+                ) : "Sorry! Related Movies Cannot be Shown!"}
                 </div>
             </div>
         </div>       
