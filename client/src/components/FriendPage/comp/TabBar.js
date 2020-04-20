@@ -22,6 +22,16 @@ function TabBar(props) {
                     Favorites List
                     </Link>
                 </li>
+                <li class="nav-item active">
+                    <Link to={`/friendProfile/${props.id}/FollowerList`} className={location.pathname === `/friendProfile/${props.id}/FollowerList`? "NavLinkActive" : "navLink"}>
+                    Follower List
+                    </Link>
+                </li>
+                <li class="nav-item active">
+                    <Link to={`/friendProfile/${props.id}/Reviews`} className={location.pathname === `/friendProfile/${props.id}/Reviews`? "NavLinkActive" : "navLink"}>
+                        Reviews
+                    </Link>
+                </li>
             </ul>
         </nav>
     )

@@ -1,7 +1,5 @@
 import React, { useContext } from 'react'
-import { useParams } from "react-router-dom";
 import { UserContext } from '../FriendProfilePage';
-import { Link } from "react-router-dom";
 
 function WatchList() {
     const {myMovies} = useContext(UserContext);
@@ -24,9 +22,7 @@ function WatchList() {
                             <p class="movieCrdTitle">{movie.title}</p>  
                             <p>overview: {movie.description}/10</p>
                             <p class="ratngCard"> {movie.ratings}</p>
-                            <Link to={"/movieDetails/" + movie.movieId }>
-                                <button type="button" class="btn btn-outline-primary mr-2">View More</button>
-                            </Link>
+                            <a class="btn btn-success mr-2" href={"/movieDetails/" + movie.movieId}> View Detail</a>
                         </div>
                     </div>
                 )}
