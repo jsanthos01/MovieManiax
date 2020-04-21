@@ -23,18 +23,18 @@ function GenrePage() {
                 {
                     genres.map( genres=>
                     <Link to={'/genre/'+genres.id}>
-                        <div class="flip-card">
+                        <div class="flip-card mx-auto">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front">
-                                <img src={genres.img} alt="genre Img"/>
+                                    <img src={genres.img} alt="genre Img" style={{width: "100%"}}/>
                                 </div>
                                 <div class="flip-card-back">
-                                    <h3 class='mt-3'>{genres.name}</h3>
+                                    <h3 class='mt-5'>{genres.name}</h3>
                                 </div>
                             </div>
                         </div>
                     </Link>
-                )
+                    )
                 }
             </div>
         </div>
