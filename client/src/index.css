@@ -229,6 +229,21 @@ ul li {
   top: -15px;
   right: -15px;
 }
+.ratngCard2{
+  position: absolute;
+  text-align: center;
+  font-size: 1rem;
+  font-style: italic;
+  width: 80px;
+  /* height: 50px; */
+  border-radius: 5px;
+  background:  rgb(237, 20, 91);
+  color: white;
+  padding: 5px;
+  top: 0;
+  right: 0;
+
+}
 
 .myBtn {
   border: 1px solid #26b3b8;
