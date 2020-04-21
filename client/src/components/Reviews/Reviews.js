@@ -13,7 +13,7 @@ function Reviews() {
     const [movieImage, setMovieImage] = useState("");
     async function getSpecificReviews(){
         const getMovies = await fetch(`/api/specificReviews/${id}`).then(res => res.json());
-        const getProfileImage = await fetch(`/api/userImage/${id}`).then(res => res.json());
+        // const getProfileImage = await fetch(`/api/userImage/${id}`).then(res => res.json());
         setReviews(getMovies);
         getMovies.map(review =>reviewUserId.push(review.user.id));
 

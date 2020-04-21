@@ -14,12 +14,91 @@ body {
     flex-direction: column;
 }
 
+    
 .btnStyle {
-    width: 150px;
+    border: 1px solid rgb(237, 20, 91);
+    color: white;
     padding: 10px;
-    background-color: rgb(237, 20, 91);
-    border-radius: 20px;
-    margin-left: 20px;
-    cursor: pointer;
-    border: none;
+    border-radius: 10px;
+    background-color:rgb(237, 20, 91);
+    filter: drop-shadow(1px 1px 5px rgb(237, 20, 91));
 }
+
+.profileh1 {
+    padding: 0;
+    color: #2ec3d6;
+}
+
+.pencil{
+    /* background-color:rgb(237, 20, 91); */
+    color: #2ec3d6;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 50%;
+    border: 1px solid #2ec3d6;
+
+}
+.pencil:hover{
+    background-color:#2ec3d6;
+    color: white;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 50%;
+    filter: drop-shadow(1px 1px 5px #2ec3d6);
+
+}
+
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center
+}
+
+.cardStyle {
+    background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
+    background: #0f1b38;
+    border-radius: 10px;
+    /* border: 1px solid #fdc664; */
+    padding: 15px;
+    /* margin: 10px; */
+    filter: drop-shadow( 0px 0px 8px #0000009d);
+    height: 30vh
+    
+}
+
+.iconsStyle {
+    padding: 5px;
+    background-color:#2ec3d6;
+    border-radius: 3px;
+}
+
+.textStyle {
+    font-style: italic;
+    font-weight: 600;
+    text-decoration: none;
+    color: #2ec3d6;
+    margin: 20px;
+}
+.textStyle:hover  {
+    font-style: italic;
+    font-weight: 600;
+    text-decoration: none;
+    color: #2ec3d6;
+    filter: drop-shadow( 0px 0px 8px #2ec3d6);
+}
+
+.imgStyling {
+    width: 80px;
+    height:80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.reviewContainer {
+    background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 10px;
+    /* filter: drop-shadow( 0px 0px 8px #2ec3d6); */
+}
+
