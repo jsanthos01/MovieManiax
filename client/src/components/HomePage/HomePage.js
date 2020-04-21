@@ -4,7 +4,6 @@ import "../style/HomePage.css"
 function HomePage(){
     return(
         <div class="hero2">
-
             <div class="homeDiv">
                 <div class="container styleCont">
                     <h1 class="display-7 title">MovieManiax</h1>
