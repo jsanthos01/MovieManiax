@@ -1,0 +1,25 @@
+body {
+    color: white;
+}
+
+.profileContainer {
+    margin-top: 5%
+    
+}
+
+.imageHolder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.btnStyle {
+    width: 150px;
+    padding: 10px;
+    background-color: rgb(237, 20, 91);
+    border-radius: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    border: none;
+}

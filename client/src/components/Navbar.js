@@ -24,13 +24,13 @@ function NavBar() {
       </button>
 
       <div className={showClass} id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">        
-              <li className="nav-item">
-                <Link to="/searchMovie" className={location.pathname === "/searchMovie" ? "nav-link active" : "nav-link"}>
+          <ul className=" navbar-nav mr-auto">        
+              <li className="nav-item ">
+                <Link to="/searchMovie" className={location.pathname === "/searchMovie" ? "nav-link active " : "nav-link"}>
                 Search
                 </Link>
               </li>
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown " >
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 More
                 </a>
@@ -52,19 +52,7 @@ function NavBar() {
                   </Link>
                 </div>
               </li>   
-              {/* { !id ? 
-              <li className="nav-item">
-                  <Link to="/login" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>
-                  Login
-                  </Link>
-              </li> :
-                <li className="nav-item">
-                  <Link to="/logout" className={location.pathname === "/logout" ? "nav-link active" : "nav-link"}>
-                  Logout
-                  </Link>
-                </li> 
-              }  */}
-                          
+              
               { !id ? '': 
                 <li className="nav-item">
                     <Link to={`/watchlist/${id}`} className={location.pathname === `/watchlist/${id}` ? "nav-link active" : "nav-link"}>
@@ -73,10 +61,10 @@ function NavBar() {
                 </li> 
               } 
               
-              { !id ? <Link to="/login" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>
-                  Login
-                  </Link> :
-                    <li className="nav-item dropdown">
+              { !id ? 
+                  <li className="nav-item"><Link to="/login" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>
+                  Login </Link></li> :
+                    <li className="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="mr-1"><i class="fas fa-user"></i></span> {`${userName}`}
                     </a>

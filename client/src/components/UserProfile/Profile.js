@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import AvatarUpload from './AvatarUpload';
 import { Link } from "react-router-dom";
 import Bio from './Bio';
+import './Profile.css'
 
 function Profile() {
     const userid = localStorage.id;
@@ -17,7 +18,6 @@ function Profile() {
     
 
     async function loadAvatar(){  
-
         const profileData = await fetch(`/api/avatar/${userid}`).then( result => result.json() )  
         setProfileInfo (profileData)
         setwatchList( profileData.watchlist);
@@ -26,12 +26,12 @@ function Profile() {
         setMyReviews( profileData.myReviews)
         let date = new Date(profileData.createdAt)
         let newDate = date.toString().substring(4, 15)
-        setNewDate( newDate )
-        
+        setNewDate( newDate )  
     }
+
     function loadFriendProfile(){  
-            window.location.reload(true);
-        }
+        window.location.reload(true);
+    }
     
     useEffect( function(){
         loadAvatar();
@@ -48,22 +48,22 @@ function Profile() {
     }
 
     return (
-        <div>
-            <div class="row mt-4" style={{color: "white"}}>
+        <div class="profileContainer container-fluid">
+            <div class="row " >
                 <div class="col-lg-8">  
                     <div class="row ml-4">
-                        <div class="col">
+                        <div class="col-lg-12">
                             <div class="row">
-                                <div class="col-2">
+                                <div class="col-4 imageHolder">
                                     <img src={profileInfo.profileImg} style={{minHeight:'70px', height:'120px'}} alt="..." class="img-thumbnail"/><br/>
                                     { showForm ? <AvatarUpload uploadPic={uploadPic} /> : 
-                                        <div >
-                                            <button onClick={function(){ setShowForm(true) }}>
-                                                edit</button>
-                                        </div> }
+                                    <div >
+                                        <button class="btn btnStyle" onClick={function(){ setShowForm(true) }}>
+                                            edit</button>
+                                    </div> }
                                 </div>    
                                 
-                                <div class="col-8">
+                                <div class="col-7 ">
                                     <h1 >{profileInfo.name}</h1>
                                     <small class="text-muted ml-4">Movie Maniax member since {newDate}</small>
                                 </div>

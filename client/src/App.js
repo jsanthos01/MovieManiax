@@ -11,11 +11,9 @@ import LogoutPage from './components/Login/LogoutPage';
 import Registration from './components/Registration/Registration';
 import Profile from './components/UserProfile/Profile';
 import Favourites from './components/FavouritePage/MovieFavourites';
-// import Footer from './components/Footer/Footer'
-
+import Footer from './components/Footer/Footer'
 import Friends from './components/FriendPage/Friend';
 import FriendProfilePage from './components/FriendPage/FriendProfilePage';
-
 import Reviews from './components/Reviews/Reviews' 
 import GenrePage from './components/Genre/GenrePage';
 import GenreMoviePage from './components/Genre/GenreMoviePage';
