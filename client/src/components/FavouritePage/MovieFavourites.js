@@ -86,7 +86,6 @@ function MovieFavourites() {
     return (
         <div>
             <div className="header">
-                
                 <div class="container-fluid">
                     <h1 style={style.header}>Your Favourites</h1>
                     <div class="row" style={style.rowStyle}>

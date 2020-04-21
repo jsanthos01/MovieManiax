@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import action from './assets/action-movie-coloured.png'
 import { Link } from "react-router-dom";
 
 function GenrePage() {

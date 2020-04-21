@@ -18,7 +18,17 @@ function MovieInformation() {
         imgStyle :{height: "50vh",objectFit: "cover"},
         cardBody: {height: "30vh",display: "flex",flexDirection: "column", justifyContent: "center"},
         movieDesc: {color: "black",padding: "10px"},
-        messageStyle: {position: 'sticky',top: '0',left: '0'}
+        messageStyle: {
+            width: '80%',
+            border: 'none',
+            background: '#26b3b8',
+            color: 'white',
+            position: 'sticky',
+            top: '0',
+            left: '0',
+            zIndex: '10',
+            margin: '0 auto'
+        }
     }
     const style = {
         messageStyle: {
@@ -139,10 +149,10 @@ function MovieInformation() {
                     <div class='col-md-8'>
                         <h1>{movieDetails.title}</h1>
                         <h4 style={{color:"white", fontStyle: "italic"}}>"{movieDetails.tagline}"</h4>
-                        <button class="btn btn-outline-danger mr-3 mt-3" onClick={() => getMovieId("favourites", movieDetails)}><i class="fas fa-heart"></i> Favourites</button>
-                        <button class="btn btn-outline-primary mr-3 mt-3" onClick={() => getMovieId("watchlist", movieDetails)}><i class="fas fa-plus"></i>  Watch List</button>
+                        <button class="btn myBtnPink mr-3 mt-3" onClick={() => getMovieId("favourites", movieDetails)}><i class="fas fa-heart"></i> Favourites</button>
+                        <button class="btn myBtnPink mr-3 mt-3" onClick={() => getMovieId("watchlist", movieDetails)}><i class="fas fa-plus"></i>  Watch List</button>
                         <Link to={`/reviews/${movieDetails.id}/${movieDetails.title}`}>
-                            <button type="button" className="btn btn-outline-info mt-3"><i class="fas fa-comments"></i> View Reviews</button>
+                            <button type="button" className="btn myBtnPink mt-3"><i class="fas fa-comments"></i> View Reviews</button>
                         </Link>
                         <div>
                             <ul class="list-group">
@@ -173,7 +183,7 @@ function MovieInformation() {
                     )} 
                     </div> : '[no cast members]' }
                 </div>
-            </div>
+            </div> 
             <div class="container mt-5">
                 <h1>Official Movie Trailers</h1>
                 <div class="row ">                    
