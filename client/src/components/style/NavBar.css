@@ -6,11 +6,18 @@
 .navbar .navbar-brand {
     padding-left: 10px;
     font-size: 30px;
-    background: -webkit-linear-gradient(#FF416C, #FF4B2B);
+    color:#FF416C;
     font-weight: 900;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /* -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
 }
+.navbar .navbar-brand:hover {
+    padding-left: 10px;
+    font-size: 30px;
+    color:#FF416C;
+    font-weight: 900;
+}
+
 
 .navbar .navbar-brand img {
     margin-right: 10px;
