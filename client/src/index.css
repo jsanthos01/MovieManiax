@@ -170,7 +170,7 @@ border-bottom-right-radius: 5px;
 .friendCard{
   background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
   border-radius: 20px;
-  padding: 25px;
+  padding: 20px;
   margin: 10px;
   filter: drop-shadow( 0px 0px 8px #0000009d);
 }
@@ -206,7 +206,7 @@ border-bottom-right-radius: 5px;
   
 }
 .mvHrzCrdImg{
-  /* width: 40%; */
+  width: 40%;
     /* height: 40vh;
   width: 40vh; */
 
@@ -259,16 +259,13 @@ ul li {
   font-size: 1rem;
   font-style: italic;
   width: 80px;
-  /* height: 50px; */
   border-radius: 5px;
   background:  rgb(237, 20, 91);
   color: white;
   padding: 5px;
   top: 0;
   right: 0;
-
 }
-
 .myBtn {
   border: 1px solid #26b3b8;
   color: #26b3b8;
@@ -290,6 +287,13 @@ ul li {
   color: white;
   display: block;
   text-align: center;
+}
+
+.profileImg {
+  width: 15vh;
+  height: 15vh;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 @media only screen and (max-width: 1200px) {

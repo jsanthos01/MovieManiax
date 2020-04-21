@@ -9,20 +9,10 @@ function Reviews() {
             <div class=' '>
             {myReview.map(review=>
                     <div class="movieHrzCard mx-auto row " >
-                        
-                        {/* <div class="mvHrzCrdImg">
-                        </div> 
-                        movieId: {type: String},
-                        movieImage: {type: String},
-                        comment: {type: String},
-                        rating: {type: String},
-                        movieName: {type: String}
-                        
-                        */}
-                        <div class="mvHrzCrdDesc">
+                        <div class="mvHrzCrdDesc col-md-2">
                             <img src={`https://image.tmdb.org/t/p/w500/${review.movieImage}`} class="hrCdImg " alt="movie poster" />
                         </div>
-                        <div class="mvHrzCrdDesc">
+                        <div class="mvHrzCrdDesc col-md-10">
                             <h3 class="movieCrdTitle">{review.movieName}</h3>  
                             <p>comment: {review.comment}</p>
                             <p class="ratngCard2"> {review.rating}</p>
