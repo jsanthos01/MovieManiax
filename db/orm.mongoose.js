@@ -14,9 +14,9 @@ async function registerUser( userData ){
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(userData.password, saltRounds);    
     const saveData = {
-       name: userData.name,
-       email: userData.email,
-       password: passwordHash
+        name: userData.name,
+        email: userData.email,
+        password: passwordHash
     };
 
     const dbUser = new db.users( saveData );
@@ -151,7 +151,7 @@ async function getFriendlist(id){
 }
 async function getFriendInfo(id){
     const getFriendInfo =  await db.users.find({_id:id});
-    console.log('in Orm etFriendInfo: ', getFriendInfo)
+    // console.log('in Orm etFriendInfo: ', getFriendInfo)
     return getFriendInfo[0];
 }
 
@@ -168,7 +168,7 @@ async function showProfileDb(id){
 }
 
 async function postReview(details){
-    console.log(details);
+    // console.log(details);
     const myReview = {
         // 'reviewSchemaId': `${details.id}`,
         'movieId': `${details.movieId}`,
@@ -200,7 +200,7 @@ async function getSpecificMovieReviews(id){
 }
 
 async function deleteReviewInfo( userId, movieId, comment ){
-    console.log(`Orm.js`, comment)
+    // console.log(`Orm.js`, comment)
     const deleteReview = db.reviews.deleteOne( { "_id" : movieId}, function (err) {
         if (err) return handleError(err)
     });

@@ -19,7 +19,7 @@ function MovieFavourites() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            border: "5px solid white",
+            // border: "5px solid white",
             margin: "10px"
         },
         alignStyle: {
@@ -89,12 +89,12 @@ function MovieFavourites() {
                 <div class="container-fluid">
                     <h1 style={style.header}>Your Favourites</h1>
                     <div class="row" style={style.rowStyle}>
-                        <div class="col-lg-4" style={style.alignStyle}>
+                        <div class="col-lg-6" style={style.alignStyle}>
                             Showing All {myMovies.length} Movies
                         </div>
-                        <div class="col-lg-4" style={style.alignStyle}>
+                        <div class="col-lg-6" style={style.alignStyle}>
                             <div class="dropdown" onClick={toggleOpen}>
-                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn  myBtnPink dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Sort By:
                                 </button>
                                 <div class={menuClass} aria-labelledby="dropdownMenu2">
@@ -103,9 +103,6 @@ function MovieFavourites() {
                                     <button onClick={() => sortOptions("reverse alphabetical")}class="dropdown-item" type="button">Reverse Alphabetical</button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4" style={style.alignStyle}>
-                            <button class="btn btn-primary">Filter By:</button>
                         </div>
                     </div>
                 </div>
