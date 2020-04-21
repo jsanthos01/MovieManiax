@@ -57,7 +57,7 @@ h1 {
   cursor: pointer;
 }
 .flip-card:active {
-  background: pink;
+  /* background: pink; */
 }
 .flip-card-inner {
   position: relative;
@@ -68,10 +68,22 @@ h1 {
   transform-style: preserve-3d;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
+.flip-card-inner:hover {
+  /* position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0);
+}
 .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
 }
 .flip-card-front, .flip-card-back {
+
+  border-top: 3px solid #265563;
+  border-right: 3px solid #265563;
   padding: 5px;
   position: absolute;
   width: 100%;
@@ -79,26 +91,40 @@ h1 {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
 .flip-card-front {
   border-radius: 5px;
-  background-color: white;
+  background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
   color: black;
+  box-shadow: -2px 2px 8px 0 rgba(190, 60, 230, 0.562);
+
 }
 .flip-card-back {
   border-radius: 5px;
-  background-color: white;
-  color: black;
+  background-color: #265563;
+  color: white;
   transform: rotateY(180deg);
+  box-shadow: 0 4px 8px 0 rgba(190, 60, 230, 0.562);
 }
-
 
 /* tab */
 .tabBar{
   margin-bottom: 30px;
+  /* border: 1px solid red; */
+  position: relative;
 
 }
+.myFlex {
+  display: flex;
+  flex-direction: row;
+}
+
 .navLink {
   color: rgb(134, 134, 134);
+  padding: 15px;
+
+}
+.tab {
   padding: 15px;
 
 }
@@ -108,17 +134,14 @@ text-decoration: none;
 color: white;
 border-top-left-radius: 5px;
 border-top-right-radius: 5px;
-
 }
 
 .NavLinkActive {
   color: #f56372;
   border-top: 1px solid #2ec3d6;
-  /* border-bottom: 1px solid #2ec3d6; */
   border-left: 1px solid #2ec3d6;
-  /* border-right: 1px solid #2ec3d6; */
+  border-right: 1px solid #2ec3d6;
   padding: 15px;
-  /* background: white; */
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
@@ -133,11 +156,31 @@ border-bottom-right-radius: 5px;
 
 /* movie card */
 .movieCard {
+  width: 60vh;
+  background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
+  border-radius: 20px;
+  padding: 25px;
+  margin: 15px 10px;
+  filter: drop-shadow( 0px 0px 8px #0000009d);
+  position: relative;
+
+}
+.movieHrzCard {
+  width: 100%;
   background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
   /* background: #0f1b38; */
   border-radius: 20px;
   /* border: 1px solid #fdc664; */
   padding: 25px;
+  margin: 10px;
+  filter: drop-shadow( 0px 0px 8px #0000009d);
+  position: relative;
+
+}
+.friendCard{
+  background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
+  border-radius: 20px;
+  padding: 20px;
   margin: 10px;
   filter: drop-shadow( 0px 0px 8px #0000009d);
 }
@@ -173,7 +216,7 @@ border-bottom-right-radius: 5px;
   
 }
 .mvHrzCrdImg{
-  /* width: 40%; */
+  width: 40%;
     /* height: 40vh;
   width: 40vh; */
 
@@ -188,6 +231,9 @@ border-bottom-right-radius: 5px;
 }
 .movieCrdDesc{
   padding: 20px;
+  min-height: 30vh;
+  text-align: center;
+  align-items: center;
   /* margin-top: 20px; */
 }
 
@@ -204,10 +250,90 @@ ul li {
 }
 
 .ratngCard {
+  position: absolute;
   text-align: center;
-  width: 70px;
-  border-radius: 5px;
-  background: #e75c6a;
+  font-size: 1.2rem;
+  font-style: italic;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background:  rgb(237, 20, 91);
   color: white;
   padding: 10px;
+  top: -15px;
+  right: -15px;
+}
+.ratngCard2{
+  position: absolute;
+  text-align: center;
+  font-size: 1rem;
+  font-style: italic;
+  width: 80px;
+  border-radius: 5px;
+  background:  rgb(237, 20, 91);
+  color: white;
+  padding: 5px;
+  top: 0;
+  right: 0;
+}
+.myBtn {
+  border: 1px solid #26b3b8;
+  color: #26b3b8;
+}
+.myBtn:hover {
+  background: #26b3b8;
+  color: white;
+}
+.myBtnPink {
+  border: 1px solid rgb(237, 20, 91);
+  color: rgb(237, 20, 91);
+}
+.myBtnPink:hover {
+  background: rgb(237, 20, 91);
+  color: white;
+}
+
+.moreHeads{
+  color: white;
+  display: block;
+  text-align: center;
+}
+
+.profileImg {
+  width: 15vh;
+  height: 15vh;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 1200px) {
+  .movieCard {
+    width: 65vh;
+    
+  }
+}
+@media only screen and (max-width: 1170px) {
+  .movieCard {
+    width: 75vh;
+    
+  }
+}
+@media only screen and (max-width: 990px) {
+  .movieCard {
+    width: 70vh;
+    
+  }
+}
+@media only screen and (max-width: 770px) {
+  .movieCard {
+    width: 85vh;
+    
+  }
+  .myFlex {
+    display: flex;
+    flex-direction: column;
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+  }
 }

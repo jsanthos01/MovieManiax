@@ -49,7 +49,7 @@ function App() {
             <Route exact path="/popular" component={PopularPage} />
             <Route exact path="/TopRated" component={TopRatedPage} /> 
           </div>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </div>
   );

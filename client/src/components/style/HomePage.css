@@ -6,11 +6,6 @@
   box-sizing: border-box;
 
 }
-.homeDiv{
-  background-image: url('../assets/movieBackground.jpg');
-  background-size: cover;
-  height: 90vh;
-}
 
 .title{
   text-align: center;
@@ -43,11 +38,27 @@
 }
 
 .searchButton:hover{
-  text-decoration: none;
-  color: white;
-  filter: drop-shadow(1px 1px 5px #FF416C);
+text-decoration: none;
+color: white;
+filter: drop-shadow(1px 1px 5px #FF416C);
 
 
 }
 
-  
+.hero2{
+  height: 66vh;
+}
+.homeDiv{
+  position: absolute;
+  background-image: url('../assets/movieBackground.jpg');
+  background-size: cover;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+}
+
+
+
