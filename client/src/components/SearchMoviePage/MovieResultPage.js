@@ -106,7 +106,7 @@ function MovieResultPage(props) {
                 <div class="row">
                     {resultArray.map(movie => 
                         <div class="movieCard mx-auto" >
-                        <p class="movieCard-title">MOVIE INFO</p>  
+                            <p class="movieCard-title">MOVIE INFO</p>  
                         <div class="movieCrdImg">
                             {movie.poster_path && movie.poster_path ? <img style={style.imgStyle} class="crdImg" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="movie poster" /> : <img style={style.imgStyle} class="crdImg" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png' style={style.imgStyle} /> }
                         </div>
