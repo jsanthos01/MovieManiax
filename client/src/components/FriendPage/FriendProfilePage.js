@@ -46,12 +46,12 @@ function FriendProfilePage() {
     return (
     <div class="container-fluid">
         <div class="container mx-auto" style={{color : 'white'}}>
-            <div class="d-flex justify-content-center">
+            <div class="row">
                 <div class="col-md-2  mx-auto">
                     <img src={friendProfile.profileImg} alt="img profile" style={{width : '100%'}}/>
                 </div>
                 <div class="col-md-10  mx-auto">
-                    <h1 class="text-center">{friendProfile.name}</h1>
+                    <h1 class="text-center" style={{color: "#2ec3d6"}}>{friendProfile.name}</h1>
                     <UserContext.Provider value ={{myMovies, myFavouritesMovies, friendProfile, myFriendList, myReview}}>
                         <Router>
                             <TabBar id={id}/>

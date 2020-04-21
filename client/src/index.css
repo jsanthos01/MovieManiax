@@ -107,15 +107,24 @@ h1 {
   box-shadow: 0 4px 8px 0 rgba(190, 60, 230, 0.562);
 }
 
-
-
 /* tab */
 .tabBar{
   margin-bottom: 30px;
+  /* border: 1px solid red; */
+  position: relative;
 
 }
+.myFlex {
+  display: flex;
+  flex-direction: row;
+}
+
 .navLink {
   color: rgb(134, 134, 134);
+  padding: 15px;
+
+}
+.tab {
   padding: 15px;
 
 }
@@ -131,6 +140,7 @@ border-top-right-radius: 5px;
   color: #f56372;
   border-top: 1px solid #2ec3d6;
   border-left: 1px solid #2ec3d6;
+  border-right: 1px solid #2ec3d6;
   padding: 15px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -318,5 +328,12 @@ ul li {
   .movieCard {
     width: 85vh;
     
+  }
+  .myFlex {
+    display: flex;
+    flex-direction: column;
+    /* position: absolute;
+    top: 0;
+    left: 0; */
   }
 }
