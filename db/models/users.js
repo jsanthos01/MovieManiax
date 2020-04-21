@@ -22,12 +22,16 @@ let users = new Schema ({
       type: String,
       default: 'https://getdrawings.com/free-icon-bw/anonymous-avatar-icon-19.png'  
    },
+   bio: {
+      type: String,
+      default: 'Tell the world something about yourself'  
+   },
    favourites: [
       { 
          movieId: {type: String},
          title: {type: String},
          image: {type: String},
-         ratings: {type: String}
+         ratings: {type: String},
       }
    ],
 
@@ -45,10 +49,21 @@ let users = new Schema ({
    friendList: [
       {
          userId: {type: String},
+         friendId: {type: String},
          name: {type: String},
-         // image: {type: String},
+         image: {type: String},
+      }
+   ],
+   myReviews: [
+      {
+         movieId: {type: String},
+         movieImage: {type: String},
+         comment: {type: String},
+         rating: {type: String},
+         movieName: {type: String}
       }
    ]
+
  }, {
     timestamps: true
  });

@@ -1,9 +1,6 @@
 import React, {useState, useRef}  from 'react'
 import MovieResultPage from './MovieResultPage'
 
-//Not sure if this is a package = Sara Check !
-// const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop); 
-
 function SearchForm() {
     const [searchInput, setSearchInput] = useState("");
     const [movieList, setMovieList] = useState([]);
@@ -38,20 +35,13 @@ function SearchForm() {
 
     async function loadMovieList(e){
         e.preventDefault();
-        console.log(`[loadMovieList] called with '${searchInput}'`);
-
-        //API CALL (TMDB)
         const Api = '5b4dbf95cc35d2e911560cca64385e60';
         const newMovieList = await fetch( `https://api.themoviedb.org/3/search/movie?api_key=${Api}&language=en-US&query=${searchInput}&page=1&include_adult=false` ).then( result=>result.json() );
-        console.log( 'movieList: ', newMovieList.results); 
         setMovieList(newMovieList.results);
-
-        //Needs to be checked by SARA MUNIR
-        // scrollToRef(myRef);
     }
 
     return (
-        <div id='something'>
+        <div>
             <div class="jumbotron jumbotron-fluid hero" >
                 <div class="searchBox container">
                     <h1>Enter the Movie Of your Choice</h1>
@@ -67,7 +57,6 @@ function SearchForm() {
                 </div>
             </div>
             { movieList.length > 0 ? <MovieResultPage  movieList={movieList} myRef={myRef} /> : '' }
-
         </div>
     )
 }

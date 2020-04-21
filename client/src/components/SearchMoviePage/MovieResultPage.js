@@ -4,18 +4,25 @@ import { Link } from "react-router-dom";
 function MovieResultPage(props) {
     console.log("Inside the MovieResult", props.movieList);
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
-    const [ isNotLoggedIn, setIsNotLoggedIn ] = useState( false );
     const resultArray = props.movieList;
 
     const style = {
         messageStyle: {
+            width: '80%',
+            border: 'none',
+            background: '#26b3b8',
+            color: 'white',
             position: 'sticky',
             top: '0',
-            left: '0'
+            left: '0',
+            zIndex: '10',
+            margin: '0 auto'
         },
         imgStyle: {
             objectFit: "cover",
-            height: "50vh"
+            height: "60vh",
+            width: "100%"
+
         },
         movieDesc: {
             color: "black",
@@ -24,7 +31,6 @@ function MovieResultPage(props) {
     }
     
     async function getMovieId(type, movieObj){
-        console.log("inside getMovieId Function: ", movieObj);
         let MovieData;
         let postMovieData;
 
@@ -85,7 +91,6 @@ function MovieResultPage(props) {
                 setTimeout( function(){ setAlertMessage( {} ); }, 2500 );
             }
         }else {
-            setIsNotLoggedIn(true)
             setAlertMessage( { type: 'danger', message: "Please signin to add to your favourites or watchlist!" } );
             setTimeout( function(){ setAlertMessage( {} ); }, 3000 ); 
         }
@@ -93,29 +98,30 @@ function MovieResultPage(props) {
     }
 
     return (
-        <div ref={props.myRef}>
+        <div >
             <div style={style.messageStyle} className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
                 {alertMessage.message}
             </div>
             <div className="container ">
                 <div class="row">
                     {resultArray.map(movie => 
-                        <div class="col-md-4 text-center">
-                            <div class="card mb-4 box-shadow">
-                                {movie.poster_path && movie.poster_path ? <img style={style.imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="something" /> : <img style={style.imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
-                                
-                                <div class="movieDesc" style={style.movieDesc}> 
-                                    <h4>{movie.title}</h4>
-                                        <div class="extra">
-                                            <Link to={"/movieDetails/" + movie.id }>
-                                                <button type="button" class="btn btn-outline-primary mr-2">View More</button>
-                                            </Link>
-                                            <button type="button" onClick={() => getMovieId("watchlist", movie)} class="btn btn-primary mr-2"><i class="fas fa-bookmark"></i></button>
-                                            <button type="button" onClick={() => getMovieId("favourites", movie)} class="btn btn-danger mr-2"><i class="far fa-heart"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="movieCard mx-auto" >
+                            <p class="movieCard-title">MOVIE INFO</p>  
+                        <div class="movieCrdImg">
+                            {movie.poster_path && movie.poster_path ? <img style={style.imgStyle} class="crdImg" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="movie poster" /> : <img style={style.imgStyle} class="crdImg" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png' style={style.imgStyle} /> }
                         </div>
+                        <div class="movieCrdDesc">
+                            <p class="movieCrdTitle">{movie.title}</p>  
+                            <p class="ratngCard">{movie.vote_average}</p>
+                        </div>
+                        <div class="extra">
+                            <Link to={"/movieDetails/" + movie.id }>
+                                <button type="button" class="btn myBtn mr-2">View More</button>
+                            </Link>
+                            <button type="button" onClick={() => getMovieId("watchlist", movie)} class="btn  myBtn mr-2"><i class="fas fa-bookmark"></i></button>
+                            <button type="button" onClick={() => getMovieId("favourites", movie)} class="btn myBtn mr-2"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
                     )}
 
                 </div>

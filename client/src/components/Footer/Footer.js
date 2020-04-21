@@ -2,24 +2,19 @@ import React from 'react'
 
 function Footer() {
     const footerStyle={
-            position: "relative",
-            left: 0,
-            bottom: 0,
-            width: "100%",
-            paddingTop: "20px",
-            backgroundColor: "grey",
-            color: "white",
-            textAlign:"center"
-         
+        position: "relative",
+        left: 0,
+        bottom: 0,
+        width: "100%",
+        color: "rgb(158, 158, 158)",
+        textAlign:"center"
     }
     return (
-        <div class="footer" style={footerStyle}>
-            <h3>(c) 2020 MovieManiax</h3>
-            <h4>Created by:  Akanksha Joanna Norma Sara</h4>
-            <a class="btn btn-outline-light btn-social text-center rounded-circle" target="_blank" href="https://github.com/jsanthos01/MovieManiax">
-                 <i class="fab fa-github"></i>
-            </a>
-            </div>
+        <div class="footer mt-5" style={footerStyle}>
+            <p>(c) 2020 MovieManiax</p>
+            <p>Created by:  Akanksha Joanna Norma Sara</p>
+
+        </div>
     )
 }
 

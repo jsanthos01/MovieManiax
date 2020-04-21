@@ -1,25 +1,18 @@
 const mongoose = require('mongoose');
 const bcrypt = require ( 'bcrypt' );
 
-mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useFindAndModify: false});
 // mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true});
+// mongoose.connect(`mongodb://${process.env.movieTracker}`,{useNewUrlParser: true});
+// mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true, useFindAndModify: false});
 const db = require( './models' );
 
-
-// input: <object> { name, email, password }
-// output: { message, id, name }
 async function registerUser( userData ){
     if( !userData.password || !userData.name || !userData.email ){
-        // console.log( `[registerUser] invalid userData! `, userData );
         return { message: "Invalid user data", id: "", name: "" };
     }
-    
-    // console.log( `[registerUser], userData: `, userData );
     const saltRounds = 10;
- 
-    const passwordHash = await bcrypt.hash(userData.password, saltRounds);
-    // console.log( `[registerUser] (hash=${passwordHash}) req.body:`, userData );
-    
+    const passwordHash = await bcrypt.hash(userData.password, saltRounds);    
     const saveData = {
        name: userData.name,
        email: userData.email,
@@ -34,19 +27,16 @@ async function registerUser( userData ){
         email: saveUser.email,
         name: saveUser.name 
     };           
- }
+}
 
-// input: email, password
-// output: <object> { userId, firstName, lastName, emailAddress, creationTime } || false
+
 async function loginUser( email, password ) {
     const userData = await db.users.findOne({ email: email });
-    // console.log( `[loadUser] email='${email}' userData:`, userData );
     if( !userData ) {
         return { error: "Couldn't find that email. Register or try again!" };
     }
 
     const isValidPassword = await bcrypt.compare( password, userData.password );
-    // console.log( ` [loginUser] checking password (password: ${password} ) hash(${userData.password})`, isValidPassword );
     if( !isValidPassword ) {
         return { error: "Invalid password" };
     }
@@ -71,19 +61,8 @@ async function loginUser( email, password ) {
     };
 }
 
-async function logoutUser( session ){
-    const userData = await db.users.findOneAndDelete({ session });
-    // console.log( `[logoutUser] session(${session})`, userData );
-    return true; //( userData._id ? true : false );
-}
-
-
 //WatchList Section
 async function postWatchlist(movieData){
-    console.log("Inside orm file");    
-    // console.log("Inside orm file")
-    // console.log(movieData);
- 
     const movieInfo = {
        "movieId": `${movieData.movieId}`,
        "title": `${movieData.title}`,
@@ -94,109 +73,171 @@ async function postWatchlist(movieData){
        "ratings": `${movieData.ratings}`
     }
  
-    const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { watchlist:  movieInfo } });
-    // console.log(userFetch)
-    return { message: "Movie successfully saved in Watchlist!!"};
+    const checkWatchlist = await db.users.findOne({ _id: movieData.userId});
+    let watchListArr = checkWatchlist.watchlist;
+    const exists = watchListArr.find(movie => movie.movieId === movieInfo.movieId)
+    if( exists) {
+        return { message: "Movie Exists in the your watchlist page!!!" };
+    }else{
+        const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { watchlist:  movieInfo } });
+        return { message: "Movie successfully saved in Watchlist!!"};
+    }
 }
 
-
 async function getWatchlist(id){
-    const getSavedList =  db.users.find({_id:id});
+    const getSavedList = await db.users.find({_id:id});
     return getSavedList;
 }
 
 //Favourites Section
 async function postFavourites(movieData){
-    console.log("Inside orm post favourites file")
-    console.log(movieData);
-   
-    // console.log("Inside orm post favourites file")
-    // console.log(movieData);
- 
     const movieInfo = {
         "movieId": `${movieData.movieId}`,
         "title": `${movieData.title}`,
         "image":`${movieData.image}`,
         "ratings": `${movieData.ratings}`
     }
-    //creating a new modal object
-    const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { favourites:  movieInfo } });
-    // console.log(userFetch)
-    return { message: "Movie successfully saved in Favourites!!"};
+    const checkFavourites = await db.users.findOne({ _id: movieData.userId});
+    let favArr = checkFavourites.favourites;
     
-    
- }
+    const exists = favArr.find(movie => movie.movieId === movieInfo.movieId)
+    if( exists ) {
+        return { message: "Movie Exists in the your Favourites page!!!" };
+    }else {
+        const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { favourites:  movieInfo } });
+        return { message: "Movie successfully saved in Favourites!!"}; 
+    }
+}
  
 async function getFavourites(id){
-    const getSavedList =  db.users.find({_id:id});
+    const getSavedList = await db.users.find({_id:id});
     return getSavedList;
 }
  
 async function deleteFavMovie(userId, movieObjId){
-    console.log("Inside orm delete favourites ");
-    console.log(userId)
-    console.log(movieObjId);
-    const deleteMovieDb = db.users.updateOne({_id: userId},{ "$pull": { "favourites": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
+    const deleteMovieDb = await db.users.updateOne({_id: userId},{ "$pull": { "favourites": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
         console.log(err)
     });
     return { message: "Movie successfully deleted from favourites page!!"};
 }
 async function deleteWatchListMovie(userId, movieObjId){
-    console.log("Inside orm delete watchlist ");
-    console.log(userId)
-    console.log(movieObjId);
-    const deletemovie = db.users.updateOne({_id: userId},{ "$pull": { "watchlist": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
+    const deletemovie = await db.users.updateOne({_id: userId},{ "$pull": { "watchlist": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
+        console.log(err)
     });
     return { message: "Movie successfully deleted from watchlist page!!"};
 }
 
-
-// sara's code starts here
-
-//sara code: 
-
-
 async function getUserslist(){
-    const getUserList =  db.users.find({});
-    console.log('user list is: ', getUserList)
+    const getUserList = await db.users.find({});
     return getUserList;
 }
-async function postFriend(friendData){
-    console.log("Inside orm file")
-    console.log(friendData);
-    const myId= friendData.userId;
 
+async function postFriend(friendData){
+    const myId= friendData.userId;
     const friendInfo = {
         'userId': `${friendData.userId}`,
+        'friendId': `${friendData.friendId}`,
         'name': `${friendData.friendName}`,
+        'image': `${friendData.friendImg}`,
     }
 
     const userFetch = await db.users.findOneAndUpdate({ _id: friendData.userId }, { $push: { friendList:  friendInfo } });
-    console.log(userFetch)
     return { message: "friend successfully saved in Watchlist!!"};
 }
 
 async function getFriendlist(id){
-    const getFriendList =  db.users.find({_id:id});
+    const getFriendList = await db.users.find({_id:id});
     return getFriendList;
+}
+async function getFriendInfo(id){
+    const getFriendInfo =  await db.users.find({_id:id});
+    console.log('in Orm etFriendInfo: ', getFriendInfo)
+    return getFriendInfo[0];
 }
 
 async function deleteFriend( objIds ){
-    console.log( ' in orm objIds: ', objIds)
-    
-    const DeleteFriendList =  db.users.update({ _id:  objIds.userId }, { "$pull": { "friendList": { "_id": objIds.frndId } }}, { safe: true, multi:true }, function(err, obj) {
-       //do something smart
+    const DeleteFriendList = await db.users.update({ _id:  objIds.userId }, { "$pull": { "friendList": { "_id": objIds.frndId } }}, { safe: true, multi:true }, function(err, obj) {
+        console.log(err)
     });
     return DeleteFriendList;
 }
 
-// sara's code ends here
 async function showProfileDb(id){
-    
-    const profileDb = db.users.findById({ _id:id })
-    // console.log( `[userInfo avatar] id ${id}`, avatarDb );
+    const profileDb = await db.users.findById({ _id:id })
     return profileDb;
 }
+
+async function postReview(details){
+    console.log(details);
+    const myReview = {
+        // 'reviewSchemaId': `${details.id}`,
+        'movieId': `${details.movieId}`,
+        'movieImage':`${details.moviePoster}`,
+        'movieName': `${details.movieName}`,
+        'rating': `${details.rating}`,
+        'comment': `${details.comment}`
+    }
+    const userFetch = await db.users.findOneAndUpdate({ _id: details.id }, { $push: { myReviews:  myReview } });
+    
+    const reviewSchema = {
+        movieId: details.movieId,
+        rating: details.rating,
+        user: { 
+            name:details.name,
+            id: details.id
+        },   
+        comment: details.comment,
+    }
+    const dbReviews = new db.reviews( reviewSchema);
+    const reviewInfo = await dbReviews.save();
+    return { message: "Review successfully saved !!"};
+
+}
+
+async function getSpecificMovieReviews(id){   
+    const getReviewData = await db.reviews.find({movieId: id});
+    return getReviewData;
+}
+
+async function deleteReviewInfo( userId, movieId, comment ){
+    console.log(`Orm.js`, comment)
+    const deleteReview = db.reviews.deleteOne( { "_id" : movieId}, function (err) {
+        if (err) return handleError(err)
+    });
+    const deleteUserReview = await db.users.update({ _id:  userId }, { "$pull": { "myReviews": { "comment": comment.comment } }}, { safe: true, multi:true }, function(err, obj) {
+        console.log(err)
+    });
+    return { message: "Your Review has been deleted !!"};
+}
+
+
+//-----------------multer--------------------------------
+async function updateAvatar( userId, imageUrl ){
+    // console.log(`[updateThumbnail] thumbId(${imageId}) myEdit: `, myData);
+    const imageData = {
+        profileImg: imageUrl
+     };
+    const dbResult = await db.users.findOneAndUpdate({_id: userId}, imageData);
+    const userFetch = await db.users.findOneAndUpdate({ _id: userId }, { $push: { friendList: {image: imageData} } });
+
+    return { message: `Thank you, updated` }
+}
+//--------------------------bio----------------------------
+
+async function bioResultDb( bioId, bioData ){
+    // console.log(`[updateBio] BioId(${bioId}) myEdit: `, bioData);
+    const dbBioResult = await db.users.findOneAndUpdate({_id: bioId}, bioData);
+    return dbBioResult;
+}    
+
+// async function getProfileImage(){
+//     const userFetched = await db.users.find({});
+//     let profileUrl = [];
+
+//     userFetched.forEach(user => profileUrl.push(user.profileImg));
+//     return profileUrl;
+// }
+//------------------------------------------------------------ 
 
 module.exports = {
     registerUser,
@@ -207,12 +248,15 @@ module.exports = {
     getFavourites,
     deleteFavMovie,
     deleteWatchListMovie,
-
-    //sara
     getUserslist,
     postFriend,
     getFriendlist,
     deleteFriend,
-
-    showProfileDb
+    getFriendInfo,
+    showProfileDb,
+    postReview,
+    getSpecificMovieReviews,
+    deleteReviewInfo,
+    bioResultDb,
+    updateAvatar    
 }

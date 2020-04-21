@@ -10,15 +10,12 @@ function MovieWatchList() {
         header: {textAlign: "center", paddingBottom: "30px"}
     }
     async function getSavedMovieList(){
-
         const getMovies = await fetch(`/api/watchlistMovie/${id}`).then(res => res.json());
-        console.log("Inside the WatchList Component")
-        console.log("inside the watchlist page:", getMovies)
-        console.log("inside the watchlist page 2:", getMovies[0].watchlist)
         const movies = getMovies;
-        console.log(movies);
-        console.log(movies[0].name);
-        setMyMovies(movies[0].watchlist);
+        const sortedMovies = movies[0].watchlist.reverse()
+        // console.log(sortedMovies)
+        // setMyMovies(movies[0].watchlist);
+        setMyMovies(sortedMovies);
     }
 
     useEffect(function(){
@@ -31,7 +28,7 @@ function MovieWatchList() {
                 <h1 style={style.header}>Your WatchList</h1>
             </div>
 
-            <div className="result container mb-5">
+            <div className="container mb-5">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -39,7 +36,6 @@ function MovieWatchList() {
                         </div>
                         <hr/>
                         { myMovies.length > 0 ? <MovieList myMovies={myMovies}getSavedMovieList={getSavedMovieList} />: 'You have not added to your watchlist' }
-
                     </div>
                 </div>
             </div>

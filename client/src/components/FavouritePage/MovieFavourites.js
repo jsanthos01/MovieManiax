@@ -30,14 +30,11 @@ function MovieFavourites() {
     }
     
     async function getSavedMovieList(){
-        
         const getMovies = await fetch(`/api/favourites/${id}`).then(res => res.json());
-        console.log("Inside the Favourites Component")
-        console.log("inside the Favourites page:", getMovies)
-        console.log("inside the Favourites page 2:", getMovies[0].favourites)
         const movies = getMovies;
-        console.log(movies)
-        setMyMovies(movies[0].favourites);
+        const sortedMovies = movies[0].favourites.reverse()
+        // console.log(sortedMovies)
+        setMyMovies(sortedMovies);
     }
 
     useEffect(function(){
@@ -47,16 +44,14 @@ function MovieFavourites() {
     function sortOptions(option){
         setMyMovies([]);
         if(option === "alphabetical"){
-            console.log(option);
             myMovies.sort(nameOrder);
             setMyMovies([...myMovies]);
         }else if(option ==="rating"){
-            console.log(option);
             myMovies.sort(ratingsOrder);
             setMyMovies([...myMovies]);
-        }else if(option === "date"){
-            console.log(option);
-
+        }else if(option === "reverse alphabetical"){
+            myMovies.sort(reverseNameOrder);
+            setMyMovies([...myMovies]);
         }
     }
 
@@ -71,6 +66,17 @@ function MovieFavourites() {
         }
         return 0
     }
+    //Sort by Name(Reverse Alphabetical)
+    function reverseNameOrder(a,b){
+        const titleA = a.title.toUpperCase();
+        const titleB = b.title.toUpperCase();
+        if(titleA < titleB){
+            return 1;
+        }else if(titleA > titleB){
+            return -1
+        }
+        return 0
+    }
 
     //Sort By ID
     function ratingsOrder(a,b){
@@ -80,7 +86,6 @@ function MovieFavourites() {
     return (
         <div>
             <div className="header">
-                
                 <div class="container-fluid">
                     <h1 style={style.header}>Your Favourites</h1>
                     <div class="row" style={style.rowStyle}>
@@ -95,7 +100,7 @@ function MovieFavourites() {
                                 <div class={menuClass} aria-labelledby="dropdownMenu2">
                                     <button onClick={() => sortOptions("alphabetical")}class="dropdown-item" type="button">Alphabetical</button>
                                     <button onClick={() => sortOptions("rating")}class="dropdown-item" type="button">IMDb Rating</button>
-                                    <button onClick={() => sortOptions("date")}class="dropdown-item" type="button">Date Added</button>
+                                    <button onClick={() => sortOptions("reverse alphabetical")}class="dropdown-item" type="button">Reverse Alphabetical</button>
                                 </div>
                             </div>
                         </div>

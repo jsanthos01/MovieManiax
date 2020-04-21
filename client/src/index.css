@@ -6,8 +6,8 @@ body {
     sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #060d1d;
-  /* color: white;   */
+  background-image: linear-gradient(   #0a1635 20%, #0c1226);
+  color: white;  
 
 }
 code {
@@ -30,7 +30,7 @@ h1 {
 .hero {
   background-size: cover; 
   background-repeat: no-repeat;
-  background-image:  linear-gradient(to right, rgba(3.14%, 14.51%, 40.39%, 0.5) 150px, rgba(7.06%, 20.39%, 50.59%, 0.7) 100%), url( https://i.pinimg.com/originals/9d/0f/50/9d0f5009708b1c92adb022c647b89913.jpg);
+  background-image:  linear-gradient(to right, rgba(3.14%, 14.51%, 40.39%, 0.5) 150px, rgba(7.06%, 20.39%, 50.59%, 0.7) 100%), url(https://cdn.wallpapersafari.com/69/71/mgiTNs.jpg);
 }
 
 .searchBox {
@@ -47,15 +47,6 @@ h1 {
   justify-content: center;
 }
 
-
-
-
-
-
-
-
-
-
 /* genre */
 .flip-card {
   background-color: transparent;
@@ -66,7 +57,7 @@ h1 {
   cursor: pointer;
 }
 .flip-card:active {
-  background: pink;
+  /* background: pink; */
 }
 .flip-card-inner {
   position: relative;
@@ -77,10 +68,22 @@ h1 {
   transform-style: preserve-3d;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
+.flip-card-inner:hover {
+  /* position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0);
+}
 .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
 }
 .flip-card-front, .flip-card-back {
+
+  border-top: 3px solid #265563;
+  border-right: 3px solid #265563;
   padding: 5px;
   position: absolute;
   width: 100%;
@@ -88,14 +91,249 @@ h1 {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
 .flip-card-front {
   border-radius: 5px;
-  background-color: white;
+  background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
   color: black;
+  box-shadow: -2px 2px 8px 0 rgba(190, 60, 230, 0.562);
+
 }
 .flip-card-back {
   border-radius: 5px;
-  background-color: white;
-  color: black;
+  background-color: #265563;
+  color: white;
   transform: rotateY(180deg);
+  box-shadow: 0 4px 8px 0 rgba(190, 60, 230, 0.562);
+}
+
+/* tab */
+.tabBar{
+  margin-bottom: 30px;
+  /* border: 1px solid red; */
+  position: relative;
+
+}
+.myFlex {
+  display: flex;
+  flex-direction: row;
+}
+
+.navLink {
+  color: rgb(134, 134, 134);
+  padding: 15px;
+
+}
+.tab {
+  padding: 15px;
+
+}
+.navLink:hover {
+background: #f56372;
+text-decoration: none;
+color: white;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+}
+
+.NavLinkActive {
+  color: #f56372;
+  border-top: 1px solid #2ec3d6;
+  border-left: 1px solid #2ec3d6;
+  border-right: 1px solid #2ec3d6;
+  padding: 15px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.NavLinkActive:hover {
+text-decoration: none;
+color: #f56372;
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+
+
+
+/* movie card */
+.movieCard {
+  width: 60vh;
+  background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
+  border-radius: 20px;
+  padding: 25px;
+  margin: 15px 10px;
+  filter: drop-shadow( 0px 0px 8px #0000009d);
+  position: relative;
+
+}
+.movieHrzCard {
+  width: 100%;
+  background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
+  /* background: #0f1b38; */
+  border-radius: 20px;
+  /* border: 1px solid #fdc664; */
+  padding: 25px;
+  margin: 10px;
+  filter: drop-shadow( 0px 0px 8px #0000009d);
+  position: relative;
+
+}
+.friendCard{
+  background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 10px;
+  filter: drop-shadow( 0px 0px 8px #0000009d);
+}
+
+.movieCard-title{
+  color: #2ec3d6;
+
+}
+.movieCrdImg{
+  filter: drop-shadow( 0px 0px 8px #1743509d);
+
+  /* border-bottom:   3px solid #fdc664; */
+}
+.movieCrdTitle{
+  /* padding: 20px; */
+  font-size: 1.5rem;
+  /* width: 100%; */
+}
+.crdImg {
+  border-radius: 10px;
+  height: 60vh;
+  object-fit: cover;
+
+  /* border: 3px solid #e2a439; */
+
+}
+.hrCdImg{
+  border-radius: 10px;
+  /* height: 40vh; */
+  width: 100%;
+  object-fit: cover;
+  /* border: 1px solid palevioletred; */
+  
+}
+.mvHrzCrdImg{
+  width: 40%;
+    /* height: 40vh;
+  width: 40vh; */
+
+
+}
+.mvHrzCrdDesc {
+  /* width: 60%; */
+  /* border: 1px solid #2ec3d6; */
+  /* padding: 20px; */
+  /* margin-top: 20px; */
+
+}
+.movieCrdDesc{
+  padding: 20px;
+  min-height: 30vh;
+  text-align: center;
+  align-items: center;
+  /* margin-top: 20px; */
+}
+
+.navbar{
+  color: white;
+}
+
+.tabHeight{
+  min-height: 60vh;
+}
+
+ul li {
+  list-style: none;
+}
+
+.ratngCard {
+  position: absolute;
+  text-align: center;
+  font-size: 1.2rem;
+  font-style: italic;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background:  rgb(237, 20, 91);
+  color: white;
+  padding: 10px;
+  top: -15px;
+  right: -15px;
+}
+.ratngCard2{
+  position: absolute;
+  text-align: center;
+  font-size: 1rem;
+  font-style: italic;
+  width: 80px;
+  border-radius: 5px;
+  background:  rgb(237, 20, 91);
+  color: white;
+  padding: 5px;
+  top: 0;
+  right: 0;
+}
+.myBtn {
+  border: 1px solid #26b3b8;
+  color: #26b3b8;
+}
+.myBtn:hover {
+  background: #26b3b8;
+  color: white;
+}
+.myBtnPink {
+  border: 1px solid rgb(237, 20, 91);
+  color: rgb(237, 20, 91);
+}
+.myBtnPink:hover {
+  background: rgb(237, 20, 91);
+  color: white;
+}
+
+.moreHeads{
+  color: white;
+  display: block;
+  text-align: center;
+}
+
+.profileImg {
+  width: 15vh;
+  height: 15vh;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 1200px) {
+  .movieCard {
+    width: 65vh;
+    
+  }
+}
+@media only screen and (max-width: 1170px) {
+  .movieCard {
+    width: 75vh;
+    
+  }
+}
+@media only screen and (max-width: 990px) {
+  .movieCard {
+    width: 70vh;
+    
+  }
+}
+@media only screen and (max-width: 770px) {
+  .movieCard {
+    width: 85vh;
+    
+  }
+  .myFlex {
+    display: flex;
+    flex-direction: column;
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+  }
 }

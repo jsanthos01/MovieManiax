@@ -1,17 +1,38 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 function AvatarUpload(props) {
+    const userid = localStorage.id;
+    const [ myPic, setMyPic] = useState ( '' )
+
+    function handleChange(e){
+        const file = e.target.files[0];
+        // console.log(file);
+        setMyPic(file)
+    }
+
     
-
-    function handleUpload(){
-
+    async function handleUpload(e){
+        e.preventDefault();
+        props.uploadPic(e);
+        
+        if(myPic){
+            let myForm = document.getElementById('myForm');
+            let formData = new FormData(myForm);
+            const uploadPic = await fetch(`/api/upload/${userid}`, 
+                {
+                    method: 'PUT',
+                    body: formData
+                }
+            ).then( result=>result.json())
+                console.log(uploadPic)
+        }
+        
     }
     return (
-        <div>
-            <form> 
-                <input type="file" name="myFile" />
-               <button onClick={props.UploadPic}>Upload </button> 
-                {/* <button class='btn btn-lg btn-primary' onClick={props.saveForm}>Save Review</button> */}
+        <div>            
+            <form id='myForm' role="form" encType="multipart/form-data"> 
+               <input type="file" name="myFile" onChange={handleChange} />
+               <button onClick={handleUpload}>Upload</button> 
             </form>
         </div>
     )
