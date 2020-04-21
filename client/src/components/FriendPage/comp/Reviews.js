@@ -19,10 +19,10 @@ function Reviews() {
                         movieName: {type: String}
                         
                         */}
-                        <div class="mvHrzCrdDesc col-md-2">
+                        <div class="mvHrzCrdDesc">
                             <img src={`https://image.tmdb.org/t/p/w500/${review.movieImage}`} class="hrCdImg " alt="movie poster" />
                         </div>
-                        <div class="mvHrzCrdDesc col-md-10">
+                        <div class="mvHrzCrdDesc">
                             <h3 class="movieCrdTitle">{review.movieName}</h3>  
                             <p>comment: {review.comment}</p>
                             <p class="ratngCard2"> {review.rating}</p>

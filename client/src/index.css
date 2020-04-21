@@ -150,6 +150,16 @@ border-bottom-right-radius: 5px;
   position: relative;
 
 }
+.friendCard{
+  /* width: 100%; */
+  background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
+  /* background: #0f1b38; */
+  border-radius: 20px;
+  /* border: 1px solid #fdc664; */
+  padding: 25px;
+  margin: 10px;
+  filter: drop-shadow( 0px 0px 8px #0000009d);
+}
 
 .movieCard-title{
   color: #2ec3d6;

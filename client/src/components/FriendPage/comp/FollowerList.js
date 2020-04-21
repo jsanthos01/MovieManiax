@@ -12,11 +12,11 @@ function FollowerList() {
     return (
         <div class='tabHeight row'  style={{color : 'white'}}>
             {myFriendList.map(friend=>
-            <div class="movieCard mx-auto" >
-                <div class="mvHrzCrdDesc col-md-6">
+            <div class="friendCard mx-auto" >
+                <div class="mvHrzCrdDesc">
                     <img src={friend.image} class="crdImg" alt="movie poster" style={friendImg}/>
                 </div>
-                <div class="mvHrzCrdDesc col-md-6">
+                <div class="mvHrzCrdDesc">
                     <p class="movieCrdTitle">{friend.name}</p>  
                     <a class="btn btn-success mr-2" href={'/friendProfile/'+friend.friendId}> View Profile</a>
                 </div>
