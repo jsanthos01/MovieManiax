@@ -10,7 +10,7 @@
 .title{
   text-align: center;
   font-size: 6vw;
-  padding-top: 20%;
+  padding-top: 10%;
   
 }
 .icon {
@@ -52,7 +52,7 @@ filter: drop-shadow(1px 1px 5px #FF416C);
   position: relative;
   background-image: url('../assets/movieBackground.jpg');
   background-size: cover;
-  height: 100vh;
+  min-height: 80vh;
   top: 0;
   bottom: 0;
   right: 0;

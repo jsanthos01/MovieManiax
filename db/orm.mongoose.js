@@ -13,9 +13,9 @@ async function registerUser( userData ){
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(userData.password, saltRounds);    
     const saveData = {
-       name: userData.name,
-       email: userData.email,
-       password: passwordHash
+        name: userData.name,
+        email: userData.email,
+        password: passwordHash
     };
 
     const dbUser = new db.users( saveData );
