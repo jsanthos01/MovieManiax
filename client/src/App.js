@@ -25,7 +25,7 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-          <div className="container-fluid main">
+          <div className="container-fluid main" style={{minHeight: "80vh"}}>
             <Route exact path={["/","/homepage"]} component={HomePage} />
             <Route exact path="/searchMovie" component={SearchMovie} />
             <Route exact path="/movieDetails/:id" component={MovieInfo} />

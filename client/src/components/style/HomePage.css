@@ -49,7 +49,7 @@ filter: drop-shadow(1px 1px 5px #FF416C);
   height: 66vh;
 }
 .homeDiv{
-  position: absolute;
+  position: relative;
   background-image: url('../assets/movieBackground.jpg');
   background-size: cover;
   height: 100vh;
@@ -57,7 +57,7 @@ filter: drop-shadow(1px 1px 5px #FF416C);
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: 10;
+
 }
 
 
