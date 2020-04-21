@@ -146,7 +146,7 @@ app.put("/api/removeReview/:userId/:movieId", async (req, res) => {
 });
 
 //-----------multer image upload----------------
-const upload = require('multer')({ dest: 'client/public/uploads/' });
+const upload = require('multer')({ dest: 'client/build/uploads/' });
 
 app.put( '/api/upload/:userid', upload.single('myFile'), async function( req, res ){
   let userId = req.params.userid
@@ -155,7 +155,7 @@ app.put( '/api/upload/:userid', upload.single('myFile'), async function( req, re
  
   const fileExt = originalName.toLowerCase().substr((originalName.lastIndexOf('.'))).replace('jpeg','jpg');
     fs.renameSync( `${__dirname}/${filePath}`, `${__dirname}/${filePath}${fileExt}` );
-  const imageUrl = req.file.path.replace(/\\/g, '/').replace('client/public/','/')+fileExt;
+  const imageUrl = req.file.path.replace(/\\/g, '/').replace('client/build/','/')+fileExt;
   const imgUploadDb = await orm.updateAvatar( userId, imageUrl );
   res.send( imgUploadDb );
 
