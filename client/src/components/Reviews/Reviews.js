@@ -8,7 +8,7 @@ function Reviews() {
     const userId = localStorage.id
     const userName = localStorage.name;
     const [reviews, setReviews] = useState([]);
-    const [profileImg, setProfileImg] = useState([])
+    const [profileImg, setProfileImg] = useState([]);
     const [modalDisplay, setModalDisplay] = useState(false);
     const [movieImage, setMovieImage] = useState("");
     const [formOpen, setFormOpen] = useState({});
@@ -67,7 +67,7 @@ function Reviews() {
             body: JSON.stringify(comment)
         }).then( result=>result.json());
 
-        console.log(postReviewComment);
+        console.log(postReviewComment);   
         getSpecificReviews();
     }
 
@@ -88,6 +88,7 @@ function Reviews() {
         console.log(postThumbsUp);
         getSpecificReviews();
     }
+
     useEffect(function(){
         getSpecificReviews();
     }, [modalDisplay])
@@ -96,7 +97,7 @@ function Reviews() {
         <div className="result container mb-5">
             <div>
                 <h1>{title}</h1>
-                <button type="button" class="btn btn-sm btn-outline-primary m-3"  onClick={getMovieImage}>Add a Review</button>
+                <button type="button" class="btn btn-md btn-outline-primary m-3"  onClick={getMovieImage}>Add a Review</button>
             </div>
             <div class="container">
                 {reviews.map((review, idx) => 
@@ -130,10 +131,9 @@ function Reviews() {
                                         <i class="thumbsUp far fa-thumbs-up" onClick={()=> postThumbsUp(review._id)}></i><span>{review.like}</span>
                                     </li>
                                     <div class="container">
-                                        {formOpen.id == idx && formOpen.state ? 
+                                        {formOpen.id === idx && formOpen.state ? 
                                             <form>
                                                 <div class="form-group">
-                                                    <label htmlFor="content">Your Comment</label>
                                                     <textarea 
                                                         value={comment.content}
                                                         class="form-control" 
@@ -142,10 +142,28 @@ function Reviews() {
                                                         onChange={handleInputChange}
                                                     />
                                                 </div>
-                                                <button type="submit" class="btn btn-outline-primary" onClick={() => postComment(idx)}>Save Comment</button>
+                                                <button type="submit" class="btn btn-outline-primary" style={{marginBottom: "20px"}} onClick={() => postComment(idx)}>Post Comment</button>
                                             </form> : ''  
                                         }
                                     </div>
+                                    {formOpen.id === idx && formOpen.state ? 
+                                        <div class="container">
+                                            {review.miniComments.map(comment => 
+                                                <div class="card styleCard">
+                                                    <div class="grouped">
+                                                        <div class="avatar">
+                                                        {profileImg.map(user => user._id === comment.userId ? <img class="avatar lazyload" src={user.profileImg} alt="userProfile" />: '')}
+                                                            
+                                                        </div>
+                                                        <div class="info">
+                                                            <h5>Written by {comment.userName}</h5>
+                                                            <p>{comment.content}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>: ''
+                                    }
                                 </ul>
                             </div>
                         </div>
