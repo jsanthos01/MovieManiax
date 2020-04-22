@@ -10,9 +10,36 @@ function Friend() {
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
 
     const messageStyle = {
+        width: '80%',
+        border: 'none',
+        background: '#26b3b8',
+        color: 'white',
         position: 'sticky',
         top: '0',
-        left: '0'
+        left: '0',
+        zIndex: '10',
+        margin: '0 auto'
+    }
+    const style = {
+        myForm: {
+            width: "70%",
+            margin: "50px"
+        }, 
+        myInput: {
+            borderTopLeftRadius: '20px',
+            borderRadius: '20px',
+            borderBottomLeftRadius: '20px'
+        },
+        myBtnRgt: {
+            width: '150px',
+            padding: '10px',
+            backgroundColor: '#ed145b',
+            borderRadius: '20px',
+            marginLeft: '20px',
+            cursor: 'pointer',
+            border: 'none'
+        }
+
     }
 
     function handleInputChange( e ){
@@ -68,35 +95,23 @@ function Friend() {
                     setAlertMessage( { type: 'danger', message: addedFriend.message } );
                     setTimeout( function(){ setAlertMessage( {} ); }, 2500 );
                 }
-                // setShowList('');
                 setUserProfile([])
-
                 loadFriend()  
         
     }
     async function deleteFromFriendList( frndId ){
-        console.log('delete btn clicked. userId: ', frndId);
-        // const friendInfo = {
-        //     userId: localStorage.id,
-        //     friendId: user._id,
-        //     friendName: user.name,
-        //     // friendImg: user.img
-        // }
+        // console.log('delete btn clicked. userId: ', frndId);
         const userId = localStorage.id;
 
-        console.log(`***loading userList `);
-        // const userListResult = await fetch('https://randomuser.me/api/0.8/?results=45').then(result=>result.json());  
+        // console.log(`***loading userList `);
         const friendListResult = await fetch(`/api/deleteFriend/${userId}/${frndId}`).then(result=>result.json());  
 
-        // setMyFriendList( friendListResult[0].friendList );
-        // console.log( 'friendListResult: ', friendListResult[0].friendList );
         loadFriend()  
     }
 
     async function loadPeople(){
 
         console.log(`***loading userList `);
-        // const userListResult = await fetch('https://randomuser.me/api/0.8/?results=45').then(result=>result.json());  
         const userListResult = await fetch('/api/UsersList').then(result=>result.json());  
 
         setUserList( userListResult );
@@ -107,7 +122,6 @@ function Friend() {
         const userId = localStorage.id;
 
         console.log(`***loading userList `);
-        // const userListResult = await fetch('https://randomuser.me/api/0.8/?results=45').then(result=>result.json());  
         const friendListResult = await fetch(`/api/friendList/${userId}`).then(result=>result.json());  
         setMyFriendList( friendListResult[0].friendList );
         console.log( '104 friendListResult: ', friendListResult[0].friendList )
@@ -127,7 +141,7 @@ function Friend() {
             <form >
                 <h4 style={{color: "white"}}>Find People</h4>
                 <div class="input-group">
-                    <input onChange={handleInputChange} value={searchInput} type="text" class="form-control" placeholder="Search your user"/>
+                    <input onChange={handleInputChange} value={searchInput} type="text" class="form-control" style={style.myInput} placeholder="Search your user"/>
                 </div>
                 <div class="mb-3">
                     <ul class="col-6 list-group">
@@ -159,18 +173,21 @@ function Friend() {
                 <div class="mb-3">
                     <h4 style={{color: "white"}}>Your Following List</h4>
                         { myFriendList.length>0 ? myFriendList.map( user =>
-                        <div class="card" style={{border : '1px solid red'}}>
+                        <div class="friendCard" >
                             <div class="d-flex card-body">
-                                <div class="col-md-1">
-                                    <img src={user.image} alt="img profile" style={{width : '100%'}}/>
+                                <div class="col-md-2">
+                                    <img src={user.image} alt="profileImg " class="profileImg" />
                                 </div>
-                                <div class="col-md-11">
-                                    <h3>{user.name}</h3>
+                                <div class="col-md-7  mt-4">
+
+                                    <h3 style={{color: 'white', fontSize: '1.6rem'}} >{user.name}</h3>
+                                </div>
+                                <div class="col-md-3  mt-4">
                                     <div class="d-flex justify-content-between">
                                         <Link to={'/friendProfile/'+user.friendId}>
-                                            <div class="btn btn-success mr-2">View Profile</div>
+                                            <div class="btn myBtn mr-2">View Profile</div>
                                         </Link>
-                                        <div class="btn btn-success" onClick={()=>deleteFromFriendList(user._id)}> <i class="fas fa-user-times"></i></div>
+                                        <div class="btn myBtn" onClick={()=>deleteFromFriendList(user._id)}> <i class="fas fa-user-times"></i></div>
                                     </div>
                                 </div>
                             </div>

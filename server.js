@@ -126,6 +126,7 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
 //----------------------------------------------------------
 //JOANNA REVIEWS SECTION
 app.post("/api/review", async (req, res) => {
+  // console.log("REVIEW IMAGE SECTION", req.body);
   const postMovieReview = await orm.postReview(req.body);
   res.send(postMovieReview );
 })
@@ -139,7 +140,7 @@ app.put("/api/removeReview/:userId/:movieId", async (req, res) => {
   const movieId = req.params.movieId;
   const userId = req.params.userId;
   const comment = req.body;
-  console.log("Server.js", comment)
+  // console.log("Server.js", comment)
   const deleteReview = await orm.deleteReviewInfo(userId, movieId, comment);
   res.send(deleteReview);
 });
@@ -171,8 +172,12 @@ app.put('/api/user/:id', async function( req, res ){
   res.send( bioResult );
 });
 
+app.get("/api/userImage/:id" , async function (req, res) {
+  const id = req.params.id;
+  const getProfilePic = await orm.profilePic( id );
+  res.send(getProfilePic)
+})
 //-----------------------------------------------------------------
-
 
 app.listen( PORT, function(){
   console.log( `[MovieManiax server] RUNNING, http://localhost:${PORT}` );

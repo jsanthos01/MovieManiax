@@ -31,7 +31,7 @@ function MovieList(props) {
                     <div className="row" style={rowStyle}>
                         <div className="col-lg-3" style={imageStyle}>
                             {movie.image !== "null" && movie.image ? <img style={imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt="something" /> : <img style={imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
-                            <a href="Www.google.com" ><button type="button" class="btn btn-danger mr-2"><i class="fas fa-play"></i> Watch Trailer</button></a>
+                            
                         </div>
                         <div className="col-lg-9 d-flex justify-content-center flex-column">
                             <h2 style={{fontWeight:"900"}}><em>{movie.title}</em></h2>
@@ -39,10 +39,8 @@ function MovieList(props) {
                             <p><b>Rating:</b> <b>{movie.ratings}</b>/10 </p>
                             <p><b>Release Date:</b> {movie.releaseDate}</p>
                             <div class="container d-flex mx-auto ">
-                                <Link to={"/movieDetails/" + movie.movieId }>
-                                    <button type="button" class="btn btn-outline-primary mr-2">View</button>
-                                </Link>
-                                <button type="button" class="btn btn-sm btn-outline-danger mr-2" onClick={() => deleteMovieWlist(movie._id)} >Delete</button>                                
+                                <a class="btn myBtnPink mr-2" href={"/movieDetails/" + movie.movieId}> View Detail</a>
+                                <button type="button" class="btn myBtnPink mr-2" onClick={() => deleteMovieWlist(movie._id)} ><i class="fas fa-trash"></i></button>       
                             </div> 
                         </div>
                 

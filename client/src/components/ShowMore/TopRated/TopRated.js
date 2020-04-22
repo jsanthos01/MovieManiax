@@ -17,7 +17,7 @@ function TopRated() {
 
     return (
         <div >
-            <h3 class="text-center mb-4" style={{color: 'white'}}>Top Rated Movies</h3>
+            <h3 class="text-center mb-4 moreHeads" style={{color: 'white'}}>Top Rated Movies</h3>
             <MovieList movieList={movieList}></MovieList>
         </div>
     )

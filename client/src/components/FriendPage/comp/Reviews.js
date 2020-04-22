@@ -8,19 +8,15 @@ function Reviews() {
         <div class='tabHeight' style={{color : 'white'}}>
             <div class=' '>
             {myReview.map(review=>
-                    <div class="movieCard mx-auto row " >
-                        
-                        {/* <div class="mvHrzCrdImg">
-                        </div> */}
+                    <div class="movieHrzCard mx-auto row " >
                         <div class="mvHrzCrdDesc col-md-2">
-                            <img src={`https://via.placeholder.com/150`} class="hrCdImg " alt="movie poster" />
+                            <img src={`https://image.tmdb.org/t/p/w500/${review.movieImage}`} class="hrCdImg " alt="movie poster" />
                         </div>
                         <div class="mvHrzCrdDesc col-md-10">
-                            <h3>Movie Name</h3>
-                            <p class="movieCrdTitle">{review.movieId}</p>  
+                            <h3 class="movieCrdTitle">{review.movieName}</h3>  
                             <p>comment: {review.comment}</p>
-                            <p class="ratngCard"> {review.rating}</p>
-                            {/* <a class="btn btn-success mr-2" href={"/movieDetails/" + review.movieId}> View Detail</a> */}
+                            <p class="ratngCard2"> {review.rating}</p>
+                            <a class="btn btn-success mr-2" href={"/movieDetails/" + review.movieId}> View Detail</a>
                         </div>
                     </div>
                 )}

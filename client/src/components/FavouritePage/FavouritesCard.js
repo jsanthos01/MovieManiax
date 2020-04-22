@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 function FavouritesCard(props) {
     const { id } = useParams();
     const imgStyle = {
+        objectFit: "cover",
         height: "50vh",
-        objectFit: "cover"
+        width: "100%"
     }
 
     async function deleteMovieFavourite(movieId){
@@ -20,21 +21,18 @@ function FavouritesCard(props) {
     return (
         <>
         {props.myMovies.map(movie => (
-            <div class="col-md-4" style={{color: "black"}}>
-                <div class="card mb-4 shadow-sm">
-                {movie.image && movie.image!=="null" ? <img style={imgStyle} class="card-img-top" src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt="something" /> : <img style={imgStyle} class="card-img-top" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png'  /> }
-                    <div class="card-body">
-                    <h2 class="card-title"><b>{movie.title}</b></h2>
-                        <p class="card-text"><b>Ratings</b>: {movie.ratings}/10</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <Link to={"/movieDetails/" + movie.movieId }>
-                                    <button type="button" class="btn btn-outline-primary mr-2">View</button>
-                                </Link> 
-                                <button type="button" class="btn btn-sm btn-outline-danger" onClick={() => deleteMovieFavourite(movie._id)} >Delete</button>
-                            </div>
-                        </div>
-                    </div>
+            <div class="movieCard mx-auto" >
+                <p class="movieCard-title">MOVIE INFO</p>  
+                <div class="movieCrdImg">
+                    {movie.image && movie.image!=="null" ? <img style={imgStyle} class="crdImg" src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt="movie poster" /> : <img style={imgStyle} class="crdImg" src='https://www.kindpng.com/picc/m/18-189751_movie-placeholder-hd-png-download.png' alt="movie poster" /> }
+                </div>
+                <div class="movieCrdDesc">
+                    <p class="movieCrdTitle">{movie.title}</p>  
+                    <p class="ratngCard">{movie.ratings}</p>
+                </div>
+                <div class="extra">
+                    <a class="btn myBtn mr-2" href={"/movieDetails/" + movie.movieId}> View Detail</a>
+                    <button type="button" class="btn myBtn" onClick={() => deleteMovieFavourite(movie._id)} >Delete</button>
                 </div>
             </div>
         ))}

@@ -7,13 +7,25 @@ function Reviews() {
     const {id, title} = useParams();
     const userId = localStorage.id
     const [reviews, setReviews] = useState([]);
+    const [reviewUserId, setReviewUserId] = useState([]);
+    const [profileImg, setProfileImg] = useState([])
     const [modalDisplay, setModalDisplay] = useState(false);
+    const [movieImage, setMovieImage] = useState("");
+    
+    //NEW THINGS
+
     const [formOpen, setFormOpen] = useState({});
     const [comment, setComment] = useState({name: "", userId: "", reviewId: "", content: ""});
     
     async function getSpecificReviews(){
         const getMovies = await fetch(`/api/specificReviews/${id}`).then(res => res.json());
+        // const getProfileImage = await fetch(`/api/userImage/${id}`).then(res => res.json());
         setReviews(getMovies);
+        getMovies.map(review =>reviewUserId.push(review.user.id));
+
+        const getUserInfo = await fetch(`/api/UsersList`).then(res => res.json());
+        console.log(getUserInfo);
+        setProfileImg(getUserInfo);   
     }
 
     async function deleteReview(reviewId, comment){
@@ -31,7 +43,15 @@ function Reviews() {
         console.log(removeSpecificReview.message);
         getSpecificReviews();
     }
+    async function getMovieImage(){
+        const apiMovie = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=5b4dbf95cc35d2e911560cca64385e60&language=en-US`).then( result=>result.json() );
+        console.log(apiMovie)
+        setMovieImage(apiMovie.poster_path)
+        // console.log(movieImage)
+        setModalDisplay(true)
+    }
 
+    //new things for comments
     function handleInputChange(e){
         let commentInfo = {...comment}
         commentInfo["userId"] = userId;
@@ -44,18 +64,17 @@ function Reviews() {
         }
         console.log("")
         setComment(commentInfo);
-    }
+    }  
 
     useEffect(function(){
         getSpecificReviews();
     }, [modalDisplay])
 
-    console.log(comment)
     return ( 
         <div className="result container mb-5">
             <div>
                 <h1>{title}</h1>
-                <button type="button" class="btn btn-sm btn-outline-primary m-3"  onClick={() => setModalDisplay(true)}>Add a Review</button>
+                <button type="button" class="btn btn-sm btn-outline-primary m-3"  onClick={getMovieImage}>Add a Review</button>
             </div>
             <div class="container">
                 {reviews.map((review, idx) => 
@@ -64,9 +83,8 @@ function Reviews() {
                             <div class="card styleCard">
                                 <div class="grouped">
                                     <div class="avatar">
-                                        <a href="/u/Ruuz?language=en-US">
-                                            <img class="avatar lazyload" src="https://images-platform.99static.com/jQu2xohritutSVmnVq7np7rbkxg=/0x0:1920x1920/500x500/top/smart/99designs-contests-attachments/106/106359/attachment_106359975" data-srcset="https://image.tmdb.org/t/p/w64_and_h64_face/xUObnJSvHrFPsIpoDmb1jiQZLq7.jpg 1x, https://image.tmdb.org/t/p/w128_and_h128_face/xUObnJSvHrFPsIpoDmb1jiQZLq7.jpg 2x" alt="Gimly" />
-                                        </a>
+                                        {profileImg.map(user => user._id === review.user.id ? <img class="avatar lazyload" src={user.profileImg} alt="Gimly" />: '')}
+                                        
                                     </div>
                                     <div class="info">
                                         <div class="rating_wrapper">
@@ -74,6 +92,11 @@ function Reviews() {
                                             <div class="rounded rating"><i class="fas fa-star pr-2" style={{color: "yellow"}}></i>{review.rating}</div>
                                         </div>
                                         <h5>Written on {review.createdAt}</h5>
+                                        <ul class="nav justify-content-end">
+                                            <li class="nav-item ">
+                                                { userId === review.user.id ? <i class=" trash fas fa-trash" onClick={()=> deleteReview(review._id, review.comment)} ></i> : ''}
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="teaser">
@@ -120,7 +143,7 @@ function Reviews() {
                 )}
                   
             </div>
-            {modalDisplay ? <Modal setModalDisplay={setModalDisplay}  movieId={id} movieName={title} /> : ''}
+            {modalDisplay ? <Modal setModalDisplay={setModalDisplay}  movieId={id} movieName={title} movieImage={movieImage} /> : ''}
         </div>
     )
 }

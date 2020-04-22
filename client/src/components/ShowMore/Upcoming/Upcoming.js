@@ -17,7 +17,7 @@ function Upcoming() {
 
     return (
         <div>
-            <h3 class="text-center mb-4" style={{color: 'white'}}>Upcoming  Movies</h3>
+            <h3 class="text-center mb-4 moreHeads" >Upcoming  Movies</h3>
 
             <MovieList movieList={movieList}></MovieList>
         </div>

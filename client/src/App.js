@@ -11,11 +11,9 @@ import LogoutPage from './components/Login/LogoutPage';
 import Registration from './components/Registration/Registration';
 import Profile from './components/UserProfile/Profile';
 import Favourites from './components/FavouritePage/MovieFavourites';
-// import Footer from './components/Footer/Footer'
-
+import Footer from './components/Footer/Footer'
 import Friends from './components/FriendPage/Friend';
 import FriendProfilePage from './components/FriendPage/FriendProfilePage';
-
 import Reviews from './components/Reviews/Reviews' 
 import GenrePage from './components/Genre/GenrePage';
 import GenreMoviePage from './components/Genre/GenreMoviePage';
@@ -27,7 +25,7 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-          <div className="container-fluid main">
+          <div className="container-fluid main" style={{minHeight: "80vh"}}>
             <Route exact path={["/","/homepage"]} component={HomePage} />
             <Route exact path="/searchMovie" component={SearchMovie} />
             <Route exact path="/movieDetails/:id" component={MovieInfo} />
@@ -51,7 +49,7 @@ function App() {
             <Route exact path="/popular" component={PopularPage} />
             <Route exact path="/TopRated" component={TopRatedPage} /> 
           </div>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </div>
   );

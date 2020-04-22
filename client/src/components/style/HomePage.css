@@ -1,44 +1,64 @@
 * {
-    margin: 0;
-    padding: 0;
-    /* height: 100%; */
-    /* margin: 0; */
-  }
-  .homeDiv{
-    background-image: url('../assets/movieBackground.jpg');
-    background-size: cover;
-    height: 100vh;
-  }
+  margin: 0;
+  padding: 0;
+  /* height: 100%; */
+  /* margin: 0; */
+  box-sizing: border-box;
 
-  .title{
-    text-align: center;
-    font-size: 6vw;
-    padding-top: 20%;
-  }
+}
 
-  .words{
-    color: aliceblue;
-    text-align: center;
-    font-size: 2.5vw;
-  }
-  .btnContainer{
-    text-align: center;
-  }
-  .searchButton{
-    background-color: rgba(235,20,90);
-    padding: 15px;
-    color: white;
-    text-decoration: none;
-    margin-top: 20px;
-    border-radius: 80px;
-
-  }
-
-  .searchButton:hover{
-    text-decoration: none;
-    color: white
-
-  }
+.title{
+  text-align: center;
+  font-size: 6vw;
+  padding-top: 10%;
   
-    
-  
+}
+.icon {
+  padding: 30px;
+}
+.words{
+  color: aliceblue;
+  text-align: center;
+  text-transform: lowercase;
+  font-size: 2.5vw;
+}
+
+.btnContainer{
+  text-align: center;
+}
+
+.searchButton{
+  background-color: rgba(235,20,90);
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+  margin-top: 20px;
+  border-radius: 80px;
+
+}
+
+.searchButton:hover{
+text-decoration: none;
+color: white;
+filter: drop-shadow(1px 1px 5px #FF416C);
+
+
+}
+
+.hero2{
+  height: 66vh;
+}
+.homeDiv{
+  position: relative;
+  background-image: url('../assets/movieBackground.jpg');
+  background-size: cover;
+  min-height: 80vh;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+}
+
+
+

@@ -30,7 +30,7 @@ function Bio(props) {
             <form>
                 <textarea rows="10" name="myBio" value={myBio.bio} cols="60" onChange={updateBio}></textarea>
                 <br/><br/>
-                <input onClick={handleSubmit} type="submit"></input>
+                <input onClick={handleSubmit} class="btnStyle" type="submit"></input>
             </form>
         </div>
     )
