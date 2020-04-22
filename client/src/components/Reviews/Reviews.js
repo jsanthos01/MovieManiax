@@ -101,72 +101,67 @@ function Reviews() {
             </div>
             <div class="container">
                 {reviews.map((review, idx) => 
-                    <div class="content">
-                        <div class="inner_content">
-                            <div class="card styleCard">
-                                <div class="grouped">
-                                    <div class="avatar">
-                                        {profileImg.map(user => user._id === review.user.id ? <img class="avatar lazyload" src={user.profileImg} alt="userProfile" />: '')}
-                                        
-                                    </div>
-                                    <div class="info">
-                                        <div class="rating_wrapper">
-                                            <h3>{review.user.name}</h3>
-                                            <div class="rounded rating"><i class="fas fa-star pr-2" style={{color: "yellow"}}></i>{review.rating}</div>
-                                        </div>
-                                        <h5>Written on {review.createdAt}</h5>
-                                        <ul class="nav justify-content-end">
-                                            <li class="nav-item ">
-                                                { userId === review.user.id ? <i class=" trash fas fa-trash" onClick={()=> deleteReview(review._id, review.comment)} ></i> : ''}
-                                            </li>
-                                        </ul>
-                                    </div>
+                    <div class="card styleCard">
+                        <div class="introSection">
+                            <div class="avatar">
+                                {profileImg.map(user => user._id === review.user.id ? <img class="avatar lazyload" src={user.profileImg} alt="userProfile" />: '')} 
+                            </div>
+                            <div class="info">
+                                <div class="rating_wrapper">
+                                    <h3>{review.user.name}</h3>
+                                    <div class="rating">{review.rating}</div>
                                 </div>
-                                <div class="teaser">
-                                    <p>{review.comment}</p>
-                                </div>
-                                <ul class="nav justify-content-start">
+                                <h5>Written on {review.createdAt}</h5>
+                                <ul class="nav justify-content-end">
                                     <li class="nav-item ">
-                                        <i class="comments far fa-comment" onClick={() => setFormOpen({id: idx, state: true})}></i><span>{review.miniComments.length}</span>
-                                        <i class="thumbsUp far fa-thumbs-up" onClick={()=> postThumbsUp(review._id)}></i><span>{review.like}</span>
+                                        { userId === review.user.id ? <i class=" trash fas fa-trash" onClick={()=> deleteReview(review._id, review.comment)} ></i> : ''}
                                     </li>
-                                    <div class="container">
-                                        {formOpen.id === idx && formOpen.state ? 
-                                            <form>
-                                                <div class="form-group">
-                                                    <textarea 
-                                                        value={comment.content}
-                                                        class="form-control" 
-                                                        id={review._id}
-                                                        rows="3"
-                                                        onChange={handleInputChange}
-                                                    />
-                                                </div>
-                                                <button type="submit" class="btn btn-outline-primary" style={{marginBottom: "20px"}} onClick={() => postComment(idx)}>Post Comment</button>
-                                            </form> : ''  
-                                        }
-                                    </div>
-                                    {formOpen.id === idx && formOpen.state ? 
-                                        <div class="container">
-                                            {review.miniComments.map(comment => 
-                                                <div class="card styleCard">
-                                                    <div class="grouped">
-                                                        <div class="avatar">
-                                                        {profileImg.map(user => user._id === comment.userId ? <img class="avatar lazyload" src={user.profileImg} alt="userProfile" />: '')}
-                                                            
-                                                        </div>
-                                                        <div class="info">
-                                                            <h5>Written by {comment.userName}</h5>
-                                                            <p>{comment.content}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>: ''
-                                    }
                                 </ul>
                             </div>
                         </div>
+                        <div class="commentSection">
+                            <p>{review.comment}</p>
+                        </div>
+                        <ul class="nav justify-content-start">
+                            <li class="nav-item ">
+                                <i class="comments far fa-comment" onClick={() => setFormOpen({id: idx, state: true})}></i><span>{review.miniComments.length}</span>
+                                <i class="thumbsUp far fa-thumbs-up" onClick={()=> postThumbsUp(review._id)}></i><span>{review.like}</span>
+                            </li>
+                            <div class="container">
+                                {formOpen.id === idx && formOpen.state ? 
+                                    <form>
+                                        <div class="form-group">
+                                            <textarea 
+                                                value={comment.content}
+                                                class="form-control" 
+                                                id={review._id}
+                                                rows="3"
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-primary" style={{marginBottom: "20px"}} onClick={() => postComment(idx)}>Post Comment</button>
+                                    </form> : ''  
+                                }
+                            </div>
+                            {formOpen.id === idx && formOpen.state ? 
+                                <div class="container">
+                                    {review.miniComments.map(comment => 
+                                        <div class="card styleCard">
+                                            <div class="grouped">
+                                                <div class="avatar">
+                                                {profileImg.map(user => user._id === comment.userId ? <img class="avatar lazyload" src={user.profileImg} alt="userProfile" />: '')}
+                                                    
+                                                </div>
+                                                <div class="info">
+                                                    <h5>Written by {comment.userName}</h5>
+                                                    <p>{comment.content}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>: ''
+                            }
+                        </ul>
                     </div>
                 )}
                   
