@@ -6,25 +6,18 @@ import './Reviews.css'
 function Reviews() {
     const {id, title} = useParams();
     const userId = localStorage.id
+    const userName = localStorage.name;
     const [reviews, setReviews] = useState([]);
-    const [reviewUserId, setReviewUserId] = useState([]);
     const [profileImg, setProfileImg] = useState([])
     const [modalDisplay, setModalDisplay] = useState(false);
     const [movieImage, setMovieImage] = useState("");
-    
-    //NEW THINGS
-
     const [formOpen, setFormOpen] = useState({});
     const [comment, setComment] = useState({name: "", userId: "", reviewId: "", content: ""});
-    
-    async function getSpecificReviews(){
-        const getMovies = await fetch(`/api/specificReviews/${id}`).then(res => res.json());
-        // const getProfileImage = await fetch(`/api/userImage/${id}`).then(res => res.json());
-        setReviews(getMovies);
-        getMovies.map(review =>reviewUserId.push(review.user.id));
 
+    async function getSpecificReviews(){
+        const getMoviesReviews = await fetch(`/api/specificReviews/${id}`).then(res => res.json());
+        setReviews(getMoviesReviews);
         const getUserInfo = await fetch(`/api/UsersList`).then(res => res.json());
-        console.log(getUserInfo);
         setProfileImg(getUserInfo);   
     }
 
@@ -43,6 +36,7 @@ function Reviews() {
         console.log(removeSpecificReview.message);
         getSpecificReviews();
     }
+
     async function getMovieImage(){
         const apiMovie = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=5b4dbf95cc35d2e911560cca64385e60&language=en-US`).then( result=>result.json() );
         console.log(apiMovie)
@@ -50,22 +44,50 @@ function Reviews() {
         // console.log(movieImage)
         setModalDisplay(true)
     }
-
-    //new things for comments
+    
     function handleInputChange(e){
         let commentInfo = {...comment}
         commentInfo["userId"] = userId;
-
-        if(e.target.id === "name"){
-            commentInfo["name"] = e.target.value
-        }else if(e.target.id === "content") {
-            commentInfo["content"] = e.target.value
-
-        }
-        console.log("")
+        commentInfo["name"] = userName;
+        commentInfo["content"] = e.target.value;
+        commentInfo["reviewId"] = e.target.id;
         setComment(commentInfo);
     }  
 
+    async function postComment(idx){
+        setFormOpen({id: idx, state: false});
+        console.log(comment)
+        const postReviewComment = await fetch('/api/reviewComment',
+        {  
+            method: 'post',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(comment)
+        }).then( result=>result.json());
+
+        console.log(postReviewComment);
+        getSpecificReviews();
+    }
+
+    async function postThumbsUp(idx){
+        const thumbsUp = {
+            reviewId: idx
+        }
+        const postThumbsUp = await fetch('/api/thumbsUp',
+        {  
+            method: 'post',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(thumbsUp)
+        }).then( result=>result.json());
+
+        console.log(postThumbsUp);
+        getSpecificReviews();
+    }
     useEffect(function(){
         getSpecificReviews();
     }, [modalDisplay])
@@ -83,7 +105,7 @@ function Reviews() {
                             <div class="card styleCard">
                                 <div class="grouped">
                                     <div class="avatar">
-                                        {profileImg.map(user => user._id === review.user.id ? <img class="avatar lazyload" src={user.profileImg} alt="Gimly" />: '')}
+                                        {profileImg.map(user => user._id === review.user.id ? <img class="avatar lazyload" src={user.profileImg} alt="userProfile" />: '')}
                                         
                                     </div>
                                     <div class="info">
@@ -104,38 +126,26 @@ function Reviews() {
                                 </div>
                                 <ul class="nav justify-content-start">
                                     <li class="nav-item ">
-                                        <i class="comments far fa-comment" onClick={()=>setFormOpen({id: idx, state: true})}></i><span id="number${fetchPosts[i].post_id}">5</span>
-                                        <i class="thumbsUp far fa-thumbs-up"></i><span id="comment${fetchPosts[i].post_id}" >9</span>
-                                        { userId === review.user.id ? <i class=" trash fas fa-trash" onClick={()=> deleteReview(review._id, review.comment)} ></i> : ''}
-                                        <div class="container">
+                                        <i class="comments far fa-comment" onClick={() => setFormOpen({id: idx, state: true})}></i><span>{review.miniComments.length}</span>
+                                        <i class="thumbsUp far fa-thumbs-up" onClick={()=> postThumbsUp(review._id)}></i><span>{review.like}</span>
+                                    </li>
+                                    <div class="container">
                                         {formOpen.id == idx && formOpen.state ? 
                                             <form>
-                                                
-                                                <div class="form-group">
-                                                    <label htmlFor="name">Name</label>
-                                                    <input 
-                                                        value={reviewData.name} 
-                                                        onChange={handleInputChange} 
-                                                        class="form-control" 
-                                                        id="name" 
-                                                        type="text" 
-                                                    />
-                                                </div>
                                                 <div class="form-group">
                                                     <label htmlFor="content">Your Comment</label>
                                                     <textarea 
-                                                        value={reviewData.comment}
+                                                        value={comment.content}
                                                         class="form-control" 
-                                                        id="content" 
+                                                        id={review._id}
                                                         rows="3"
                                                         onChange={handleInputChange}
                                                     />
                                                 </div>
-                                                <button type="submit" class="btn btn-outline-primary">Save Comment</button>
+                                                <button type="submit" class="btn btn-outline-primary" onClick={() => postComment(idx)}>Save Comment</button>
                                             </form> : ''  
                                         }
-                                        </div>
-                                    </li>
+                                    </div>
                                 </ul>
                             </div>
                         </div>

@@ -9,9 +9,16 @@ const reviews = new Schema({
         id: {type: String},
     },   
     comment: String,
-    comments: {
-        type: Schema.Types.ObjectId,
-        ref: 'comments'
+    miniComments: [
+        {
+            content: {type: String},
+            userId: {type: String},
+            userName: {type: String}
+        }
+    ],
+    like: {
+        type: Number,
+        default: 0 
     }
 }, {
     timestamps: true 

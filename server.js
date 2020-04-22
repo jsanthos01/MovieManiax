@@ -111,20 +111,18 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
 })
 
 //genre list
- app.get('/api/genre/list', async( req,res) => {
-   const genres = JSON.parse( fs.readFileSync( "client/src/components/Genre/genre.json" ) );
-   res.send( genres );
-  });
+app.get('/api/genre/list', async( req,res) => {
+  const genres = JSON.parse( fs.readFileSync( "client/src/components/Genre/genre.json" ) );
+  res.send( genres );
+});
   
-  //-----------------------------get profile details------
-  app.get("/api/avatar/:id", async (req, res) => {
-    const id = req.params.id;
-    const showProfile = await orm.showProfileDb( id );
+app.get("/api/avatar/:id", async (req, res) => {
+  const id = req.params.id;
+  const showProfile = await orm.showProfileDb( id );
   res.json(showProfile)
 })
 
-//----------------------------------------------------------
-//JOANNA REVIEWS SECTION
+
 app.post("/api/review", async (req, res) => {
   // console.log("REVIEW IMAGE SECTION", req.body);
   const postMovieReview = await orm.postReview(req.body);
@@ -145,9 +143,8 @@ app.put("/api/removeReview/:userId/:movieId", async (req, res) => {
   res.send(deleteReview);
 });
 
-//-----------multer image upload----------------
-const upload = require('multer')({ dest: 'client/public/uploads/' });
 
+const upload = require('multer')({ dest: 'client/public/uploads/' });
 app.put( '/api/upload/:userid', upload.single('myFile'), async function( req, res ){
   let userId = req.params.userid
   const filePath = req.file.path;
@@ -160,24 +157,28 @@ app.put( '/api/upload/:userid', upload.single('myFile'), async function( req, re
   res.send( imgUploadDb );
 
 });
-//------------------------------------------------------
-
-//----------------------------------bio--------------------
 
 app.put('/api/user/:id', async function( req, res ){
   const bioData = req.body;
   const id = req.params.id;
-  // console.log( `[POST: /api/user/bioId userData: `, bioData );
   const bioResult = await orm.bioResultDb( id, bioData );
   res.send( bioResult );
 });
 
 app.get("/api/userImage/:id" , async function (req, res) {
-  const id = req.params.id;
-  const getProfilePic = await orm.profilePic( id );
+  const getProfilePic = await orm.profilePic( req.params.id );
   res.send(getProfilePic)
-})
-//-----------------------------------------------------------------
+});
+
+app.post("/api/reviewComment", async (req, res) => {
+  const postReviewComment = await orm.postComment(req.body);
+  res.send(postReviewComment)
+});
+
+app.post("/api/thumbsUp", async (req, res) => {
+  const postThumbsUp = await orm.thumbsUp(req.body);
+  res.send(postThumbsUp)
+});
 
 app.listen( PORT, function(){
   console.log( `[MovieManiax server] RUNNING, http://localhost:${PORT}` );
