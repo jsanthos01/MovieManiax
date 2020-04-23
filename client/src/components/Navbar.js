@@ -81,6 +81,9 @@ function NavBar() {
                         <Link to="/friendList" style={{color: 'black', paddingLeft: '20px'}}  className={location.pathname === "/friendList" ? "nav-link active" : "nav-link"}>
                         Friends
                         </Link>
+                        <Link to="/friendActivity" style={{color: 'black', paddingLeft: '20px'}}  className={location.pathname === "/friendActivity" ? "nav-link active" : "nav-link"}>
+                        Friends Activity
+                        </Link>
                         <div class="dropdown-divider"></div>
                         <Link to="/logout" style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === "/logout" ? "nav-link active" : "nav-link"}>
                         Logout

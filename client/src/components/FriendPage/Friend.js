@@ -73,6 +73,7 @@ function Friend() {
 
         const friendInfo = {
             userId: localStorage.id,
+            userName: localStorage.name,
             friendId: user._id,
             friendName: user.name,
             friendImg: user.profileImg

@@ -62,6 +62,7 @@ async function loginUser( email, password ) {
 
 //WatchList Section
 async function postWatchlist(movieData){
+    // console.log('in orm the movieData: ', movieData)
     const movieInfo = {
        "movieId": `${movieData.movieId}`,
        "title": `${movieData.title}`,
@@ -71,6 +72,26 @@ async function postWatchlist(movieData){
        "releaseDate": `${movieData.releaseDate}`,
        "ratings": `${movieData.ratings}`
     }
+    // const activityData = {
+    //     "userId":  `${movieData.userId}`, 
+    //     "userName":  `${movieData.userName}`, 
+    //     "activity":  `added ${movieData.title} to watchlist`, 
+    // }
+
+    const activityData = {
+        "userId": `${movieData.userId}`, 
+        "userName": `${movieData.userName}`, 
+        "activityType": `watchList`, 
+        "activity": `added ${movieData.title} to watchlist`,
+        "movie":{
+            "movieName": `${movieData.title}`,
+            "movieId": `${movieData.movieId}`,
+            "movieImg":`${movieData.image}`
+        }
+    }
+    // userId: {type: String},
+    // activity: String,   
+    // comment: String
  
     const checkWatchlist = await db.users.findOne({ _id: movieData.userId});
     let watchListArr = checkWatchlist.watchlist;
@@ -78,6 +99,9 @@ async function postWatchlist(movieData){
     if( exists) {
         return { message: "Movie Exists in the your watchlist page!!!" };
     }else{
+        const dbActivity = new db.activities( activityData );
+        const saveActivity = await dbActivity.save();
+    
         const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { watchlist:  movieInfo } });
         return { message: "Movie successfully saved in Watchlist!!"};
     }
@@ -96,6 +120,18 @@ async function postFavourites(movieData){
         "image":`${movieData.image}`,
         "ratings": `${movieData.ratings}`
     }
+
+    const activityData = {
+        "userId": `${movieData.userId}`, 
+        "userName": `${movieData.userName}`,
+        "activityType": `favouritesList`, 
+        "activity": `added ${movieData.title} to favourites List`,
+        "movie":{
+            "movieName": `${movieData.title}`,
+            "movieId": `${movieData.movieId}`,
+            "movieImg":`${movieData.image}`
+        }
+    }
     const checkFavourites = await db.users.findOne({ _id: movieData.userId});
     let favArr = checkFavourites.favourites;
     
@@ -103,6 +139,10 @@ async function postFavourites(movieData){
     if( exists ) {
         return { message: "Movie Exists in the your Favourites page!!!" };
     }else {
+
+        const dbActivity = new db.activities( activityData );
+        const saveActivity = await dbActivity.save();
+
         const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { favourites:  movieInfo } });
         return { message: "Movie successfully saved in Favourites!!"}; 
     }
@@ -139,18 +179,43 @@ async function postFriend(friendData){
         'name': `${friendData.friendName}`,
         'image': `${friendData.friendImg}`,
     }
+    const activityData = {
+        "userId": `${friendData.userId}`, 
+        "userName": `${friendData.userName}`,
+        "activityType": `friendList`, 
+        "activity": `added ${friendData.friendName} to Followers List`,
+        "friend":{
+            "friendName": `${friendData.friendName}`,
+            "friendId": `${friendData.friendId}`,
+            "friendImg":`${friendData.friendImg}`
+        }
+    }
+    const dbActivity = new db.activities( activityData );
+    const saveActivity = await dbActivity.save();
 
     const userFetch = await db.users.findOneAndUpdate({ _id: friendData.userId }, { $push: { friendList:  friendInfo } });
     return { message: "friend successfully saved in Watchlist!!"};
 }
-
+//activity list: 
+async function getActivitylist(ids){
+    // console.log('in orm ids: ', ids)
+    const getActivityList = await db.activities.find({});
+    const frndActvtArr= [];
+    // console.log(getActivityList);
+    getActivityList.forEach(activity=>{
+        for (var i=0; i<ids.length; i++){
+            if(activity.userId == ids[i]){
+                frndActvtArr.push(activity)
+            }
+        } })
+    return frndActvtArr;
+}
 async function getFriendlist(id){
     const getFriendList = await db.users.find({_id:id});
     return getFriendList;
 }
 async function getFriendInfo(id){
     const getFriendInfo =  await db.users.find({_id:id});
-    // console.log('in Orm etFriendInfo: ', getFriendInfo)
     return getFriendInfo[0];
 }
 
@@ -176,6 +241,25 @@ async function postReview(details){
         'rating': `${details.rating}`,
         'comment': `${details.comment}`
     }
+
+    const activityData = {
+        "userId": `${details.id}`, 
+        "userName": `${details.name}`,
+        "activityType": `reviewList`, 
+        "activity": `reviewed ${details.movieName}`,
+        "review":{
+            "comment": `${details.comment}`,
+            "rating": `${details.rating}`,
+        },
+        "movie": {
+            "movieName": `${details.movieName}`,
+            "movieId": `${details.movieId}`,
+            "movieImg":`${details.moviePoster}`
+        },
+    }
+    const dbActivity = new db.activities( activityData );
+    const saveActivity = await dbActivity.save();
+
     const userFetch = await db.users.findOneAndUpdate({ _id: details.id }, { $push: { myReviews:  myReview } });
     
     const reviewSchema = {
@@ -257,5 +341,9 @@ module.exports = {
     getSpecificMovieReviews,
     deleteReviewInfo,
     bioResultDb,
-    updateAvatar    
+    updateAvatar ,
+    
+    
+    //later for friend activity
+    getActivitylist
 }

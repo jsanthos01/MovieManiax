@@ -122,6 +122,13 @@ app.get("/api/deleteFriend/:userId/:frndId", async (req, res) => {
     const showProfile = await orm.showProfileDb( id );
   res.json(showProfile)
 })
+//--------------friends activity page
+
+app.post("/api/activityList", async (req, res) => {
+  // console.log('in server the friend ids: ',req.body)
+  const activityData = await orm.getActivitylist(req.body);
+  res.json(activityData);
+})
 
 //----------------------------------------------------------
 //JOANNA REVIEWS SECTION

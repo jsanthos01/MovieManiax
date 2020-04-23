@@ -37,6 +37,7 @@ function MovieResultPage(props) {
         if(localStorage.id){
             if(type === "watchlist"){
                 MovieData = {
+                    userName: localStorage.name,
                     userId: localStorage.id,
                     movieId: movieObj.id,
                     title: movieObj.title,
@@ -62,6 +63,7 @@ function MovieResultPage(props) {
     
             }else if (type === "favourites"){
                 MovieData = {
+                    userName: localStorage.name,
                     userId: localStorage.id,
                     movieId: movieObj.id,
                     title: movieObj.title,

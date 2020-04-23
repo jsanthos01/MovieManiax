@@ -20,6 +20,8 @@ import GenreMoviePage from './components/Genre/GenreMoviePage';
 import UpcomingPage from './components/ShowMore/Upcoming/Upcoming';
 import PopularPage from './components/ShowMore/Popular/Popular';
 import TopRatedPage from './components/ShowMore/TopRated/TopRated';
+
+import FriendActivity from './components/FriendPage/FriendActivity';
 function App() {
   return (
     <div className="App">
@@ -40,6 +42,7 @@ function App() {
 
             <Route exact path="/friendList" component={Friends} />
             <Route path="/friendProfile/:id" component={FriendProfilePage} />          
+            <Route path="/friendActivity" component={FriendActivity} />          
 
             <Route exact path="/reviews/:id/:title" component={Reviews} />
             {/* show more  page */}
