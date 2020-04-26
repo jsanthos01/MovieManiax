@@ -27,6 +27,9 @@ function FriendActivity() {
 
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
 
+    const [formOpen, setFormOpen] = useState({});
+    const [comment, setComment] = useState({name: localStorage.name, userId: localStorage.id, activityId: "", content: ""});
+
     let friendIds;
     async function loadFriend(){
         const userId = localStorage.id;
@@ -45,7 +48,7 @@ function FriendActivity() {
         // console.log('myFriendIds: ', myFriendIds)
     } 
     async function loadActivity(){
-       const activityListResult = await fetch('/api/activityList',
+        const activityListResult = await fetch('/api/activityList',
         {  
             method: 'post',
             headers: {
@@ -61,15 +64,58 @@ function FriendActivity() {
         setActivityList(activityListResult)
     }
 
-    async function showCommentForm(){
-        console.log('is comment form working?')
-        setAlertMessage( { type: 'success', message: 'show something' } );
+    // async function showCommentForm(){
+    //     console.log('is comment form working?')
+    //     setAlertMessage( { type: 'success', message: 'show something' } );
 
-    }
-    async function likeComment(){
+    // }
+    async function likeComment(idx){
         console.log('is like working?')
+        const activityLikes = {
+            activityId: idx
+        }
+
+        const postLike = await fetch('/api/likeCommentActivity',
+        {  
+            method: 'post',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(activityLikes)
+        }).then( result=>result.json());
+        console.log('friends activity: ', activityLikes)
+
+        comment.content = '';
+        loadFriend()
 
     }
+    async function postComment(idx){
+        setFormOpen({id: idx, state: false})
+        console.log('is post working?idx: ', idx)
+        console.log('is post working?idx: ', comment.content)
+
+        const postComment = await fetch('/api/postCommentActivity',
+        {  
+            method: 'post',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(comment)
+        }).then( result=>result.json());
+        console.log('friends activity: ', postComment)
+
+        comment.content = '';
+        loadFriend()
+    }
+
+    function handleInputChange(e){
+        let commentInfo = {...comment}
+        commentInfo["content"] = e.target.value;
+        commentInfo["activityId"] = e.target.id;
+        setComment(commentInfo);
+    }  
 
     useEffect( function(){
         loadFriend()  
@@ -78,14 +124,13 @@ function FriendActivity() {
     
     return (
         <div class="row">
-
             <div class="col-lg-8">
-            {activityList.map(activity=>{
+            {activityList.map((activity, idx)=>{
             switch (activity.activityType) {
             case "watchList":   
                 return <div class="container movieHrzCard mx-auto" >
                 <div class="mvHrzCrdDesc">
-                <p class="movieCard-title"><a class=" mr-2" href={"/friendProfile/" + activity.userId}><span style={{fontSize: '1.4rem'}}>{activity.userName}</span></a> {activity.activity}</p>
+                    <p class="movieCard-title"><a class=" mr-2" href={"/friendProfile/" + activity.userId}><span style={{fontSize: '1.4rem'}}>{activity.userName}</span></a> {activity.activity}</p>
                 </div>
                 <div class="mvHrzCrdDesc row">
                     <div class="col-md-2">
@@ -98,11 +143,36 @@ function FriendActivity() {
                     </div>
                 </div>
                 <div class="row container">
-                    <button class="btn myBtnPink mr-2" onClick={()=>showCommentForm(activity._id)}><i class="far fa-comments"></i><span>{activity.likes} 1</span></button>
-                    <button class="btn myBtnPink mr-2" onClick={()=>likeComment(activity._id)} ><i class="far fa-thumbs-up"></i></button>
+                    <button class="btn myBtnPink mr-2" onClick={() => setFormOpen({id: idx, state: true})}><i class="far fa-comments"></i><span>{activity.comment.length}</span></button>
+                    <button class="btn myBtnPink mr-2" onClick={()=>likeComment(activity._id)} ><i class="far fa-thumbs-up"></i><span>{activity.likes}</span></button>
                 </div>
-                <div style={style.messageStyle} className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
-                {alertMessage.message}
+                <div class="container mt-3">
+                    {formOpen.id === idx && formOpen.state ? 
+                    <div>
+                        <form>
+                            <div class="form-group">
+                                <textarea 
+                                    value={comment.content}
+                                    class="form-control" 
+                                    id={activity._id}
+                                    rows="3"
+                                    onChange={handleInputChange}/>
+                            </div>
+                            <button type="submit" class="btn btn-outline-primary" style={{marginBottom: "20px"}} onClick={() => postComment(idx)}>Post Comment</button>
+                        </form> 
+                    <div>{activity.comment.map(comment=> 
+                        <div class="card mt-3" style={{color: "black"}}>
+                            <div class="col-md-8">
+                                <a class="movieCrdTitle mr-2" href={"/friendProfile/" + comment.userId}>{comment.userName}</a>
+                                <p>{comment.content}</p>
+                                <p >{comment.createdAt}</p>
+                            </div>
+                        </div>
+                        )}
+                    </div>
+
+                </div>: ''  
+                    }
                 </div>
             </div>;
             case "favouritesList": return <div class="container movieHrzCard mx-auto" >
@@ -117,13 +187,40 @@ function FriendActivity() {
                     <div class="col-md-8">
                         <p class="movieCrdTitle">{activity.movie.movieName}</p>
                         <a class="btn myBtnPink mr-2" href={"/movieDetails/" + activity.movie.movieId}> View Detail</a>
-                        <p >{activity.createdAt}</p>
-
+                        <p>{activity.createdAt}</p>
                     </div>
                 </div>
                 <div class="row container">
-                    <button class="btn myBtnPink mr-2" onClick={()=>showCommentForm(activity._id)}><i class="far fa-comments"></i><span>{activity.likes} 1</span></button>
-                    <button class="btn myBtnPink mr-2" onClick={()=>likeComment(activity._id)} ><i class="far fa-thumbs-up"></i></button>
+                    <button class="btn myBtnPink mr-2" onClick={() => setFormOpen({id: idx, state: true})}><i class="far fa-comments"></i><span>{activity.comment.length}</span></button>
+                    <button class="btn myBtnPink mr-2" onClick={()=>likeComment(activity._id)}><i class="far fa-thumbs-up"></i><span>{activity.likes}</span></button>
+                </div>
+                <div class="container mt-3">
+                    {formOpen.id === idx && formOpen.state ? 
+                    <div>
+                    <form>
+                        <div class="form-group">
+                            <textarea 
+                                value={comment.content}
+                                class="form-control" 
+                                id={activity._id}
+                                rows="3"
+                                onChange={handleInputChange}/>
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary" style={{marginBottom: "20px"}} onClick={() => postComment(idx)}>Post Comment</button>
+                    </form> 
+                <div>{activity.comment.map(comment=> 
+                    <div class="card mt-3" style={{color: "black"}}>
+                        <div class="col-md-8">
+                            <a class="movieCrdTitle mr-2" href={"/friendProfile/" + comment.userId}>{comment.userName}</a>
+                            <p>{comment.content}</p>
+                            <p >{comment.createdAt}</p>
+                        </div>
+                    </div>
+                    )}
+                </div>
+
+            </div>: ''  
+                    }
                 </div>
             </div>;
             case "friendList":  return <div class="container movieHrzCard mx-auto" >
@@ -138,12 +235,40 @@ function FriendActivity() {
                         <p class="movieCrdTitle">{activity.friend.friendName}</p>
                         <a class="btn myBtnPink mr-2" href={"/friendProfile/" + activity.friend.friendId}> View Profile</a>
                         <p >{activity.createdAt}</p>
-
                     </div>
                 </div>
                 <div class="row container">
-                    <button class="btn myBtnPink mr-2" onClick={()=>showCommentForm(activity._id)}><i class="far fa-comments"></i><span>{activity.likes} 1</span></button>
-                    <button class="btn myBtnPink mr-2" onClick={()=>likeComment(activity._id)} ><i class="far fa-thumbs-up"></i></button>
+                    <button class="btn myBtnPink mr-2" onClick={() => setFormOpen({id: idx, state: true})}><i class="far fa-comments"></i><span>{activity.comment.length}</span></button>
+                    <button class="btn myBtnPink mr-2" onClick={()=>likeComment(activity._id)} ><i class="far fa-thumbs-up"></i><span>{activity.likes}</span></button>
+                </div>
+                <div class="container mt-3">
+                    {formOpen.id === idx && formOpen.state ? 
+                    <div>
+                    <form>
+                        <div class="form-group">
+                            <textarea 
+                                value={comment.content}
+                                class="form-control" 
+                                id={activity._id}
+                                rows="3"
+                                onChange={handleInputChange}/>
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary" style={{marginBottom: "20px"}} onClick={() => postComment(idx)}>Post Comment</button>
+                    </form> 
+                <div>{activity.comment.map(comment=> 
+                    <div class="card mt-3" style={{color: "black"}}>
+                        <div class="col-md-8">
+                            <a class="movieCrdTitle mr-2" href={"/friendProfile/" + comment.userId}>{comment.userName}</a>
+                            <p>{comment.content}</p>
+                            <p >{comment.createdAt}</p>
+                        </div>
+                    </div>
+                    )}
+                </div>
+
+            </div>
+                    : ''  
+                    }
                 </div>
             </div>;
             case "reviewList":  return <div class="container movieHrzCard mx-auto" >
@@ -151,7 +276,7 @@ function FriendActivity() {
                     <p class="movieCard-title"> <a class=" mr-2" href={"/friendProfile/" + activity.userId} ><span style={{fontSize: '1.4rem'}}>{activity.userName}</span></a>{activity.activity}</p>
                 </div>
                 <div class="mvHrzCrdDesc row">
-                <div class="col-md-2">
+                    <div class="col-md-2">
                         <img src={`https://image.tmdb.org/t/p/w500/${activity.movie.movieImg}`} class="hrCdImg" alt="movie poster" style={imgStyle}/>
                     </div>
                     <div class="col-md-8">
@@ -163,8 +288,36 @@ function FriendActivity() {
                     </div>
                 </div>
                 <div class="row container">
-                    <button class="btn myBtnPink mr-2" onClick={()=>showCommentForm(activity._id)}><i class="far fa-comments"></i><span>{activity.likes} 1</span></button>
-                    <button class="btn myBtnPink mr-2" onClick={()=>likeComment(activity._id)} ><i class="far fa-thumbs-up"></i></button>
+                    <button class="btn myBtnPink mr-2" onClick={() => setFormOpen({id: idx, state: true})}><i class="far fa-comments"></i><span>{activity.comment.length}</span></button>
+                    <button class="btn myBtnPink mr-2" onClick={()=>likeComment(activity._id)} ><i class="far fa-thumbs-up"></i><span>{activity.likes}</span></button>
+                </div>
+                <div class="container mt-3">
+                    {formOpen.id === idx && formOpen.state ? 
+                    <div>
+                    <form>
+                        <div class="form-group">
+                            <textarea 
+                                value={comment.content}
+                                class="form-control" 
+                                id={activity._id}
+                                rows="3"
+                                onChange={handleInputChange}/>
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary" style={{marginBottom: "20px"}} onClick={() => postComment(idx)}>Post Comment</button>
+                    </form> 
+                <div>{activity.comment.map(comment=> 
+                    <div class="card mt-3" style={{color: "black"}}>
+                        <div class="col-md-8">
+                            <a class="movieCrdTitle mr-2" href={"/friendProfile/" + comment.userId}>{comment.userName}</a>
+                            <p>{comment.content}</p>
+                            <p >{comment.createdAt}</p>
+                        </div>
+                    </div>
+                    )}
+                </div>
+
+            </div> : ''  
+                    }
                 </div>
             </div>;
                 default:   return "";
@@ -173,12 +326,9 @@ function FriendActivity() {
             )}
             </div>
             <div class="col-lg-4">
-                
                 {myFriendList.map(friend=>
-
                 <a class=" mr-2" href={"/friendProfile/" + friend.friendId} style={{display: "block"}}> 
-                <img src={friend.image} class="hrCdImg" alt="profile poster" style={imgStyle}/>
-                    </a>
+                <img src={friend.image} class="hrCdImg" alt="profile poster" style={imgStyle}/> </a>
                     )}
             </div>
         </div>

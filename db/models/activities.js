@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const activities = new Schema({
     userId: {type: String},
-    activity: String,   
     userName: String,
     activityType: String,   
     activity: String,   
@@ -21,8 +20,15 @@ const activities = new Schema({
         comment:  {type: String},
         rating: {type: String},
     },
-    comment: String,
-    likes: String
+    comment: [{
+        userName: {type: String},
+        userId: {type: String},
+        content: {type: String},
+    }],
+    likes: {
+        type: Number, 
+        default: 0
+    }
 }, {
     timestamps: true 
 });

@@ -129,6 +129,16 @@ app.post("/api/activityList", async (req, res) => {
   const activityData = await orm.getActivitylist(req.body);
   res.json(activityData);
 })
+app.post("/api/postCommentActivity", async (req, res) => {
+  // console.log('in server the friend ids: ',req.body)
+  const activityData = await orm.postCommentActivity(req.body);
+  res.json(activityData);
+})
+app.post("/api/likeCommentActivity", async (req, res) => {
+  // console.log('in server the friend ids: ',req.body)
+  const activityData = await orm.postLikeActivity(req.body);
+  res.json(activityData);
+})
 
 //----------------------------------------------------------
 //JOANNA REVIEWS SECTION

@@ -276,6 +276,31 @@ async function postReview(details){
     return { message: "Review successfully saved !!"};
 
 }
+async function postCommentActivity(details){
+    const activityId= details.activityId; 
+
+    const activityComment = {
+        'userName': `${details.name}`,
+        'userId':`${details.userId}`,
+        'content': `${details.content}`,
+    }
+
+    // const userFetch = await db.users.findOneAndUpdate({ _id: activityId }, { $push: { friendList: {image: imageData} } });
+    const userFetch = await db.activities.findOneAndUpdate({ _id: activityId }, { $push: { comment: activityComment } });
+    console.log('userFetch ', userFetch)
+
+
+    // const dbComments = new db.reviews( reviewSchema);
+    // const comment = await dbComments.save();
+    return { message: "Comment successfully posted !!"};
+}
+async function postLikeActivity(details){
+    const activityId= details.activityId; 
+    console.log("299 etails", details)
+
+    const dbPostThumbsUp = await db.activities.findOneAndUpdate({ _id: activityId }, { $inc: { likes: 1 } });
+    return { message: "Thank you, likes added!" }
+}
 
 async function getSpecificMovieReviews(id){   
     const getReviewData = await db.reviews.find({movieId: id});
@@ -345,5 +370,7 @@ module.exports = {
     
     
     //later for friend activity
-    getActivitylist
+    getActivitylist, 
+    postCommentActivity,
+    postLikeActivity
 }
