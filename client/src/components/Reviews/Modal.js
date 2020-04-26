@@ -6,7 +6,7 @@ function Modal(props) {
     const id = localStorage.id
     const [reviewData, setReviewData] = useState({id: id, name: '', moviePoster: props.movieImage, movieId: props.movieId, movieName: props.movieName, rating: '', comment:''})
     
-    const modalWrapper = {
+    const modalMain = {
         position: 'fixed',
         top: 0,
         left: 0,
@@ -78,9 +78,9 @@ function Modal(props) {
     }
     
     return (
-        <div className={'modal-wrapper'} style={modalWrapper}>
-            <div className={'modal-backdrop'} style={modalBackdrop} />
-            <div className={'modal-box'} style={modalBox}>
+        <div className='modal-main' style={modalMain}>
+            <div className='modal-backdrop' style={modalBackdrop} />
+            <div className='modal-box' style={modalBox}>
                 <div class='close' onClick={() => props.setModalDisplay(false)} style={close}>
                     +
                 </div>

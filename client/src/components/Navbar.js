@@ -16,8 +16,7 @@ function NavBar() {
   return (
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <Link to="/" className="navbar-brand">
-        <img src="https://icons.iconarchive.com/icons/designbolts/free-multimedia/1024/Film-icon.png" style={{width: "40px"}}/>
-        MovieManiax
+        M<img src="https://icons.iconarchive.com/icons/designbolts/free-multimedia/1024/Film-icon.png" style={{width: "40px"}}/>vieManiax
       </Link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onClick={()=>setShown(!isShown)}>
         <span class="navbar-toggler-icon"></span>
@@ -30,7 +29,7 @@ function NavBar() {
                 Search
                 </Link>
               </li>
-              <li class="nav-item dropdown " >
+              <li class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 More
                 </a>
