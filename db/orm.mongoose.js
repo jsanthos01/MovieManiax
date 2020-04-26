@@ -41,18 +41,6 @@ async function loginUser( email, password ) {
         return { error: "Invalid password" };
     }
 
-    // // create a new session for this user and save it.
-    // userData.session = uuid.v4();
-
-    // // update the session
-    // // remove entries before we do teh update
-    // delete userData.createdAt;
-    // delete userData.updatedAt;
-    // const dbResult = await db.users.findOneAndUpdate( 
-    //    { _id: userData._id}, 
-    //    userData );
-
-    // remap the data into the specified fields as we are using camelCase
     return {
         message: "user successfully loggedin",
         id: userData._id,
@@ -222,22 +210,27 @@ async function updateAvatar( userId, imageUrl ){
 
     return { message: `Thank you, updated` }
 }
-//--------------------------bio----------------------------
 
 async function bioResultDb( bioId, bioData ){
-    // console.log(`[updateBio] BioId(${bioId}) myEdit: `, bioData);
     const dbBioResult = await db.users.findOneAndUpdate({_id: bioId}, bioData);
     return dbBioResult;
 }    
 
-// async function getProfileImage(){
-//     const userFetched = await db.users.find({});
-//     let profileUrl = [];
+async function postComment(content){
+    const comment = {
+        'content': `${content.content}`,
+        'userId':`${content.userId}`,
+        'userName': `${content.name}`,
+    }
+    const dbPostComment = await db.reviews.findOneAndUpdate({ _id: content.reviewId }, { $push: { miniComments: comment } });
+    return { message: `Thank you, comment added!` }
 
-//     userFetched.forEach(user => profileUrl.push(user.profileImg));
-//     return profileUrl;
-// }
-//------------------------------------------------------------ 
+}
+
+async function thumbsUp(likes){
+    const dbPostThumbsUp = await db.reviews.findOneAndUpdate({ _id: likes.reviewId }, { $inc: { like: 1 } });
+    return { message: `Thank you, likes added!` }
+}
 
 module.exports = {
     registerUser,
@@ -258,5 +251,7 @@ module.exports = {
     getSpecificMovieReviews,
     deleteReviewInfo,
     bioResultDb,
-    updateAvatar    
+    updateAvatar,
+    postComment,
+    thumbsUp
 }
