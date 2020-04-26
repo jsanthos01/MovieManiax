@@ -64,7 +64,7 @@ function NavBar() {
               { !id ? 
                   <li className="nav-item"><Link to="/login" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>
                   Login </Link></li> :
-                    <li className="nav-item dropdown ">
+                    <li className="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="mr-1"><i class="fas fa-user"></i></span> {`${userName}`}
                     </a>
@@ -81,6 +81,7 @@ function NavBar() {
                         <Link to="/friendList" style={{color: 'black', paddingLeft: '20px'}}  className={location.pathname === "/friendList" ? "nav-link active" : "nav-link"}>
                         Friends
                         </Link>
+                        <div class="dropdown-divider"></div>
                         <Link to="/friendActivity" style={{color: 'black', paddingLeft: '20px'}}  className={location.pathname === "/friendActivity" ? "nav-link active" : "nav-link"}>
                         Friends Activity
                         </Link>
