@@ -180,6 +180,11 @@ app.post("/api/thumbsUp", async (req, res) => {
   res.send(postThumbsUp)
 });
 
+app.get("/api/notifications", async (req, res) => {
+  const getNotifications = await orm.getNotifications();
+  res.send(getNotifications)
+});
+
 app.listen( PORT, function(){
   console.log( `[MovieManiax server] RUNNING, http://localhost:${PORT}` );
 });

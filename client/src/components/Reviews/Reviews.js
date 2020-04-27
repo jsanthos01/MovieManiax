@@ -13,6 +13,7 @@ function Reviews() {
     const [movieImage, setMovieImage] = useState("");
     const [formOpen, setFormOpen] = useState({});
     const [comment, setComment] = useState({name: "", userId: "", reviewId: "", content: ""});
+    const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
 
     async function getSpecificReviews(){
         const getMoviesReviews = await fetch(`/api/specificReviews/${id}`).then(res => res.json());
@@ -38,11 +39,14 @@ function Reviews() {
     }
 
     async function getMovieImage(){
-        const apiMovie = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=5b4dbf95cc35d2e911560cca64385e60&language=en-US`).then( result=>result.json() );
-        console.log(apiMovie)
-        setMovieImage(apiMovie.poster_path)
-        // console.log(movieImage)
-        setModalDisplay(true)
+        if(!localStorage.id){
+            setAlertMessage( { type: 'danger', message: 'Sorry you have not logged in!' } );
+        }else{
+            const apiMovie = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=5b4dbf95cc35d2e911560cca64385e60&language=en-US`).then( result=>result.json() );
+            console.log(apiMovie)
+            setMovieImage(apiMovie.poster_path)
+            setModalDisplay(true);
+        }
     }
     
     function handleInputChange(e){
@@ -56,37 +60,46 @@ function Reviews() {
 
     async function postComment(idx){
         setFormOpen({id: idx, state: false});
-        console.log(comment)
-        const postReviewComment = await fetch('/api/reviewComment',
-        {  
-            method: 'post',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(comment)
-        }).then( result=>result.json());
 
-        console.log(postReviewComment);   
-        getSpecificReviews();
+        if(!localStorage.id){
+            setAlertMessage( { type: 'danger', message: 'Sorry you have not logged in!' } );
+        }else{
+            console.log(comment)
+            const postReviewComment = await fetch('/api/reviewComment',
+            {  
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(comment)
+            }).then( result=>result.json());
+
+            console.log(postReviewComment);   
+            getSpecificReviews();
+        }
     }
 
     async function postThumbsUp(idx){
-        const thumbsUp = {
-            reviewId: idx
-        }
-        const postThumbsUp = await fetch('/api/thumbsUp',
-        {  
-            method: 'post',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(thumbsUp)
-        }).then( result=>result.json());
+        if(!localStorage.id){
+            setAlertMessage( { type: 'danger', message: 'Sorry you have not logged in!' } );
+        }else{
+            const thumbsUp = {
+                reviewId: idx
+            }
+            const postThumbsUp = await fetch('/api/thumbsUp',
+            {  
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(thumbsUp)
+            }).then( result=>result.json());
 
-        console.log(postThumbsUp);
-        getSpecificReviews();
+            console.log(postThumbsUp);
+            getSpecificReviews();
+        }
     }
 
     useEffect(function(){
@@ -95,6 +108,9 @@ function Reviews() {
 
     return ( 
         <div className="result container mb-5">
+            <div className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
+                {alertMessage.message}
+            </div>
             <div>
                 <h1>{title}</h1>
                 <button type="button" class="btn btn-md btn-outline-primary m-3"  onClick={getMovieImage}>Add a Review</button>

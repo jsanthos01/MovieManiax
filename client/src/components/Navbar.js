@@ -1,17 +1,28 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import './style/NavBar.css';
 import { Link, useLocation } from "react-router-dom";
 
 function NavBar() {
   const location = useLocation();
   const [isShown, setShown] = useState(false);
+  const [notifications, setNotifications] = useState([]);
   let showClass = !isShown ? `collapse navbar-collapse`: `collapse navbar-collapse show`;
 
   const id = localStorage.id;
   console.log(id);
-
   const userName = localStorage.name;
   console.log(userName);
+
+  async function getNotifications(){
+    const getNotifications = await fetch(`/api/notifications`).then(res => res.json());
+    console.log(getNotifications);
+    setNotifications(getNotifications)
+    console.log(`${getNotifications[0].userName} has added a review.`)
+  }
+
+  useEffect(function (){
+    getNotifications();
+  }, [])
 
   return (
     <nav class="navbar navbar-expand-lg navbar-dark ">
@@ -59,7 +70,14 @@ function NavBar() {
                     </Link>
                 </li> 
               } 
-              
+              { !id ? '': 
+                <li className="nav-item">
+                    <Link to={`/watchlist/${id}`} className={location.pathname === `/watchlist/${id}` ? "nav-link active" : "nav-link"}>
+                    <i class="fas fa-bell"></i>
+                    </Link>
+                </li> 
+              } 
+             
               { !id ? 
                   <li className="nav-item"><Link to="/login" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>
                   Login </Link></li> :
@@ -84,8 +102,6 @@ function NavBar() {
                         <Link to="/logout" style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === "/logout" ? "nav-link active" : "nav-link"}>
                         Logout
                         </Link>
-                        
-                       
                     </div>
                 </li>  
               }
