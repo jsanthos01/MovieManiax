@@ -231,6 +231,95 @@ async function thumbsUp(likes){
     return { message: `Thank you, likes added!` }
 }
 
+//-----tagdata----
+async function postTagDb(details){
+    // console.log('the tag details are', details);
+      
+    const tagSchema = {
+        movieId: details.movieId,
+        userId: details.id, 
+        title: details.title,
+        image: details.image,  
+        tags: details.tags,
+    }
+    const dbTags = new db.tags( tagSchema );
+    const tagInfo = await dbTags.save();
+    const updateTagsInUserScheema = await db.users.findByIdAndUpdate({_id:details.id},{ $push: {userTags: tagInfo._id }})
+  
+    return { message: "Tags successfully save!!"};
+
+}
+//---------post edit tags---
+async function postEditTags(newtags){
+    // console.log(newtags);
+    const newTags = newtags.tags;
+    const updateTags = await db.tags.findOneAndUpdate({userId:newtags.userId}, {tags: newTags} )
+    // console.log('updated tags', updateTags)
+    return { message: "Tags updated successfully !!"}
+
+}
+//--------gettagsdata-----
+async function getTagsDb(id){
+    // console.log(id)
+    let tagArray = [];
+    let tagSingleArray = [];
+    const getUserTags = await db.tags.find({ userId:id })
+
+    for (i = 0; i < getUserTags.length; i++){
+        tagArray.push(getUserTags[i].tags)
+    }
+
+    for( i = 0; i < tagArray.length; i++){
+        for ( j = 0; j < tagArray[i].length; j++){
+            tagSingleArray.push(tagArray[i][j]);
+        }
+    }
+    const uniqueTags = tagSingleArray.filter(
+        function (tag, i) {
+        return tagSingleArray.indexOf(tag) === i
+        });
+    // console.log(uniqueTags);
+    // console.log('the unique tag array is', uniqueTags);
+    // console.log(getUserTags)
+    return uniqueTags;
+    
+}
+
+async function getAllMoviesDb(id){
+    const getAllTagMovies = await db.tags.find({ userId:id })
+    return getAllTagMovies;
+
+}
+//------getmovietagdb---
+async function getMoviesTagDb( id, tag ){
+
+    const getMoviesTagDb = await db.tags.find({ userId:id, tags: tag})
+    return (getMoviesTagDb)
+    // console.log('the returned obj data is', getMoviesTagDb)
+}
+//-------similartag movies---
+async function movieTagDb( id, tag ){
+
+    const similarTagMovies = await db.tags.find({tags: tag})
+
+    const filterTagMovies = similarTagMovies.filter( function(movie){
+        return movie.userId !== id 
+    })
+    // console.log('the filtered tag movies are', filterTagMovies);
+    return (filterTagMovies)
+    
+}
+//---------deletemovietag----
+async function deleteMoviebyTag( movieId, userId ){
+    const deleteMovieByTag = await db.tags.findOneAndDelete({ $and: [{movieId:movieId}, {userId:userId}]
+    },
+        function (err) {
+            if(err) console.log(err); 
+        });
+return { message: "Movie successfully deleted!!"} ;
+}
+//--------------------
+
 module.exports = {
     registerUser,
     loginUser,
@@ -252,5 +341,12 @@ module.exports = {
     bioResultDb,
     updateAvatar,
     postComment,
-    thumbsUp
+    thumbsUp,
+    postTagDb,
+    getTagsDb,
+    getMoviesTagDb,
+    getAllMoviesDb,
+    movieTagDb,
+    postEditTags,
+    deleteMoviebyTag
 }

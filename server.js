@@ -180,6 +180,69 @@ app.post("/api/thumbsUp", async (req, res) => {
   res.send(postThumbsUp)
 });
 
+//----tagdata---
+app.post("/api/tag", async (req, res) => {
+  // console.log('tag data is', req.body)
+  const tagData = req.body;
+  const tagResult = await orm.postTagDb( tagData );
+  res.send(tagResult );
+})
+
+//-----gettagdata---
+app.get("/api/tags/:id", async (req, res) => {
+  const id = req.params.id;
+  const getTags = await orm.getTagsDb( id );
+  res.json(getTags)
+})
+
+app.get("/api/movies/:id", async (req, res) => {
+  const id = req.params.id;
+  const getAllMovies = await orm.getAllMoviesDb( id );
+  res.json(getAllMovies)
+})
+
+//-----displaymoviefortag-----
+app.get("/api/movietag/:id/:tag", async(req, res) =>{
+  // console.log('movietag data is', req.params)
+  const id = req.params.id;
+  const tag = req.params.tag;
+
+  const getMoviesOnTags = await orm.getMoviesTagDb(id, tag);
+
+  res.send(getMoviesOnTags)
+})
+//--------similar movie tag----
+app.get("/api/similartag/:id/:tag", async(req, res) =>{
+  // console.log('movietag data is', req.params)
+  const id = req.params.id;
+  const tag = req.params.tag;
+
+  const getSimilarMovieTag = await orm.movieTagDb(id, tag);
+  // console.log(getSimilarMovieTag);
+
+  res.send(getSimilarMovieTag)
+})
+//-----edittag--------
+app.post("/api/edittag", async (req, res) => {
+  // console.log('tag data is', req.body)
+  const tagData = req.body;
+  const editTagResult = await orm.postEditTags( tagData );
+  res.send(editTagResult);
+})
+//------delete movies----
+app.delete("/api/delete/:movieId/:userId", async(req, res) =>{
+  // console.log('movietag data is', req.params)
+  const movieId = req.params.movieId;
+  const userId = req.params.userId;
+
+  const deleteMovieResult = await orm.deleteMoviebyTag(movieId, userId);
+  // console.log(deleteMoviebyTags);
+  console.log(deleteMovieResult.message);
+
+  res.send(deleteMovieResult)
+  
+})
+
 app.listen( PORT, function(){
   console.log( `[MovieManiax server] RUNNING, http://localhost:${PORT}` );
 });
