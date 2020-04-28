@@ -221,9 +221,8 @@ async function showProfileDb(id){
 }
 
 async function postReview(details){
-    // console.log(details);
+    //Save is User Schema
     const myReview = {
-        // 'reviewSchemaId': `${details.id}`,
         'movieId': `${details.movieId}`,
         'movieImage':`${details.moviePoster}`,
         'movieName': `${details.movieName}`,
@@ -251,6 +250,7 @@ async function postReview(details){
 
     const userFetch = await db.users.findOneAndUpdate({ _id: details.id }, { $push: { myReviews:  myReview } });
     
+    //Save is Review Schema
     const reviewSchema = {
         movieId: details.movieId,
         rating: details.rating,
@@ -262,6 +262,16 @@ async function postReview(details){
     }
     const dbReviews = new db.reviews( reviewSchema);
     const reviewInfo = await dbReviews.save();
+
+
+    //Save is Notification Schema
+    const notification = {
+        userName: details.name,
+        reviewId: reviewInfo._id
+    }
+    const dbNotify = new db.notifications( notification);
+    const saveNotification = await dbNotify.save();
+
     return { message: "Review successfully saved !!"};
 
 }
@@ -341,6 +351,26 @@ async function thumbsUp(likes){
     return { message: `Thank you, likes added!` }
 }
 
+async function getNotifications(){
+    const dbGetUpdates = await db.notifications.find({});
+    return dbGetUpdates
+}
+async function postGroupInfo(info){
+    const data = {
+        "groupName": `${info.groupName}`,
+        "groupImage": `${info.groupImage}`
+    }
+    const dbPostGroups = await db.users.findOneAndUpdate({ _id: info.id }, { $push: { myGroups: data } });
+    return { message: `Success! Your group has been added !` }
+
+}
+
+async function getGroups(userId){
+    const dbGetGroups = await db.users.find({ _id: userId });
+    const returnValue = dbGetGroups[0].myGroups
+    return returnValue
+}
+
 module.exports = {
     registerUser,
     loginUser,
@@ -365,9 +395,11 @@ module.exports = {
     postComment,
     thumbsUp,
     
-    
     //later for friend activity
     getActivitylist, 
     postCommentActivity,
-    postLikeActivity
+    postLikeActivity,
+    getNotifications,
+    postGroupInfo,
+    getGroups
 }

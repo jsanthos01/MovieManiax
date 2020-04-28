@@ -20,8 +20,12 @@ import GenreMoviePage from './components/Genre/GenreMoviePage';
 import UpcomingPage from './components/ShowMore/Upcoming/Upcoming';
 import PopularPage from './components/ShowMore/Popular/Popular';
 import TopRatedPage from './components/ShowMore/TopRated/TopRated';
-
 import FriendActivity from './components/FriendPage/FriendActivity';
+import GroupChat from './components/GroupChat/GroupChat';
+import Join from './components/GroupChat/Join/Join';
+import Chat from './components/GroupChat/Chat/Chat';
+import CustomChatBot from './components/CustomChatBot/CustomChatBot';
+
 function App() {
   return (
     <div className="App">
@@ -37,21 +41,20 @@ function App() {
             <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/user/:id" component={Profile} /> 
             <Route exact path="/favourites/:id" component={Favourites} />
-
-            {/* friends  page */}
-
             <Route exact path="/friendList" component={Friends} />
             <Route path="/friendProfile/:id" component={FriendProfilePage} />          
             <Route path="/friendActivity" component={FriendActivity} />          
-
             <Route exact path="/reviews/:id/:title" component={Reviews} />
-            {/* show more  page */}
             <Route path="/genre/:id" component={GenreMoviePage} />
             <Route exact path="/genrePage" component={GenrePage} />
             <Route exact path="/upcoming" component={UpcomingPage} />
             <Route exact path="/popular" component={PopularPage} />
             <Route exact path="/TopRated" component={TopRatedPage} /> 
+            <Route exact path="/groupChat" component={GroupChat} /> 
+            <Route exact path="/join" component={Join} />
+            <Route path="/chat/:name/:room" component={Chat} />
           </div>
+          <CustomChatBot />
         <Footer />
       </Router>
     </div>
