@@ -1,6 +1,7 @@
 import React from 'react'
 import './InfoBar.css'
 function InfoBar({room}) {
+    console.log("Inside InfoBar!", room)
     return (
         <div className="infoBar">
             <div className="leftInnerContainer">

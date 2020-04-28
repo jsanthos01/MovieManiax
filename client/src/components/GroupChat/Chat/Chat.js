@@ -1,6 +1,5 @@
 import React, { useState, useEffect,  } from 'react';
 import {useParams} from 'react-router-dom'
-import queryString from 'query-string'
 import io from 'socket.io-client'
 import './Chat.css'
 import InfoBar from  '../InfoBar/InfoBar'
