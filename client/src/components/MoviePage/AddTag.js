@@ -18,6 +18,7 @@ function TagForm(props) {
         // setMyTag(noSpaceTag);  
         setMyTag(newtagString)
     } 
+    console.log(myTag)
     async function handleSubmit(e){
         e.preventDefault();   
         props.submitTag(e);

@@ -20,6 +20,7 @@ import GenreMoviePage from './components/Genre/GenreMoviePage';
 import UpcomingPage from './components/ShowMore/Upcoming/Upcoming';
 import PopularPage from './components/ShowMore/Popular/Popular';
 import TopRatedPage from './components/ShowMore/TopRated/TopRated';
+import Tags from './components/Tags/Tags';
 function App() {
   return (
     <div className="App">
@@ -34,6 +35,7 @@ function App() {
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/user/:id" component={Profile} /> 
+            <Route exact path="/tags/:id" component={Tags} />
             <Route exact path="/favourites/:id" component={Favourites} />
 
             {/* friends  page */}

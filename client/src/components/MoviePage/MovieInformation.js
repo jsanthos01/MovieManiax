@@ -6,11 +6,13 @@ import AddTag from './AddTag';
 
 function MovieInformation() {
     const { id } = useParams();
+    const userId = localStorage.id;
     const [ movieDetails, setMovieDetails ] = useState([]);
     const [ movieTrailer, setMovieTrailer ]= useState([]);
     const [ similarMovies, setSimilarMovies ]= useState([]);
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
     const [ isNotLoggedIn, setIsNotLoggedIn ] = useState( false );
+    const [tagForm, setTagForm] = useState(false);
     const movieStyle = {
         listGroupItem: {backgroundColor: "transparent", borderRadius: "0", color: "#fff"},
         h4Style: {color:"white", fontStyle: "italic"},
