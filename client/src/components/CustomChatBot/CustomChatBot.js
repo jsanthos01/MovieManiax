@@ -109,11 +109,6 @@ function CustomChatBot() {
           value: "Custom Tags",
           label: "Custom Tags",
           trigger: "Asking about Custom Tags"
-        },
-        {
-          value: "Friendlist",
-          label: "Friendlist",
-          trigger: "Asking about Friendlist"
         }
       ]
     },
