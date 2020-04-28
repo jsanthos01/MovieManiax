@@ -42,13 +42,14 @@ function TagForm(props) {
             },
             body: JSON.stringify(tagData)
         }).then( result=>result.json());
+
     }
     return (
         <div>
             <form>
                 <input type="text" name="" id="tags" value={myTag} onChange={updateTag} placeholder="seperate tags by comma" size="40"></input><br/>
                 
-                <button type="submit" onClick={handleSubmit}>Add</button>  
+                <button class="btn myBtnPink" type="submit" onClick={handleSubmit}>Add</button>  
             </form>
             
         </div>

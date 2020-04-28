@@ -39,9 +39,9 @@ function EditTag(props) {
     return (
         <div>
             <form>
-                <input type="text" name="" id="tags"  value={editTags} onChange={handleChange} placeholder="seperate tags by comma" size="40"></input><br/>
+                <input type="text" name="" id="tags"  value={editTags} onChange={handleChange} placeholder="seperate tags by comma" size="40" style={{height: '30px', marginTop: '10px'}}></input><br/>
                 
-                <button type="submit" onClick={handleSubmit}>Add</button>  
+                <button type="submit" class="btn myBtnPink" onClick={handleSubmit}>Add</button>  
             </form>
             
         </div>

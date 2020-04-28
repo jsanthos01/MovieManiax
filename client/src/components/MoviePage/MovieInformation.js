@@ -162,6 +162,8 @@ function MovieInformation() {
                         <Link to={`/reviews/${movieDetails.id}/${movieDetails.title}`}>
                             <button type="button" className="btn myBtnPink mt-3"><i class="fas fa-comments"></i> View Reviews</button>
                         </Link>
+                        <button class="btn myBtnPink ml-3 mt-3" onClick={function(){setTagForm(true) }} className="btn myBtnPink ml-3 mt-3" style={{position: 'relative'}}><i class="fas fa-plus"></i>Add Tags</button>
+                        { tagForm && localStorage.id ? <AddTag submitTag={submitTag} movieId={id} userId={userId} title={movieDetails.title} image={movieDetails.poster_path}/> : '' }
                         <div>
                             <ul class="list-group">
                                 <li class="list-group-item" style={movieStyle.listGroupItem}> <i class="fas fa-1x fa-star" style={{color: "yellow"}}></i><b> {movieDetails.vote_average}</b>/10</li>
@@ -169,8 +171,7 @@ function MovieInformation() {
                             </ul>
                         </div>
 
-                        <button type="button" onClick={function(){setTagForm(true) }} className="btn myBtnPink mt-3"><i class="fas fa-plus"></i>Add Tags</button>
-                        { tagForm && localStorage.id ? <AddTag submitTag={submitTag} movieId={id} userId={userId} title={movieDetails.title} image={movieDetails.poster_path}/> : '' }
+                       
                         
                         <div>
                             <ul class="list-group">
