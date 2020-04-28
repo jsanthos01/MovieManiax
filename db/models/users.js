@@ -63,7 +63,6 @@ let users = new Schema ({
          movieName: {type: String}
       }
    ]
-
  }, {
     timestamps: true
  });

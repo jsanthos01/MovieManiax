@@ -305,6 +305,9 @@ ul li {
   border-radius: 50%;
   object-fit: cover;
 }
+.dropdown-menu{
+  min-width: 250px;
+}
 
 @media only screen and (max-width: 1200px) {
   .movieCard {

@@ -121,8 +121,26 @@ app.get("/api/avatar/:id", async (req, res) => {
   const showProfile = await orm.showProfileDb( id );
   res.json(showProfile)
 })
+//--------------friends activity page
 
 
+app.post("/api/activityList", async (req, res) => {
+  // console.log('in server the friend ids: ',req.body)
+  const activityData = await orm.getActivitylist(req.body);
+  res.json(activityData);
+})
+app.post("/api/postCommentActivity", async (req, res) => {
+  // console.log('in server the friend ids: ',req.body)
+  const activityData = await orm.postCommentActivity(req.body);
+  res.json(activityData);
+})
+app.post("/api/likeCommentActivity", async (req, res) => {
+  // console.log('in server the friend ids: ',req.body)
+  const activityData = await orm.postLikeActivity(req.body);
+  res.json(activityData);
+})
+//----------------------------------------------------------
+//JOANNA REVIEWS SECTION
 app.post("/api/review", async (req, res) => {
   // console.log("REVIEW IMAGE SECTION", req.body);
   const postMovieReview = await orm.postReview(req.body);

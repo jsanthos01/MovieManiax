@@ -73,6 +73,7 @@ function Friend() {
 
         const friendInfo = {
             userId: localStorage.id,
+            userName: localStorage.name,
             friendId: user._id,
             friendName: user.name,
             friendImg: user.profileImg
@@ -174,15 +175,15 @@ function Friend() {
                     <h4 style={{color: "white"}}>Your Following List</h4>
                         { myFriendList.length>0 ? myFriendList.map( user =>
                         <div class="friendCard" >
-                            <div class="d-flex card-body">
-                                <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-3">
                                     <img src={user.image} alt="profileImg " class="profileImg" />
                                 </div>
-                                <div class="col-md-7  mt-4">
+                                <div class="col-md-7 mt-4">
 
                                     <h3 style={{color: 'white', fontSize: '1.6rem'}} >{user.name}</h3>
                                 </div>
-                                <div class="col-md-3  mt-4">
+                                <div class="col-md-2  mt-4">
                                     <div class="d-flex justify-content-between">
                                         <Link to={'/friendProfile/'+user.friendId}>
                                             <div class="btn myBtn mr-2">View Profile</div>
