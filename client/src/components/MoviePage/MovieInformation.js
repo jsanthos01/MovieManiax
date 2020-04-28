@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import AddTag from './AddTag';
 
 function MovieInformation() {
     const { id } = useParams();
@@ -134,6 +135,11 @@ function MovieInformation() {
         }
     }
 
+    function submitTag(e){
+        e.preventDefault();
+        setTagForm(false);
+    }
+
     return (
         <div class='container-fluid' >
             { isNotLoggedIn ? <Redirect to='/login' /> : '' }
@@ -160,6 +166,17 @@ function MovieInformation() {
                                 <li class="list-group-item" style={movieStyle.listGroupItem}><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
                             </ul>
                         </div>
+
+                        <button type="button" onClick={function(){setTagForm(true) }} className="btn myBtnPink mt-3"><i class="fas fa-plus"></i>Add Tags</button>
+                        { tagForm && localStorage.id ? <AddTag submitTag={submitTag} movieId={id} userId={userId} title={movieDetails.title} image={movieDetails.poster_path}/> : '' }
+                        
+                        <div>
+                            <ul class="list-group">
+                                <li class="list-group-item" style={movieStyle.listGroupItem}> <i class="fas fa-1x fa-star" style={{color: "yellow"}}></i><b> {movieDetails.vote_average}</b>/10</li>
+                                <li class="list-group-item" style={movieStyle.listGroupItem}><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
+                            </ul>
+                        </div>
+    
                         <div class="container" style={{color:"white"}}>
                             <h5>Overview</h5>
                             <p>{movieDetails.overview}</p>
