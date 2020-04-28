@@ -24,11 +24,10 @@ function FriendActivity() {
     const [ myFriendList, setMyFriendList ] = useState([]);
     const [ myFriendIds, setMyFriendIds ] = useState([]);
     const [ activityList, setActivityList ] = useState([]);
-
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
-
     const [formOpen, setFormOpen] = useState({});
     const [comment, setComment] = useState({name: localStorage.name, userId: localStorage.id, activityId: "", content: ""});
+    const [ profileImg, setProfileImg] = useState( [] )
 
     let friendIds;
     async function loadFriend(){
@@ -42,7 +41,10 @@ function FriendActivity() {
             ids.friendId
             )
         setMyFriendIds(friendIds)
-        console.log('friendIds: ', friendIds)
+        console.log('friendIds: ', friendIds);
+        const getUserInfo = await fetch(`/api/UsersList`).then(res => res.json());
+        setProfileImg(getUserInfo);  
+
         loadActivity()  
 
         // console.log('myFriendIds: ', myFriendIds)
@@ -125,7 +127,9 @@ function FriendActivity() {
         <div class="row">
             <div class="col-lg-8">
             {activityList.slice(0,15).map((activity, idx)=>{
+            
             switch (activity.activityType) {
+            
             case "watchList":   
                 return <div class="container movieHrzCard mx-auto" >
                 <div class="mvHrzCrdDesc">
@@ -174,6 +178,7 @@ function FriendActivity() {
                     }
                 </div>
             </div>;
+
             case "favouritesList": return <div class="container movieHrzCard mx-auto" >
                 <div class="mvHrzCrdDesc">
                     <p class="movieCrdTitle"></p>  
@@ -228,7 +233,9 @@ function FriendActivity() {
                 </div>
                 <div class="mvHrzCrdDesc row">
                     <div class="col-md-2">
-                        <img src={`${activity.friend.friendImg}`} class="hrCdImg " alt="friend poster" style={imgStyle}/>
+                        {profileImg.map(user => user._id === activity.friend.friendId ? <img class="hrCdImg" style={imgStyle} src={user.profileImg} />: "") }
+
+                        {/* <img src={`${activity.friend.friendImg}`} class="hrCdImg " alt="friend poster" style={imgStyle}/> */}
                     </div>
                     <div class="col-md-8">
                         <p class="movieCrdTitle">{activity.friend.friendName}</p>
@@ -327,7 +334,10 @@ function FriendActivity() {
             <div class="col-lg-4">
                 {myFriendList.map(friend=>
                 <a class=" mr-2" href={"/friendProfile/" + friend.friendId} style={{display: "block"}}> 
-                <img src={friend.image} class="hrCdImg" alt="profile poster" style={imgStyle}/> </a>
+                {profileImg.map(user => user._id === friend.friendId ? <img class="hrCdImg" style={imgStyle} src={user.profileImg} />: "") }
+
+                {/* <img src={friend.image} class="hrCdImg" alt="profile poster" style={imgStyle}/>  */}
+                </a>
                     )}
             </div>
         </div>
