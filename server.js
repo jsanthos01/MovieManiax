@@ -339,7 +339,3 @@ app.delete("/api/delete/:movieId/:userId", async(req, res) =>{
   res.send(deleteMovieResult)
   
 })
-
-app.listen( PORT, function(){
-  console.log( `[MovieManiax server] RUNNING, http://localhost:${PORT}` );
-});

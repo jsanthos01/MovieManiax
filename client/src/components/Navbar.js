@@ -82,12 +82,13 @@ function NavBar() {
                         <Link to={`/groupChat`} style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === `/groupChat` ? "nav-link active" : "nav-link"}>
                         Group Chats
                         </Link>
+                        <div class="dropdown-divider"></div>
                         <Link to={`/tags/${id}`} style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === `/tags/${id}` ? "nav-link active" : "nav-link"}>
                         Tags
                         </Link>
                         <div class="dropdown-divider"></div>
                         <Link to="/friendList" style={{color: 'black', paddingLeft: '20px'}}  className={location.pathname === "/friendList" ? "nav-link active" : "nav-link"}>
-                        Friends
+                        My Friends
                         </Link>
                         <div class="dropdown-divider"></div>
                         <Link to="/friendActivity" style={{color: 'black', paddingLeft: '20px'}}  className={location.pathname === "/friendActivity" ? "nav-link active" : "nav-link"}>
