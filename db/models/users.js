@@ -62,6 +62,12 @@ let users = new Schema ({
          rating: {type: String},
          movieName: {type: String}
       }
+   ],
+   myGroups: [
+      {
+         groupName:{type: String},
+         groupImage:{type: String}
+      }
    ]
 
  }, {

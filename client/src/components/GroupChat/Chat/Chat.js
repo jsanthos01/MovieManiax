@@ -65,10 +65,9 @@ function Chat() {
     }
   }
 
-  console.log(message, allMessages)
   return (
     <div class="outerContainer">
-      <div class="container">
+      <div class="innerChatContainer">
         <InfoBar room={room} />
         <Messages allMessages={allMessages} name={name} />
         <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />

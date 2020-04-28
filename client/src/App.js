@@ -20,9 +20,10 @@ import GenreMoviePage from './components/Genre/GenreMoviePage';
 import UpcomingPage from './components/ShowMore/Upcoming/Upcoming';
 import PopularPage from './components/ShowMore/Popular/Popular';
 import TopRatedPage from './components/ShowMore/TopRated/TopRated';
-// import GroupChat from './components/GroupChat/GroupChat';
-// import Join from './components/Join/Join';
-// import Chat from './components/Chat/Chat';
+import GroupChat from './components/GroupChat/GroupChat';
+import Join from './components/GroupChat/Join/Join';
+import Chat from './components/GroupChat/Chat/Chat';
+import CustomChatBot from './components/CustomChatBot/CustomChatBot';
 
 function App() {
   return (
@@ -47,10 +48,11 @@ function App() {
             <Route exact path="/upcoming" component={UpcomingPage} />
             <Route exact path="/popular" component={PopularPage} />
             <Route exact path="/TopRated" component={TopRatedPage} /> 
-            {/* <Route exact path="/groupChat" component={GroupChat} />  */}
-            {/* <Route exact path="/join" component={Join} /> */}
-            {/* <Route path="/chat/:name/:room" component={Chat} /> */}
+            <Route exact path="/groupChat" component={GroupChat} /> 
+            <Route exact path="/join" component={Join} />
+            <Route path="/chat/:name/:room" component={Chat} />
           </div>
+          <CustomChatBot />
         <Footer />
       </Router>
     </div>

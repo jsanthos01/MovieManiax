@@ -3,9 +3,9 @@ import './Input.css'
 
 function Input({message, setMessage, sendMessage}) {
     return (
-        <form className="form">
+        <form className="formChat">
             <input 
-                className="input"
+                className="inputChat"
                 type="text"
                 placeholder="Type a message..."
                 value={message} 

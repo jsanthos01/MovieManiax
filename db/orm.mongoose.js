@@ -245,6 +245,21 @@ async function getNotifications(){
     const dbGetUpdates = await db.notifications.find({});
     return dbGetUpdates
 }
+async function postGroupInfo(info){
+    const data = {
+        "groupName": `${info.groupName}`,
+        "groupImage": `${info.groupImage}`
+    }
+    const dbPostGroups = await db.users.findOneAndUpdate({ _id: info.id }, { $push: { myGroups: data } });
+    return { message: `Success! Your group has been added !` }
+
+}
+
+async function getGroups(userId){
+    const dbGetGroups = await db.users.find({ _id: userId });
+    const returnValue = dbGetGroups[0].myGroups
+    return returnValue
+}
 
 module.exports = {
     registerUser,
@@ -268,5 +283,7 @@ module.exports = {
     updateAvatar,
     postComment,
     thumbsUp,
-    getNotifications
+    getNotifications,
+    postGroupInfo,
+    getGroups
 }

@@ -12,15 +12,15 @@ function Join() {
             <div className="joinInnerContainer">
                 <h1 className="heading">Join</h1>
                 {/* 3. get the values of both inputs and put it inside setName and setRoom */}
-                <div><input placeholder="" className="joinInput" type="text" onChange={(event) => setName(event.target.value)} /></div>
-                <div><input placeholder="" className="joinInput mt-20" type="text" onChange={(event) => setRoom(event.target.value)}  /></div>
+                <div><input placeholder="Write your name." className="joinInput" type="text" onChange={(event) => setName(event.target.value)} /></div>
+                <div><input placeholder="Write your room name" className="joinInput mt-20" type="text" onChange={(event) => setRoom(event.target.value)}  /></div>
                 
                 {/* 
                     4. Set the name of user and room inside the url
                     5. Prevent the user from going to chat.js if any of the inputs are empty
                 */}
                 <Link onClick={event => (!name || !room) ? event.preventDefault() : null} to={`/chat/${name}/${room}`}>
-                    <button className="button mt-20" type="submit">Sign In</button>
+                    <button className="buttonSign mt-20" type="submit">Sign In</button>
                 </Link>
             </div>
         </div>

@@ -6,6 +6,10 @@ const orm = require( './db/orm.mongoose' );
 const multer  = require('multer');
 const PORT = process.env.PORT || 8080;
 const app = express();
+const io = require('socket.io')(server);
+//getting all the functions that are initialized inside users.js
+const {addUser, removeUser, getUser, getUserInRoom} = require("./chatUsers");
+var server = app.listen( PORT, function(){ console.log( `[Movie Maniax], http://localhost:${PORT}` ); });
 
 app.use( express.static('client/build/') );
 app.use(express.static(path.join(__dirname, "client/src/components/Genre")));
@@ -185,6 +189,74 @@ app.get("/api/notifications", async (req, res) => {
   res.send(getNotifications)
 });
 
-app.listen( PORT, function(){
-  console.log( `[MovieManiax server] RUNNING, http://localhost:${PORT}` );
+app.post("/api/groupData", async (req, res) => {
+  const postGroupData = await orm.postGroupInfo(req.body);
+  res.send(postGroupData)
 });
+
+app.get("/api/groupData/:id", async (req, res) => {
+  const getGroupsInfo = await orm.getGroups(req.params.id);
+  res.send(getGroupsInfo)
+});
+
+
+// SOCKET.IO
+
+//Here, we set up socket.io. This function listens for a connection event. Once it hears the connection event, it runs the io.on function
+io.on('connection', (socket) => {  
+    //When user joins (specific event)
+    //The callback is useful to trigger a response immediately after socket.on event is emitted
+    socket.on("join", ({name, room}, callback)=> {
+        // console.log(`Name of User: ${name} and Room: ${room}`);
+       
+        // 1. Here, we are calling addUser function from users.js
+        // 2. If this function successfully works, it returns the user's info else it returns an error
+        // UNSURE 3. socket.id = basically is the id of a specific instance of a socket
+        const {error, user} = addUser({id:socket.id, name, room});
+        if(error) return callback(error);
+
+        // 4. joins a user to a room
+        socket.join(user.room);
+
+        //ADMIN GENERATED MESSAGE : Now that the user has entered a specific room, we can send a message to the user on the client-side
+        socket.emit('message', {user: 'admin', text: `${user.name}, Welcome to the room ${user.room}`})
+        
+        //socket.broadcast sends a message to everyone except the user
+        // in this case, we notify everyone in the chat that a new user has joined
+        socket.broadcast.to(user.room).emit('message', {user: 'admin', text: `${user.name}, has joined`})
+       
+        //if there are no errors, simply run callback so that the if statement in client side runs 
+        
+        //5. to get all the users inside a specific room
+        // io.to(user.room).emit('roomData', {room: user.room, users: getUserInRoom(user.room)})
+        callback();
+    }) 
+
+    //USER GENERATED MESSAGE
+    socket.on("sendMessage", (message, callback) => {
+        //1. get the id of the user who sent the message
+        // console.log(message);
+        // console.log(socket.id)
+        const user = getUser(socket.id);
+        // console.log(user)
+        //2. io.to().emit()  will send the message to all everyone connected to the room including the user himself who wrote it
+        io.to(user.room).emit("message", {user: user.name, text: message})
+        // io.to(user.room).emit("message", {room: user.room, users: getUserInRoom(user.room)})
+        callback();
+    })
+    //When user disconnects, 
+    socket.on('disconnect', () => {
+        console.log("User has Left");
+        // 1. If user left, call removeUser function
+        const user = removeUser(socket.id);
+        // 2. send a message to the other users in the room 
+        if(user){
+            io.to(user.room).emit('message', {user: 'admin', text: `${user.name} has left the chat.`});
+        }
+
+    })
+});
+
+// app.listen( PORT, function(){
+//   console.log( `[MovieManiax server] RUNNING, http://localhost:${PORT}` );
+// });
