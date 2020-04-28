@@ -121,11 +121,10 @@ function FriendActivity() {
         loadFriend()  
         // loadActivity()  
     }, []);
-    
     return (
         <div class="row">
             <div class="col-lg-8">
-            {activityList.map((activity, idx)=>{
+            {activityList.slice(0,15).map((activity, idx)=>{
             switch (activity.activityType) {
             case "watchList":   
                 return <div class="container movieHrzCard mx-auto" >

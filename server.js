@@ -139,7 +139,6 @@ app.post("/api/likeCommentActivity", async (req, res) => {
   const activityData = await orm.postLikeActivity(req.body);
   res.json(activityData);
 })
-
 //----------------------------------------------------------
 //JOANNA REVIEWS SECTION
 app.post("/api/review", async (req, res) => {

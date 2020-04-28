@@ -89,10 +89,17 @@ function NavBar() {
                         <Link to="/logout" style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === "/logout" ? "nav-link active" : "nav-link"}>
                         Logout
                         </Link>
-                        
-                       
                     </div>
-                </li>  
+                
+                </li>
+                  
+              }
+              { !id ? '': 
+                <li className="nav-item">
+                  <Link to="/friendActivity" className={location.pathname === "/friendActivity" ? "nav-link active" : "nav-link"}>
+                  <i class="far fa-bell"></i>
+                  </Link>
+                </li>
               }
               
           </ul>

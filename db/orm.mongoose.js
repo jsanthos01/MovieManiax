@@ -39,18 +39,6 @@ async function loginUser( email, password ) {
     if( !isValidPassword ) {
         return { error: "Invalid password" };
     }
-
-    // // create a new session for this user and save it.
-    // userData.session = uuid.v4();
-
-    // // update the session
-    // // remove entries before we do teh update
-    // delete userData.createdAt;
-    // delete userData.updatedAt;
-    // const dbResult = await db.users.findOneAndUpdate( 
-    //    { _id: userData._id}, 
-    //    userData );
-
     // remap the data into the specified fields as we are using camelCase
     return {
         message: "user successfully loggedin",
