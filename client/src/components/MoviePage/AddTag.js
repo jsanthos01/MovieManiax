@@ -4,6 +4,7 @@ import React, {useState} from 'react'
 function TagForm(props) {
     // console.log(props);
     const[ myTag, setMyTag ] = useState([] );
+    const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
     let tagData = {};
 
     function updateTag(e){
@@ -23,7 +24,7 @@ function TagForm(props) {
         e.preventDefault();   
         props.submitTag(e);
         let noSpaceTag = myTag.map(name => name.trim());
-        console.log(noSpaceTag)
+        // console.log(noSpaceTag)
     
         tagData = {
             id: props.userId,

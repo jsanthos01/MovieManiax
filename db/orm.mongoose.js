@@ -234,7 +234,7 @@ async function thumbsUp(likes){
 //-----tagdata----
 async function postTagDb(details){
     // console.log('the tag details are', details);
-      
+    
     const tagSchema = {
         movieId: details.movieId,
         userId: details.id, 
@@ -274,6 +274,8 @@ async function getTagsDb(id){
             tagSingleArray.push(tagArray[i][j]);
         }
     }
+    // const trimArray = tagSingleArray.map(name => name.trim());
+
     const uniqueTags = tagSingleArray.filter(
         function (tag, i) {
         return tagSingleArray.indexOf(tag) === i

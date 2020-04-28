@@ -78,21 +78,21 @@ function Tags() {
                         {myTags.map( item =>
                         <button class="text-left pb-2" style={{ width:'10rem', backgroundColor: 'transparent', borderStyle: 'none', color: 'white'}} onClick={() => getMovieData(item)} >{item}</button> )}
                     </div> 
-                    <div class="col-lg-10 col-md-4 mt-4">
-                        <div calss="row">
-                            <div class="col-lg-12 col-md-12">
+                    <div class="col-lg-10 mt-4">
+                        <div>
+                            <div class="row">
                                 {movieCard.length !== 0 ? <div class="col-lg-12"><h4>Your Movies By Tags</h4></div> : <div class="col-lg-12"><h4>You have not saved movies by Tag yet!</h4></div>}
                                 { movieCard.map( (movie, idx) => 
-                                <div class="card cardStyle d-inline-flex mr-4 justify-content-around" style={{width: '10rem'}}>
+                                <div class="card cardStyle mr-2 mt-2 justify-content-around mx-auto" style={{width: '10rem'}}>
                                 {movie.image && movie.image !== "null" ? <img class="" style={{minHeight:'70px', height:'160px', objectFit: 'cover'}} src={`https://image.tmdb.org/t/p/w500/${movie.image}`} alt={movie.title} /> : <img class="card-img-top" src='https://via.placeholder.com/150/000000/FFFFFF/'  /> }
-                                <div class="text-center">{movie.title}</div>
-                                <div class="mt-2 d-inline-flex justify-content-around">
+                                    <div class="text-center">{movie.title}</div>
+                                    <div class="mt-2 d-flex justify-content-around">
                                     <div type="button" id={idx} onClick={e => handleBtnSubmit(e, idx)} class='btn myBtn mr-2' style={{color: 'red'}} title="Edit"><i class="fas fa-edit"></i></div>
                                     {  tagForm.id == idx && tagForm.state  ? <EditTag submitTag={submitTag} idx={idx} movieId={movie.movieId} movieTags={movie.tags} userId={movie.userId}/> : '' }
                                     <button type="button" class='btn myBtn'  onClick={e => handleDelete(e, movie.movieId, movie.userId)} style={{color: 'red'}} title="Delete"><i class="fas fa-times"></i></button></div>
                                 </div>)}
                             </div>
-                            <div class="col-lg-12 col-md-12">
+                            <div class="row">
                                 <SimilarTags similarMovie ={similarMovie} />
                                 
                             </div>

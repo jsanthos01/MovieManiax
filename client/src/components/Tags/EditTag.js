@@ -9,21 +9,19 @@ function EditTag(props) {
         let tagString = e.target.value;
         let newtagString = tagString.toLowerCase().split(',');
 
-        let noSpaceTag = [];
-        for ( var i = 0; i < newtagString.length; i++){
-            noSpaceTag.push(newtagString[i].replace(/ /g, ''))
-        }
-        setEditTags(noSpaceTag);  
+        
+        setEditTags(newtagString);  
     }
     
     async function handleSubmit(e){
         e.preventDefault();   
         props.submitTag(e, props.movieId); 
+        let noSpaceTag = editTags.map(name => name.trim());
         
         let tagData ={ 
             movieId: props.movieId,
             userId: props.userId,
-            tags: editTags
+            tags: noSpaceTag
         }
 
         const postEditTags = await fetch('/api/edittag',
@@ -39,9 +37,9 @@ function EditTag(props) {
     return (
         <div>
             <form>
-                <input type="text" name="" id="tags"  value={editTags} onChange={handleChange} placeholder="seperate tags by comma" size="40" style={{height: '30px', marginTop: '10px'}}></input><br/>
+                <input type="text" name="" id="tags"  value={editTags} onChange={handleChange} placeholder="seperate tags by comma" size="40"></input><br/>
                 
-                <button type="submit" class="btn myBtnPink" onClick={handleSubmit}>Add</button>  
+                <button type="submit" class="btn btnStyle" onClick={handleSubmit}>Add</button>  
             </form>
             
         </div>
