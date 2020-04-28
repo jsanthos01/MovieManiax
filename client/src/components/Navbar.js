@@ -9,9 +9,10 @@ function NavBar() {
   let showClass = !isShown ? `collapse navbar-collapse`: `collapse navbar-collapse show`;
 
   const id = localStorage.id;
-  console.log(id);
+  // console.log(id);
+
   const userName = localStorage.name;
-  console.log(userName);
+  // console.log(userName);
 
 
 
@@ -80,6 +81,9 @@ function NavBar() {
                         <div class="dropdown-divider"></div>
                         <Link to={`/groupChat`} style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === `/groupChat` ? "nav-link active" : "nav-link"}>
                         Group Chats
+                        </Link>
+                        <Link to={`/tags/${id}`} style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === `/tags/${id}` ? "nav-link active" : "nav-link"}>
+                        Tags
                         </Link>
                         <div class="dropdown-divider"></div>
                         <Link to="/friendList" style={{color: 'black', paddingLeft: '20px'}}  className={location.pathname === "/friendList" ? "nav-link active" : "nav-link"}>

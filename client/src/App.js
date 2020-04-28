@@ -26,6 +26,7 @@ import Join from './components/GroupChat/Join/Join';
 import Chat from './components/GroupChat/Chat/Chat';
 import CustomChatBot from './components/CustomChatBot/CustomChatBot';
 
+import Tags from './components/Tags/Tags';
 function App() {
   return (
     <div className="App">
@@ -40,6 +41,7 @@ function App() {
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/user/:id" component={Profile} /> 
+            <Route exact path="/tags/:id" component={Tags} />
             <Route exact path="/favourites/:id" component={Favourites} />
             <Route exact path="/friendList" component={Friends} />
             <Route path="/friendProfile/:id" component={FriendProfilePage} />          

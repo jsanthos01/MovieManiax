@@ -34,7 +34,6 @@ let users = new Schema ({
          ratings: {type: String},
       }
    ],
-
    watchlist: [
       {
          movieId: {type: String},
@@ -68,7 +67,13 @@ let users = new Schema ({
          groupName:{type: String},
          groupImage:{type: String}
       }
-   ]
+   ],
+   userTags: [
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "tags"
+       }
+    ]
  }, {
     timestamps: true
  });
