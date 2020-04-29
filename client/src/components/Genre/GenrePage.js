@@ -27,6 +27,7 @@ function GenrePage() {
                                 <div class="flip-card-inner mx-auto">
                                     <div class="flip-card-front">
                                         <img src={genres.img} alt="genre Img" style={{width: "100%"}}/>
+                                        <p>{genres.name}</p>
                                     </div>
                                     <div class="flip-card-back">
                                         <h3 class='mt-5'>{genres.name}</h3>
