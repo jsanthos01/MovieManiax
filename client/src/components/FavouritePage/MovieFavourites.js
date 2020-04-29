@@ -33,7 +33,6 @@ function MovieFavourites() {
         const getMovies = await fetch(`/api/favourites/${id}`).then(res => res.json());
         const movies = getMovies;
         const sortedMovies = movies[0].favourites.reverse()
-        // console.log(sortedMovies)
         setMyMovies(sortedMovies);
     }
 

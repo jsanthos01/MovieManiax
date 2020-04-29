@@ -50,8 +50,8 @@ h1 {
 /* genre */
 .flip-card {
   background-color: transparent;
-  width: 25vh;
-  height: 25vh;
+  width: 23vh;
+  height: 26vh;
   padding: 10px;
   perspective: 1000px;
   cursor: pointer;
@@ -69,19 +69,13 @@ h1 {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 .flip-card-inner:hover {
-  /* position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d; */
+
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0);
 }
 .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
 }
 .flip-card-front, .flip-card-back {
-
   border-top: 3px solid #265563;
   border-right: 3px solid #265563;
   padding: 5px;
@@ -94,15 +88,15 @@ h1 {
 
 .flip-card-front {
   border-radius: 5px;
-  background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563);
+  /* background-image: linear-gradient(45deg, #2a184d, #0f1b38, #265563); */
+  background-color: white;
   color: black;
   box-shadow: -2px 2px 8px 0 rgba(190, 60, 230, 0.562);
-
 }
 .flip-card-back {
   border-radius: 5px;
-  background-color: #265563;
-  color: white;
+  background-color: white;
+  color: black;
   transform: rotateY(180deg);
   box-shadow: 0 4px 8px 0 rgba(190, 60, 230, 0.562);
 }
@@ -304,6 +298,9 @@ ul li {
   height: 15vh;
   border-radius: 50%;
   object-fit: cover;
+}
+.dropdown-menu{
+  min-width: 250px;
 }
 
 @media only screen and (max-width: 1200px) {

@@ -1,5 +1,6 @@
 import React,{useState , useEffect} from 'react'
 import { Link } from "react-router-dom";
+import './Friends.css'
 
 function Friend() {
     const [ searchInput, setSearchInput ] = useState("");
@@ -8,6 +9,7 @@ function Friend() {
     const [ userProfile, setUserProfile ] = useState([]);
     const [ myFriendList, setMyFriendList ] = useState([]);
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
+    const [ profileImg, setProfileImg] = useState( [] )
 
     const messageStyle = {
         width: '80%',
@@ -73,30 +75,34 @@ function Friend() {
 
         const friendInfo = {
             userId: localStorage.id,
+            userName: localStorage.name,
             friendId: user._id,
             friendName: user.name,
             friendImg: user.profileImg
         }
         console.log('posting friendInfo: ', friendInfo);
         const addedFriend= await fetch('/api/saveFriend',
-                {  
-                    method: 'post',
-                    headers: {
-                        'Accept': 'application/json, text/plain, */*',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(friendInfo)
-                }).then( result=>result.json());
+            {  
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(friendInfo)
+            }).then( result=>result.json());
 
-                if( addedFriend.message ){
-                    setAlertMessage( { type: 'success', message: addedFriend.message } );
-                    setTimeout( function(){ setAlertMessage( {} ); }, 3000 );
-                } else {
-                    setAlertMessage( { type: 'danger', message: addedFriend.message } );
-                    setTimeout( function(){ setAlertMessage( {} ); }, 2500 );
-                }
-                setUserProfile([])
-                loadFriend()  
+            if( addedFriend.message ){
+                setAlertMessage( { type: 'success', message: addedFriend.message } );
+                setTimeout( function(){ setAlertMessage( {} ); }, 3000 );
+            } else {
+                setAlertMessage( { type: 'danger', message: addedFriend.message } );
+                setTimeout( function(){ setAlertMessage( {} ); }, 2500 );
+            }
+
+             
+
+            setUserProfile([])
+            loadFriend()  
         
     }
     async function deleteFromFriendList( frndId ){
@@ -124,22 +130,22 @@ function Friend() {
         console.log(`***loading userList `);
         const friendListResult = await fetch(`/api/friendList/${userId}`).then(result=>result.json());  
         setMyFriendList( friendListResult[0].friendList );
-        console.log( '104 friendListResult: ', friendListResult[0].friendList )
+        console.log( '104 friendListResult: ', friendListResult[0].friendList );
+        const getUserInfo = await fetch(`/api/UsersList`).then(res => res.json());
+        setProfileImg(getUserInfo); 
     }
-    async function viewProfile(user){
-        console.log('to check if view btn works: ', user)
-    }
+    
     useEffect( function(){
         loadPeople()  
         loadFriend()  
     }, []);
     return (
-        <div class="container" style={{color : 'black'}}>
+        <div class="container" style={{color : 'black', marginTop: "30px"}}>
             <div style={messageStyle} className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
                 {alertMessage.message}
             </div>
             <form >
-                <h4 style={{color: "white"}}>Find People</h4>
+                <h4  class="findPeople" style={{color: "white"}}>Find People</h4>
                 <div class="input-group">
                     <input onChange={handleInputChange} value={searchInput} type="text" class="form-control" style={style.myInput} placeholder="Search your user"/>
                 </div>
@@ -171,18 +177,20 @@ function Friend() {
             {/* friendList._id */}
             <div class="container">
                 <div class="mb-3">
-                    <h4 style={{color: "white"}}>Your Following List</h4>
+                    <h4 class="findPeople" style={{color: "white"}}>Your Following List</h4>
                         { myFriendList.length>0 ? myFriendList.map( user =>
                         <div class="friendCard" >
-                            <div class="d-flex card-body">
-                                <div class="col-md-2">
-                                    <img src={user.image} alt="profileImg " class="profileImg" />
-                                </div>
-                                <div class="col-md-7  mt-4">
+                            <div class="row">
+                                <div class="col-md-3 specialFriendPics">
+                                    {profileImg.map(users => users._id === user.friendId ? <img class="imgStyling"  src={users.profileImg} alt="profile pic" />: "") }
 
-                                    <h3 style={{color: 'white', fontSize: '1.6rem'}} >{user.name}</h3>
+                                    {/* <img src={user.image} alt="profileImg " class="profileImg" /> */}
                                 </div>
-                                <div class="col-md-3  mt-4">
+                                <div class=" specialFriendName col-md-7 mt-4">
+
+                                    <h3  style={{color: 'white', fontSize: '1.6rem'}} >{user.name}</h3>
+                                </div>
+                                <div class="col-md-2  mt-4">
                                     <div class="d-flex justify-content-between">
                                         <Link to={'/friendProfile/'+user.friendId}>
                                             <div class="btn myBtn mr-2">View Profile</div>

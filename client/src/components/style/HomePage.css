@@ -60,5 +60,18 @@ filter: drop-shadow(1px 1px 5px #FF416C);
 
 }
 
+@media only screen and (max-width: 600px) {
+  .title {
+    font-size: 40px;
+  }
 
+  .icon {
+    width: 100px;
+    height: 100px;
+
+  }
+  .words {
+    font-size: 20px;
+  }
+}
 

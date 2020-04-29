@@ -7,35 +7,30 @@ import AboutPage from "./comp/About"
 import FollowerList from "./comp/FollowerList"
 import Reviews from "./comp/Reviews"
 import TabBar from "./comp/TabBar"
-// import MovieInfo from './components/MoviePage/MovieInformation'
 import MovieInfo from '../MoviePage/MovieInformation'
-
+import './Friends.css'
 export const UserContext = React.createContext();
 
 function FriendProfilePage() {
 
     const { id } = useParams();
-    console.log("frndId: ", id);
     const [friendProfile, setFriendProfile] = useState([]);
     const [myMovies, setMyMovies] = useState( [] );
     const [myFavouritesMovies, setFavouritesMyMovies] = useState( [] );
     const [myFriendList, setMyFriendList] = useState( [] );
     const [myReview, setMyReview] = useState( [] );
+    const [ profileImg, setProfileImg] = useState( [] )
 
 
     async function loadFriendProfile(){
         const getFriend = await fetch(`/api/friend/${id}`).then(result=>result.json());
-        // const newfriend = apiFriend;
-        console.log("22 inside the watchlist page:", getFriend)
-        console.log("23 inside the friendList page 2:", getFriend.friendList)
-        
         setMyMovies(getFriend.watchlist);
         setFavouritesMyMovies(getFriend.favourites);
         setMyFriendList(getFriend.friendList);
         setMyReview(getFriend.myReviews);
-
-        console.log( 'line 30 ', getFriend)
         
+        const getUserInfo = await fetch(`/api/UsersList`).then(res => res.json());
+        setProfileImg(getUserInfo);  
         setFriendProfile( getFriend );
     }
 

@@ -6,7 +6,6 @@ function AvatarUpload(props) {
 
     function handleChange(e){
         const file = e.target.files[0];
-        // console.log(file);
         setMyPic(file)
     }
 
@@ -24,7 +23,6 @@ function AvatarUpload(props) {
                     body: formData
                 }
             ).then( result=>result.json())
-                console.log(uploadPic)
         }
         
     }

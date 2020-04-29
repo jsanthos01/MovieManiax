@@ -1,0 +1,15 @@
+@media only screen and (max-width: 600px) {
+    .watchlistContainer {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    .cardSpecialWatchlist{
+        padding-left: 10px ;
+        padding-right: 10px ;
+    }
+
+    .pinned {
+        text-align: center;
+    }
+}

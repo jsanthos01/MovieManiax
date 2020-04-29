@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import AddTag from './AddTag';
 
 function MovieInformation() {
     const { id } = useParams();
+    const userId = localStorage.id;
     const [ movieDetails, setMovieDetails ] = useState([]);
     const [ movieTrailer, setMovieTrailer ]= useState([]);
     const [ similarMovies, setSimilarMovies ]= useState([]);
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
     const [ isNotLoggedIn, setIsNotLoggedIn ] = useState( false );
+    const [tagForm, setTagForm] = useState(false);
     const movieStyle = {
         listGroupItem: {backgroundColor: "transparent", borderRadius: "0", color: "#fff"},
         h4Style: {color:"white", fontStyle: "italic"},
@@ -134,6 +137,11 @@ function MovieInformation() {
         }
     }
 
+    function submitTag(e){
+        e.preventDefault();
+        setTagForm(false);
+    }
+
     return (
         <div class='container-fluid' >
             { isNotLoggedIn ? <Redirect to='/login' /> : '' }
@@ -154,6 +162,8 @@ function MovieInformation() {
                         <Link to={`/reviews/${movieDetails.id}/${movieDetails.title}`}>
                             <button type="button" className="btn myBtnPink mt-3"><i class="fas fa-comments"></i> View Reviews</button>
                         </Link>
+                        <button class="btn myBtnPink ml-3 mt-3" onClick={function(){setTagForm(true) }} className="btn myBtnPink ml-3 mt-3" style={{position: 'relative'}}><i class="fas fa-plus"></i>Add Tags</button>
+                        { tagForm && localStorage.id ? <AddTag submitTag={submitTag} movieId={id} userId={userId} title={movieDetails.title} image={movieDetails.poster_path}/> : '' }
                         <div>
                             <ul class="list-group">
                                 <li class="list-group-item" style={movieStyle.listGroupItem}> <i class="fas fa-1x fa-star" style={{color: "yellow"}}></i><b> {movieDetails.vote_average}</b>/10</li>
