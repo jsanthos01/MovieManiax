@@ -51,7 +51,6 @@ async function loginUser( email, password ) {
 
 //WatchList Section
 async function postWatchlist(movieData){
-    // console.log('in orm the movieData: ', movieData)
     const movieInfo = {
        "movieId": `${movieData.movieId}`,
        "title": `${movieData.title}`,
@@ -61,11 +60,6 @@ async function postWatchlist(movieData){
        "releaseDate": `${movieData.releaseDate}`,
        "ratings": `${movieData.ratings}`
     }
-    // const activityData = {
-    //     "userId":  `${movieData.userId}`, 
-    //     "userName":  `${movieData.userName}`, 
-    //     "activity":  `added ${movieData.title} to watchlist`, 
-    // }
 
     const activityData = {
         "userId": `${movieData.userId}`, 
@@ -78,9 +72,6 @@ async function postWatchlist(movieData){
             "movieImg":`${movieData.image}`
         }
     }
-    // userId: {type: String},
-    // activity: String,   
-    // comment: String
  
     const checkWatchlist = await db.users.findOne({ _id: movieData.userId});
     let watchListArr = checkWatchlist.watchlist;
@@ -90,7 +81,6 @@ async function postWatchlist(movieData){
     }else{
         const dbActivity = new db.activities( activityData );
         const saveActivity = await dbActivity.save();
-    
         const userFetch = await db.users.findOneAndUpdate({ _id: movieData.userId }, { $push: { watchlist:  movieInfo } });
         return { message: "Movie successfully saved in Watchlist!!"};
     }
@@ -187,10 +177,8 @@ async function postFriend(friendData){
 }
 //activity list: 
 async function getActivitylist(ids){
-    // console.log('in orm ids: ', ids)
     const getActivityList = await db.activities.find({});
     const frndActvtArr= [];
-    // console.log(getActivityList);
     getActivityList.forEach(activity=>{
         for (var i=0; i<ids.length; i++){
             if(activity.userId == ids[i]){
@@ -277,26 +265,18 @@ async function postReview(details){
 }
 async function postCommentActivity(details){
     const activityId= details.activityId; 
-
     const activityComment = {
         'userName': `${details.name}`,
         'userId':`${details.userId}`,
         'content': `${details.content}`,
     }
 
-    // const userFetch = await db.users.findOneAndUpdate({ _id: activityId }, { $push: { friendList: {image: imageData} } });
     const userFetch = await db.activities.findOneAndUpdate({ _id: activityId }, { $push: { comment: activityComment } });
-    console.log('userFetch ', userFetch)
-
-
-    // const dbComments = new db.reviews( reviewSchema);
-    // const comment = await dbComments.save();
     return { message: "Comment successfully posted !!"};
 }
+
 async function postLikeActivity(details){
     const activityId= details.activityId; 
-    console.log("299 etails", details)
-
     const dbPostThumbsUp = await db.activities.findOneAndUpdate({ _id: activityId }, { $inc: { likes: 1 } });
     return { message: "Thank you, likes added!" }
 }
@@ -307,7 +287,6 @@ async function getSpecificMovieReviews(id){
 }
 
 async function deleteReviewInfo( userId, movieId, comment ){
-    // console.log(`Orm.js`, comment)
     const deleteReview = db.reviews.deleteOne( { "_id" : movieId}, function (err) {
         if (err) return handleError(err)
     });
@@ -320,7 +299,6 @@ async function deleteReviewInfo( userId, movieId, comment ){
 
 //-----------------multer--------------------------------
 async function updateAvatar( userId, imageUrl ){
-    // console.log(`[updateThumbnail] thumbId(${imageId}) myEdit: `, myData);
     const imageData = {
         profileImg: imageUrl
      };
@@ -372,8 +350,6 @@ async function getGroups(userId){
 }
 //-----tagdata----
 async function postTagDb(details){
-    // console.log('the tag details are', details);
-    
     const tagSchema = {
         movieId: details.movieId,
         userId: details.id, 
@@ -390,16 +366,13 @@ async function postTagDb(details){
 }
 //---------post edit tags---
 async function postEditTags(newtags){
-    // console.log(newtags);
     const newTags = newtags.tags;
     const updateTags = await db.tags.findOneAndUpdate({userId:newtags.userId}, {tags: newTags} )
-    // console.log('updated tags', updateTags)
     return { message: "Tags updated successfully !!"}
 
 }
 //--------gettagsdata-----
 async function getTagsDb(id){
-    // console.log(id)
     let tagArray = [];
     let tagSingleArray = [];
     const getUserTags = await db.tags.find({ userId:id })
@@ -413,15 +386,12 @@ async function getTagsDb(id){
             tagSingleArray.push(tagArray[i][j]);
         }
     }
-    // const trimArray = tagSingleArray.map(name => name.trim());
 
     const uniqueTags = tagSingleArray.filter(
-        function (tag, i) {
+    function (tag, i) {
         return tagSingleArray.indexOf(tag) === i
-        });
-    // console.log(uniqueTags);
-    // console.log('the unique tag array is', uniqueTags);
-    // console.log(getUserTags)
+    });
+
     return uniqueTags;
     
 }
@@ -431,22 +401,19 @@ async function getAllMoviesDb(id){
     return getAllTagMovies;
 
 }
+
 //------getmovietagdb---
 async function getMoviesTagDb( id, tag ){
-
     const getMoviesTagDb = await db.tags.find({ userId:id, tags: tag})
     return (getMoviesTagDb)
-    // console.log('the returned obj data is', getMoviesTagDb)
 }
+
 //-------similartag movies---
 async function movieTagDb( id, tag ){
-
     const similarTagMovies = await db.tags.find({tags: tag})
-
     const filterTagMovies = similarTagMovies.filter( function(movie){
         return movie.userId !== id 
     })
-    // console.log('the filtered tag movies are', filterTagMovies);
     return (filterTagMovies)
     
 }
@@ -454,12 +421,11 @@ async function movieTagDb( id, tag ){
 async function deleteMoviebyTag( movieId, userId ){
     const deleteMovieByTag = await db.tags.findOneAndDelete({ $and: [{movieId:movieId}, {userId:userId}]
     },
-        function (err) {
-            if(err) console.log(err); 
-        });
+    function (err) {
+        if(err) console.log(err); 
+    });
 return { message: "Movie successfully deleted!!"} ;
 }
-//--------------------
 
 module.exports = {
     registerUser,
@@ -480,12 +446,9 @@ module.exports = {
     getSpecificMovieReviews,
     deleteReviewInfo,
     bioResultDb,
-
     updateAvatar,
     postComment,
     thumbsUp,
-    
-    //later for friend activity
     getActivitylist, 
     postCommentActivity,
     postLikeActivity,

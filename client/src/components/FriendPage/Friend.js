@@ -1,5 +1,6 @@
 import React,{useState , useEffect} from 'react'
 import { Link } from "react-router-dom";
+import './Friends.css'
 
 function Friend() {
     const [ searchInput, setSearchInput ] = useState("");
@@ -139,12 +140,12 @@ function Friend() {
         loadFriend()  
     }, []);
     return (
-        <div class="container" style={{color : 'black'}}>
+        <div class="container" style={{color : 'black', marginTop: "30px"}}>
             <div style={messageStyle} className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
                 {alertMessage.message}
             </div>
             <form >
-                <h4 style={{color: "white"}}>Find People</h4>
+                <h4  class="findPeople" style={{color: "white"}}>Find People</h4>
                 <div class="input-group">
                     <input onChange={handleInputChange} value={searchInput} type="text" class="form-control" style={style.myInput} placeholder="Search your user"/>
                 </div>
@@ -176,18 +177,18 @@ function Friend() {
             {/* friendList._id */}
             <div class="container">
                 <div class="mb-3">
-                    <h4 style={{color: "white"}}>Your Following List</h4>
+                    <h4 class="findPeople" style={{color: "white"}}>Your Following List</h4>
                         { myFriendList.length>0 ? myFriendList.map( user =>
                         <div class="friendCard" >
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 specialFriendPics">
                                     {profileImg.map(users => users._id === user.friendId ? <img class="imgStyling"  src={users.profileImg} alt="profile pic" />: "") }
 
                                     {/* <img src={user.image} alt="profileImg " class="profileImg" /> */}
                                 </div>
-                                <div class="col-md-7 mt-4">
+                                <div class=" specialFriendName col-md-7 mt-4">
 
-                                    <h3 style={{color: 'white', fontSize: '1.6rem'}} >{user.name}</h3>
+                                    <h3  style={{color: 'white', fontSize: '1.6rem'}} >{user.name}</h3>
                                 </div>
                                 <div class="col-md-2  mt-4">
                                     <div class="d-flex justify-content-between">

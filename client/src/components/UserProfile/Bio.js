@@ -7,11 +7,10 @@ function Bio(props) {
     function updateBio(e){
         e.preventDefault();
         let newBio = e.target.value;
-        // console.log(newBio);
         const key = 'bio'
         setMyBio( { ...myBio, [key]: newBio } );
     }
-    // console.log(myBio)
+
     async function handleSubmit(e){
         e.preventDefault();       
         const apiBio = await fetch(`/api/user/${bioId}`, 

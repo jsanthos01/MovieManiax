@@ -170,16 +170,6 @@ function MovieInformation() {
                                 <li class="list-group-item" style={movieStyle.listGroupItem}><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
                             </ul>
                         </div>
-
-                       
-                        
-                        <div>
-                            <ul class="list-group">
-                                <li class="list-group-item" style={movieStyle.listGroupItem}> <i class="fas fa-1x fa-star" style={{color: "yellow"}}></i><b> {movieDetails.vote_average}</b>/10</li>
-                                <li class="list-group-item" style={movieStyle.listGroupItem}><i class="fas fa-clock"></i> RunTime: {movieDetails.runtime} min</li>
-                            </ul>
-                        </div>
-    
                         <div class="container" style={{color:"white"}}>
                             <h5>Overview</h5>
                             <p>{movieDetails.overview}</p>

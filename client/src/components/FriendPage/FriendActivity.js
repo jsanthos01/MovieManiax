@@ -1,5 +1,6 @@
 import React,{useState , useEffect} from 'react'
 import { Link } from "react-router-dom";
+import './Friends.css'
 
 function FriendActivity() {
 
@@ -8,19 +9,7 @@ function FriendActivity() {
         height: '20vh',
         objectFit: 'cover'
     }
-    const style = {
-        messageStyle: {
-            width: '80%',
-            border: 'none',
-            background: '#26b3b8',
-            color: 'white',
-            position: 'sticky',
-            top: '0',
-            left: '0',
-            zIndex: '10',
-            margin: '0 auto'
-        }}
-
+    
     const [ myFriendList, setMyFriendList ] = useState([]);
     const [ myFriendIds, setMyFriendIds ] = useState([]);
     const [ activityList, setActivityList ] = useState([]);
@@ -32,22 +21,17 @@ function FriendActivity() {
     let friendIds;
     async function loadFriend(){
         const userId = localStorage.id;
-
-        console.log(`***loading friendList in activity page: `);
         const friendListResult = await fetch(`/api/friendList/${userId}`).then(result=>result.json());  
         setMyFriendList( friendListResult[0].friendList );
-        console.log( '104 friendListResult: ', friendListResult[0].friendList )
         friendIds = friendListResult[0].friendList.map(ids=>
             ids.friendId
             )
         setMyFriendIds(friendIds)
-        console.log('friendIds: ', friendIds);
         const getUserInfo = await fetch(`/api/UsersList`).then(res => res.json());
         setProfileImg(getUserInfo);  
 
         loadActivity()  
 
-        // console.log('myFriendIds: ', myFriendIds)
     } 
     async function loadActivity(){
         const activityListResult = await fetch('/api/activityList',
@@ -59,20 +43,12 @@ function FriendActivity() {
             },
             body: JSON.stringify(friendIds)
         }).then( result=>result.json());
-        console.log('friends activity: ', activityListResult)
 
         activityListResult.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1)
-
         setActivityList(activityListResult)
     }
 
-    // async function showCommentForm(){
-    //     console.log('is comment form working?')
-    //     setAlertMessage( { type: 'success', message: 'show something' } );
-
-    // }
     async function likeComment(idx){
-        console.log('is like working?')
         const activityLikes = {
             activityId: idx
         }
@@ -86,17 +62,13 @@ function FriendActivity() {
             },
             body: JSON.stringify(activityLikes)
         }).then( result=>result.json());
-        console.log('friends activity: ', activityLikes)
 
         comment.content = '';
         loadFriend()
 
     }
     async function postComment(idx){
-        setFormOpen({id: idx, state: false})
-        console.log('is post working?idx: ', idx)
-        console.log('is post working?idx: ', comment.content)
-
+        setFormOpen({id: idx, state: false});
         const postComment = await fetch('/api/postCommentActivity',
         {  
             method: 'post',
@@ -106,7 +78,6 @@ function FriendActivity() {
             },
             body: JSON.stringify(comment)
         }).then( result=>result.json());
-        console.log('friends activity: ', postComment)
 
         comment.content = '';
         loadFriend()
@@ -121,7 +92,6 @@ function FriendActivity() {
 
     useEffect( function(){
         loadFriend()  
-        // loadActivity()  
     }, []);
     return (
         <div class="row">
@@ -234,8 +204,6 @@ function FriendActivity() {
                 <div class="mvHrzCrdDesc row">
                     <div class="col-md-2">
                         {profileImg.map(user => user._id === activity.friend.friendId ? <img class="hrCdImg" style={imgStyle} src={user.profileImg} />: "") }
-
-                        {/* <img src={`${activity.friend.friendImg}`} class="hrCdImg " alt="friend poster" style={imgStyle}/> */}
                     </div>
                     <div class="col-md-8">
                         <p class="movieCrdTitle">{activity.friend.friendName}</p>

@@ -9,12 +9,7 @@ function NavBar() {
   let showClass = !isShown ? `collapse navbar-collapse`: `collapse navbar-collapse show`;
 
   const id = localStorage.id;
-  // console.log(id);
-
   const userName = localStorage.name;
-  // console.log(userName);
-
-
 
   return (
     <nav class="navbar navbar-expand-lg navbar-dark ">

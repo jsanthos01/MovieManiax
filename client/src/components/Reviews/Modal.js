@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 function Modal(props) {
-    console.log(props)
     const id = localStorage.id
     const name = localStorage.name
     const [reviewData, setReviewData] = useState({id: id, name: name, moviePoster: props.movieImage, movieId: props.movieId, movieName: props.movieName, rating: '', comment:''})
@@ -64,8 +63,6 @@ function Modal(props) {
     async function postReview(e){
         e.preventDefault();
         props.setModalDisplay(false);
-        
-
         const postReviewData = await fetch('/api/review',
         {  
             method: 'post',

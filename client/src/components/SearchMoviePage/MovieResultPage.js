@@ -2,7 +2,6 @@ import React,{ useState } from 'react'
 import { Link } from "react-router-dom";
 
 function MovieResultPage(props) {
-    console.log("Inside the MovieResult", props.movieList);
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
     const resultArray = props.movieList;
 
@@ -48,7 +47,6 @@ function MovieResultPage(props) {
                     releaseDate: movieObj.release_date
                 }
         
-                console.log("Movie Data", MovieData);
                 postMovieData = await fetch(`/api/watchlistMovie/`,
                 {  
                     method: 'post',
@@ -59,7 +57,6 @@ function MovieResultPage(props) {
                     body: JSON.stringify(MovieData)
                 }).then( result=>result.json());
         
-                console.log(postMovieData);
     
             }else if (type === "favourites"){
                 MovieData = {
@@ -71,7 +68,6 @@ function MovieResultPage(props) {
                     ratings: movieObj.vote_average,
                 }
             
-                console.log("Movie Data", MovieData);
                 postMovieData = await fetch('/api/favourites',
                 {  
                     method: 'post',
@@ -82,7 +78,6 @@ function MovieResultPage(props) {
                     body: JSON.stringify(MovieData)
                 }).then( result=>result.json());
         
-                console.log(postMovieData);
             }   
     
             if( postMovieData.message ){

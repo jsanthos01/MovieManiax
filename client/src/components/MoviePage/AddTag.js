@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 
 
 function TagForm(props) {
-    // console.log(props);
     const[ myTag, setMyTag ] = useState([] );
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
     let tagData = {};
@@ -10,21 +9,14 @@ function TagForm(props) {
     function updateTag(e){
         e.preventDefault();     
         let tagString = e.target.value;
-        let newtagString = tagString.toLowerCase().split(',');
-
-        // let noSpaceTag = [];
-        // for ( var i = 0; i < newtagString.length; i++){
-        //     noSpaceTag.push(newtagString[i].replace(/ /g, ''))
-        // }
-        // setMyTag(noSpaceTag);  
+        let newtagString = tagString.toLowerCase().split(','); 
         setMyTag(newtagString)
     } 
-    console.log(myTag)
+
     async function handleSubmit(e){
         e.preventDefault();   
         props.submitTag(e);
         let noSpaceTag = myTag.map(name => name.trim());
-        // console.log(noSpaceTag)
     
         tagData = {
             id: props.userId,
@@ -34,8 +26,7 @@ function TagForm(props) {
             tags:  noSpaceTag 
         }
 
-    const postTagData = await fetch('/api/tag',
-        {  
+        const postTagData = await fetch('/api/tag',{  
             method: 'post',
             headers: {
                 'Accept': 'application/json, text/plain, */*',

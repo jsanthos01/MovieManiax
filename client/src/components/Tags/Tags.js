@@ -13,37 +13,29 @@ function Tags() {
     useEffect( function(){
         loadTags();
         allTagMovies();
-
-        }, [] );
+    }, [] );
 
     async  function loadTags(){
-       
         const fetchTags = await fetch(`/api/tags/${id}`).then( result => result.json() ) 
-    
         setMyTags([...fetchTags])
-        // console.log(fetchTags)
     }
 
     async function allTagMovies(){
         const allMovies = await fetch(`/api/movies/${id}`).then( result => result.json() )
-        // console.log(allMovies)
         setMovieCard(allMovies);
     }
     
     async function getMovieData(tag){
-        // console.log(tag);
         const movieCards = await fetch(`/api/movietag/${id}/${tag}`).then( result => result.json() ) 
         setMovieCard(movieCards);
         getSimilarTagMovies(tag);
     }
     
     async function getSimilarTagMovies(tag){
-
         const similarMoviesTag = await fetch(`/api/similartag/${id}/${tag}`).then( result => result.json() )
-        
-        setSimilarMovie(similarMoviesTag) 
-        
+        setSimilarMovie(similarMoviesTag)  
     }
+
     function submitTag(e, idx){
         e.preventDefault();
         setTagForm( {id: idx, state: false} );
@@ -52,7 +44,6 @@ function Tags() {
     function handleBtnSubmit(e, idx){
         e.preventDefault();
         setTagForm( {id: idx, state: true} );
-        // ( e.target.id ? setTagForm (true) : setTagForm(false) )           
     }
 
     async function handleDelete(e, movieId, userId){
@@ -62,12 +53,10 @@ function Tags() {
                 method: 'delete'
             }
         ).then( result => result.json());
-        console.log(apiDelete.message);
         allTagMovies();
         loadTags();
     }
-    // console.log(similarMovie);
-    // console.log(movieCard)
+   
 
     return (
         <div>             

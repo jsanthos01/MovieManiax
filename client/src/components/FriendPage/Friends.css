@@ -1,0 +1,14 @@
+
+@media only screen and (max-width: 600px) {
+    .specialFriendPics {
+        display: flex;
+        justify-content: center;    
+    }
+
+    .specialFriendName {
+        text-align: center;
+    }
+    .findPeople {
+        text-align: center;
+    }
+}

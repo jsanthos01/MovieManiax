@@ -1,5 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react'
 import MovieList from './MovieList'
+import './Watchlist.css'
 import { useParams } from 'react-router-dom';
 
 function MovieWatchList() {
@@ -28,11 +29,11 @@ function MovieWatchList() {
                 <h1 style={style.header}>Your WatchList</h1>
             </div>
 
-            <div className="container mb-5">
+            <div className="container watchlistContainer mb-5">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body cardSpecialWatchlist">
                         <div class="row">
-                            <h3 class="col-11"><i class="fas fa-cloud-download-alt"></i>  Pinned Movies </h3>
+                            <h3 class="col-11 pinned"><i class="fas fa-cloud-download-alt"></i>  Pinned Movies </h3>
                         </div>
                         <hr/>
                         { myMovies.length > 0 ? <MovieList myMovies={myMovies}getSavedMovieList={getSavedMovieList} />: 'You have not added to your watchlist' }

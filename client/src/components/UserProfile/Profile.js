@@ -14,13 +14,10 @@ function Profile() {
     const [ newDate, setNewDate] = useState( '' )
     const [ bioForm, setBioForm] = useState( false )
     const [ profileImg, setProfileImg] = useState( [] )
-    const [ myReviews, setMyReviews] = useState( [] )
-    // console.log(userid);
-    
+    const [ myReviews, setMyReviews] = useState( [] )    
 
     async function loadAvatar(){  
         const profileData = await fetch(`/api/avatar/${userid}`).then( result => result.json() );
-        console.log(profileData) 
         setProfileInfo (profileData)
         setwatchList( profileData.watchlist);
         setFavoriteList( profileData.favourites )
@@ -29,14 +26,12 @@ function Profile() {
         const getUserInfo = await fetch(`/api/UsersList`).then(res => res.json());
         setProfileImg(getUserInfo);  
 
-        console.log('[line 32]:', getUserInfo)
         setMyReviews( profileData.myReviews)
         let date = new Date(profileData.createdAt)
         let newDate = date.toString().substring(4, 15)
         setNewDate( newDate )  
     }
 
-    console.log("line 39", friendList)
     useEffect( function(){
         loadAvatar();
     }, [bioForm, showForm] );
@@ -54,8 +49,8 @@ function Profile() {
     return (
         <div class="profileContainer container-fluid">
             <div class="row " >
-                <div class="col-lg-8">  
-                    <div class="row ml-4">
+                <div class="col-lg-8 specialContainer ">  
+                    <div class="row">
                         <div class="col-lg-12">
                             <div class="row">
                                 <div class="col-lg-4 imageHolder">
@@ -88,7 +83,7 @@ function Profile() {
                             <div class="row mt-4">
                                  <div class="col"> 
                                     <div class="row">
-                                        <div class="col-12">
+                                        <div class="col-12 importantTitles">
                                             <h3 style={{display: 'inline', marginRight:'5px'}}>Your Watchlist  </h3><span><i class="fas fa-bookmark iconsStyle"></i></span>
                                         </div>
 
@@ -99,7 +94,7 @@ function Profile() {
                                                 <div class="text-center">{movie.title}</div>
                                             </div>)}
                                         </div>
-                                        { watchList.length !== 0 ? <div class="col-12"><Link to={`/watchlist/${userid}`} class="ml-2" style={{color:'white'}}>More</Link></div> : <div class="col-12">Add movies to your watch list</div>}
+                                        { watchList.length !== 0 ? <div class="col-12 more"><Link to={`/watchlist/${userid}`} class="ml-2 " style={{color:'white'}}>More</Link></div> : <div class="col-12">Add movies to your watch list</div>}
                                     </div>
                                  </div>              
                                 <div class="col-12 mt-4" style={{ border: '1px solid #2ec3d6'}}></div>                
@@ -107,7 +102,7 @@ function Profile() {
                             <div class="row mt-4">
                                  <div class="col"> 
                                     <div class="row">
-                                        <div class="col-12">
+                                        <div class="col-12 importantTitles">
                                             <h3 style={{display: 'inline', marginRight:'5px'}}>Your Favorites </h3><span><i class="fas fa-heart iconsStyle"></i></span>
                                         </div>
                                         <div class="cardContainer col mt-4 mb-4">
@@ -119,7 +114,7 @@ function Profile() {
                                             </div> )}
                                             
                                         </div>
-                                        { favoriteList.length !== 0 ? <div class="col-12"><Link to={`/favourites/${userid}`} class="ml-2" style={{color:'white',}}>More</Link></div> : <div  class="col-12">List out your favorite movies! </div>}
+                                        { favoriteList.length !== 0 ? <div class="col-12 more"><Link to={`/favourites/${userid}`} class="ml-2 " style={{color:'white'}}>More</Link></div> : <div  class="col-12">List out your favorite movies! </div>}
                                     </div>
                                  </div>
                                  <div class="col-12 mt-4" style={{ border: '1px solid #2ec3d6'}}></div>                
@@ -127,7 +122,7 @@ function Profile() {
                             <div class="row mt-4">
                                  <div class="col"> 
                                     <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12 importantTitles">
                                             <h3 style={{display: 'inline', marginRight:'5px'}}>Your Reviews </h3><span><i class="fas fa-comments iconsStyle"></i></span>
                                         </div>
                                         <div class="col mt-4 mb-4 ">

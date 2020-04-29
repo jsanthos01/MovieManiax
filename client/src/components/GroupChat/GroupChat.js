@@ -32,13 +32,11 @@ function GroupChat() {
             },
             body: JSON.stringify(groupData)
         }).then( result=>result.json());
-        console.log(postGroupData);
         getGroups();
     }
 
     async function getGroups(){
         const getUsersGroups = await fetch(`/api/groupData/${id}`).then(res => res.json());
-        console.log(getUsersGroups)
         setMyGroups(getUsersGroups);
     }
 

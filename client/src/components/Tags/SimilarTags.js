@@ -1,7 +1,6 @@
 import React from 'react'
 
 function SimilarTags(props) {
-    // console.log(props)
     return (
         <div>
             { props.similarMovie.length !== 0 ? <div class="col-lg-12 mt-4">

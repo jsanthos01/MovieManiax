@@ -7,6 +7,9 @@ body {
     
 }
 
+.specialContainer {
+    margin-left: 30px;
+}
 .imageHolder {
     display: flex;
     align-items: center;
@@ -25,7 +28,7 @@ body {
 }
 
 .profileh1 {
-    padding: 0;
+    padding: 10px;
     color: #2ec3d6;
 }
 
@@ -102,8 +105,31 @@ body {
     /* filter: drop-shadow( 0px 0px 8px #2ec3d6); */
 }
 
-/* 
-.btnStyle {
-    border: 1px solid rgb(237, 20, 91);
-    color: rgb(237, 20, 91);
-} */
+@media only screen and (max-width: 600px) {
+    .cardContainer  {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .text-left {
+        text-align: center !important;
+    }
+
+    .profileh1 {
+        text-align: center !important;
+        padding-top: 30px !important;
+    }
+    .importantTitles {
+        text-align: center;
+    }
+
+    .more {
+        text-align: center;
+    }
+
+    .specialContainer {
+        margin-left: 0
+    }
+}

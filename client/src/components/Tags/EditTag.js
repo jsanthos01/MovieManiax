@@ -2,14 +2,11 @@ import React, {useState} from 'react'
 
 function EditTag(props) {
     const[ editTags, setEditTags] = useState( props.movieTags )
-    // console.log(props)
 
     function handleChange(e){
         e.preventDefault();
         let tagString = e.target.value;
         let newtagString = tagString.toLowerCase().split(',');
-
-        
         setEditTags(newtagString);  
     }
     

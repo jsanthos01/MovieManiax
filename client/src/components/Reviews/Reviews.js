@@ -23,7 +23,6 @@ function Reviews() {
     }
 
     async function deleteReview(reviewId, comment){
-        console.log(reviewId)
         const putComment = {comment: comment}
         const removeSpecificReview = await fetch(`/api/removeReview/${userId}/${reviewId}`, 
             {
@@ -34,7 +33,6 @@ function Reviews() {
                 body: JSON.stringify(putComment)
             }
         ).then(result => result.json());
-        console.log(removeSpecificReview.message);
         getSpecificReviews();
     }
 
@@ -43,7 +41,6 @@ function Reviews() {
             setAlertMessage( { type: 'danger', message: 'Sorry you have not logged in!' } );
         }else{
             const apiMovie = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=5b4dbf95cc35d2e911560cca64385e60&language=en-US`).then( result=>result.json() );
-            console.log(apiMovie)
             setMovieImage(apiMovie.poster_path)
             setModalDisplay(true);
         }
@@ -64,7 +61,6 @@ function Reviews() {
         if(!localStorage.id){
             setAlertMessage( { type: 'danger', message: 'Sorry you have not logged in!' } );
         }else{
-            console.log(comment)
             const postReviewComment = await fetch('/api/reviewComment',
             {  
                 method: 'post',
@@ -74,8 +70,6 @@ function Reviews() {
                 },
                 body: JSON.stringify(comment)
             }).then( result=>result.json());
-
-            console.log(postReviewComment);   
             getSpecificReviews();
         }
     }
@@ -97,7 +91,6 @@ function Reviews() {
                 body: JSON.stringify(thumbsUp)
             }).then( result=>result.json());
 
-            console.log(postThumbsUp);
             getSpecificReviews();
         }
     }
