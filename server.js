@@ -165,7 +165,7 @@ app.put("/api/removeReview/:userId/:movieId", async (req, res) => {
   res.send(deleteReview);
 });
 
-const upload = require('multer')({ dest: 'client/public/uploads/' });
+const upload = require('multer')({ dest: 'client/build/uploads/' });
 app.put( '/api/upload/:userid', upload.single('myFile'), async function( req, res ){
   let userId = req.params.userid
   const filePath = req.file.path;
