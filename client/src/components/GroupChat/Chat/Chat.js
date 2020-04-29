@@ -18,13 +18,13 @@ function Chat() {
   //stores all the messages for a specific room
   const [allMessages, setAllMessages] = useState([]);
 
-  // const ENDPOINT = "http://localhost:8080";
+  const ENDPOINT = "https://git.heroku.com/movie-app123.git";
   // 1. Runs when the component renders - we need to immediately retrieve user's info while they join
   useEffect(() =>{
     console.log(`URL name: ${name}, room: ${room}`);
 
     //3. Here, we set up a socket connection which now connects to the backend io.on()
-    socket = io.connect();
+    socket = io.connect(ENDPOINT);
     setUserName(name);
     setUserRoom(room);
 
