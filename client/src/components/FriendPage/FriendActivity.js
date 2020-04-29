@@ -96,7 +96,7 @@ function FriendActivity() {
     return (
         <div class="row">
             <div class="col-lg-8">
-            {activityList.slice(0,15).map((activity, idx)=>{
+            {activityList.slice(0,25).map((activity, idx)=>{
             
             switch (activity.activityType) {
             

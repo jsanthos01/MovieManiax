@@ -47,7 +47,7 @@ function FriendProfilePage() {
                 </div>
                 <div class="col-md-10  mx-auto">
                     <h1 class="text-center" style={{color: "#2ec3d6"}}>{friendProfile.name}</h1>
-                    <UserContext.Provider value ={{myMovies, myFavouritesMovies, friendProfile, myFriendList, myReview}}>
+                    <UserContext.Provider value ={{myMovies, myFavouritesMovies, friendProfile, myFriendList, myReview, profileImg}}>
                         <Router>
                             <TabBar id={id}/>
                             <Route exact path={["/friendProfile/:id","/friendProfile/:id/About"]} component={AboutPage} />
