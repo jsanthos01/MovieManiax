@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Comments() {
+function Notifications() {
     return (
         <div>
-            [Comments]
+            
         </div>
     )
 }
 
-export default Comments
+export default Notifications

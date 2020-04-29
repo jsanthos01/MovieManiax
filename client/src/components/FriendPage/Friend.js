@@ -8,6 +8,7 @@ function Friend() {
     const [ userProfile, setUserProfile ] = useState([]);
     const [ myFriendList, setMyFriendList ] = useState([]);
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
+    const [ profileImg, setProfileImg] = useState( [] )
 
     const messageStyle = {
         width: '80%',
@@ -80,24 +81,27 @@ function Friend() {
         }
         console.log('posting friendInfo: ', friendInfo);
         const addedFriend= await fetch('/api/saveFriend',
-                {  
-                    method: 'post',
-                    headers: {
-                        'Accept': 'application/json, text/plain, */*',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(friendInfo)
-                }).then( result=>result.json());
+            {  
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(friendInfo)
+            }).then( result=>result.json());
 
-                if( addedFriend.message ){
-                    setAlertMessage( { type: 'success', message: addedFriend.message } );
-                    setTimeout( function(){ setAlertMessage( {} ); }, 3000 );
-                } else {
-                    setAlertMessage( { type: 'danger', message: addedFriend.message } );
-                    setTimeout( function(){ setAlertMessage( {} ); }, 2500 );
-                }
-                setUserProfile([])
-                loadFriend()  
+            if( addedFriend.message ){
+                setAlertMessage( { type: 'success', message: addedFriend.message } );
+                setTimeout( function(){ setAlertMessage( {} ); }, 3000 );
+            } else {
+                setAlertMessage( { type: 'danger', message: addedFriend.message } );
+                setTimeout( function(){ setAlertMessage( {} ); }, 2500 );
+            }
+
+             
+
+            setUserProfile([])
+            loadFriend()  
         
     }
     async function deleteFromFriendList( frndId ){
@@ -125,11 +129,11 @@ function Friend() {
         console.log(`***loading userList `);
         const friendListResult = await fetch(`/api/friendList/${userId}`).then(result=>result.json());  
         setMyFriendList( friendListResult[0].friendList );
-        console.log( '104 friendListResult: ', friendListResult[0].friendList )
+        console.log( '104 friendListResult: ', friendListResult[0].friendList );
+        const getUserInfo = await fetch(`/api/UsersList`).then(res => res.json());
+        setProfileImg(getUserInfo); 
     }
-    async function viewProfile(user){
-        console.log('to check if view btn works: ', user)
-    }
+    
     useEffect( function(){
         loadPeople()  
         loadFriend()  
@@ -177,7 +181,9 @@ function Friend() {
                         <div class="friendCard" >
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img src={user.image} alt="profileImg " class="profileImg" />
+                                    {profileImg.map(users => users._id === user.friendId ? <img class="imgStyling"  src={users.profileImg} alt="profile pic" />: "") }
+
+                                    {/* <img src={user.image} alt="profileImg " class="profileImg" /> */}
                                 </div>
                                 <div class="col-md-7 mt-4">
 

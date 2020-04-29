@@ -1,17 +1,20 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import './style/NavBar.css';
 import { Link, useLocation } from "react-router-dom";
 
 function NavBar() {
   const location = useLocation();
   const [isShown, setShown] = useState(false);
+  const [notifications, setNotifications] = useState([]);
   let showClass = !isShown ? `collapse navbar-collapse`: `collapse navbar-collapse show`;
 
   const id = localStorage.id;
-  console.log(id);
+  // console.log(id);
 
   const userName = localStorage.name;
-  console.log(userName);
+  // console.log(userName);
+
+
 
   return (
     <nav class="navbar navbar-expand-lg navbar-dark ">
@@ -59,7 +62,7 @@ function NavBar() {
                     </Link>
                 </li> 
               } 
-              
+             
               { !id ? 
                   <li className="nav-item"><Link to="/login" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>
                   Login </Link></li> :
@@ -68,7 +71,6 @@ function NavBar() {
                     <span class="mr-1"><i class="fas fa-user"></i></span> {`${userName}`}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        
                         <a href={`/user/${id}`} style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === `/user/${id}` ? "nav-link active" : "nav-link"} >
                         Your Activity
                         </a>
@@ -77,8 +79,16 @@ function NavBar() {
                         Favourites
                         </Link>
                         <div class="dropdown-divider"></div>
+                        <Link to={`/groupChat`} style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === `/groupChat` ? "nav-link active" : "nav-link"}>
+                        Group Chats
+                        </Link>
+                        <div class="dropdown-divider"></div>
+                        <Link to={`/tags/${id}`} style={{color: 'black', paddingLeft: '20px'}} className={location.pathname === `/tags/${id}` ? "nav-link active" : "nav-link"}>
+                        Tags
+                        </Link>
+                        <div class="dropdown-divider"></div>
                         <Link to="/friendList" style={{color: 'black', paddingLeft: '20px'}}  className={location.pathname === "/friendList" ? "nav-link active" : "nav-link"}>
-                        Friends
+                        My Friends
                         </Link>
                         <div class="dropdown-divider"></div>
                         <Link to="/friendActivity" style={{color: 'black', paddingLeft: '20px'}}  className={location.pathname === "/friendActivity" ? "nav-link active" : "nav-link"}>

@@ -13,26 +13,30 @@ function Profile() {
     const [ showForm, setShowForm] = useState( false )
     const [ newDate, setNewDate] = useState( '' )
     const [ bioForm, setBioForm] = useState( false )
+    const [ profileImg, setProfileImg] = useState( [] )
     const [ myReviews, setMyReviews] = useState( [] )
     // console.log(userid);
     
 
     async function loadAvatar(){  
-        const profileData = await fetch(`/api/avatar/${userid}`).then( result => result.json() )  
+        const profileData = await fetch(`/api/avatar/${userid}`).then( result => result.json() );
+        console.log(profileData) 
         setProfileInfo (profileData)
         setwatchList( profileData.watchlist);
         setFavoriteList( profileData.favourites )
         setFriendList( profileData.friendList)
+
+        const getUserInfo = await fetch(`/api/UsersList`).then(res => res.json());
+        setProfileImg(getUserInfo);  
+
+        console.log('[line 32]:', getUserInfo)
         setMyReviews( profileData.myReviews)
         let date = new Date(profileData.createdAt)
         let newDate = date.toString().substring(4, 15)
         setNewDate( newDate )  
     }
 
-    function loadFriendProfile(){  
-        window.location.reload(true);
-    }
-    
+    console.log("line 39", friendList)
     useEffect( function(){
         loadAvatar();
     }, [bioForm, showForm] );
@@ -168,7 +172,7 @@ function Profile() {
                                         <div>
                                             <div class="mt-4">
                                                 <div style={{display: 'block', width:'60px', margin: "0 auto"}}>
-                                                    {<img class="imgStyling"  src={friend.image} alt={friend.name} /> }
+                                                    {profileImg.map(user => user._id === friend.friendId ? <img class="imgStyling"  src={user.profileImg} alt={friend.name} />: "") }
                                                 </div>    
                                         </div>
                                             <div class="text-center"><Link to={`/friendProfile/${friend.friendId}`} class="textStyle">{friend.name}</Link></div>                                    
