@@ -3,17 +3,17 @@
     {
     "id": 28,
     "name": "Action",
-    "img": "./assets/action-movie-coloured.png"
+    "img": "./assets/action-movie-black.png"
     },
     {
     "id": 12,
     "name": "Adventure",
-    "img": "./assets/adventure-movie-coloured.png"
+    "img": "./assets/adventure-movie-black.png"
     },
     {
     "id": 16,
     "name": "Animation",
-    "img": "./assets/animation-movie-coloured.png"
+    "img": "./assets/animation-movie.png"
     },
     {
     "id": 35,
@@ -23,12 +23,12 @@
     {
     "id": 80,
     "name": "Crime",
-    "img": "./assets/crime-movie-coloured.png"
+    "img": "./assets/crime-movie-black.png"
     },
     {
     "id": 99,
     "name": "Documentary",
-    "img": "./assets/documentary-movie-coloured.png"
+    "img": "./assets/documentary-movie-black.png"
     },
     {
     "id": 18,
@@ -43,7 +43,7 @@
     {
     "id": 14,
     "name": "Fantasy",
-    "img": "./assets/fantasy-movie-coloured.png"
+    "img": "./assets/fantasy-movie-black.png"
     },
     {
     "id": 36,
@@ -53,7 +53,7 @@
     {
     "id": 27,
     "name": "Horror",
-    "img": "./assets/horror-movie-coloured.png"
+    "img": "./assets/horror-movie-black.png"
     },
     {
     "id": 10402,
@@ -63,7 +63,7 @@
     {
     "id": 9648,
     "name": "Mystery",
-    "img": "./assets/mystery-movie-coloured.png"
+    "img": "./assets/mystery-movie-black.png"
     },
     {
     "id": 10749,
@@ -93,7 +93,7 @@
     {
     "id": 37,
     "name": "Western",
-    "img": "./assets/western-movie-coloured.png"
+    "img": "./assets/western-movie-black.png"
     }
     ]
 }
