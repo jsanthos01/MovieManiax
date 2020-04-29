@@ -18,13 +18,13 @@ function Chat() {
   //stores all the messages for a specific room
   const [allMessages, setAllMessages] = useState([]);
 
-  const ENDPOINT = "http://localhost:8080";
+  // const ENDPOINT = "http://localhost:8080";
   // 1. Runs when the component renders - we need to immediately retrieve user's info while they join
   useEffect(() =>{
     console.log(`URL name: ${name}, room: ${room}`);
 
     //3. Here, we set up a socket connection which now connects to the backend io.on()
-    socket = io.connect(ENDPOINT);
+    socket = io.connect();
     setUserName(name);
     setUserRoom(room);
 
