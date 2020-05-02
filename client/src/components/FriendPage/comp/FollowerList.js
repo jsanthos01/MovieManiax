@@ -17,7 +17,7 @@ function FollowerList() {
                 <div class="mvHrzCrdDesc">
                     {profileImg.map(user => user._id === friend.friendId ? <img class="hrCdImg"  src={user.profileImg} />: "") }
 
-                    {/* <img src={friend.image} class="crdImg" alt="movie poster" style={friendImg}/> */}
+                    <img src={friend.image} class="crdImg" alt="movie poster" style={friendImg}/>
                 </div>
                 <div class="mvHrzCrdDesc">
                     <p class="movieCrdTitle">{friend.name}</p>  
