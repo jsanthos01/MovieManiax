@@ -133,7 +133,10 @@ async function getFavourites(id){
 }
  
 async function deleteFavMovie(userId, movieObjId){
-    const deleteMovieDb = await db.users.updateOne({_id: userId},{ "$pull": { "favourites": { _id: movieObjId }}}, {safe: true, multi: true},function(err, obj){
+    const deleteMovieDb = await db.users.updateOne({_id: userId},
+        { "$pull": 
+            { "favourites": { _id: movieObjId }}
+        }, {safe: true, multi: true},function(err, obj){
         console.log(err)
     });
     return { message: "Movie successfully deleted from favourites page!!"};
@@ -194,7 +197,7 @@ async function getFriendlist(id){
 async function getFriendInfo(id){
     const getFriendInfo =  await db.users.find({_id:id});
     return getFriendInfo[0];
-}
+} 
 
 async function deleteFriend( objIds ){
     const DeleteFriendList = await db.users.update({ _id:  objIds.userId }, { "$pull": { "friendList": { "_id": objIds.frndId } }}, { safe: true, multi:true }, function(err, obj) {

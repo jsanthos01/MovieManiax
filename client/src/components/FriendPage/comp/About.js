@@ -7,8 +7,7 @@ function About() {
 
     return (
         <div  class='tabHeight'>
-            <div class="movieHrzCard" style={{paddingLeft: '50px'}}>  
-
+            <div class="movieHrzCard" style={{paddingLeft: '50px'}}>
                 <p><i class="far fa-envelope fa-2x"></i> {friendProfile.email}</p>
                 <p><i class="fas fa-map-marker-alt fa-2x"></i> {friendProfile.email}</p>
                 <p>joined: {friendProfile.createdAt}</p>

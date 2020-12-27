@@ -50,8 +50,8 @@ function RegisterPage(){
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(userData)
-          }).then( result=>result.json())       
-                  
+        }).then( result=>result.json())     
+        
         if( apiResult.message ){
             setAlertMessage( { type: 'success', message: 'Thank you successfully registered!' } );
             setTimeout( function(){ setIsRegistered(true); }, 1000 );
@@ -64,7 +64,7 @@ function RegisterPage(){
     return (
         <div style={{color: "black"}}>
             { isRegistered ? <Redirect to='/login' /> : '' }
-            <section class=" text-center">
+            <section class="text-center">
                 <div class="container">
                     <h1>User Registration</h1>
                     <p class="lead text-muted">Register and browse movies!</p>
@@ -73,7 +73,6 @@ function RegisterPage(){
             <div className={ alertMessage.type ? `alert alert-${alertMessage.type}` : 'd-hide' } role="alert">
                 {alertMessage.message}
             </div>
-        
             <div class="container">
                 <div class="card">
                     <div class="card-header">

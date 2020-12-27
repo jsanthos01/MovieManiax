@@ -25,12 +25,13 @@ import GroupChat from './components/GroupChat/GroupChat';
 import Join from './components/GroupChat/Join/Join';
 import Chat from './components/GroupChat/Chat/Chat';
 import CustomChatBot from './components/CustomChatBot/CustomChatBot';
-
+ 
 import Tags from './components/Tags/Tags';
 function App() {
   return (
     <div className="App">
       <Router>
+        
         <Navbar />
           <div className="container-fluid main" style={{minHeight: "80vh"}}>
             <Route exact path={["/","/homepage"]} component={HomePage} />

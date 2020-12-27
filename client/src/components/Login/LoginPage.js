@@ -6,7 +6,6 @@ function LoginPage(){
     const [ userData, setUserData ] = useState({ name: "", email: localStorage.email, password: "", rememberMe: true });
     const [ isLoggedIn, setIsLoggedIn ] = useState( false );
     const [ alertMessage, setAlertMessage ] = useState( { type: "", message: ""} );
-
     const inputEmail = useRef();
     const inputPassword = useRef();
 
@@ -14,27 +13,22 @@ function LoginPage(){
         const { id, value } = e.target;
         setUserData( { ...userData, [id]: value } );
     }
-
     function handleCheckbox(){
         setUserData( { ...userData, rememberMe: !userData.rememberMe } );
     }
-
     async function loginUser( e ){
         e.preventDefault();
         setUserData({ name: "", email: localStorage.email, password: "", rememberMe: true })
-        
         if( userData.email === "" ) {
             inputEmail.current.focus();
             setAlertMessage( { type: 'danger', message: 'Please provide your Email!' } );
             return;
         }
-    
         if( userData.password === "" || userData.password.length < 8 ) {
             inputPassword.current.focus();
             setAlertMessage( { type: 'danger', message: 'Please provide your password!' } );
             return;
         }
-
         const apiResult = await fetch('/api/user/login', 
             {   method: 'post',
                 headers: {
@@ -47,7 +41,7 @@ function LoginPage(){
             localStorage.setItem("email", apiResult.email);
             localStorage.setItem('id', apiResult.id);
             localStorage.setItem('name', apiResult.name);
-                  
+
         if( !apiResult.message ){
             setAlertMessage( { type: 'danger', message: apiResult.error } );
             return;

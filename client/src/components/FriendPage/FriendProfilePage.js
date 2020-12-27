@@ -20,8 +20,6 @@ function FriendProfilePage() {
     const [myFriendList, setMyFriendList] = useState( [] );
     const [myReview, setMyReview] = useState( [] );
     const [ profileImg, setProfileImg] = useState( [] )
-
-
     async function loadFriendProfile(){
         const getFriend = await fetch(`/api/friend/${id}`).then(result=>result.json());
         setMyMovies(getFriend.watchlist);

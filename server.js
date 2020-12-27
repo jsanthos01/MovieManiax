@@ -177,7 +177,6 @@ app.put( '/api/upload/:userid', upload.single('myFile'), async function( req, re
   const imageUrl = req.file.path.replace(/\\/g, '/').replace('client/public/','/')+fileExt;
   const imgUploadDb = await orm.updateAvatar( userId, imageUrl );
   res.send( imgUploadDb );
-
 });
 
 app.put('/api/user/:id', async function( req, res ){

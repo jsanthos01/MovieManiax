@@ -99,8 +99,6 @@ function Friend() {
                 setTimeout( function(){ setAlertMessage( {} ); }, 2500 );
             }
 
-             
-
             setUserProfile([])
             loadFriend()  
         
