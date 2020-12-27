@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
 const bcrypt = require ( 'bcrypt' );
 
-mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
+// mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
 // mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true});
 // mongoose.connect(`mongodb://${process.env.movieTracker}`,{useNewUrlParser: true});
 // mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true, useFindAndModify: false});
+
+const password= '1qaz2wsx'
+const dbname= 'movieTracker'
+mongoose.connect(`mongodb+srv://saramunir011:${password}@cluster0.df4lk.mongodb.net/${dbname}?retryWrites=true&w=majority`, {useNewUrlParser: true, useFindAndModify: false});
+
 const db = require( './models' );
 
 async function registerUser( userData ){
@@ -28,8 +33,6 @@ async function registerUser( userData ){
         name: saveUser.name 
     };           
 }
-
-
 async function loginUser( email, password ) {
     const userData = await db.users.findOne({ email: email });
     if( !userData ) {
