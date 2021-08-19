@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require ( 'bcrypt' );
-
+mongoose.connect(`mongodb+srv://${process.env.ATLAS_URI}`, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 // mongoose.connect(`mongodb://${process.env.movieTracker}`,{useNewUrlParser: true});
 
-mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true, useFindAndModify: false});
+// mongoose.connect(`mongodb://localhost:27017/movieTracker`, {useNewUrlParser: true, useFindAndModify: false});
 const db = require( './models' );
 
 async function registerUser( userData ){

@@ -325,3 +325,28 @@ app.delete("/api/delete/:movieId/:userId", async(req, res) =>{
   const deleteMovieResult = await orm.deleteMoviebyTag(movieId, userId);
   res.send(deleteMovieResult)
 })
+
+
+
+
+
+
+const data = {
+  doctors: [
+    {
+      id: 2,
+      name: "John"
+    }, 
+    {
+      id: 4,
+      name: "Labiba"
+    }
+  ]
+}
+
+let id = 4
+let doctor = data.doctors.find(element => element.id == id);
+// find function - go through each element in the doctors array. 
+// check if there is an element with id 4. 
+// if there is an element with id 4 - put that element inside the variable doctor
+
