@@ -22,7 +22,7 @@ Movie Maniax is a user-friendly movie search application built on MERN stack. Us
 [https://www.loom.com/share/66b585373d2a42b6a99e094d5f222c5f](https://www.loom.com/share/66b585373d2a42b6a99e094d5f222c5f)
 
 ## Live Demo
-*Heroku Link: https://movie-app123.herokuapp.com/*
+*Heroku Link: https://movie-maniax.herokuapp.com/*
 
 ## Contributors
 * [Norma Moras](https://github.com/nmoras)
